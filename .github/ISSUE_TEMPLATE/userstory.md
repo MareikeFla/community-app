@@ -17,9 +17,11 @@ In order to <benefit/purpose>
 - Precise, no unnecessary information
 
 ## Acceptance criteria
-- [ ] What happens when an entry is empty?
-- [ ] How should something behave?
-- [ ] What is the text of an alert?
+- [ ] App design matches our design criteria
+- [ ]
+
 
 ## Tasks
-- [ ] List the tasks that need to be performed within the dev team
+- [ ] Create new branch USx-userStorieName
+- [ ] Style new elements according our styling criteria
+- [ ]
