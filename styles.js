@@ -60,6 +60,9 @@ export default createGlobalStyle`
   body {
     background: var(--color_body);
     font: var(--font_body);
-    color: var(--color_grey)
+    color: var(--color_grey);
+    min-height: 100vh;
+    position: relative;
+
   }
 `;
