@@ -25,12 +25,12 @@ export default createGlobalStyle`
     --font-family: ${nunito_sans.style.fontFamily};
 
     --font_heading-1: 700 1.25rem/1.35 var(--font-family);
-    --font_heading-2: 700 1.125rem/1.56 var(--font-family);
+    --font_heading-2: 600 1.125rem/1.56 var(--font-family);
     --font_heading-3: 900 0.875rem/1.36 var(--font-family);
     --font_heading-category: 900 1.25rem/1.35 var(--font-family);
 
     --font_body: 300 1rem/1.5 var(--font-family);
-    --font_info: 600 0.875rem/1.43 var(--font-family);
+    --font_info: 300 0.875rem/1.43 var(--font-family);
     --font_label: 700 0.875rem/1.43 var(--font-family);
     --font_footer: 700 0.75rem/1.33 var(--font-family);
 
