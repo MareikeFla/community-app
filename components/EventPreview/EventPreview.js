@@ -9,26 +9,28 @@ import {
 } from "./EventPreview.styled";
 
 export default function EventPreview({ event }) {
+  const { eventName, shortDescription, start, location } = event;
+  const { date, time } = start;
   return (
     <Card>
-      <PreviewTitle>{event.eventName}</PreviewTitle>
-      <PreviewDescription>{event.shortDescription}</PreviewDescription>
+      <PreviewTitle>{eventName}</PreviewTitle>
+      <PreviewDescription>{shortDescription}</PreviewDescription>
       <Divider />
       <InfoContainer>
         <Info>
           <Icon src="/assets/icons/icon_date.svg" alt="event date icon" />
-          {event.start.date}
+          {date}
         </Info>
         <Info>
           <Icon src="/assets/icons/icon_time.svg" alt="event time icon" />
-          {event.start.time}
+          {time}
         </Info>
         <Info>
           <Icon
             src="/assets/icons/icon_location.svg"
             alt="event location icon"
           />
-          {event.location.city}
+          {location.city || "Online"}
         </Info>
       </InfoContainer>
     </Card>
