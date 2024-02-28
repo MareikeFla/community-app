@@ -1,3 +1,6 @@
+import EventList from "@/components/EventList/EventList";
+import { events } from "@/lib/events";
+
 export default function HomePage() {
-  return <div></div>;
+  return <EventList events={events} />;
 }
