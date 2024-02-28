@@ -13,5 +13,6 @@ export const StyledFooter = styled.footer`
 
 export const TextFooter = styled.p`
   color: var(--color_white);
-  font-family: var(--font_footer);
+  font: var(--font_footer);
+  text-transform: uppercase;
 `;
