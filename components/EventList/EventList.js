@@ -3,12 +3,10 @@ import { EventListWrapper } from "./EventList.styled";
 
 export default function EventList({ events }) {
   return (
-    <>
-      <EventListWrapper>
-        {events.map((event) => (
-          <EventPreview key={event.id} event={event} />
-        ))}
-      </EventListWrapper>
-    </>
+    <EventListWrapper>
+      {events.map((event) => (
+        <EventPreview key={event.id} event={event} />
+      ))}
+    </EventListWrapper>
   );
 }
