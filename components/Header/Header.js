@@ -12,7 +12,7 @@ export default function Header() {
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
       >
-        <polygon fill="#f8f8f9" points="0,0 0,100 100,100" />
+        <polygon fill="var(--color_body)" points="0,0 0,100 100,100" />
       </HeaderCutout>
     </HeaderBackground>
   );
