@@ -50,7 +50,7 @@ export default function EventDetail({ event }) {
           {end.date}, {end.time} Uhr
         </Info>
         <InfoTitle>Ort</InfoTitle>
-        <Info>{location.city}</Info>
+        <Info>{location.city || "Online"}</Info>
         <InfoTitle>Kosten</InfoTitle>
         <Info>{costs}</Info>
         <InfoTitle>Veranstalter</InfoTitle>
