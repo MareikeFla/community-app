@@ -6,9 +6,9 @@ export const BackButtonWrapper = styled.button`
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 10px;
-  left: 10px;
-  height: 30px;
+  top: 0.625rem;
+  left: 0.625rem;
+  height: 1.875rem;
   aspect-ratio: 1;
   background-color: var(--color_orange);
   border: none;
@@ -23,5 +23,5 @@ export const BackButtonWrapper = styled.button`
 `;
 
 export const BackIcon = styled(Image)`
-  margin-right: 2px;
+  margin-right: 0.125rem;
 `;
