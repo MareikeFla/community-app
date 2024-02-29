@@ -1,4 +1,9 @@
-export default function New() {
-  return "Hallo";
+import NewEventCard from "@/components/NewEventCard/NewEventCard";
+
+export default function NewCard() {
+  return (
+    <>
+      <NewEventCard></NewEventCard>
+    </>
+  );
 }
-New();
