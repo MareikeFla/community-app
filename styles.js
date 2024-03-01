@@ -61,6 +61,8 @@ export default createGlobalStyle`
     background: var(--color_body);
     font: var(--font_body);
     color: var(--color_grey);
+    hyphens: auto;
+    word-break: break-word;
     min-height: 100vh;
     position: relative;
   }
