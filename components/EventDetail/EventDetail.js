@@ -1,4 +1,5 @@
-import BackButton from "@/components/BackButton/BackButton";
+import BackButton from "../BackButton/BackButton";
+import CategoryTag from "../CategoryTag/CategoryTag";
 import {
   Card,
   ErrorMessage,
@@ -32,6 +33,7 @@ export default function EventDetail({ event }) {
     costs,
     organization,
     links,
+    category,
   } = event;
   const { organizationName, organizationContact } = organization;
 
@@ -69,6 +71,7 @@ export default function EventDetail({ event }) {
           ))}
         </LinkList>
       </InfoWrapper>
+      <CategoryTag category={category} />
     </Card>
   );
 }
