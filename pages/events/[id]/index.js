@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { events } from "@/lib/events";
 import EventDetail from "@/components/EventDetail/EventDetail";
 import useSWR from "swr";
 import Loading from "@/components/Loading/Loading";
