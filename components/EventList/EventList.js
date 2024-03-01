@@ -5,7 +5,7 @@ export default function EventList({ events }) {
   return (
     <EventListWrapper>
       {events.map((event) => (
-        <EventDetailsLink key={event.id} href={`/events/${event.id}`}>
+        <EventDetailsLink key={event._id} href={`/events/${event._id}`}>
           <EventPreview event={event} />
         </EventDetailsLink>
       ))}

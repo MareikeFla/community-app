@@ -1,17 +1,17 @@
 import EventList from "@/components/EventList/EventList";
+import FetchingError from "@/components/FetchingError/FetchingError";
+import Loading from "@/components/Loading/Loading";
 import useSWR from "swr";
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
 export default function HomePage() {
-  const { data, isLoading, error } = useSWR("/api/events", fetcher);
+  const { data: events, isLoading, error } = useSWR("/api/events");
 
   if (isLoading) {
-    return <p>is loading...</p>;
+    return <Loading />;
   }
   if (error) {
-    return <p>error...</p>;
+    return <FetchingError />;
   }
 
-  return <EventList events={data} />;
+  return <EventList events={events} />;
 }
