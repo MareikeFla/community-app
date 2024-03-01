@@ -52,7 +52,14 @@ export default function EventDetail({ event }) {
           {end.date}, {end.time} Uhr
         </Info>
         <InfoTitle>Ort</InfoTitle>
-        <Info>{location.city || "Online"}</Info>
+        <Info>
+          {location.zip &&
+          location.street &&
+          location.houseNumber &&
+          location.city
+            ? `${location.street} ${location.houseNumber}, ${location.zip}, ${location.city}`
+            : "Online"}
+        </Info>
         <InfoTitle>Kosten</InfoTitle>
         <Info>{costs}</Info>
         <InfoTitle>Veranstalter</InfoTitle>
