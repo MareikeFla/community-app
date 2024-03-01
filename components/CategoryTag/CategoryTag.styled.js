@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Button = styled.button`
+export const Button = styled.span`
   font: var(--font_button-secondary);
   color: var(--color_white);
   text-transform: uppercase;
