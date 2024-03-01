@@ -10,7 +10,7 @@ export default function EventDetailPage() {
   const { id } = router.query;
   console.log(id);
 
-  const { data: event, isLoading, error } = useSWR(`api/events/${id}`);
+  const { data: event, isLoading, error } = useSWR(`/api/events/${id}`);
   console.log(event);
 
   if (isLoading) {
