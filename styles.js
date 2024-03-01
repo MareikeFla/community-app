@@ -34,8 +34,8 @@ export default createGlobalStyle`
     --font_label: 600 0.875rem/1.43 var(--font-family);
     --font_footer: 700 0.75rem/1.33 var(--font-family);
 
-    --font_button-primary: 800 0.8125rem/1.38 var(--font-family);
-    --font_button-secondary: 800 0.75rem/1.33 var(--font-family);
+    --font_button-primary: 700 0.8125rem/1.38 var(--font-family);
+    --font_button-secondary: 700 0.75rem/1.33 var(--font-family);
     
     /* Effect Styles */
     --border-radius_input: 3px;
