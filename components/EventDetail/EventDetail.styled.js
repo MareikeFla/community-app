@@ -29,7 +29,7 @@ export const InfoWrapper = styled.div`
   display: grid;
   grid-template-columns: minmax(6.25rem, 1fr) 2fr;
   gap: 0.5rem;
-  margin-top: 1.25rem;
+  margin: 1.25rem 0 1.875rem;
   padding: 1.125rem 1rem 1rem;
   border: 1px solid var(--color_light-grey);
   border-radius: var(--border-radius_card);
@@ -63,7 +63,7 @@ export const ListItemLink = styled.a`
   text-decoration: none;
 
   &:hover {
-    color: var(--color_grey);
+    text-decoration: underline;
   }
 `;
 
