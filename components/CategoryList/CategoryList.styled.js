@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 export const CategoryListContainer = styled.section`
   display: flex;
@@ -19,4 +20,9 @@ export const CategoryListStyled = styled.ul`
   @media (min-width: 768px) {
     grid-template-columns: repeat(4, 1fr);
   }
+`;
+
+export const CategoryLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
 `;
