@@ -6,9 +6,12 @@ import FetchingError from "@/components/FetchingError/FetchingError";
 
 export default function EventDetailPage() {
   const router = useRouter();
-  const { id } = router.query;
 
-  const { data: event, isLoading, error } = useSWR(`/api/events/${id}`);
+  const {
+    data: event,
+    isLoading,
+    error,
+  } = useSWR(`/api/events/${router.query.id}`);
 
   if (isLoading) {
     return <Loading />;
