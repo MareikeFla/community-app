@@ -41,6 +41,7 @@ export default createGlobalStyle`
     --border-radius_input: 3px;
     --border-radius_card: 6px;
     --border-radius_button: 30px;
+    --border-radius_square-button: 6px;
     --border-radius_round-button: 50px;
 
     --shadow_card: 0px 2px 12px 0px rgba(91, 95, 98, 0.2);
