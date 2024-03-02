@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
+import { DelteButton } from "./DeleteEventButton.styled";
+import Image from "next/image";
 
-export default function DeleteEvenetButton({ id }) {
+export default function DeleteEventButton({ id }) {
   const router = useRouter();
 
   async function handleDelete() {
@@ -13,10 +15,13 @@ export default function DeleteEvenetButton({ id }) {
   }
 
   return (
-    <>
-      <button type="button" onClick={handleDelete}>
-        Delete
-      </button>
-    </>
+    <DelteButton onClick={handleDelete}>
+      <Image
+        src="/assets/icons/icon_delete.svg"
+        alt="Delete button"
+        width={18}
+        height={22}
+      />
+    </DelteButton>
   );
 }
