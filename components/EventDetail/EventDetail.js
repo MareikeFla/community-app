@@ -1,6 +1,6 @@
 import BackButton from "../BackButton/BackButton";
 import CategoryTag from "../CategoryTag/CategoryTag";
-import DeleteEvenetButton from "../DeleteEventButton/DeleteEventButton";
+import DeleteEventButton from "../DeleteEventButton/DeleteEventButton";
 import {
   Card,
   ErrorMessage,
@@ -42,7 +42,7 @@ export default function EventDetail({ event }) {
   return (
     <Card>
       <BackButton />
-      <DeleteEvenetButton id={_id} />
+      <DeleteEventButton id={_id} />
       <EventName>{eventName}</EventName>
       <Description>{longDescription}</Description>
       <InfoWrapper>
