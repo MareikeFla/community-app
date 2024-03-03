@@ -24,7 +24,10 @@ export default function CategoryList() {
       <CategoryListHeader>Was interessiert dich?</CategoryListHeader>
       <CategoryListStyled>
         {categories.map((category) => (
-          <CategoryLink key={category._id} href={`/${category.slug}`}>
+          <CategoryLink
+            key={category._id}
+            href={`/categories/${category.slug}`}
+          >
             <CategoryCard category={category} />
           </CategoryLink>
         ))}

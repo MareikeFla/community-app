@@ -9,7 +9,9 @@ import useSWR from "swr";
 export default function HomePage() {
   const router = useRouter();
 
-  const { data, isLoading, error } = useSWR(`/api/${router.query.category}`);
+  const { data, isLoading, error } = useSWR(
+    `/api/categories/${router.query.category}`
+  );
 
   if (isLoading) {
     return <Loading />;

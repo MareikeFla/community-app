@@ -4,7 +4,7 @@ import FetchingError from "../FetchingError/FetchingError";
 import CategoryCardUI from "../CategoryCardUI/CategoryCardUI";
 
 export default function CategoryCard({ category }) {
-  const { data, isLoading, error } = useSWR(`api/${category.slug}`);
+  const { data, isLoading, error } = useSWR(`api/categories/${category.slug}`);
 
   if (isLoading) {
     return <Loading />;
