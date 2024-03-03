@@ -4,16 +4,33 @@ import {
   FormLabel,
   FormInput,
   FormSelect,
-  FormCheckbox,
   FormCheckboxWrapper,
   FormDesicriptionField,
+  CancelButton,
+  SubmitButton,
+  FormButtonWrapper,
+  FormLegend,
+  FormInfoText,
+  ImageURLWrapper,
+  FormTimeDateWrapper,
+  SwitchContainer,
+  SwitchInput,
+  SwitchBackground,
+  SwitchHandle,
 } from "./EventForm.styled";
+import { useState } from "react";
 import { Subtitle } from "./EventForm.styled";
 
 export default function EventForm() {
   const handleChange = () => {};
 
   const handleSubmit = () => {};
+
+  const [isActive, setIsActive] = useState(false);
+
+  const toggleSwitch = () => {
+    setIsActive(!isActive);
+  };
   return (
     <EventFormStyled onSubmit={handleSubmit}>
       <FormSection>
@@ -39,29 +56,30 @@ export default function EventForm() {
       </FormSection>
       <FormSection>
         <FormLabel htmlFor="startDate">Beginn*</FormLabel>
-        <FormInput
-          required
-          aria-required="true"
-          id="startDate"
-          name="startDate"
-          value=""
-          onChange={handleChange}
-          placeholder="TT/MM/JJ"
-        />
-        <FormLabel htmlFor="startTime"></FormLabel>
-        <FormInput
-          required
-          aria-required="true"
-          id="startTime"
-          name="startTime"
-          value=""
-          onChange={handleChange}
-          placeholder="HH:MM"
-        />
+        <FormTimeDateWrapper>
+          <FormInput
+            required
+            aria-required="true"
+            id="startDate"
+            name="startDate"
+            value=""
+            onChange={handleChange}
+            placeholder="TT/MM/JJ"
+          />
+          <FormInput
+            required
+            aria-required="true"
+            id="startTime"
+            name="startTime"
+            value=""
+            onChange={handleChange}
+            placeholder="HH:MM"
+          />
+        </FormTimeDateWrapper>
       </FormSection>
       <FormSection>
-        <div>
-          <FormLabel htmlFor="endDate">Ende</FormLabel>
+        <FormLabel htmlFor="End">Ende</FormLabel>
+        <FormTimeDateWrapper>
           <FormInput
             id="endDate"
             name="endDate"
@@ -69,18 +87,17 @@ export default function EventForm() {
             onChange={handleChange}
             placeholder="TT/MM/JJ"
           />
-        </div>
-        <FormLabel htmlFor="endTime"></FormLabel>
-        <FormInput
-          id="endTime"
-          name="endTime"
-          value=""
-          onChange={handleChange}
-          placeholder="HH:MM"
-        />
+          <FormInput
+            id="endTime"
+            name="endTime"
+            value=""
+            onChange={handleChange}
+            placeholder="HH:MM"
+          />
+        </FormTimeDateWrapper>
       </FormSection>
       <FormSection aria-describedby="Ort des Events">
-        <legend>Ort des Events</legend>
+        <FormLegend>Ort des Events</FormLegend>
         <Subtitle>(Für online Events bitte leer lassen)</Subtitle>
         <div>
           <FormLabel htmlFor="street">Straße</FormLabel>
@@ -98,13 +115,15 @@ export default function EventForm() {
       <FormSection>
         <FormCheckboxWrapper>
           <FormLabel htmlFor="forFree">Kostenlos</FormLabel>
-          <FormCheckbox
-            type="checkbox"
-            id="forFree"
-            name="forFree"
-            value="false"
-            onChange={handleChange}
-          />
+          <SwitchContainer>
+            <SwitchInput
+              htmlFor="switch"
+              checked={isActive}
+              onChange={toggleSwitch}
+            />
+            <SwitchBackground />
+            <SwitchHandle isActive={isActive} />
+          </SwitchContainer>
         </FormCheckboxWrapper>
         <FormLabel htmlFor="cost">Kosten*</FormLabel>
         <FormInput
@@ -154,7 +173,7 @@ export default function EventForm() {
       </FormSection>
 
       <FormSection>
-        <FormLabel htmlFor="linkURL">Links</FormLabel>
+        <FormLabel htmlFor="linkURL">Link für weitere Infos</FormLabel>
         <FormInput
           type="url"
           id="linkURL"
@@ -162,10 +181,11 @@ export default function EventForm() {
           onChange={handleChange}
           required
           aria-required="true"
+          placeholder="http://"
         />
       </FormSection>
 
-      <div>
+      <ImageURLWrapper>
         <FormLabel htmlFor="imageURL">Bild</FormLabel>
         <FormInput
           type="url"
@@ -174,12 +194,14 @@ export default function EventForm() {
           onChange={handleChange}
           required
           aria-required="true"
+          placeholder="http://"
         />
-      </div>
-      <div>
-        <button type="reset">Abbrechen</button>
-        <button type="submit">Absenden</button>
-      </div>
+      </ImageURLWrapper>
+      <FormButtonWrapper>
+        <CancelButton type="reset">Abbrechen</CancelButton>
+        <SubmitButton type="submit">Absenden</SubmitButton>
+      </FormButtonWrapper>
+      <FormInfoText>*Pflichtfeld</FormInfoText>
     </EventFormStyled>
   );
 }
