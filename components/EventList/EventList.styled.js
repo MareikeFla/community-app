@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled from "styled-components";
 
 export const EventListWrapper = styled.ul`
@@ -11,4 +12,9 @@ export const EventListWrapper = styled.ul`
   @media (min-width: 1024px) {
     grid-template-columns: repeat(3, 1fr);
   }
+`;
+
+export const EventDetailsLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
 `;
