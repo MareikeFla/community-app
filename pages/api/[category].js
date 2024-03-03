@@ -8,9 +8,9 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     try {
-      const searchedCategory = await Category.find({ slug: category });
+      const searchedCategory = await Category.findOne({ slug: category });
       const filteredEvents = await Event.find({
-        category: searchedCategory[0].title,
+        category: searchedCategory.title,
       });
       return response.status(200).json(filteredEvents);
     } catch (error) {

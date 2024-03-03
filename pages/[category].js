@@ -7,6 +7,7 @@ import useSWR from "swr";
 
 export default function HomePage() {
   const router = useRouter();
+  console.log(router.query.category);
 
   const { data, isLoading, error } = useSWR(`/api/${router.query.category}`);
 
