@@ -15,6 +15,7 @@ export default function CategoryCardUI({ category, filteredEvents }) {
         alt={imageAlt}
         height={126}
         width={183}
+        priority
       />
       <CategoryInfoContainer>
         <CategoryInfoHeading>{title}</CategoryInfoHeading>

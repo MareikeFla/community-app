@@ -9,6 +9,7 @@ export const CategoryCardContainer = styled.li`
 
 export const CategoryImage = styled(Image)`
   width: 100%;
+  height: auto;
   object-fit: cover;
   border-top-left-radius: var(--border-radius_card);
   border-top-right-radius: var(--border-radius_card);
