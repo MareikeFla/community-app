@@ -23,10 +23,10 @@ export default function HomePage() {
   return (
     <>
       <BackButton />
-      {!data ? (
-        <EventList events={data} />
-      ) : (
+      {data.length === 0 ? (
         <MessageCard>Keine Events gefunden...</MessageCard>
+      ) : (
+        <EventList events={data} />
       )}
     </>
   );
