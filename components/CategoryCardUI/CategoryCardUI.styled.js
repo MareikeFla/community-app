@@ -16,12 +16,14 @@ export const CategoryImage = styled(Image)`
 `;
 
 export const CategoryInfoContainer = styled.section`
-  padding: 0 0 0.75rem 0.75rem;
+  padding: 0.313rem 0.75rem 0.75rem 0.75rem;
 `;
 
 export const CategoryInfoHeading = styled.h3`
   font: var(--font_heading-3);
   color: var(--color_night);
+  text-transform: uppercase;
+  padding-bottom: 0.125rem;
 `;
 
 export const CategoryInfo = styled.p`
