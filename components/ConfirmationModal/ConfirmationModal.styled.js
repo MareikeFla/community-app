@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
 export const Dialog = styled.dialog`
-  padding: 1rem 1.5rem;
+  padding: 1rem 2rem;
   margin: auto;
   border: none;
   border-radius: var(--border-radius_card);
-  font: var(--font_heading);
 
   &::backdrop {
     background-color: black;
@@ -14,8 +13,10 @@ export const Dialog = styled.dialog`
 `;
 
 export const DialogMessage = styled.p`
-  margin-bottom: 1rem;
+  margin-bottom: 10px;
   color: var(--color_grey);
+  font: var(--font_label);
+  text-align: center;
 `;
 
 export const ButtonWrap = styled.div`
@@ -25,8 +26,9 @@ export const ButtonWrap = styled.div`
 `;
 
 export const Button = styled.button`
-  padding: 3px 10px;
-  font: var(--font_button-primary);
+  padding: 3px;
+  width: 48%;
+  font: var(--font_button-secondary);
   color: var(--color_orange);
   border: 2px solid var(--color_orange);
   border-radius: var(--border-radius_button);
@@ -42,6 +44,7 @@ export const Button = styled.button`
   &.primary {
     background-color: var(--color_orange);
     color: var(--color_white);
+    font: var(--font_button-primary);
   }
 
   &.primary:hover {
