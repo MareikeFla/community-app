@@ -1,3 +1,4 @@
+import WelcomeCard from "@/components/WelcomeCard/WelcomeCard";
 import EventList from "@/components/EventList/EventList";
 import FetchingError from "@/components/FetchingError/FetchingError";
 import Loading from "@/components/Loading/Loading";
@@ -13,5 +14,10 @@ export default function HomePage() {
     return <FetchingError />;
   }
 
-  return <EventList events={events} />;
+  return (
+    <>
+      <WelcomeCard />
+      <EventList events={events} />
+    </>
+  );
 }
