@@ -6,7 +6,7 @@ import { useState, useRef } from "react";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function App({ Component, pageProps }) {
-  const hook = useRef();
+  const modalRef = useRef();
 
   const [modalInfo, setModalInfo] = useState({
     message: "",
@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }) {
     onConfirm,
   }) => {
     const onClose = function () {
-      hook.current.close();
+      modalRef.current.close();
     };
     setModalInfo({
       message,
@@ -32,7 +32,7 @@ export default function App({ Component, pageProps }) {
       onConfirm,
       onClose,
     });
-    hook.current.showModal();
+    modalRef.current.showModal();
   };
 
   return (
@@ -44,7 +44,7 @@ export default function App({ Component, pageProps }) {
             {...pageProps}
             openModal={openModal}
             modalInfo={modalInfo}
-            hook={hook}
+            modalRef={modalRef}
           />
         </SWRConfig>
       </Layout>
