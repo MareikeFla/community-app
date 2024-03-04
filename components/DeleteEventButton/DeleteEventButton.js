@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { DeleteButton } from "./DeleteEventButton.styled";
+import { DelteButton } from "./DeleteEventButton.styled";
 import Image from "next/image";
 
 export default function DeleteEventButton({ id }) {
@@ -15,13 +15,13 @@ export default function DeleteEventButton({ id }) {
   }
 
   return (
-    <DeleteButton onClick={handleDelete}>
+    <DelteButton onClick={handleDelete}>
       <Image
         src="/assets/icons/icon_delete.svg"
         alt="Delete button"
         width={18}
         height={22}
       />
-    </DeleteButton>
+    </DelteButton>
   );
 }

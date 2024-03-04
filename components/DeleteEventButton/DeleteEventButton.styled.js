@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Image from "next/image";
 
-export const DeleteButton = styled.button`
+export const DelteButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
