@@ -15,7 +15,7 @@ import {
   ListItemMarker,
 } from "./EventDetail.styled";
 
-export default function EventDetail({ event }) {
+export default function EventDetail({ event, showDeleteModal }) {
   if (!event) {
     return (
       <Card pageNotFound>
@@ -42,7 +42,7 @@ export default function EventDetail({ event }) {
   return (
     <Card>
       <BackButton />
-      <DeleteEventButton id={_id} />
+      <DeleteEventButton id={_id} showDeleteModal={showDeleteModal} />
       <EventName>{eventName}</EventName>
       <Description>{longDescription}</Description>
       <InfoWrapper>
