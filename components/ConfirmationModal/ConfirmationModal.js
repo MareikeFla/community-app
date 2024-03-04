@@ -6,12 +6,12 @@ import {
   Button,
 } from "./ConfirmationModal.styled";
 
-const ConfirmationModal = React.forwardRef(({ modalInfo }, ref) => {
+export const ConfirmationModal = ({ modalInfo, hook }) => {
   const { message, textButtonClose, textButtonConfirm, onClose, onConfirm } =
     modalInfo;
 
   return (
-    <Dialog ref={ref}>
+    <Dialog ref={hook}>
       <DialogMessage>{message}</DialogMessage>
       <ButtonWrap>
         <Button onClick={onClose}>{textButtonClose}</Button>
@@ -21,8 +21,4 @@ const ConfirmationModal = React.forwardRef(({ modalInfo }, ref) => {
       </ButtonWrap>
     </Dialog>
   );
-});
-
-ConfirmationModal.displayName = "ConfirmationModal";
-
-export default ConfirmationModal;
+};
