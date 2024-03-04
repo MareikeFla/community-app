@@ -5,11 +5,7 @@ import Loading from "@/components/Loading/Loading";
 import FetchingError from "@/components/FetchingError/FetchingError";
 import ConfirmationModal from "@/components/ConfirmationModal/ConfirmationModal";
 
-export default function EventDetailPage({
-  modalInfo,
-  openModal,
-  dialogElement,
-}) {
+export default function EventDetailPage({ modalInfo, openModal, hook }) {
   const router = useRouter();
   const { id } = router.query;
 
@@ -25,10 +21,7 @@ export default function EventDetailPage({
   return (
     <>
       <EventDetail event={event} showDeleteModal={openModal} />
-      <ConfirmationModal
-        ref={dialogElement}
-        modalInfo={modalInfo}
-      ></ConfirmationModal>
+      <ConfirmationModal ref={hook} modalInfo={modalInfo}></ConfirmationModal>
     </>
   );
 }
