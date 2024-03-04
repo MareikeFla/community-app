@@ -16,7 +16,7 @@ export const CategoryImage = styled(Image)`
 `;
 
 export const CategoryInfoContainer = styled.section`
-  padding: 0.313rem 0.75rem 0.75rem 0.75rem;
+  padding: 0.313rem 0.75rem 0.688rem 0.75rem;
 `;
 
 export const CategoryInfoHeading = styled.h3`
