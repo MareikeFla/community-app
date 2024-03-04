@@ -1,7 +1,7 @@
 import BackButton from "../BackButton/BackButton";
-import { Card, ErrorMessage } from "./PlaceholderCard.styled";
+import { Card, ErrorMessage } from "./MessageCard.styled";
 
-export default function PlaceholderCard({ children }) {
+export default function MessageCard({ children }) {
   return (
     <Card $pageNotFound>
       <ErrorMessage>{children}</ErrorMessage>
