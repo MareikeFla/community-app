@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Dialog = styled.dialog`
-  padding: 1rem 2rem;
+  padding: 1.7rem 0;
   margin: auto;
   border: none;
   border-radius: var(--border-radius_card);
@@ -13,22 +13,23 @@ export const Dialog = styled.dialog`
 `;
 
 export const DialogMessage = styled.p`
-  margin-bottom: 10px;
+  margin: 0 4rem 1.4rem 4rem;
   color: var(--color_grey);
-  font: var(--font_label);
+  font: var(--font_body);
+  font-weight: bold;
   text-align: center;
 `;
 
 export const ButtonWrap = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 10px;
 `;
 
 export const Button = styled.button`
-  padding: 3px;
-  width: 48%;
-  font: var(--font_button-secondary);
+  padding: 6px 30px;
+  font: var(--font_button-primary);
   color: var(--color_orange);
   border: 2px solid var(--color_orange);
   border-radius: var(--border-radius_button);
@@ -36,6 +37,7 @@ export const Button = styled.button`
   transition: var(--transition_button);
   cursor: pointer;
   box-shadow: none;
+  text-transform: uppercase;
 
   &:hover {
     background-color: #fff4eb;
