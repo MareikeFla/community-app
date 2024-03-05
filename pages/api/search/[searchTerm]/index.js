@@ -7,11 +7,10 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     try {
-      const filteredEvents = await Event.find({
-        $text: {
-          $search: searchTerm,
-        },
-      });
+      const filteredEvents = await Event.find(
+        { $text: { $search: searchTerm } },
+        { score: { $meta: "textScore" } }
+      ).sort({ score: { $meta: "textScore" } });
       if (!filteredEvents) {
         return response.status(404).json({ status: "Not Found" });
       }
