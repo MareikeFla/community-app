@@ -5,9 +5,18 @@ export const EventFormStyled = styled.form`
   flex-direction: column;
 `;
 
-export const Subtitle = styled.p`
+export const SubtitleRight = styled.p`
   font: var(--font_info);
   margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  text-align: right;
+`;
+
+export const SubtitleLeft = styled.p`
+  font: var(--font_info);
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  text-align: left;
 `;
 
 export const FormSection = styled.div`
@@ -15,18 +24,18 @@ export const FormSection = styled.div`
 `;
 
 export const FormLabel = styled.label`
-  margin-bottom: 5px;
+  margin-bottom: 0.313;
   color: var(--color_night);
   font: var(--font_label);
   display: block;
 `;
 
 export const FormInput = styled.input`
-  padding: 8px;
+  padding: 0.5rem;
   border: none;
   background-color: #f5f5f5;
   border-radius: var(--border-radius_input);
-  height: 40px;
+  height: 2.5rem;
   width: 100%;
 
   &::placeholder {
@@ -34,13 +43,17 @@ export const FormInput = styled.input`
   }
 `;
 
+export const FormInputTime = styled(FormInput)`
+  width: 7.5rem;
+`;
 export const FormSelect = styled.select`
-  padding: 8px;
-  margin-bottom: 10px;
+  padding: 0.5rem;
+  margin-bottom: 0.625rem;
   border: none;
   background-color: #f5f5f5;
   width: 100%;
   color: var(--color_grey);
+  height: 2.5rem;
 
   &::placeholder {
     color: var(--color_grey);
@@ -52,35 +65,20 @@ export const FormCheckboxWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 46px;
+  height: 2.875rem;
   padding: 0 0.875rem;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
+  border-radius: var(--border-radius_input);
+
+  & > * {
+    margin: 0;
+  }
 `;
 
 export const FormSelectOption = styled.option``;
 
 export const FormDesicriptionField = styled(FormInput)`
-  min-height: 113px;
-`;
-
-export const CancelButton = styled.button`
-  border-radius: var(--border-radius_button);
-  border: 2px solid var(--color_orange);
-  text-transform: uppercase;
-  padding: 0.75rem 1.875rem;
-  background-color: var(--color_white);
-  color: var(--color_orange);
-  font: var(--font_button-primary);
-`;
-
-export const SubmitButton = styled.button`
-  border-radius: var(--border-radius_button);
-  border: 2px solid var(--color_orange);
-  text-transform: uppercase;
-  padding: 0.75rem 1.875rem;
-  background-color: var(--color_orange);
-  color: var(--color_white);
-  font: var(--font_button-primary);
+  min-height: 7.063rem;
 `;
 
 export const FormButtonWrapper = styled.div`
@@ -92,6 +90,7 @@ export const FormButtonWrapper = styled.div`
 
 export const FormLegend = styled.legend`
   font: var(--font_label);
+  color: var(--color_night);
 `;
 
 export const FormInfoText = styled.p`
@@ -108,34 +107,16 @@ export const FormTimeDateWrapper = styled.div`
   gap: 0.75rem;
 `;
 
-export const SwitchContainer = styled.div`
-  position: relative;
-  display: inline-block;
-  width: 46px;
-  height: 24px;
+export const FlexContainer = styled.div`
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: ${({ addMargin }) => (addMargin ? "20px" : "0")};
 `;
 
-export const SwitchInput = styled.input`
-  display: none;
+export const FixedSize = styled.div`
+  width: 5.125rem;
 `;
 
-export const SwitchBackground = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--color_sunset);
-  border-radius: 17px;
-`;
-
-export const SwitchHandle = styled.div`
-  position: absolute;
-  top: 2px;
-  width: 20px;
-  height: 20px;
-  background-color: white;
-  border-radius: 50%;
-  transition: transform 0.3s ease;
-  left: ${({ isActive }) => (!isActive ? "calc(100% - 22px)" : "2px")};
+export const FullWidth = styled.div`
+  width: 100%;
 `;

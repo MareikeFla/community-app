@@ -6,31 +6,40 @@ import {
   FormSelect,
   FormCheckboxWrapper,
   FormDesicriptionField,
-  CancelButton,
-  SubmitButton,
   FormButtonWrapper,
   FormLegend,
   FormInfoText,
   ImageURLWrapper,
   FormTimeDateWrapper,
-  SwitchContainer,
-  SwitchInput,
-  SwitchBackground,
-  SwitchHandle,
+  FlexContainer,
+  FormInputTime,
+  FixedSize,
+  FullWidth,
+  SubtitleLeft,
+  SubtitleRight,
 } from "./EventForm.styled";
 import { useState } from "react";
-import { Subtitle } from "./EventForm.styled";
+import Button from "../Button/Button";
+import SwitchButton from "../SwitchButton/SwitchButton";
 
 export default function EventForm() {
   const handleChange = () => {};
 
-  const handleSubmit = () => {};
-
-  const [isActive, setIsActive] = useState(false);
-
-  const toggleSwitch = () => {
-    setIsActive(!isActive);
+  const handleSubmit = (event) => {
+    event.preventDefault();
   };
+  const handleButtonClick = (onClick) => {
+    console.log("Button wurde geklickt!");
+    if (onClick) {
+    }
+  };
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleToggle = (newValue) => {
+    setIsChecked(newValue);
+  };
+
   return (
     <EventFormStyled onSubmit={handleSubmit}>
       <FormSection>
@@ -66,7 +75,7 @@ export default function EventForm() {
             onChange={handleChange}
             placeholder="TT/MM/JJ"
           />
-          <FormInput
+          <FormInputTime
             required
             aria-required="true"
             id="startTime"
@@ -87,7 +96,7 @@ export default function EventForm() {
             onChange={handleChange}
             placeholder="TT/MM/JJ"
           />
-          <FormInput
+          <FormInputTime
             id="endTime"
             name="endTime"
             value=""
@@ -98,32 +107,32 @@ export default function EventForm() {
       </FormSection>
       <FormSection aria-describedby="Ort des Events">
         <FormLegend>Ort des Events</FormLegend>
-        <Subtitle>(Für online Events bitte leer lassen)</Subtitle>
-        <div>
-          <FormLabel htmlFor="street">Straße</FormLabel>
-          <FormInput type="text" name="street" id="street" />
-
-          <FormLabel htmlFor="number">Hnr</FormLabel>
-          <FormInput type="text" name="number" id="number" />
-        </div>
-        <FormLabel htmlFor="zip">PLZ</FormLabel>
-        <FormInput type="text" name="zip" id="zip" />
-
-        <FormLabel htmlFor="city">Ort</FormLabel>
-        <FormInput type="text" name="city" id="city" />
+        <SubtitleLeft>(Für online Events bitte leer lassen)</SubtitleLeft>
+        <FlexContainer addMargin>
+          <FullWidth>
+            <FormLabel htmlFor="street">Straße</FormLabel>
+            <FormInput type="text" name="street" id="street" />
+          </FullWidth>
+          <FixedSize>
+            <FormLabel htmlFor="number">Hnr</FormLabel>
+            <FormInput type="text" name="number" id="number" />
+          </FixedSize>
+        </FlexContainer>
+        <FlexContainer>
+          <FixedSize>
+            <FormLabel htmlFor="zip">PLZ</FormLabel>
+            <FormInput type="text" name="zip" id="zip" />
+          </FixedSize>
+          <FullWidth>
+            <FormLabel htmlFor="city">Ort</FormLabel>
+            <FormInput type="text" name="city" id="city" />
+          </FullWidth>
+        </FlexContainer>
       </FormSection>
       <FormSection>
         <FormCheckboxWrapper>
           <FormLabel htmlFor="forFree">Kostenlos</FormLabel>
-          <SwitchContainer>
-            <SwitchInput
-              htmlFor="switch"
-              checked={isActive}
-              onChange={toggleSwitch}
-            />
-            <SwitchBackground />
-            <SwitchHandle isActive={isActive} />
-          </SwitchContainer>
+          <SwitchButton isChecked={isChecked} onToggle={handleToggle} />
         </FormCheckboxWrapper>
         <FormLabel htmlFor="cost">Kosten*</FormLabel>
         <FormInput
@@ -157,7 +166,7 @@ export default function EventForm() {
           required
           aria-required="true"
         />
-        <Subtitle>Erscheint in der Event Vorschau</Subtitle>
+        <SubtitleRight>Erscheint in der Event Vorschau</SubtitleRight>
       </FormSection>
 
       <FormSection>
@@ -169,7 +178,7 @@ export default function EventForm() {
           required
           aria-required="true"
         />
-        <Subtitle>Erscheint auf der Event Seite</Subtitle>
+        <SubtitleRight>Erscheint auf der Event Seite</SubtitleRight>
       </FormSection>
 
       <FormSection>
@@ -198,8 +207,13 @@ export default function EventForm() {
         />
       </ImageURLWrapper>
       <FormButtonWrapper>
-        <CancelButton type="reset">Abbrechen</CancelButton>
-        <SubmitButton type="submit">Absenden</SubmitButton>
+        <Button color="primary" type="reset" text="Abbrechen" />
+        <Button
+          color="secondary"
+          type="submit"
+          onClick={handleButtonClick}
+          text="Absenden"
+        />
       </FormButtonWrapper>
       <FormInfoText>*Pflichtfeld</FormInfoText>
     </EventFormStyled>
