@@ -1,6 +1,6 @@
 import Logo from "public/logo.svg";
 import { HeaderBackground, LogoHeader, HeaderCutout } from "./Header.styles";
-import SearchLink from "../Searchicon/SearchIcon";
+import SearchLink from "../Search/SearchIcon";
 
 export default function Header() {
   return (
