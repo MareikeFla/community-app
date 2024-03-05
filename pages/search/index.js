@@ -22,9 +22,7 @@ export default function SearchPage() {
   return (
     <>
       <SearchCard onSubmit={handleSubmit} />
-      {filteredEvents.length > 0
-        ? `Suchergebnis für: ${searchTerm}`
-        : "Keine Ergebnisse"}
+      {searchTerm ? `Suchergebnis für: ${searchTerm}` : ""}
       <EventList events={filteredEvents} />
     </>
   );
