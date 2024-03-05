@@ -1,6 +1,7 @@
 import BackButton from "../BackButton/BackButton";
 import CategoryTag from "../CategoryTag/CategoryTag";
 import DeleteEventButton from "../DeleteEventButton/DeleteEventButton";
+import Map from "../Map";
 import {
   Card,
   ErrorMessage,
@@ -38,6 +39,7 @@ export default function EventDetail({ event, showDeleteModal }) {
     category,
   } = event;
   const { organizationName, organizationContact } = organization;
+  const { street, houseNumber, zip, city, latitude, longitude } = location;
 
   return (
     <Card>
@@ -56,11 +58,8 @@ export default function EventDetail({ event, showDeleteModal }) {
         </Info>
         <InfoTitle>Ort</InfoTitle>
         <Info>
-          {location.zip &&
-          location.street &&
-          location.houseNumber &&
-          location.city
-            ? `${location.street} ${location.houseNumber}, ${location.zip}, ${location.city}`
+          {zip && street && houseNumber && city
+            ? `${street} ${houseNumber}, ${zip}, ${city}`
             : "Online"}
         </Info>
         <InfoTitle>Kosten</InfoTitle>
@@ -80,6 +79,7 @@ export default function EventDetail({ event, showDeleteModal }) {
             </ListItem>
           ))}
         </LinkList>
+        {longitude && latitude && <Map event={event} />}
       </InfoWrapper>
       <CategoryTag category={category} />
     </Card>
