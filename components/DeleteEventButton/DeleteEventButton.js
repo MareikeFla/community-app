@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { DelteButton } from "./DeleteEventButton.styled";
+import { DeleteButton } from "./DeleteEventButton.styled";
 import Image from "next/image";
 
 export default function DeleteEventButton({ id, showDeleteModal }) {
@@ -20,7 +20,7 @@ export default function DeleteEventButton({ id, showDeleteModal }) {
   }
 
   return (
-    <DelteButton
+    <DeleteButton
       onClick={() => {
         showDeleteModal(modalContent);
       }}
@@ -31,6 +31,6 @@ export default function DeleteEventButton({ id, showDeleteModal }) {
         width={18}
         height={22}
       />
-    </DelteButton>
+    </DeleteButton>
   );
 }
