@@ -5,7 +5,7 @@ export const SearchMessage = styled.p`
   font: var(--font_h2);
   font-weight: 400;
   margin-bottom: -1.5rem;
-  margin-top: -0.8rem;
+  margin-top: -0.75rem;
 `;
 
 // SearchCard
@@ -15,18 +15,16 @@ export const SearchBox = styled.div`
   background-color: white;
   text-align: center;
   border-radius: var(--border-radius_card);
-  padding-bottom: 1.6rem;
+  padding: 3rem 1.5rem 2rem 1.5rem;
   box-shadow: var(--shadow_card);
 `;
 
 export const SearchHeader = styled.h2`
   font: var(--font_heading-2);
-  padding: 2.5rem 1.8rem 1.2rem 2rem;
+  margin-bottom: 1.875rem;
 `;
 
-export const SearchForm = styled.form`
-  padding: 0 1.5rem;
-`;
+export const SearchForm = styled.form``;
 
 export const SearchBar = styled.input`
   font: var(--font_body);
@@ -34,10 +32,10 @@ export const SearchBar = styled.input`
   border-radius: var(--border-radius_input);
   background-color: #f5f5f5;
   background-image: url("/assets/icons/icon_search-grey.svg");
-  background-size: 36px 36px;
+  background-size: 2.25rem 2.25rem;
   background-position: 0px center;
   background-repeat: no-repeat;
-  padding: 5px 5px 5px 40px;
+  padding: 0.3125rem 0.3125rem 0.3125rem 2.625rem;
   width: 100%;
   color: var(--color_grey);
 
@@ -57,7 +55,7 @@ export const SearchLinkStyled = styled(Link)`
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 1.2rem;
+  top: 1.1875rem;
   right: 1rem;
   background-color: var(--color_white) 20%;
   border: none;
