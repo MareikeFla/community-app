@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const SearchMessage = styled.p`
   font: var(--font_h2);
-  font-weight: 400;
+  font-weight: 500;
   margin-bottom: -1.5rem;
   margin-top: -0.75rem;
 `;
@@ -20,7 +20,7 @@ export const SearchBox = styled.div`
 `;
 
 export const SearchHeader = styled.h2`
-  font: var(--font_heading-2);
+  font: var(--font_heading-1);
   margin-bottom: 1.875rem;
 `;
 
