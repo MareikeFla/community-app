@@ -28,6 +28,6 @@ export const SwitchHandle = styled.div`
   height: 20px;
   background-color: white;
   border-radius: 50%;
-  transition: transform 0.3s ease;
   left: ${({ checked }) => (!checked ? "calc(100% - 22px)" : "2px")};
+  transition: left 0.3s ease;
 `;

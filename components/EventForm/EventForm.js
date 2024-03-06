@@ -68,6 +68,7 @@ export default function EventForm() {
         <FormTimeDateWrapper>
           <FormInput
             required
+            type="date"
             aria-required="true"
             id="startDate"
             name="startDate"
@@ -77,11 +78,12 @@ export default function EventForm() {
           />
           <FormInputTime
             required
+            type="time"
             aria-required="true"
             id="startTime"
             name="startTime"
-            value=""
             onChange={handleChange}
+            value=""
             placeholder="HH:MM"
           />
         </FormTimeDateWrapper>
@@ -90,13 +92,14 @@ export default function EventForm() {
         <FormLabel htmlFor="End">Ende</FormLabel>
         <FormTimeDateWrapper>
           <FormInput
+            type="date"
             id="endDate"
             name="endDate"
             value=""
             onChange={handleChange}
-            placeholder="TT/MM/JJ"
           />
           <FormInputTime
+            type="time"
             id="endTime"
             name="endTime"
             value=""
@@ -106,8 +109,11 @@ export default function EventForm() {
         </FormTimeDateWrapper>
       </FormSection>
       <FormSection aria-describedby="Ort des Events">
-        <FormLegend>Ort des Events</FormLegend>
-        <SubtitleLeft>(Für online Events bitte leer lassen)</SubtitleLeft>
+        <FormLegend>
+          Ort des Events
+          <SubtitleLeft>(Für Online Events bitte leer lassen)</SubtitleLeft>
+        </FormLegend>
+
         <FlexContainer addMargin>
           <FullWidth>
             <FormLabel htmlFor="street">Straße</FormLabel>
@@ -166,7 +172,9 @@ export default function EventForm() {
           required
           aria-required="true"
         />
-        <SubtitleRight>Erscheint in der Event Vorschau</SubtitleRight>
+        <SubtitleRight addMarginTop>
+          Erscheint in der Event Vorschau
+        </SubtitleRight>
       </FormSection>
 
       <FormSection>
@@ -178,7 +186,9 @@ export default function EventForm() {
           required
           aria-required="true"
         />
-        <SubtitleRight>Erscheint auf der Event Seite</SubtitleRight>
+        <SubtitleRight addMarginTop>
+          Erscheint auf der Event Seite
+        </SubtitleRight>
       </FormSection>
 
       <FormSection>

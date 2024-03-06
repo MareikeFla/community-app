@@ -33,6 +33,7 @@ export default createGlobalStyle`
     --font_info: 300 0.875rem/1.43 var(--font-family);
     --font_label: 600 0.875rem/1.43 var(--font-family);
     --font_footer: 700 0.75rem/1.33 var(--font-family);
+    --font_form-note: 400 0.75rem/1.023rem var(--font-family);
 
     --font_button-primary: 700 0.8125rem/1.38 var(--font-family);
     --font_button-secondary: 700 0.75rem/1.33 var(--font-family);
