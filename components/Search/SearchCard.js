@@ -1,16 +1,20 @@
-import { SearchBox } from "./SearchCard.styled";
+import {
+  SearchBox,
+  SearchHeader,
+  SearchBar,
+  SearchForm,
+  SearchMessage,
+} from "./Search.styled";
 import BackButton from "../BackButton/BackButton";
-import { SearchHeader } from "./SearchCard.styled";
-
-export default function SearchCard({ onSubmit }) {
+export default function SearchCard({ handleSubmit, hasSearchResults }) {
   return (
     <>
       <SearchBox>
-        <BackButton></BackButton>
+        <BackButton />
         <SearchHeader>Wonach suchst Du?</SearchHeader>
-        <form onSubmit={(event) => onSubmit(event)}>
-          <input type="search" name="searchTerm" />
-        </form>
+        <SearchForm onSubmit={(event) => handleSubmit(event)}>
+          <SearchBar type="search" name="searchTerm" placeholder="Suche" />
+        </SearchForm>
       </SearchBox>
     </>
   );
