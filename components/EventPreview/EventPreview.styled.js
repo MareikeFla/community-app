@@ -15,6 +15,7 @@ export const PreviewTitle = styled.h2`
 
 export const PreviewDescription = styled.p`
   font: var(--font_body);
+  margin-bottom: 1.125rem;
 `;
 
 export const InfoContainer = styled.div`
@@ -37,5 +38,5 @@ export const Divider = styled.div`
   height: 0.063rem;
   background-color: var(--color_light-grey);
   width: calc(100% + 3rem);
-  margin: 0.75rem -1.5rem 0;
+  margin: 1.125rem -1.5rem 0;
 `;
