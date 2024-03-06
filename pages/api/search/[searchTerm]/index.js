@@ -32,9 +32,6 @@ export default async function handler(request, response) {
         },
       ]);
 
-      if (!filteredEvents) {
-        return response.status(404).json({ status: "Not Found" });
-      }
       return response.status(200).json(filteredEvents);
     } catch (error) {
       console.error(error);

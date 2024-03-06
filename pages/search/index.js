@@ -11,9 +11,7 @@ export default function SearchPage() {
     searchTerm ? `/api/search/${searchTerm}` : null
   );
   const hasSearchResults = filteredEvents
-    ? filteredEvents.length > 0
-      ? true
-      : false
+    ? Boolean(filteredEvents.length)
     : undefined;
 
   if (isLoading) {
