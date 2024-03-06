@@ -17,7 +17,7 @@ export default function HomePage() {
   return (
     <>
       <CategoryList />
-      <EventList events={events} />
+      <EventList events={events} isSorted={false} />
     </>
   );
 }
