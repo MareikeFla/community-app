@@ -3,6 +3,7 @@ import Link from "next/link";
 
 export const SearchMessage = styled.p`
   font: var(--font_h2);
+  color: var(--color_night);
   font-weight: 500;
   margin-bottom: -1.5rem;
   margin-top: -0.75rem;
@@ -14,6 +15,7 @@ export const SearchBox = styled.div`
   width: 100%;
   background-color: white;
   text-align: center;
+  color: var(--color_night);
   border-radius: var(--border-radius_card);
   padding: 3rem 1.5rem 2rem 1.5rem;
   box-shadow: var(--shadow_card);
@@ -21,10 +23,8 @@ export const SearchBox = styled.div`
 
 export const SearchHeader = styled.h2`
   font: var(--font_heading-1);
-  margin-bottom: 1.875rem;
+  margin-bottom: 1.625rem;
 `;
-
-export const SearchForm = styled.form``;
 
 export const SearchBar = styled.input`
   font: var(--font_body);
@@ -35,7 +35,7 @@ export const SearchBar = styled.input`
   background-size: 2.25rem 2.25rem;
   background-position: 0px center;
   background-repeat: no-repeat;
-  padding: 0.3125rem 0.3125rem 0.3125rem 2.625rem;
+  padding: 0.563rem 1.375rem 0.563rem 2.625rem;
   width: 100%;
   color: var(--color_grey);
 
