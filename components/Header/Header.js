@@ -1,9 +1,14 @@
 import Logo from "public/logo.svg";
 import { HeaderBackground, LogoHeader, HeaderCutout } from "./Header.styles";
+import AddEventButton from "../AddEventButton/AddEventButton";
 
 export default function Header() {
+  function handleAddButtonClick() {
+    console.log("Add button clicked");
+  }
   return (
     <HeaderBackground>
+      <AddEventButton onClick={handleAddButtonClick} />
       <LogoHeader>
         <Logo aria-label="Pin&Join Logo" />
       </LogoHeader>
