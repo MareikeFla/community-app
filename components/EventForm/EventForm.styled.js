@@ -71,7 +71,12 @@ export const FormInput = styled.input`
     font: var(--font_body);
   }
 
-  &[type="time"] {
+  &#startTime:before {
+    content: "HH:MM";
+  }
+
+  &#endTime:before {
+    content: "HH:MM";
   }
 `;
 
@@ -144,7 +149,7 @@ export const FormTimeDateWrapper = styled.div`
 export const FlexContainer = styled.div`
   display: flex;
   gap: 0.75rem;
-  margin-bottom: ${({ addMargin }) => (addMargin ? "20px" : "0")};
+  margin-bottom: ${({ addMarginBottom }) => (addMarginBottom ? "20px" : "0")};
 `;
 
 export const FixedSize = styled.div`

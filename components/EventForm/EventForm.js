@@ -43,19 +43,19 @@ export default function EventForm() {
   return (
     <EventFormStyled onSubmit={handleSubmit}>
       <FormSection>
-        <FormLabel htmlFor="eventName">Event Name*</FormLabel>
+        <FormLabel htmlFor="eventName">Event Name *</FormLabel>
         <FormInput
           required
           aria-required="true"
           type="text"
           id="eventName"
-          name="evenName"
-          value=""
+          name="eventName"
+          //   value=""
           onChange={handleChange}
         />
       </FormSection>
       <FormSection>
-        <FormLabel htmlFor="category">Kategorie*</FormLabel>
+        <FormLabel htmlFor="category">Kategorie *</FormLabel>
         <FormSelect name="category" id="category" required aria-required="true">
           <option value="activism">Aktivismus</option>
           <option value="culture">Kunst & Kultur</option>
@@ -84,7 +84,6 @@ export default function EventForm() {
             name="startTime"
             onChange={handleChange}
             value=""
-            placeholder="HH:MM"
           />
         </FormTimeDateWrapper>
       </FormSection>
@@ -114,7 +113,7 @@ export default function EventForm() {
           <SubtitleLeft>(Für Online Events bitte leer lassen)</SubtitleLeft>
         </FormLegend>
 
-        <FlexContainer addMargin>
+        <FlexContainer addMarginBottom>
           <FullWidth>
             <FormLabel htmlFor="street">Straße</FormLabel>
             <FormInput type="text" name="street" id="street" />
@@ -140,7 +139,7 @@ export default function EventForm() {
           <FormLabel htmlFor="forFree">Kostenlos</FormLabel>
           <SwitchButton isChecked={isChecked} onToggle={handleToggle} />
         </FormCheckboxWrapper>
-        <FormLabel htmlFor="cost">Kosten*</FormLabel>
+        <FormLabel htmlFor="cost">Kosten *</FormLabel>
         <FormInput
           id="cost"
           name="cost"
@@ -152,7 +151,7 @@ export default function EventForm() {
       </FormSection>
 
       <FormSection>
-        <FormLabel htmlFor="organization">Veranstalter*</FormLabel>
+        <FormLabel htmlFor="organization">Veranstalter *</FormLabel>
         <FormInput
           type="text"
           id="organization"
@@ -164,7 +163,7 @@ export default function EventForm() {
       </FormSection>
 
       <FormSection>
-        <FormLabel htmlFor="shortDescription">Kurzbeschreibung*</FormLabel>
+        <FormLabel htmlFor="shortDescription">Kurzbeschreibung *</FormLabel>
         <FormDesicriptionField
           id="shortDescription"
           name="shortDescription"
@@ -178,7 +177,7 @@ export default function EventForm() {
       </FormSection>
 
       <FormSection>
-        <FormLabel htmlFor="longDescription">Beschreibung*</FormLabel>
+        <FormLabel htmlFor="longDescription">Beschreibung *</FormLabel>
         <FormDesicriptionField
           id="longDescription"
           name="longDescription"
@@ -225,7 +224,7 @@ export default function EventForm() {
           text="Absenden"
         />
       </FormButtonWrapper>
-      <FormInfoText>*Pflichtfeld</FormInfoText>
+      <FormInfoText>* Pflichtfeld</FormInfoText>
     </EventFormStyled>
   );
 }
