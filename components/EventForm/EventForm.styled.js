@@ -78,6 +78,9 @@ export const FormInput = styled.input`
   &#endTime:before {
     content: "HH:MM";
   }
+  &:focus-visible {
+    outline: 1px solid var(--color_orange);
+  }
 `;
 
 export const FormInputTime = styled(FormInput)`
@@ -92,8 +95,14 @@ export const FormSelect = styled.select`
   width: 100%;
   color: var(--color_grey);
   height: 2.5rem;
+  border-radius: var(--border-radius_input);
+  font: var(--font_body);
 
-  &::-webkit-inner-spin-button {
+  &:focus-visible {
+    outline: 1px solid var(--color_orange);
+  }
+
+  &::-ms-expand {
     padding-right: 1rem;
   }
 `;
