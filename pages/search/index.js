@@ -3,12 +3,18 @@ import EventList from "@/components/EventList/EventList";
 import { useState } from "react";
 import useSWR from "swr";
 import Loading from "@/components/Loading/Loading";
+import { SearchMessage } from "@/components/Search/Search.styled";
 
 export default function SearchPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const { data: filteredEvents, isLoading } = useSWR(
-    `/api/search/${searchTerm}`
+    searchTerm ? `/api/search/${searchTerm}` : null
   );
+  const hasSearchResults = filteredEvents
+    ? filteredEvents.length > 0
+      ? true
+      : false
+    : undefined;
 
   if (isLoading) {
     return <Loading />;
@@ -21,9 +27,18 @@ export default function SearchPage() {
 
   return (
     <>
-      <SearchCard onSubmit={handleSubmit} />
-      {searchTerm ? `Suchergebnis für: ${searchTerm}` : ""}
-      <EventList events={filteredEvents} />
+      <SearchCard
+        handleSubmit={handleSubmit}
+        hasSearchResults={hasSearchResults}
+      />
+      {hasSearchResults === undefined ? null : hasSearchResults ? (
+        <SearchMessage>
+          Deine Suchergebnisse für {`"${searchTerm}"`}
+        </SearchMessage>
+      ) : (
+        <SearchMessage>Die Suche ergab leider kein Ergebnis.</SearchMessage>
+      )}
+      <EventList events={filteredEvents} isSorted />
     </>
   );
 }
