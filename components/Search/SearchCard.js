@@ -6,7 +6,7 @@ import {
   SearchMessage,
 } from "./Search.styled";
 import BackButton from "../BackButton/BackButton";
-export default function SearchCard({ handleSubmit, hasSearchResults }) {
+export default function SearchCard({ handleSubmit }) {
   return (
     <>
       <SearchBox>

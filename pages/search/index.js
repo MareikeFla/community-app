@@ -27,10 +27,7 @@ export default function SearchPage() {
 
   return (
     <>
-      <SearchCard
-        handleSubmit={handleSubmit}
-        hasSearchResults={hasSearchResults}
-      />
+      <SearchCard handleSubmit={handleSubmit} />
       {hasSearchResults === undefined ? null : hasSearchResults ? (
         <SearchMessage>
           Deine Suchergebnisse für {`"${searchTerm}"`}
