@@ -7,16 +7,12 @@ export default async function handler(request, response) {
 
   //Deconstructore searchterm and keyword from query
 
-  const {
-    query: { searchTerm },
-  } = request;
-  const {
-    query: { keyword },
-  } = request;
+  const searchTerm = request.query.searchTerm;
+  const isSubmitted = request.query.isSubmitted === "true" ? true : false;
 
   // Check if query is for search or for autocomplete and set pipeline function accordingly
 
-  const pipeline = keyword === "search" ? searchPipline : autocompletePipeline;
+  const pipeline = isSubmitted ? searchPipline : autocompletePipeline;
 
   if (request.method === "GET") {
     try {
