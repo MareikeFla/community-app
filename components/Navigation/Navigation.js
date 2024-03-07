@@ -28,7 +28,7 @@ export default function Navigation() {
             </NavLink>
           </li>
           <li>
-            <NavLink href="events/new" onClick={toggleMenu}>
+            <NavLink href="/events/new" onClick={toggleMenu}>
               Event erstellen
             </NavLink>
           </li>
