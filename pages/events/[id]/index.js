@@ -3,12 +3,16 @@ import EventDetail from "@/components/EventDetail/EventDetail";
 import useSWR from "swr";
 import Loading from "@/components/Loading/Loading";
 import FetchingError from "@/components/FetchingError/FetchingError";
+import { ConfirmationModal } from "@/components/ConfirmationModal/ConfirmationModal";
 
-export default function EventDetailPage() {
+export default function EventDetailPage({ modalInfo, openModal, modalRef }) {
   const router = useRouter();
-  const { id } = router.query;
 
-  const { data: event, isLoading, error } = useSWR(`/api/events/${id}`);
+  const {
+    data: event,
+    isLoading,
+    error,
+  } = useSWR(`/api/events/${router.query.id}`);
 
   if (isLoading) {
     return <Loading />;
@@ -17,5 +21,13 @@ export default function EventDetailPage() {
     return <FetchingError />;
   }
 
-  return <EventDetail event={event} />;
+  return (
+    <>
+      <EventDetail event={event} showDeleteModal={openModal} />
+      <ConfirmationModal
+        modalRef={modalRef}
+        modalInfo={modalInfo}
+      ></ConfirmationModal>
+    </>
+  );
 }
