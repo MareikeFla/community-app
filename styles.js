@@ -19,8 +19,8 @@ export default createGlobalStyle`
     --color_orange: #fea554;
     --color_light-red: #f9847c;
     --color_red: #ff6e63;
+    --color_input-bg: #f5f5f5;
     --color_sunset: linear-gradient(to top right, #fea554, #ff5e62);
-
     /* Font Styles */
     --font-family: ${nunito_sans.style.fontFamily};
 
@@ -30,8 +30,9 @@ export default createGlobalStyle`
     --font_heading-category: 900 1.25rem/1.35 var(--font-family);
 
     --font_body: 200 1rem/1.5 var(--font-family);
+    --font_body-bold: 600 1rem/1.5 var(--font-family);
     --font_info: 300 0.875rem/1.43 var(--font-family);
-    --font_label: 600 0.875rem/1.43 var(--font-family);
+    --font_label: 700 0.875rem/1.43 var(--font-family);
     --font_footer: 700 0.75rem/1.33 var(--font-family);
     --font_form-note: 400 0.75rem/1.023rem var(--font-family);
 
