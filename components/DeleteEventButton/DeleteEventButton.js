@@ -21,6 +21,7 @@ export default function DeleteEventButton({ id, showDeleteModal }) {
 
   return (
     <DeleteButton
+      title="Löschen"
       onClick={() => {
         showDeleteModal(modalContent);
       }}
