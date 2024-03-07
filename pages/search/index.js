@@ -8,7 +8,7 @@ import { SearchMessage } from "@/components/Search/Search.styled";
 export default function SearchPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const { data: filteredEvents, isLoading } = useSWR(
-    searchTerm ? `/api/search/${searchTerm}` : null
+    searchTerm ? `/api/search/${searchTerm}?keyword=search` : null
   );
   const hasSearchResults = filteredEvents
     ? Boolean(filteredEvents.length)
