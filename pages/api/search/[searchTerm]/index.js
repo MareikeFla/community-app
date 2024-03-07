@@ -22,7 +22,7 @@ export default async function handler(request, response) {
         },
         {
           $sort: {
-            score: { $meta: "textScore" },
+            score: { $meta: "searchScore" },
           },
         },
         {
