@@ -29,7 +29,7 @@ export default createGlobalStyle`
     --font_heading-3: 800 0.875rem/1.36 var(--font-family);
     --font_heading-category: 900 1.25rem/1.35 var(--font-family);
 
-    --font_body: 200 1rem/1.5 var(--font-family);
+    --font_body: 300 1rem/1.5 var(--font-family);
     --font_info: 300 0.875rem/1.43 var(--font-family);
     --font_label: 600 0.875rem/1.43 var(--font-family);
     --font_footer: 700 0.75rem/1.33 var(--font-family);
