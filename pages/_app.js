@@ -40,8 +40,8 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
+      <StyledToastContainer />
       <Layout>
-        <StyledToastContainer />
         <SWRConfig value={{ fetcher }}>
           <Component
             {...pageProps}
