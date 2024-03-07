@@ -3,10 +3,8 @@ import { HeaderBackground, LogoHeader, HeaderCutout } from "./Header.styles";
 import SearchLink from "../Search/SearchLink";
 import AddEventButton from "../AddEventButton/AddEventButton";
 
-
 export default function Header() {
-  function handleAddButtonClick() {
-  }
+  function handleAddButtonClick() {}
   return (
     <HeaderBackground>
       <AddEventButton onClick={handleAddButtonClick} />
