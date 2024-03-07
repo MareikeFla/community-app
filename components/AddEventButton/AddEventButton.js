@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function AddEventButton() {
   return (
     <StyledAddEventButton>
-      <Link href="events/new">
+      <Link href="/events/new">
         <img src="assets/icons/icon_plus.svg" alt="Add Event" />
       </Link>
     </StyledAddEventButton>
