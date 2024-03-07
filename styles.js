@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import { Nunito_Sans } from "next/font/google";
+import "react-toastify/dist/ReactToastify.css";
 
 export const nunito_sans = Nunito_Sans({
   subsets: ["latin"],
@@ -49,6 +50,12 @@ export default createGlobalStyle`
     --shadow_round-button: 0px 2px 4px 0px rgba(91, 95, 98, 0.24);
 
     --transition_button: 0.3s;
+
+    /* Toasts */
+    --toastify-color-success: #4fb386;
+    --toastify-color-error: var(--color_red);
+
+
   }
 
   *,
