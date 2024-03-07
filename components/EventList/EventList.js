@@ -1,7 +1,7 @@
 import EventPreview from "../EventPreview/EventPreview";
 import { EventListWrapper, EventDetailsLink } from "./EventList.styled";
 
-export default function EventList({ events, isSorted }) {
+export default function EventList({ events = [], isSorted }) {
   if (!isSorted) {
     events.sort((a, b) => new Date(a.start.date) - new Date(b.start.date));
   }

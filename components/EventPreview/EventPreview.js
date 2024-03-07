@@ -1,3 +1,4 @@
+import CategoryTag from "../CategoryTag/CategoryTag";
 import {
   Card,
   Icon,
@@ -10,7 +11,7 @@ import {
 import { formatDate } from "@/lib/formatDate";
 
 export default function EventPreview({ event }) {
-  const { eventName, shortDescription, start, location } = event;
+  const { eventName, shortDescription, start, location, category } = event;
   const { date, time } = start;
   const formattedDate = formatDate(date);
 
@@ -18,6 +19,7 @@ export default function EventPreview({ event }) {
     <Card>
       <PreviewTitle>{eventName}</PreviewTitle>
       <PreviewDescription>{shortDescription}</PreviewDescription>
+      <CategoryTag category={category} />
       <Divider />
       <InfoContainer>
         <Info>
