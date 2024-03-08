@@ -74,7 +74,7 @@ export default function EventForm({ editFormData }) {
   };
 
   const handleReset = () => {
-    router.push("/events/");
+    router.push("/");
   };
 
   return (
