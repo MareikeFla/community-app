@@ -1,8 +1,10 @@
 import Logo from "public/logo.svg";
 import { HeaderBackground, LogoHeader, HeaderCutout } from "./Header.styles";
 import SearchLink from "../Search/SearchLink";
+import AddEventButton from "../AddEventButton/AddEventButton";
 
 export default function Header() {
+  function handleAddButtonClick() {
   return (
     <HeaderBackground>
       <SearchLink />
