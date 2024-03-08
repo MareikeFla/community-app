@@ -8,7 +8,6 @@ export const Card = styled.div`
   background-color: var(--color_white);
   border-radius: var(--border-radius_card);
   box-shadow: var(--shadow_card);
-  margin-bottom: 1rem;
 
   @media (min-width: 375px) {
     grid-template-columns: 1fr minmax(8.875rem, 15%);
