@@ -1,8 +1,8 @@
 import dbConnect from "@/db/connect";
 import Event from "@/db/models/Event";
 import {
-  CreateSearchPipline,
-  CreateAutocompletePipeline,
+  createSearchPipline,
+  createAutocompletePipeline,
 } from "@/lib/mongoDBPipelines";
 
 export default async function handler(request, response) {
@@ -16,8 +16,8 @@ export default async function handler(request, response) {
   // Check if query is for search or for autocomplete and set pipeline function accordingly
 
   const pipeline = isSubmitted
-    ? CreateSearchPipline
-    : CreateAutocompletePipeline;
+    ? createSearchPipline
+    : createAutocompletePipeline;
 
   if (request.method === "GET") {
     try {
