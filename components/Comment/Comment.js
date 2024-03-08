@@ -1,7 +1,6 @@
 import {
   CommentBody,
   CommentContainer,
-  CommentDivider,
   CommentHeader,
   ProfilePicture,
 } from "./Comment.styled";
@@ -10,7 +9,6 @@ export default function Comment({ comment }) {
   const { userImageURL, userName, text } = comment;
   return (
     <article>
-      <CommentDivider />
       <CommentContainer>
         <ProfilePicture
           src={userImageURL}
