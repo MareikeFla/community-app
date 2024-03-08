@@ -12,6 +12,7 @@ export default createGlobalStyle`
     /* Color Styles */
     --color_white: #fff;
     --color_body: #f8f8f9;
+    --color_pale-grey: #f5f5f5;
     --color_light-grey: #d8d8d8;
     --color_grey: #838688;
     --color_night: #5b5f62;
@@ -21,7 +22,6 @@ export default createGlobalStyle`
     --color_light-red: #f9847c;
     --color_red: #ff6e63;
     --color_sunset: linear-gradient(to top right, #fea554, #ff5e62);
-
     /* Font Styles */
     --font-family: ${nunito_sans.style.fontFamily};
 
