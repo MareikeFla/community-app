@@ -1,3 +1,4 @@
+import WelcomeCard from "@/components/WelcomeCard/WelcomeCard";
 import CategoryList from "@/components/CategoryList/CategoryList";
 import EventList from "@/components/EventList/EventList";
 import FetchingError from "@/components/FetchingError/FetchingError";
@@ -16,6 +17,7 @@ export default function HomePage() {
 
   return (
     <>
+      <WelcomeCard />
       <CategoryList />
       <EventList events={events} isSorted={false} />
     </>
