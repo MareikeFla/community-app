@@ -26,10 +26,10 @@ export default createGlobalStyle`
 
     --font_heading-1: 600 1.25rem/1.35 var(--font-family);
     --font_heading-2: 600 1.125rem/1.56 var(--font-family);
-    --font_heading-3: 900 0.875rem/1.36 var(--font-family);
+    --font_heading-3: 800 0.875rem/1.36 var(--font-family);
     --font_heading-category: 900 1.25rem/1.35 var(--font-family);
 
-    --font_body: 200 1rem/1.5 var(--font-family);
+    --font_body: 300 1rem/1.5 var(--font-family);
     --font_info: 300 0.875rem/1.43 var(--font-family);
     --font_label: 600 0.875rem/1.43 var(--font-family);
     --font_footer: 700 0.75rem/1.33 var(--font-family);
@@ -42,6 +42,7 @@ export default createGlobalStyle`
     --border-radius_input: 3px;
     --border-radius_card: 6px;
     --border-radius_button: 30px;
+    --border-radius_square-button: 6px;
     --border-radius_round-button: 50px;
 
     --shadow_card: 0px 2px 12px 0px rgba(91, 95, 98, 0.2);

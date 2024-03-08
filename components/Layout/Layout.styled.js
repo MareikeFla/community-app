@@ -4,4 +4,7 @@ export const MainContent = styled.main`
   margin: 0 1rem;
   position: relative;
   top: -9.18rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
 `;

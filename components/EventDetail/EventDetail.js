@@ -1,5 +1,8 @@
 import BackButton from "../BackButton/BackButton";
 import CategoryTag from "../CategoryTag/CategoryTag";
+import DeleteEventButton from "../DeleteEventButton/DeleteEventButton";
+import Map from "../Map";
+import { formatDate } from "@/lib/formatDate";
 import {
   Card,
   ErrorMessage,
@@ -14,7 +17,7 @@ import {
   ListItemMarker,
 } from "./EventDetail.styled";
 
-export default function EventDetail({ event }) {
+export default function EventDetail({ event, showDeleteModal }) {
   if (!event) {
     return (
       <Card pageNotFound>
@@ -25,6 +28,7 @@ export default function EventDetail({ event }) {
   }
 
   const {
+    _id,
     eventName,
     longDescription,
     start,
@@ -36,28 +40,30 @@ export default function EventDetail({ event }) {
     category,
   } = event;
   const { organizationName, organizationContact } = organization;
+  const { street, houseNumber, zip, city, latitude, longitude } = location;
+
+  const formattedStartDate = formatDate(start.date);
+  const formattedEndDate = formatDate(end.date);
 
   return (
     <Card>
       <BackButton />
+      <DeleteEventButton id={_id} showDeleteModal={showDeleteModal} />
       <EventName>{eventName}</EventName>
       <Description>{longDescription}</Description>
       <InfoWrapper>
         <InfoTitle>Beginn</InfoTitle>
         <Info>
-          {start.date}, {start.time} Uhr
+          {formattedStartDate}, {start.time} Uhr
         </Info>
         <InfoTitle>Ende</InfoTitle>
         <Info>
-          {end.date}, {end.time} Uhr
+          {formattedEndDate}, {end.time} Uhr
         </Info>
         <InfoTitle>Ort</InfoTitle>
         <Info>
-          {location.zip &&
-          location.street &&
-          location.houseNumber &&
-          location.city
-            ? `${location.street} ${location.houseNumber}, ${location.zip}, ${location.city}`
+          {zip && street && houseNumber && city
+            ? `${street} ${houseNumber}, ${zip}, ${city}`
             : "Online"}
         </Info>
         <InfoTitle>Kosten</InfoTitle>
@@ -77,6 +83,7 @@ export default function EventDetail({ event }) {
             </ListItem>
           ))}
         </LinkList>
+        {longitude && latitude && <Map event={event} />}
       </InfoWrapper>
       <CategoryTag category={category} />
     </Card>
