@@ -2,8 +2,10 @@ import Layout from "@/components/Layout/Layout";
 import GlobalStyle from "../styles";
 import { SWRConfig } from "swr";
 import { useState, useRef } from "react";
-
+import React from "react";
+import { ToastContainer } from "react-toastify";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
+import { StyledToastContainer } from "@/components/Toast/Toast.styled";
 
 export default function App({ Component, pageProps }) {
   const modalRef = useRef();
@@ -38,6 +40,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
+      <StyledToastContainer />
       <Layout>
         <SWRConfig value={{ fetcher }}>
           <Component

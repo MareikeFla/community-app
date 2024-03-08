@@ -3,6 +3,7 @@ import CategoryTag from "../CategoryTag/CategoryTag";
 import CommentSection from "../CommentSection/CommentSection";
 import DeleteEventButton from "../DeleteEventButton/DeleteEventButton";
 import Map from "../Map";
+import { formatDate } from "@/lib/formatDate";
 import {
   Card,
   ErrorMessage,
@@ -43,6 +44,9 @@ export default function EventDetail({ event, showDeleteModal }) {
   const { organizationName, organizationContact } = organization;
   const { street, houseNumber, zip, city, latitude, longitude } = location;
 
+  const formattedStartDate = formatDate(start.date);
+  const formattedEndDate = formatDate(end.date);
+
   return (
     <>
       <Card>
@@ -53,11 +57,11 @@ export default function EventDetail({ event, showDeleteModal }) {
         <InfoWrapper>
           <InfoTitle>Beginn</InfoTitle>
           <Info>
-            {start.date}, {start.time} Uhr
+            {formattedStartDate}, {start.time} Uhr
           </Info>
           <InfoTitle>Ende</InfoTitle>
           <Info>
-            {end.date}, {end.time} Uhr
+            {formattedEndDate}, {end.time} Uhr
           </Info>
           <InfoTitle>Ort</InfoTitle>
           <Info>
