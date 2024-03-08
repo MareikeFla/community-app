@@ -1,9 +1,9 @@
 import { mutate } from "swr";
+import { user } from "@/lib/user";
+import { CommentCard } from "./CommentSection.styled";
+import SectionTitle from "../SectionTitle/SectionTitle";
 import CommentForm from "../CommentForm/CommentForm";
 import CommentList from "../CommentList/CommentList";
-import { CommentCard } from "./CommentSection.styled";
-import SectionHeader from "../SectionHeader/SectionHeader";
-import { user } from "@/lib/user";
 
 export default function CommentSection({ id, comments }) {
   async function handlePostComment(data) {
@@ -25,9 +25,9 @@ export default function CommentSection({ id, comments }) {
 
   return (
     <section>
-      <SectionHeader>
+      <SectionTitle>
         {comments.length} {comments.length === 1 ? "Kommentar" : "Kommentare"}
-      </SectionHeader>
+      </SectionTitle>
       <CommentCard>
         <CommentForm onPostComment={handlePostComment} />
         <CommentList comments={comments} />
