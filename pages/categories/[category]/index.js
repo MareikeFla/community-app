@@ -26,7 +26,7 @@ export default function HomePage() {
       {data.length === 0 ? (
         <MessageCard>Keine Events gefunden...</MessageCard>
       ) : (
-        <EventList events={data} />
+        <EventList events={data} isSorted={false} />
       )}
     </>
   );

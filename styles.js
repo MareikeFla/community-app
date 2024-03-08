@@ -38,6 +38,14 @@ export default createGlobalStyle`
 
     --font_button-primary: 700 0.8125rem/1.38 var(--font-family);
     --font_button-secondary: 700 0.75rem/1.33 var(--font-family);
+
+    @media (min-width: 768px) {
+      --font_heading-1: 600 1.5rem/1.35 var(--font-family);
+    }
+
+    @media (min-width: 1024px) {
+      --font_heading-1: 600 1.75rem/1.35 var(--font-family);
+    }
     
     /* Effect Styles */
     --border-radius_input: 3px;

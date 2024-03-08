@@ -4,10 +4,9 @@ import SearchLink from "../Search/SearchLink";
 import AddEventButton from "../AddEventButton/AddEventButton";
 
 export default function Header() {
-  function handleAddButtonClick() {}
+  function handleAddButtonClick() {
   return (
     <HeaderBackground>
-      <AddEventButton onClick={handleAddButtonClick} />
       <SearchLink />
       <LogoHeader>
         <Logo aria-label="Pin&Join Logo" />
