@@ -1,39 +1,33 @@
 import SearchCard from "@/components/Search/SearchCard";
 import EventList from "@/components/EventList/EventList";
-import { useState } from "react";
-import useSWR from "swr";
-import Loading from "@/components/Loading/Loading";
 import { SearchMessage } from "@/components/Search/Search.styled";
+import useSearch from "@/lib/useSearch";
 
 export default function SearchPage() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const { data: filteredEvents, isLoading } = useSWR(
-    searchTerm ? `/api/search/${searchTerm}?keyword=search` : null
-  );
-  const hasSearchResults = filteredEvents
-    ? Boolean(filteredEvents.length)
-    : undefined;
-
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    setSearchTerm(event.target.searchTerm.value);
-  }
+  const {
+    searchTerm,
+    filteredEvents,
+    handleSubmit,
+    suggestions,
+    handleInputChange,
+  } = useSearch();
 
   return (
     <>
-      <SearchCard handleSubmit={handleSubmit} />
-      {hasSearchResults === undefined ? null : hasSearchResults ? (
+      <SearchCard
+        handleSubmit={handleSubmit}
+        handleInputChange={handleInputChange}
+        suggestions={suggestions}
+      />
+      {filteredEvents.hasResults ===
+      undefined ? null : filteredEvents.hasResults ? (
         <SearchMessage>
           Deine Suchergebnisse für {`"${searchTerm}"`}
         </SearchMessage>
       ) : (
         <SearchMessage>Die Suche ergab leider kein Ergebnis.</SearchMessage>
       )}
-      <EventList events={filteredEvents} isSorted />
+      <EventList events={filteredEvents.events} isSorted />
     </>
   );
 }
