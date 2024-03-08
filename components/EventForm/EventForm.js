@@ -19,31 +19,51 @@ import {
   SubtitleRight,
 } from "./EventForm.styled";
 import { useState } from "react";
-import useSWR from "swr";
 import Button from "../Button/Button";
 import SwitchButton from "../SwitchButton/SwitchButton";
-export default function EventForm() {
-  const { mutate } = useSWR("/api/module/Event");
-
+export default function EventForm({ editFormData }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    for (const [name, value] of formData.entries()) {
-      console.log(`${name}: ${value}`);
-    }
-    const eventData = Object.fromEntries(formData);
 
-    const response = await fetch("/api/models/Event", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const eventTarget = event.target;
+    const eventData = {
+      eventName: eventTarget.eventName.value,
+      start: {
+        date: eventTarget.startDate.value,
+        time: eventTarget.startTime.value,
       },
-      body: JSON.stringify(eventData),
-    });
-
-    if (response.ok) {
-      mutate();
-    }
+      end: {
+        date: eventTarget.endDate.value,
+        time: eventTarget.endTime.value,
+      },
+      location: {
+        city: eventTarget.city.value,
+        zip: eventTarget.zip.value,
+        street: eventTarget.street.value,
+        houseNumber: eventTarget.houseNumber.value,
+      },
+      category: eventTarget.category.value,
+      organization: {
+        organizationName: eventTarget.organization.value,
+        organizationContact: eventTarget.contact.value,
+      },
+      costs: eventTarget.cost.value,
+      shortDescription: eventTarget.shortDescription.value,
+      longDescription: eventTarget.longDescription.value,
+      image: {
+        src: eventTarget.imageURL.value,
+        alt: eventTarget.alt.value,
+      },
+      links: [
+        {
+          url: eventTarget.linkURL.value,
+          linkDescription: eventTarget.linkDescription.value,
+        },
+      ],
+    };
+    console.log(eventData);
+    editFormData(eventData);
+    event.target.reset();
   };
 
   const handleButtonClick = (onClick) => {
@@ -133,8 +153,8 @@ export default function EventForm() {
             <FormInput type="text" name="street" id="street" />
           </FullWidth>
           <FixedSize>
-            <FormLabel htmlFor="number">Hnr</FormLabel>
-            <FormInput type="text" name="number" id="number" />
+            <FormLabel htmlFor="houseNumber">Hnr</FormLabel>
+            <FormInput type="text" name="houseNumber" id="houseNumber" />
           </FixedSize>
         </FlexContainer>
         <FlexContainer>
@@ -153,12 +173,12 @@ export default function EventForm() {
           <FormLabel htmlFor="forFree">Kostenlos</FormLabel>
           <SwitchButton isChecked={isChecked} onToggle={handleToggle} />
         </FormCheckboxWrapper>
-        {isChecked && (
-          <>
-            <FormLabel htmlFor="cost">Kosten *</FormLabel>
-            <FormInput id="cost" name="cost" required aria-required="true" />
-          </>
-        )}
+        {/* {isChecked && (
+          <> */}
+        <FormLabel htmlFor="cost">Kosten *</FormLabel>
+        <FormInput id="cost" name="cost" required aria-required="true" />
+        {/* </>
+        )} */}
       </FormSection>
 
       <FormSection>
@@ -167,6 +187,16 @@ export default function EventForm() {
           type="text"
           id="organization"
           name="organization"
+          required
+          aria-required="true"
+        />
+      </FormSection>
+      <FormSection>
+        <FormLabel htmlFor="contact">Kontakt *</FormLabel>
+        <FormInput
+          type="text"
+          id="contact"
+          name="contact"
           required
           aria-required="true"
         />
@@ -207,6 +237,13 @@ export default function EventForm() {
           aria-required="true"
           placeholder="http://"
         />
+        <FormInput
+          type="text"
+          id="linkDescription"
+          name="linkDescription"
+          aria-required="true"
+          placeholder="Link Description"
+        />
       </FormSection>
 
       <ImageURLWrapper>
@@ -217,6 +254,13 @@ export default function EventForm() {
           name="imageURL"
           aria-required="true"
           placeholder="http://"
+        />
+        <FormInput
+          type="text"
+          id="alt"
+          name="alt"
+          aria-required="true"
+          placeholder="Beschreibe dein Bild"
         />
       </ImageURLWrapper>
       <FormButtonWrapper>

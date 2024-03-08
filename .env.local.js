@@ -1,1 +1,0 @@
-MONGODB_URI=mongodb+srv://bruno0221:Q0wqlJTFODNO7NiA@cluster0.rgphmku.mongodb.net/pin-and-join?retryWrites=true&w=majority

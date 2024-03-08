@@ -71,13 +71,6 @@ export const FormInput = styled.input`
     font: var(--font_body);
   }
 
-  &#startTime:before {
-    content: "HH:MM";
-  }
-
-  &#endTime:before {
-    content: "HH:MM";
-  }
   &:focus-visible {
     outline: 1px solid var(--color_orange);
   }

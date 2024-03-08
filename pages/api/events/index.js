@@ -19,7 +19,7 @@ export default async function handler(request, response) {
   if (request.method === "POST") {
     try {
       const event = request.body;
-      await Event.create(eventData);
+      await Event.create(event);
 
       response.status(201).json({ status: "Event created" });
     } catch (error) {
