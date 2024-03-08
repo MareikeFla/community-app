@@ -17,7 +17,7 @@ export const EventFormStyled = styled.form`
 
 export const SubtitleRight = styled.p`
   font: var(--font_form-note);
-  margin-top: ${({ addMarginTop }) => (addMarginTop ? "0.5rem" : "0")};
+  margin-top: ${({ addmargintop }) => (addmargintop ? "0.5rem" : "0")};
   text-align: right;
   color: var(--color_grey);
 `;
@@ -89,7 +89,7 @@ export const FormInputTime = styled(FormInput)`
 
 export const FormSelect = styled.select`
   padding: 0.5rem;
-  margin-bottom: 0.625rem;
+
   border: none;
   background-color: #f5f5f5;
   width: 100%;
@@ -126,6 +126,7 @@ export const FormSelectOption = styled.option``;
 
 export const FormDesicriptionField = styled(FormInput)`
   min-height: 7.063rem;
+  overflow: scroll;
 `;
 
 export const FormButtonWrapper = styled.div`
@@ -158,7 +159,7 @@ export const FormTimeDateWrapper = styled.div`
 export const FlexContainer = styled.div`
   display: flex;
   gap: 0.75rem;
-  margin-bottom: ${({ addMarginBottom }) => (addMarginBottom ? "20px" : "0")};
+  margin-bottom: ${({ addmarginbottom }) => (addmarginbottom ? "20px" : "0")};
 `;
 
 export const FixedSize = styled.div`

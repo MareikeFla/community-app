@@ -19,18 +19,36 @@ import {
   SubtitleRight,
 } from "./EventForm.styled";
 import { useState } from "react";
+import useSWR from "swr";
 import Button from "../Button/Button";
 import SwitchButton from "../SwitchButton/SwitchButton";
-
 export default function EventForm() {
-  const handleChange = () => {};
+  const { mutate } = useSWR("/api/module/Event");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const formData = new FormData(event.target);
+    for (const [name, value] of formData.entries()) {
+      console.log(`${name}: ${value}`);
+    }
+    const eventData = Object.fromEntries(formData);
+
+    const response = await fetch("/api/models/Event", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(eventData),
+    });
+
+    if (response.ok) {
+      mutate();
+    }
   };
+
   const handleButtonClick = (onClick) => {
-    console.log("Button wurde geklickt!");
     if (onClick) {
+      console.log("Button wurde geklickt!");
     }
   };
 
@@ -51,7 +69,7 @@ export default function EventForm() {
           id="eventName"
           name="eventName"
           //   value=""
-          onChange={handleChange}
+          //   onChange={handleEventName}
         />
       </FormSection>
       <FormSection>
@@ -67,23 +85,21 @@ export default function EventForm() {
         <FormLabel htmlFor="startDate">Beginn*</FormLabel>
         <FormTimeDateWrapper>
           <FormInput
-            required
+            // required
             type="date"
             aria-required="true"
             id="startDate"
             name="startDate"
-            value=""
-            onChange={handleChange}
+            // value=""
             placeholder="TT/MM/JJ"
           />
           <FormInputTime
-            required
+            // required
             type="time"
             aria-required="true"
             id="startTime"
             name="startTime"
-            onChange={handleChange}
-            value=""
+            // value=""
           />
         </FormTimeDateWrapper>
       </FormSection>
@@ -94,15 +110,13 @@ export default function EventForm() {
             type="date"
             id="endDate"
             name="endDate"
-            value=""
-            onChange={handleChange}
+            // value=""
           />
           <FormInputTime
             type="time"
             id="endTime"
             name="endTime"
-            value=""
-            onChange={handleChange}
+            // value=""
             placeholder="HH:MM"
           />
         </FormTimeDateWrapper>
@@ -113,7 +127,7 @@ export default function EventForm() {
           <SubtitleLeft>(Für Online Events bitte leer lassen)</SubtitleLeft>
         </FormLegend>
 
-        <FlexContainer addMarginBottom>
+        <FlexContainer addmarginbottom>
           <FullWidth>
             <FormLabel htmlFor="street">Straße</FormLabel>
             <FormInput type="text" name="street" id="street" />
@@ -139,15 +153,12 @@ export default function EventForm() {
           <FormLabel htmlFor="forFree">Kostenlos</FormLabel>
           <SwitchButton isChecked={isChecked} onToggle={handleToggle} />
         </FormCheckboxWrapper>
-        <FormLabel htmlFor="cost">Kosten *</FormLabel>
-        <FormInput
-          id="cost"
-          name="cost"
-          value=""
-          onChange={handleChange}
-          required
-          aria-required="true"
-        />
+        {isChecked && (
+          <>
+            <FormLabel htmlFor="cost">Kosten *</FormLabel>
+            <FormInput id="cost" name="cost" required aria-required="true" />
+          </>
+        )}
       </FormSection>
 
       <FormSection>
@@ -156,7 +167,6 @@ export default function EventForm() {
           type="text"
           id="organization"
           name="organization"
-          onChange={handleChange}
           required
           aria-required="true"
         />
@@ -167,11 +177,10 @@ export default function EventForm() {
         <FormDesicriptionField
           id="shortDescription"
           name="shortDescription"
-          onChange={handleChange}
           required
           aria-required="true"
         />
-        <SubtitleRight addMarginTop>
+        <SubtitleRight addmargintop>
           Erscheint in der Event Vorschau
         </SubtitleRight>
       </FormSection>
@@ -181,11 +190,10 @@ export default function EventForm() {
         <FormDesicriptionField
           id="longDescription"
           name="longDescription"
-          onChange={handleChange}
           required
           aria-required="true"
         />
-        <SubtitleRight addMarginTop>
+        <SubtitleRight addmargintop>
           Erscheint auf der Event Seite
         </SubtitleRight>
       </FormSection>
@@ -196,8 +204,6 @@ export default function EventForm() {
           type="url"
           id="linkURL"
           name="linkURL"
-          onChange={handleChange}
-          required
           aria-required="true"
           placeholder="http://"
         />
@@ -209,14 +215,17 @@ export default function EventForm() {
           type="url"
           id="imageURL"
           name="imageURL"
-          onChange={handleChange}
-          required
           aria-required="true"
           placeholder="http://"
         />
       </ImageURLWrapper>
       <FormButtonWrapper>
-        <Button color="primary" type="reset" text="Abbrechen" />
+        <Button
+          color="primary"
+          type="reset"
+          text="Abbrechen"
+          onClick={handleButtonClick}
+        />
         <Button
           color="secondary"
           type="submit"
