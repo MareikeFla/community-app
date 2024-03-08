@@ -29,7 +29,6 @@ export default function EventForm() {
     event.preventDefault();
   };
   const handleButtonClick = (onClick) => {
-    console.log("Button wurde geklickt!");
     if (onClick) {
     }
   };
