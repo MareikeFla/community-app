@@ -69,8 +69,8 @@ export default function EventForm({ editFormData }) {
 
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleToggle = (newValue) => {
-    setIsChecked(newValue);
+  const handleToggle = () => {
+    setIsChecked(!isChecked);
   };
 
   const handleReset = () => {
@@ -131,7 +131,7 @@ export default function EventForm({ editFormData }) {
           <SubtitleLeft>(Für Online Events bitte leer lassen)</SubtitleLeft>
         </FormLegend>
 
-        <FlexContainer addmarginbottom>
+        <FlexContainer $addmarginbottom>
           <FullWidth>
             <FormLabel htmlFor="street">Straße</FormLabel>
             <FormInput type="text" name="street" id="street" />
@@ -155,7 +155,7 @@ export default function EventForm({ editFormData }) {
       <FormSection>
         <FormCheckboxWrapper>
           <FormLabel htmlFor="forFree">Kostenlos</FormLabel>
-          <SwitchButton isChecked={isChecked} onToggle={handleToggle} />
+          <SwitchButton isChecked={isChecked} toggleCosts={handleToggle} />
         </FormCheckboxWrapper>
         <FormLabel htmlFor="cost">Kosten *</FormLabel>
         <FormInput
@@ -197,7 +197,7 @@ export default function EventForm({ editFormData }) {
           required
           aria-required="true"
         />
-        <SubtitleRight addmargintop>
+        <SubtitleRight $addmargintop>
           Erscheint in der Event Vorschau
         </SubtitleRight>
       </FormSection>
@@ -210,7 +210,7 @@ export default function EventForm({ editFormData }) {
           required
           aria-required="true"
         />
-        <SubtitleRight addmargintop>
+        <SubtitleRight $addmargintop>
           Erscheint auf der Event Seite
         </SubtitleRight>
       </FormSection>
@@ -223,7 +223,7 @@ export default function EventForm({ editFormData }) {
           name="linkURL"
           aria-required="true"
           placeholder="http://"
-          addmarginbottom
+          $addmarginbottom
         />
         <FormInput
           type="text"
@@ -242,7 +242,7 @@ export default function EventForm({ editFormData }) {
           name="imageURL"
           aria-required="true"
           placeholder="http://"
-          addmarginbottom
+          $addmarginbottom
         />
         <FormInput
           type="text"

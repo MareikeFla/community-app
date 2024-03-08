@@ -4,18 +4,12 @@ import {
   SwitchBackground,
   SwitchHandle,
 } from "./SwitchButton.styled";
-export default function SwitchButton({ onToggle, isChecked }) {
-  const toggleSwitch = () => {
-    if (onToggle) {
-      onToggle(!isChecked);
-    }
-  };
-
+export default function SwitchButton({ toggleCosts, isChecked }) {
   return (
-    <SwitchContainer>
-      <SwitchInput htmlFor="switch" checked={isChecked} type="checkbox" />
-      <SwitchBackground checked={isChecked} />
-      <SwitchHandle onClick={toggleSwitch} checked={isChecked} />
+    <SwitchContainer onClick={toggleCosts}>
+      <SwitchInput htmlFor="switch" $checked={isChecked} type="checkbox" />
+      <SwitchBackground $checked={isChecked} />
+      <SwitchHandle $checked={isChecked} />
     </SwitchContainer>
   );
 }
