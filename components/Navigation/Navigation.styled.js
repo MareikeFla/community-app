@@ -30,17 +30,17 @@ export const NavIcon = styled.div`
     transition: var(--transition_button);
 
     &:nth-child(1) {
-      transform: ${({ isOpen }) =>
-        isOpen ? "rotate(45deg) translate(5px, 5px)" : "rotate(0)"};
+      transform: ${({ $isOpen }) =>
+        $isOpen ? "rotate(45deg) translate(5px, 5px)" : "rotate(0)"};
     }
 
     &:nth-child(2) {
-      opacity: ${({ isOpen }) => (isOpen ? 0 : 1)};
+      opacity: ${({ $isOpen }) => ($isOpen ? 0 : 1)};
     }
 
     &:nth-child(3) {
-      transform: ${({ isOpen }) =>
-        isOpen ? "rotate(-45deg) translate(5px, -5px)" : "rotate(0)"};
+      transform: ${({ $isOpen }) =>
+        $isOpen ? "rotate(-45deg) translate(5px, -5px)" : "rotate(0)"};
     }
   }
 `;
@@ -48,7 +48,7 @@ export const NavIcon = styled.div`
 export const NavMenu = styled.div`
   position: fixed;
   top: 0;
-  left: ${({ isOpen }) => (isOpen ? "0" : "calc(-100% - 1rem)")};
+  left: ${({ $isOpen }) => ($isOpen ? "0" : "calc(-100% - 1rem)")};
   width: 100vw;
   height: 100vh;
   background-color: var(--color_midnight);
