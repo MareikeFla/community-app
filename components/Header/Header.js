@@ -1,9 +1,11 @@
 import Logo from "public/logo.svg";
 import { HeaderBackground, LogoHeader, HeaderCutout } from "./Header.styles";
+import SearchLink from "../Search/SearchLink";
 
 export default function Header() {
   return (
     <HeaderBackground>
+      <SearchLink />
       <LogoHeader>
         <Logo aria-label="Pin&Join Logo" />
       </LogoHeader>
