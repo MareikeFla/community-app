@@ -21,10 +21,11 @@ import {
 import { useState } from "react";
 import Button from "../Button/Button";
 import SwitchButton from "../SwitchButton/SwitchButton";
+import { useRouter } from "next/router";
 export default function EventForm({ editFormData }) {
+  const router = useRouter();
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const eventTarget = event.target;
     const eventData = {
       eventName: eventTarget.eventName.value,
@@ -61,21 +62,19 @@ export default function EventForm({ editFormData }) {
         },
       ],
     };
-    console.log(eventData);
     editFormData(eventData);
     event.target.reset();
-  };
-
-  const handleButtonClick = (onClick) => {
-    if (onClick) {
-      console.log("Button wurde geklickt!");
-    }
+    router.push("/");
   };
 
   const [isChecked, setIsChecked] = useState(false);
 
   const handleToggle = (newValue) => {
     setIsChecked(newValue);
+  };
+
+  const handleReset = () => {
+    router.push("/events/");
   };
 
   return (
@@ -88,57 +87,42 @@ export default function EventForm({ editFormData }) {
           type="text"
           id="eventName"
           name="eventName"
-          //   value=""
-          //   onChange={handleEventName}
         />
       </FormSection>
       <FormSection>
         <FormLabel htmlFor="category">Kategorie *</FormLabel>
         <FormSelect name="category" id="category" required aria-required="true">
-          <option value="activism">Aktivismus</option>
-          <option value="culture">Kunst & Kultur</option>
-          <option value="education">Bildung & Wissen</option>
-          <option value="sport">Sport & Fitness</option>
+          <option value="Aktivismus">Aktivismus</option>
+          <option value="Kunst & Kultur">Kunst & Kultur</option>
+          <option value="Bildung & Wissen">Bildung & Wissen</option>
+          <option value="Sport & Fitness">Sport & Fitness</option>
         </FormSelect>
       </FormSection>
       <FormSection>
         <FormLabel htmlFor="startDate">Beginn*</FormLabel>
         <FormTimeDateWrapper>
           <FormInput
-            // required
+            required
             type="date"
             aria-required="true"
             id="startDate"
             name="startDate"
-            // value=""
             placeholder="TT/MM/JJ"
           />
           <FormInputTime
-            // required
+            required
             type="time"
             aria-required="true"
             id="startTime"
             name="startTime"
-            // value=""
           />
         </FormTimeDateWrapper>
       </FormSection>
       <FormSection>
         <FormLabel htmlFor="End">Ende</FormLabel>
         <FormTimeDateWrapper>
-          <FormInput
-            type="date"
-            id="endDate"
-            name="endDate"
-            // value=""
-          />
-          <FormInputTime
-            type="time"
-            id="endTime"
-            name="endTime"
-            // value=""
-            placeholder="HH:MM"
-          />
+          <FormInput type="date" id="endDate" name="endDate" />
+          <FormInputTime type="time" id="endTime" name="endTime" />
         </FormTimeDateWrapper>
       </FormSection>
       <FormSection aria-describedby="Ort des Events">
@@ -173,12 +157,15 @@ export default function EventForm({ editFormData }) {
           <FormLabel htmlFor="forFree">Kostenlos</FormLabel>
           <SwitchButton isChecked={isChecked} onToggle={handleToggle} />
         </FormCheckboxWrapper>
-        {/* {isChecked && (
-          <> */}
         <FormLabel htmlFor="cost">Kosten *</FormLabel>
-        <FormInput id="cost" name="cost" required aria-required="true" />
-        {/* </>
-        )} */}
+        <FormInput
+          id="cost"
+          name="cost"
+          required
+          aria-required="true"
+          disabled={!isChecked}
+          value={!isChecked ? "Kostenlos" : ""}
+        />
       </FormSection>
 
       <FormSection>
@@ -236,13 +223,14 @@ export default function EventForm({ editFormData }) {
           name="linkURL"
           aria-required="true"
           placeholder="http://"
+          addmarginbottom
         />
         <FormInput
           type="text"
           id="linkDescription"
           name="linkDescription"
           aria-required="true"
-          placeholder="Link Description"
+          placeholder="Link Beschreibung"
         />
       </FormSection>
 
@@ -254,6 +242,7 @@ export default function EventForm({ editFormData }) {
           name="imageURL"
           aria-required="true"
           placeholder="http://"
+          addmarginbottom
         />
         <FormInput
           type="text"
@@ -266,16 +255,11 @@ export default function EventForm({ editFormData }) {
       <FormButtonWrapper>
         <Button
           color="primary"
-          type="reset"
+          type="button"
           text="Abbrechen"
-          onClick={handleButtonClick}
+          onClick={handleReset}
         />
-        <Button
-          color="secondary"
-          type="submit"
-          onClick={handleButtonClick}
-          text="Absenden"
-        />
+        <Button color="secondary" type="submit" text="Absenden" />
       </FormButtonWrapper>
       <FormInfoText>* Pflichtfeld</FormInfoText>
     </EventFormStyled>

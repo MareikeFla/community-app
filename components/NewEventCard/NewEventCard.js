@@ -2,7 +2,7 @@ import { NewEventCardStyled, NewEventCardTitle } from "./NewEventCard.styled";
 import EventForm from "../EventForm/EventForm";
 import BackButton from "../BackButton/BackButton";
 import { mutate } from "swr";
-export default function NewEventCard() {
+export default function NewEventCard({}) {
   const createNewEvent = async (data) => {
     const response = await fetch("/api/events", {
       method: "POST",

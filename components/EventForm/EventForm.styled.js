@@ -47,6 +47,7 @@ export const FormInput = styled.input`
   border-radius: var(--border-radius_input);
   height: 2.5rem;
   width: 100%;
+  margin-bottom: ${({ addmarginbottom }) => (addmarginbottom ? "20px" : "0")};
 
   &::placeholder {
     color: var(--color_grey);
