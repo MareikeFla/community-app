@@ -15,7 +15,11 @@ export default function CommentForm({ onPostComment }) {
     <>
       <CommentFormContainer onSubmit={handleSubmitComment}>
         <CommentFormLabel htmlFor="comment">Dein Kommentar</CommentFormLabel>
-        <CommentFormTextarea id="comment" rows={5}></CommentFormTextarea>
+        <CommentFormTextarea
+          id="comment"
+          rows={5}
+          required
+        ></CommentFormTextarea>
         <CommentButton type="submit">Absenden</CommentButton>
       </CommentFormContainer>
     </>
