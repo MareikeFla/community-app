@@ -2,7 +2,7 @@ import { SearchBox, SearchHeader, SearchBar } from "./Search.styled";
 import BackButton from "../BackButton/BackButton";
 export default function SearchCard({
   handleSubmit,
-  handleInputChange,
+  debouncedInputChange,
   suggestions,
 }) {
   return (
@@ -15,7 +15,7 @@ export default function SearchCard({
           name="searchTerm"
           placeholder="Suche"
           list="suggestions"
-          onInput={(event) => handleInputChange(event)}
+          onInput={(event) => debouncedInputChange(event)}
         />
         <datalist id="suggestions">
           {suggestions.length > 0

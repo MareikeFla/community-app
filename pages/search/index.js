@@ -9,14 +9,14 @@ export default function SearchPage() {
     filteredEvents,
     handleSubmit,
     suggestions,
-    handleInputChange,
+    debouncedInputChange,
   } = useSearch();
 
   return (
     <>
       <SearchCard
         handleSubmit={handleSubmit}
-        handleInputChange={handleInputChange}
+        debouncedInputChange={debouncedInputChange}
         suggestions={suggestions}
       />
       {filteredEvents.hasResults ===
