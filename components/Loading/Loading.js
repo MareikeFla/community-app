@@ -1,3 +1,5 @@
+import { Spinner } from "./Loading.styled";
+
 export default function Loading() {
-  return <div>Data is Loading...</div>;
+  return <Spinner></Spinner>;
 }
