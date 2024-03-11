@@ -17,7 +17,7 @@ export const EventFormStyled = styled.form`
 
 export const SubtitleRight = styled.p`
   font: var(--font_form-note);
-  margin-top: ${({ addMarginTop }) => (addMarginTop ? "0.5rem" : "0")};
+  margin-top: ${({ $addmargintop }) => ($addmargintop ? "0.5rem" : "0")};
   text-align: right;
   color: var(--color_grey);
 `;
@@ -47,6 +47,7 @@ export const FormInput = styled.input`
   border-radius: var(--border-radius_input);
   height: 2.5rem;
   width: 100%;
+  margin-bottom: ${({ $addmarginbottom }) => ($addmarginbottom ? "20px" : "0")};
 
   &::placeholder {
     color: var(--color_grey);
@@ -71,25 +72,24 @@ export const FormInput = styled.input`
     font: var(--font_body);
   }
 
-  &#startTime:before {
-    content: "HH:MM";
-  }
-
-  &#endTime:before {
-    content: "HH:MM";
-  }
   &:focus-visible {
     outline: 1px solid var(--color_orange);
+  }
+  &[type="date"]:hover {
+    cursor: pointer;
   }
 `;
 
 export const FormInputTime = styled(FormInput)`
   width: 7.5rem;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const FormSelect = styled.select`
   padding: 0.5rem;
-  margin-bottom: 0.625rem;
+
   border: none;
   background-color: #f5f5f5;
   width: 100%;
@@ -104,6 +104,9 @@ export const FormSelect = styled.select`
 
   &::-ms-expand {
     padding-right: 1rem;
+  }
+  &:hover {
+    cursor: pointer;
   }
 `;
 
@@ -124,8 +127,22 @@ export const FormCheckboxWrapper = styled.div`
 
 export const FormSelectOption = styled.option``;
 
-export const FormDesicriptionField = styled(FormInput)`
+export const FormDesicriptionField = styled.textarea`
   min-height: 7.063rem;
+  overflow: scroll;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background-color: #f5f5f5;
+  border-radius: var(--border-radius_input);
+  height: 2.5rem;
+  width: 100%;
+  margin-bottom: ${({ $addmarginbottom }) => ($addmarginbottom ? "20px" : "0")};
+  font: var(--font_body);
+  color: var(--color_night);
+
+  &:focus-visible {
+    outline: 1px solid var(--color_orange);
+  }
 `;
 
 export const FormButtonWrapper = styled.div`
@@ -158,7 +175,7 @@ export const FormTimeDateWrapper = styled.div`
 export const FlexContainer = styled.div`
   display: flex;
   gap: 0.75rem;
-  margin-bottom: ${({ addMarginBottom }) => (addMarginBottom ? "20px" : "0")};
+  margin-bottom: ${({ $addmarginbottom }) => ($addmarginbottom ? "20px" : "0")};
 `;
 
 export const FixedSize = styled.div`
