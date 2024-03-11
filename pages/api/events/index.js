@@ -23,7 +23,7 @@ export default async function handler(request, response) {
 
       response.status(201).json({ status: "Event created" });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       response.status(400).json({ error: error.message });
     }
   }
