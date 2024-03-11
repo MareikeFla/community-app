@@ -27,7 +27,7 @@ import SwitchButton from "../SwitchButton/SwitchButton";
 
 import { useRouter } from "next/router";
 
-export default function EventForm({ updateDatabase }) {
+export default function EventForm({ updateDatabase, event }) {
   const router = useRouter();
 
   const handleSubmit = async (event) => {
@@ -92,7 +92,7 @@ export default function EventForm({ updateDatabase }) {
   }, [isFreeOfCharge, event]);
 
   const handleToggle = () => {
-    setIsChecked(!isChecked);
+    setIsFreeOfCharge(!isFreeOfCharge);
   };
 
   const handleCancel = () => {
@@ -109,11 +109,18 @@ export default function EventForm({ updateDatabase }) {
           type="text"
           id="eventName"
           name="eventName"
+          defaultValue={event ? event.eventName : ""}
         />
       </FormSection>
       <FormSection>
         <FormLabel htmlFor="category">Kategorie *</FormLabel>
-        <FormSelect name="category" id="category" required aria-required="true">
+        <FormSelect
+          name="category"
+          id="category"
+          required
+          aria-required="true"
+          defaultValue={event ? event.category : ""}
+        >
           <option value="Aktivismus">Aktivismus</option>
           <option value="Kunst & Kultur">Kunst & Kultur</option>
           <option value="Bildung & Wissen">Bildung & Wissen</option>
@@ -129,7 +136,7 @@ export default function EventForm({ updateDatabase }) {
             aria-required="true"
             id="startDate"
             name="startDate"
-            placeholder="TT/MM/JJ"
+            defaultValue={event && event.start ? event.start.date : ""}
           />
           <FormInputTime
             required
@@ -137,14 +144,25 @@ export default function EventForm({ updateDatabase }) {
             aria-required="true"
             id="startTime"
             name="startTime"
+            defaultValue={event && event.start ? event.start.time : ""}
           />
         </FormTimeDateWrapper>
       </FormSection>
       <FormSection>
         <FormLabel htmlFor="End">Ende</FormLabel>
         <FormTimeDateWrapper>
-          <FormInput type="date" id="endDate" name="endDate" />
-          <FormInputTime type="time" id="endTime" name="endTime" />
+          <FormInput
+            type="date"
+            id="endDate"
+            name="endDate"
+            defaultValue={event && event.end ? event.end.date : ""}
+          />
+          <FormInputTime
+            type="time"
+            id="endTime"
+            name="endTime"
+            defaultValue={event && event.end ? event.end.time : ""}
+          />
         </FormTimeDateWrapper>
       </FormSection>
       <FormSection aria-describedby="Ort des Events">
@@ -152,32 +170,55 @@ export default function EventForm({ updateDatabase }) {
           Ort des Events
           <SubtitleLeft>(Für Online Events bitte leer lassen)</SubtitleLeft>
         </FormLegend>
-
         <FlexContainer $addmarginbottom>
           <FullWidth>
             <FormLabel htmlFor="street">Straße</FormLabel>
-            <FormInput type="text" name="street" id="street" />
+            <FormInput
+              type="text"
+              name="street"
+              id="street"
+              defaultValue={
+                event && event.location ? event.location.street : ""
+              }
+            />
           </FullWidth>
           <FixedSize>
             <FormLabel htmlFor="houseNumber">Hnr</FormLabel>
-            <FormInput type="text" name="houseNumber" id="houseNumber" />
+            <FormInput
+              type="text"
+              name="houseNumber"
+              id="houseNumber"
+              defaultValue={
+                event && event.location ? event.location.houseNumber : ""
+              }
+            />
           </FixedSize>
         </FlexContainer>
         <FlexContainer>
           <FixedSize>
             <FormLabel htmlFor="zip">PLZ</FormLabel>
-            <FormInput type="text" name="zip" id="zip" />
+            <FormInput
+              type="text"
+              name="zip"
+              id="zip"
+              defaultValue={event && event.location ? event.location.zip : ""}
+            />
           </FixedSize>
           <FullWidth>
             <FormLabel htmlFor="city">Ort</FormLabel>
-            <FormInput type="text" name="city" id="city" />
+            <FormInput
+              type="text"
+              name="city"
+              id="city"
+              defaultValue={event && event.location ? event.location.city : ""}
+            />
           </FullWidth>
         </FlexContainer>
       </FormSection>
       <FormSection>
         <FormCheckboxWrapper>
           <FormLabel htmlFor="forFree">Kostenlos</FormLabel>
-          <SwitchButton isChecked={!isChecked} toggleCosts={handleToggle} />
+          <SwitchButton isChecked={isFreeOfCharge} toggleCosts={handleToggle} />
         </FormCheckboxWrapper>
         <FormLabel htmlFor="cost">Kosten *</FormLabel>
         <FormInput
@@ -190,7 +231,6 @@ export default function EventForm({ updateDatabase }) {
           onChange={(event) => !isFreeOfCharge && setCosts(event.target.value)}
         />
       </FormSection>
-
       <FormSection>
         <FormLabel htmlFor="organization">Veranstalter *</FormLabel>
         <FormInput
@@ -199,6 +239,11 @@ export default function EventForm({ updateDatabase }) {
           name="organization"
           required
           aria-required="true"
+          defaultValue={
+            event && event.organization
+              ? event.organization.organizationName
+              : ""
+          }
         />
       </FormSection>
       <FormSection>
@@ -209,9 +254,13 @@ export default function EventForm({ updateDatabase }) {
           name="contact"
           required
           aria-required="true"
+          defaultValue={
+            event && event.organization
+              ? event.organization.organizationContact
+              : ""
+          }
         />
       </FormSection>
-
       <FormSection>
         <FormLabel htmlFor="shortDescription">Kurzbeschreibung *</FormLabel>
         <FormDescriptionField
@@ -220,10 +269,10 @@ export default function EventForm({ updateDatabase }) {
           name="shortDescription"
           required
           aria-required="true"
+          defaultValue={event ? event.shortDescription : ""}
         />
         <SubtitleRight>Erscheint in der Event Vorschau</SubtitleRight>
       </FormSection>
-
       <FormSection>
         <FormLabel htmlFor="longDescription">Beschreibung *</FormLabel>
         <FormDescriptionField
@@ -231,48 +280,55 @@ export default function EventForm({ updateDatabase }) {
           name="longDescription"
           required
           aria-required="true"
+          defaultValue={event ? event.longDescription : ""}
         />
         <SubtitleRight>Erscheint auf der Event Seite</SubtitleRight>
       </FormSection>
-
       <FormSection>
         <FormLabel htmlFor="linkURL">Link für weitere Infos</FormLabel>
         <FormInput
           type="url"
           id="linkURL"
           name="linkURL"
-          aria-required="true"
-          placeholder="http://"
           $addmarginbottom
+          placeholder="http://"
+          defaultValue={
+            event && event.links && event.links.length > 0
+              ? event.links[0].url
+              : ""
+          }
         />
         <FormLabel htmlFor="linkDescription">Link Beschreibung</FormLabel>
-
         <FormInput
           type="text"
           id="linkDescription"
           name="linkDescription"
-          aria-required="true"
           placeholder="Link Beschreibung"
+          $addmarginbottom
+          defaultValue={
+            event && event.links && event.links.length > 0
+              ? event.links[0].linkDescription
+              : ""
+          }
         />
       </FormSection>
-
       <ImageURLWrapper>
         <FormLabel htmlFor="imageURL">Bild</FormLabel>
         <FormInput
           type="url"
           id="imageURL"
           name="imageURL"
-          aria-required="true"
           placeholder="http://"
           $addmarginbottom
+          defaultValue={event && event.image ? event.image.src : ""}
         />
         <FormLabel htmlFor="alt">Bild Beschreibung</FormLabel>
         <FormInput
           type="text"
           id="alt"
           name="alt"
-          aria-required="true"
           placeholder="Beschreibe dein Bild"
+          defaultValue={event && event.image ? event.image.alt : ""}
         />
       </ImageURLWrapper>
       <FormButtonWrapper>
