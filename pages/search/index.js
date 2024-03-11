@@ -19,15 +19,18 @@ export default function SearchPage() {
         debouncedInputChange={debouncedInputChange}
         suggestions={suggestions}
       />
-      {filteredEvents.hasResults ===
-      undefined ? null : filteredEvents.hasResults ? (
-        <SearchMessage>
-          Deine Suchergebnisse für {`"${searchTerm}"`}
-        </SearchMessage>
-      ) : (
-        <SearchMessage>Die Suche ergab leider kein Ergebnis.</SearchMessage>
-      )}
-      <EventList events={filteredEvents.events} isSorted />
+
+      <EventList
+        events={filteredEvents.events}
+        isSorted
+        heading={
+          filteredEvents.hasResults === undefined
+            ? null
+            : filteredEvents.hasResults
+            ? `Deine Suchergebnisse für "${searchTerm}"`
+            : `Deine Suche nach" "${searchTerm}" ergab leider kein Ergebnis.`
+        }
+      />
     </>
   );
 }
