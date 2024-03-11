@@ -1,4 +1,4 @@
-import EventFormCard from "@/components/EventForm/EventFormCard";
+import EventFormContainer from "@/components/EventForm/EventFormContainer";
 import { mutate } from "swr";
 
 export default function NewEvent() {
@@ -17,7 +17,7 @@ export default function NewEvent() {
   };
 
   return (
-    <EventFormCard
+    <EventFormContainer
       title={"Erstelle ein neues Event"}
       updateDatabase={handleNewEvent}
     />
