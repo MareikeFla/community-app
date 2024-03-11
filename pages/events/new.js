@@ -1,7 +1,7 @@
 import EventFormCard from "@/components/EventForm/EventFormCard";
 import { mutate } from "swr";
 
-export default function NewCard() {
+export default function NewEvent() {
   const handleNewEvent = async (data) => {
     const response = await fetch("/api/events", {
       method: "POST",
