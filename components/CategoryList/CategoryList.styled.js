@@ -6,10 +6,6 @@ export const CategoryListContainer = styled.section`
   flex-direction: column;
   gap: 1.5rem;
 `;
-export const CategoryListHeader = styled.h2`
-  font: var(--font_heading-2);
-  color: var(--color_night);
-`;
 
 export const CategoryListStyled = styled.ul`
   display: grid;

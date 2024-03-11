@@ -1,9 +1,6 @@
 import EventPreview from "../EventPreview/EventPreview";
-import {
-  EventListWrapper,
-  EventDetailsLink,
-  EventListHeader,
-} from "./EventList.styled";
+import { EventListWrapper, EventDetailsLink } from "./EventList.styled";
+import SectionTitle from "../SectionTitle/SectionTitle";
 
 export default function EventList({ events = [], isSorted, heading }) {
   if (!isSorted) {
@@ -11,13 +8,15 @@ export default function EventList({ events = [], isSorted, heading }) {
   }
 
   return (
-    <EventListWrapper>
-      {heading ? <EventListHeader>{heading}</EventListHeader> : null}
-      {events.map((event) => (
-        <EventDetailsLink key={event._id} href={`/events/${event._id}`}>
-          <EventPreview event={event} />
-        </EventDetailsLink>
-      ))}
-    </EventListWrapper>
+    <>
+      {heading ? <SectionTitle>{heading}</SectionTitle> : null}
+      <EventListWrapper>
+        {events.map((event) => (
+          <EventDetailsLink key={event._id} href={`/events/${event._id}`}>
+            <EventPreview event={event} />
+          </EventDetailsLink>
+        ))}
+      </EventListWrapper>
+    </>
   );
 }

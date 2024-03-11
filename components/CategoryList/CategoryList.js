@@ -1,9 +1,9 @@
 import {
   CategoryListStyled,
-  CategoryListHeader,
   CategoryListContainer,
   CategoryLink,
 } from "./CategoryList.styled";
+import SectionTitle from "../SectionTitle/SectionTitle";
 import CategoryCard from "../CategoryCard/CategoryCard";
 import useSWR from "swr";
 import Loading from "../Loading/Loading";
@@ -20,18 +20,20 @@ export default function CategoryList() {
   }
 
   return (
-    <CategoryListContainer>
-      <CategoryListHeader>Was interessiert dich?</CategoryListHeader>
-      <CategoryListStyled>
-        {categories.map((category) => (
-          <CategoryLink
-            key={category._id}
-            href={`/categories/${category.slug}`}
-          >
-            <CategoryCard category={category} />
-          </CategoryLink>
-        ))}
-      </CategoryListStyled>
-    </CategoryListContainer>
+    <>
+      <SectionTitle>Was interessiert dich?</SectionTitle>
+      <CategoryListContainer>
+        <CategoryListStyled>
+          {categories.map((category) => (
+            <CategoryLink
+              key={category._id}
+              href={`/categories/${category.slug}`}
+            >
+              <CategoryCard category={category} />
+            </CategoryLink>
+          ))}
+        </CategoryListStyled>
+      </CategoryListContainer>
+    </>
   );
 }

@@ -18,8 +18,3 @@ export const EventDetailsLink = styled(Link)`
   text-decoration: none;
   color: inherit;
 `;
-
-export const EventListHeader = styled.h2`
-  font: var(--font_heading-2);
-  color: var(--color_night);
-`;
