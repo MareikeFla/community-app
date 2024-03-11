@@ -127,7 +127,7 @@ export const FormCheckboxWrapper = styled.div`
 
 export const FormSelectOption = styled.option``;
 
-export const FormDesicriptionField = styled.textarea`
+export const FormDescriptionField = styled.textarea`
   min-height: 7.063rem;
   overflow: scroll;
   padding: 0.5rem 0.75rem;

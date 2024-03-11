@@ -5,7 +5,7 @@ import {
   FormInput,
   FormSelect,
   FormCheckboxWrapper,
-  FormDesicriptionField,
+  FormDescriptionField,
   FormButtonWrapper,
   FormLegend,
   FormInfoText,
@@ -198,8 +198,8 @@ export default function EventForm({ updateDatabase }) {
 
       <FormSection>
         <FormLabel htmlFor="shortDescription">Kurzbeschreibung *</FormLabel>
-        <FormDesicriptionField
-          maxlength="120"
+        <FormDescriptionField
+          maxLength="120"
           id="shortDescription"
           name="shortDescription"
           required
@@ -210,7 +210,7 @@ export default function EventForm({ updateDatabase }) {
 
       <FormSection>
         <FormLabel htmlFor="longDescription">Beschreibung *</FormLabel>
-        <FormDesicriptionField
+        <FormDescriptionField
           id="longDescription"
           name="longDescription"
           required
