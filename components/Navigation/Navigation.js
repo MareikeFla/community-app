@@ -15,12 +15,12 @@ export default function Navigation() {
 
   return (
     <NavigationContainer>
-      <NavIcon onClick={toggleMenu} isOpen={isOpen}>
+      <NavIcon onClick={toggleMenu} $isOpen={isOpen}>
         <span></span>
         <span></span>
         <span></span>
       </NavIcon>
-      <NavMenu isOpen={isOpen}>
+      <NavMenu $isOpen={isOpen}>
         <ul>
           <li>
             <NavLink href="/" onClick={toggleMenu}>

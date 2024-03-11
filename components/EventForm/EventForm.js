@@ -26,6 +26,7 @@ export default function EventForm({ editFormData }) {
   const router = useRouter();
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const eventTarget = event.target;
     const eventData = {
       eventName: eventTarget.eventName.value,

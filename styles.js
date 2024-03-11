@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import { Nunito_Sans } from "next/font/google";
+import "react-toastify/dist/ReactToastify.css";
 
 export const nunito_sans = Nunito_Sans({
   subsets: ["latin"],
@@ -11,6 +12,7 @@ export default createGlobalStyle`
     /* Color Styles */
     --color_white: #fff;
     --color_body: #f8f8f9;
+    --color_pale-grey: #f5f5f5;
     --color_light-grey: #d8d8d8;
     --color_grey: #838688;
     --color_night: #5b5f62;
@@ -20,7 +22,6 @@ export default createGlobalStyle`
     --color_light-red: #f9847c;
     --color_red: #ff6e63;
     --color_sunset: linear-gradient(to top right, #fea554, #ff5e62);
-
     /* Font Styles */
     --font-family: ${nunito_sans.style.fontFamily};
 
@@ -37,6 +38,14 @@ export default createGlobalStyle`
 
     --font_button-primary: 700 0.8125rem/1.38 var(--font-family);
     --font_button-secondary: 700 0.75rem/1.33 var(--font-family);
+
+    @media (min-width: 768px) {
+      --font_heading-1: 600 1.5rem/1.35 var(--font-family);
+    }
+
+    @media (min-width: 1024px) {
+      --font_heading-1: 600 1.75rem/1.35 var(--font-family);
+    }
     
     /* Effect Styles */
     --border-radius_input: 3px;
@@ -49,6 +58,12 @@ export default createGlobalStyle`
     --shadow_round-button: 0px 2px 4px 0px rgba(91, 95, 98, 0.24);
 
     --transition_button: 0.3s;
+
+    /* Toasts */
+    --toastify-color-success: #4fb386;
+    --toastify-color-error: var(--color_red);
+
+
   }
 
   *,

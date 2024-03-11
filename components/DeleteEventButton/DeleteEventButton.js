@@ -16,7 +16,9 @@ export default function DeleteEventButton({ id, showDeleteModal }) {
     });
     if (response.ok) {
       router.push("/");
+      return true;
     }
+    return false;
   }
 
   return (

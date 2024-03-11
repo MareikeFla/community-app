@@ -4,8 +4,7 @@ import Link from "next/link";
 export const SearchMessage = styled.h2`
   font: var(--font_heading-2);
   color: var(--color_night);
-  margin-bottom: -1.5rem;
-  margin-top: -0.75rem;
+  margin-bottom: -1.125rem;
 `;
 
 // SearchCard
