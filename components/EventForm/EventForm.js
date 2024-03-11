@@ -19,7 +19,7 @@ import {
   SubtitleRight,
 } from "./EventForm.styled";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Button from "../Button/Button";
 
@@ -74,7 +74,22 @@ export default function EventForm({ updateDatabase }) {
     router.push("/");
   };
 
-  const [isChecked, setIsChecked] = useState(false);
+  const [isFreeOfCharge, setIsFreeOfCharge] = useState(
+    event?.costs === "Kostenlos"
+  );
+  const [costs, setCosts] = useState(
+    event ? (event.costs === "Kostenlos" ? "Kostenlos" : event.costs) : ""
+  );
+
+  useEffect(() => {
+    if (isFreeOfCharge) {
+      setCosts("Kostenlos");
+    } else if (event) {
+      setCosts(event.costs);
+    } else {
+      setCosts(""); // Set default or keep previous value
+    }
+  }, [isFreeOfCharge, event]);
 
   const handleToggle = () => {
     setIsChecked(!isChecked);
@@ -170,8 +185,9 @@ export default function EventForm({ updateDatabase }) {
           name="cost"
           required
           aria-required="true"
-          disabled={isChecked}
-          placeholder={isChecked ? "Kostenlos" : ""}
+          disabled={isFreeOfCharge}
+          value={costs}
+          onChange={(event) => !isFreeOfCharge && setCosts(event.target.value)}
         />
       </FormSection>
 
