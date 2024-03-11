@@ -53,7 +53,7 @@ export default function EventDetail({ event, showDeleteModal }) {
       <Card>
         <BackButton />
         <DeleteEventButton id={_id} showDeleteModal={showDeleteModal} />
-        <EditEventButton event={event} />
+        <EditEventButton id={_id} />
         <EventName>{eventName}</EventName>
         <Description>{longDescription}</Description>
         <InfoWrapper>
