@@ -18,12 +18,18 @@ import {
   SubtitleLeft,
   SubtitleRight,
 } from "./EventForm.styled";
+
 import { useState } from "react";
+
 import Button from "../Button/Button";
+
 import SwitchButton from "../SwitchButton/SwitchButton";
+
 import { useRouter } from "next/router";
-export default function EventForm({ editFormData }) {
+
+export default function EventForm({ updateDatabase }) {
   const router = useRouter();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -63,7 +69,7 @@ export default function EventForm({ editFormData }) {
         },
       ],
     };
-    editFormData(eventData);
+    updateDatabase(eventData);
     event.target.reset();
     router.push("/");
   };
