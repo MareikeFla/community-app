@@ -1,6 +1,5 @@
 import SearchCard from "@/components/Search/SearchCard";
 import EventList from "@/components/EventList/EventList";
-import { SearchMessage } from "@/components/Search/Search.styled";
 import useSearch from "@/lib/useSearch";
 
 export default function SearchPage() {

@@ -19,11 +19,6 @@ export const SearchBox = styled.div`
   box-shadow: var(--shadow_card);
 `;
 
-export const SearchHeader = styled.h1`
-  font: var(--font_heading-1);
-  margin-bottom: 1.438rem;
-`;
-
 export const SearchBar = styled.input`
   font: var(--font_body);
   border: none;
