@@ -2,6 +2,7 @@ import BackButton from "../BackButton/BackButton";
 import CategoryTag from "../CategoryTag/CategoryTag";
 import CommentSection from "../CommentSection/CommentSection";
 import DeleteEventButton from "../DeleteEventButton/DeleteEventButton";
+import EditEventButton from "../EditEventButton/EditEventButton";
 import Map from "../Map";
 import { formatDate } from "@/lib/formatDate";
 import {
@@ -52,6 +53,7 @@ export default function EventDetail({ event, showDeleteModal }) {
       <Card>
         <BackButton />
         <DeleteEventButton id={_id} showDeleteModal={showDeleteModal} />
+        <EditEventButton event={event} />
         <EventName>{eventName}</EventName>
         <Description>{longDescription}</Description>
         <InfoWrapper>
