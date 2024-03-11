@@ -75,10 +75,16 @@ export const FormInput = styled.input`
   &:focus-visible {
     outline: 1px solid var(--color_orange);
   }
+  &[type="date"]:hover {
+    cursor: pointer;
+  }
 `;
 
 export const FormInputTime = styled(FormInput)`
   width: 7.5rem;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const FormSelect = styled.select`
@@ -99,6 +105,9 @@ export const FormSelect = styled.select`
   &::-ms-expand {
     padding-right: 1rem;
   }
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const FormCheckboxWrapper = styled.div`
@@ -118,9 +127,22 @@ export const FormCheckboxWrapper = styled.div`
 
 export const FormSelectOption = styled.option``;
 
-export const FormDesicriptionField = styled(FormInput)`
+export const FormDesicriptionField = styled.textarea`
   min-height: 7.063rem;
   overflow: scroll;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background-color: #f5f5f5;
+  border-radius: var(--border-radius_input);
+  height: 2.5rem;
+  width: 100%;
+  margin-bottom: ${({ $addmarginbottom }) => ($addmarginbottom ? "20px" : "0")};
+  font: var(--font_body);
+  color: var(--color_night);
+
+  &:focus-visible {
+    outline: 1px solid var(--color_orange);
+  }
 `;
 
 export const FormButtonWrapper = styled.div`

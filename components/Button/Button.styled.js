@@ -16,6 +16,7 @@ export const PrimaryButton = styled.button`
   }
   &:hover {
     background: rgba(254, 183, 118, 0.15);
+    cursor: pointer;
   }
 `;
 

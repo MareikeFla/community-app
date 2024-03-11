@@ -20,6 +20,9 @@ export const SwitchBackground = styled.div`
   background: ${({ $checked }) =>
     !$checked ? "var(--color_sunset)" : "var(--color_light-grey)"};
   border-radius: 17px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const SwitchHandle = styled.div`
@@ -31,4 +34,7 @@ export const SwitchHandle = styled.div`
   border-radius: 50%;
   left: ${({ $checked }) => (!$checked ? "calc(100% - 22px)" : "2px")};
   transition: left var(--transition_button) ease;
+  &:hover {
+    cursor: pointer;
+  }
 `;

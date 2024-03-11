@@ -73,7 +73,7 @@ export default function EventForm({ editFormData }) {
     setIsChecked(!isChecked);
   };
 
-  const handleReset = () => {
+  const handleCancel = () => {
     router.push("/");
   };
 
@@ -155,7 +155,7 @@ export default function EventForm({ editFormData }) {
       <FormSection>
         <FormCheckboxWrapper>
           <FormLabel htmlFor="forFree">Kostenlos</FormLabel>
-          <SwitchButton isChecked={isChecked} toggleCosts={handleToggle} />
+          <SwitchButton isChecked={!isChecked} toggleCosts={handleToggle} />
         </FormCheckboxWrapper>
         <FormLabel htmlFor="cost">Kosten *</FormLabel>
         <FormInput
@@ -163,8 +163,8 @@ export default function EventForm({ editFormData }) {
           name="cost"
           required
           aria-required="true"
-          disabled={!isChecked}
-          value={!isChecked ? "Kostenlos" : ""}
+          disabled={isChecked}
+          placeholder={isChecked ? "Kostenlos" : ""}
         />
       </FormSection>
 
@@ -192,14 +192,13 @@ export default function EventForm({ editFormData }) {
       <FormSection>
         <FormLabel htmlFor="shortDescription">Kurzbeschreibung *</FormLabel>
         <FormDesicriptionField
+          maxlength="120"
           id="shortDescription"
           name="shortDescription"
           required
           aria-required="true"
         />
-        <SubtitleRight $addmargintop>
-          Erscheint in der Event Vorschau
-        </SubtitleRight>
+        <SubtitleRight>Erscheint in der Event Vorschau</SubtitleRight>
       </FormSection>
 
       <FormSection>
@@ -210,9 +209,7 @@ export default function EventForm({ editFormData }) {
           required
           aria-required="true"
         />
-        <SubtitleRight $addmargintop>
-          Erscheint auf der Event Seite
-        </SubtitleRight>
+        <SubtitleRight>Erscheint auf der Event Seite</SubtitleRight>
       </FormSection>
 
       <FormSection>
@@ -225,6 +222,8 @@ export default function EventForm({ editFormData }) {
           placeholder="http://"
           $addmarginbottom
         />
+        <FormLabel htmlFor="linkDescription">Link Beschreibung</FormLabel>
+
         <FormInput
           type="text"
           id="linkDescription"
@@ -244,6 +243,7 @@ export default function EventForm({ editFormData }) {
           placeholder="http://"
           $addmarginbottom
         />
+        <FormLabel htmlFor="alt">Bild Beschreibung</FormLabel>
         <FormInput
           type="text"
           id="alt"
@@ -257,7 +257,7 @@ export default function EventForm({ editFormData }) {
           color="primary"
           type="button"
           text="Abbrechen"
-          onClick={handleReset}
+          onClick={handleCancel}
         />
         <Button color="secondary" type="submit" text="Absenden" />
       </FormButtonWrapper>
