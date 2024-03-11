@@ -63,6 +63,8 @@ export default createGlobalStyle`
     --toastify-color-success: #4fb386;
     --toastify-color-error: var(--color_red);
 
+    /* Loading Animation */
+    --animation_speed: 2s;
 
   }
 
