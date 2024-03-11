@@ -5,7 +5,7 @@ export const NavigationContainer = styled.nav`
   display: flex;
   align-items: center;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 `;
 
 export const NavIcon = styled.div`
