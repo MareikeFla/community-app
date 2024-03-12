@@ -20,8 +20,6 @@ export default async function handler(request, response) {
     try {
       const event = request.body;
       const newEvent = await Event.create(event);
-      console.log(newEvent._id);
-
       response.status(201).json({ status: "Event created", id: newEvent._id });
     } catch (error) {
       console.error(error);
