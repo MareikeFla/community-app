@@ -1,9 +1,25 @@
-import NewEventCard from "@/components/NewEventCard/NewEventCard";
+import EventFormContainer from "@/components/EventForm/EventFormContainer";
+import { mutate } from "swr";
 
-export default function NewCard() {
+export default function NewEvent() {
+  const handleNewEvent = async (data) => {
+    const response = await fetch("/api/events", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      mutate();
+    }
+  };
+
   return (
-    <>
-      <NewEventCard></NewEventCard>
-    </>
+    <EventFormContainer
+      title={"Erstelle ein neues Event"}
+      updateDatabase={handleNewEvent}
+    />
   );
 }

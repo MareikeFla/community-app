@@ -18,25 +18,70 @@ import {
   SubtitleLeft,
   SubtitleRight,
 } from "./EventForm.styled";
+
 import { useState } from "react";
+
 import Button from "../Button/Button";
+
 import SwitchButton from "../SwitchButton/SwitchButton";
 
-export default function EventForm() {
-  const handleChange = () => {};
+import { useRouter } from "next/router";
 
-  const handleSubmit = (event) => {
+export default function EventForm({ updateDatabase }) {
+  const router = useRouter();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-  };
-  const handleButtonClick = (onClick) => {
-    if (onClick) {
-    }
+
+    const eventTarget = event.target;
+    const eventData = {
+      eventName: eventTarget.eventName.value,
+      start: {
+        date: eventTarget.startDate.value,
+        time: eventTarget.startTime.value,
+      },
+      end: {
+        date: eventTarget.endDate.value,
+        time: eventTarget.endTime.value,
+      },
+      location: {
+        city: eventTarget.city.value,
+        zip: eventTarget.zip.value,
+        street: eventTarget.street.value,
+        houseNumber: eventTarget.houseNumber.value,
+      },
+      category: eventTarget.category.value,
+      organization: {
+        organizationName: eventTarget.organization.value,
+        organizationContact: eventTarget.contact.value,
+      },
+      costs: eventTarget.cost.value,
+      shortDescription: eventTarget.shortDescription.value,
+      longDescription: eventTarget.longDescription.value,
+      image: {
+        src: eventTarget.imageURL.value,
+        alt: eventTarget.alt.value,
+      },
+      links: [
+        {
+          url: eventTarget.linkURL.value,
+          linkDescription: eventTarget.linkDescription.value,
+        },
+      ],
+    };
+    updateDatabase(eventData);
+    event.target.reset();
+    router.push("/");
   };
 
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleToggle = (newValue) => {
-    setIsChecked(newValue);
+  const handleToggle = () => {
+    setIsChecked(!isChecked);
+  };
+
+  const handleCancel = () => {
+    router.push("/");
   };
 
   return (
@@ -49,17 +94,15 @@ export default function EventForm() {
           type="text"
           id="eventName"
           name="eventName"
-          //   value=""
-          onChange={handleChange}
         />
       </FormSection>
       <FormSection>
         <FormLabel htmlFor="category">Kategorie *</FormLabel>
         <FormSelect name="category" id="category" required aria-required="true">
-          <option value="activism">Aktivismus</option>
-          <option value="culture">Kunst & Kultur</option>
-          <option value="education">Bildung & Wissen</option>
-          <option value="sport">Sport & Fitness</option>
+          <option value="Aktivismus">Aktivismus</option>
+          <option value="Kunst & Kultur">Kunst & Kultur</option>
+          <option value="Bildung & Wissen">Bildung & Wissen</option>
+          <option value="Sport & Fitness">Sport & Fitness</option>
         </FormSelect>
       </FormSection>
       <FormSection>
@@ -71,8 +114,6 @@ export default function EventForm() {
             aria-required="true"
             id="startDate"
             name="startDate"
-            value=""
-            onChange={handleChange}
             placeholder="TT/MM/JJ"
           />
           <FormInputTime
@@ -81,29 +122,14 @@ export default function EventForm() {
             aria-required="true"
             id="startTime"
             name="startTime"
-            onChange={handleChange}
-            value=""
           />
         </FormTimeDateWrapper>
       </FormSection>
       <FormSection>
         <FormLabel htmlFor="End">Ende</FormLabel>
         <FormTimeDateWrapper>
-          <FormInput
-            type="date"
-            id="endDate"
-            name="endDate"
-            value=""
-            onChange={handleChange}
-          />
-          <FormInputTime
-            type="time"
-            id="endTime"
-            name="endTime"
-            value=""
-            onChange={handleChange}
-            placeholder="HH:MM"
-          />
+          <FormInput type="date" id="endDate" name="endDate" />
+          <FormInputTime type="time" id="endTime" name="endTime" />
         </FormTimeDateWrapper>
       </FormSection>
       <FormSection aria-describedby="Ort des Events">
@@ -112,14 +138,14 @@ export default function EventForm() {
           <SubtitleLeft>(Für Online Events bitte leer lassen)</SubtitleLeft>
         </FormLegend>
 
-        <FlexContainer addMarginBottom>
+        <FlexContainer $addmarginbottom>
           <FullWidth>
             <FormLabel htmlFor="street">Straße</FormLabel>
             <FormInput type="text" name="street" id="street" />
           </FullWidth>
           <FixedSize>
-            <FormLabel htmlFor="number">Hnr</FormLabel>
-            <FormInput type="text" name="number" id="number" />
+            <FormLabel htmlFor="houseNumber">Hnr</FormLabel>
+            <FormInput type="text" name="houseNumber" id="houseNumber" />
           </FixedSize>
         </FlexContainer>
         <FlexContainer>
@@ -136,16 +162,16 @@ export default function EventForm() {
       <FormSection>
         <FormCheckboxWrapper>
           <FormLabel htmlFor="forFree">Kostenlos</FormLabel>
-          <SwitchButton isChecked={isChecked} onToggle={handleToggle} />
+          <SwitchButton isChecked={!isChecked} toggleCosts={handleToggle} />
         </FormCheckboxWrapper>
         <FormLabel htmlFor="cost">Kosten *</FormLabel>
         <FormInput
           id="cost"
           name="cost"
-          value=""
-          onChange={handleChange}
           required
           aria-required="true"
+          disabled={isChecked}
+          placeholder={isChecked ? "Kostenlos" : ""}
         />
       </FormSection>
 
@@ -155,7 +181,16 @@ export default function EventForm() {
           type="text"
           id="organization"
           name="organization"
-          onChange={handleChange}
+          required
+          aria-required="true"
+        />
+      </FormSection>
+      <FormSection>
+        <FormLabel htmlFor="contact">Kontakt *</FormLabel>
+        <FormInput
+          type="text"
+          id="contact"
+          name="contact"
           required
           aria-required="true"
         />
@@ -164,15 +199,13 @@ export default function EventForm() {
       <FormSection>
         <FormLabel htmlFor="shortDescription">Kurzbeschreibung *</FormLabel>
         <FormDesicriptionField
+          maxlength="120"
           id="shortDescription"
           name="shortDescription"
-          onChange={handleChange}
           required
           aria-required="true"
         />
-        <SubtitleRight addMarginTop>
-          Erscheint in der Event Vorschau
-        </SubtitleRight>
+        <SubtitleRight>Erscheint in der Event Vorschau</SubtitleRight>
       </FormSection>
 
       <FormSection>
@@ -180,13 +213,10 @@ export default function EventForm() {
         <FormDesicriptionField
           id="longDescription"
           name="longDescription"
-          onChange={handleChange}
           required
           aria-required="true"
         />
-        <SubtitleRight addMarginTop>
-          Erscheint auf der Event Seite
-        </SubtitleRight>
+        <SubtitleRight>Erscheint auf der Event Seite</SubtitleRight>
       </FormSection>
 
       <FormSection>
@@ -195,10 +225,18 @@ export default function EventForm() {
           type="url"
           id="linkURL"
           name="linkURL"
-          onChange={handleChange}
-          required
           aria-required="true"
           placeholder="http://"
+          $addmarginbottom
+        />
+        <FormLabel htmlFor="linkDescription">Link Beschreibung</FormLabel>
+
+        <FormInput
+          type="text"
+          id="linkDescription"
+          name="linkDescription"
+          aria-required="true"
+          placeholder="Link Beschreibung"
         />
       </FormSection>
 
@@ -208,20 +246,27 @@ export default function EventForm() {
           type="url"
           id="imageURL"
           name="imageURL"
-          onChange={handleChange}
-          required
           aria-required="true"
           placeholder="http://"
+          $addmarginbottom
+        />
+        <FormLabel htmlFor="alt">Bild Beschreibung</FormLabel>
+        <FormInput
+          type="text"
+          id="alt"
+          name="alt"
+          aria-required="true"
+          placeholder="Beschreibe dein Bild"
         />
       </ImageURLWrapper>
       <FormButtonWrapper>
-        <Button color="primary" type="reset" text="Abbrechen" />
         <Button
-          color="secondary"
-          type="submit"
-          onClick={handleButtonClick}
-          text="Absenden"
+          color="primary"
+          type="button"
+          text="Abbrechen"
+          onClick={handleCancel}
         />
+        <Button color="secondary" type="submit" text="Absenden" />
       </FormButtonWrapper>
       <FormInfoText>* Pflichtfeld</FormInfoText>
     </EventFormStyled>

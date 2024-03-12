@@ -22,13 +22,14 @@ export default createGlobalStyle`
     --color_light-red: #f9847c;
     --color_red: #ff6e63;
     --color_sunset: linear-gradient(to top right, #fea554, #ff5e62);
+
     /* Font Styles */
     --font-family: ${nunito_sans.style.fontFamily};
 
     --font_heading-1: 600 1.25rem/1.35 var(--font-family);
     --font_heading-2: 600 1.125rem/1.56 var(--font-family);
     --font_heading-3: 800 0.875rem/1.36 var(--font-family);
-    --font_heading-category: 900 1.25rem/1.35 var(--font-family);
+    --font_heading-category: 800 1.25rem/1.35 var(--font-family);
 
     --font_body: 300 1rem/1.5 var(--font-family);
     --font_info: 300 0.875rem/1.43 var(--font-family);
@@ -41,10 +42,12 @@ export default createGlobalStyle`
 
     @media (min-width: 768px) {
       --font_heading-1: 600 1.5rem/1.35 var(--font-family);
+      --font_heading-category: 800 1.5rem/1.35 var(--font-family);
     }
 
     @media (min-width: 1024px) {
       --font_heading-1: 600 1.75rem/1.35 var(--font-family);
+      --font_heading-category: 800 1.75rem/1.35 var(--font-family);
     }
     
     /* Effect Styles */
@@ -63,6 +66,8 @@ export default createGlobalStyle`
     --toastify-color-success: #4fb386;
     --toastify-color-error: var(--color_red);
 
+    /* Loading Animation */
+    --animation_speed: 2s;
 
   }
 
