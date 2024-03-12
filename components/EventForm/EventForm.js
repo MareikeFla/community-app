@@ -83,7 +83,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
   // State 'isFreeOfCharge' controls the switch button and the enabling/disabling of the costs input field. Toggled by the switch button.
   const initialFreeOfCharge = editEvent
     ? editEvent.costs === "Kostenlos"
-    : false;
+    : true;
   const [isFreeOfCharge, setIsFreeOfCharge] = useState(initialFreeOfCharge);
 
   // Initializes 'costs' state with editEvent's costs or sets it to empty if creating a new event.
@@ -96,7 +96,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
   useEffect(() => {
     if (isFreeOfCharge) {
       setCosts("Kostenlos"); // Show "Kostenlos" in the input field if the event is free of charge
-    } else if (editEvent?.costs !== "Kostenlos") {
+    } else if (editEvent && editEvent.costs !== "Kostenlos") {
       setCosts(editEvent.costs); // Show the events costs value, if not "Kostenlos", if the event is not free of charge and user is editing an event
     } else {
       setCosts(""); // Costs will be empty if the event is not free of charge and user is creating a new event or editing an event with "Kostenlos" in costs value
