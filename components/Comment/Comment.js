@@ -1,12 +1,17 @@
+import { useGetTimeElapsed } from "@/lib/useGetTimeElapsed";
 import {
   CommentBody,
   CommentContainer,
   CommentHeader,
+  CommentTime,
   ProfilePicture,
 } from "./Comment.styled";
 
 export default function Comment({ comment }) {
-  const { userImageURL, userName, text } = comment;
+  const { userImageURL, userName, text, creationDate } = comment;
+
+  const timeElapsed = useGetTimeElapsed(creationDate);
+
   return (
     <article>
       <CommentContainer>
@@ -17,7 +22,9 @@ export default function Comment({ comment }) {
           width={36}
         />
         <div>
-          <CommentHeader>{userName}</CommentHeader>
+          <CommentHeader>
+            {userName} <CommentTime>·{creationDate && timeElapsed}</CommentTime>
+          </CommentHeader>
           <CommentBody>{text}</CommentBody>
         </div>
       </CommentContainer>
