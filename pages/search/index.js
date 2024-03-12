@@ -22,7 +22,7 @@ export default function SearchPage() {
       <EventList
         events={filteredEvents.events}
         isSorted
-        heading={
+        title={
           filteredEvents.hasResults === undefined
             ? null
             : filteredEvents.hasResults

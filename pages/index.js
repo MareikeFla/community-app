@@ -19,7 +19,7 @@ export default function HomePage() {
     <>
       <WelcomeCard />
       <CategoryList />
-      <EventList events={events} isSorted={false} heading={"Aktuelle Events"} />
+      <EventList events={events} isSorted={false} title={"Aktuelle Events"} />
     </>
   );
 }
