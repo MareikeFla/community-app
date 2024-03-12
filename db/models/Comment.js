@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const commentSchema = new Schema({
+  creationDate: { type: Date },
   userName: { type: String },
   text: { type: String },
   userImageURL: { type: String },
