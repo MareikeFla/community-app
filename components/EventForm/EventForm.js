@@ -24,16 +24,17 @@ import Button from "../Button/Button";
 import SwitchButton from "../SwitchButton/SwitchButton";
 import { useRouter } from "next/router";
 
-// Component definition for EventForm, receiving updateDatabase function and event object(When called from edit page) as props
+// EventForm component definition. It receives an updateDatabase function for database operations,
+// and an optional 'editEvent' object for prefilling form fields during event edits.
 
 export default function EventForm({ updateDatabase, event: editEvent }) {
   const router = useRouter();
 
-  // Function to handle form submission
+  // Handles the form submission, packages form data into an object, and updates the database.
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Extracting form values into a structured object
+    // Compiles form data into a structured event object from the form's input fields.
     const eventTarget = event.target;
     const eventData = {
       eventName: eventTarget.eventName.value,
@@ -70,38 +71,44 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
         },
       ],
     };
-    const newEventID = await updateDatabase(eventData);
+    const newEventID = await updateDatabase(eventData); // Calls the updateDatabase function to save the event and retrieves the new or updated event's ID.
+
     event.target.reset();
     router.push(
-      editEvent ? `/events/${editEvent._id}` : `/events/${newEventID}`
+      editEvent ? `/events/${editEvent._id}` : `/events/${newEventID}` // Show event details page after saving
     );
   };
 
-  const [isFreeOfCharge, setIsFreeOfCharge] = useState(
-    editEvent?.costs === "Kostenlos"
-  );
-  const [costs, setCosts] = useState(
-    editEvent
-      ? editEvent.costs === "Kostenlos"
-        ? "Kostenlos"
-        : editEvent.costs
-      : ""
-  );
+  // Initialize 'free of charge' status based on editEvent's costs or defaults to false.
+  // State 'isFreeOfCharge' controls the switch button and the enabling/disabling of the costs input field. Toggled by the switch button.
+  const initialFreeOfCharge = editEvent
+    ? editEvent.costs === "Kostenlos"
+    : false;
+  const [isFreeOfCharge, setIsFreeOfCharge] = useState(initialFreeOfCharge);
 
+  // Initializes 'costs' state with editEvent's costs or sets it to empty if creating a new event.
+  // State 'costs' is the costs input field value. The input field has an onChange event listener wich calls setCosts to make value editable.
+  const initialCosts = editEvent ? editEvent.costs : "";
+  const [costs, setCosts] = useState(initialCosts);
+
+  // Updates the 'costs' state based on the 'isFreeOfCharge' toggle.
+  // Sets costs to 'Kostenlos' if free, retains existing costs if applicable, or clears if chargeable.
   useEffect(() => {
     if (isFreeOfCharge) {
-      setCosts("Kostenlos");
-    } else if (editEvent) {
-      setCosts(editEvent.costs);
+      setCosts("Kostenlos"); // Show "Kostenlos" in the input field if the event is free of charge
+    } else if (editEvent?.costs !== "Kostenlos") {
+      setCosts(editEvent.costs); // Show the events costs value, if not "Kostenlos", if the event is not free of charge and user is editing an event
     } else {
-      setCosts("");
+      setCosts(""); // Costs will be empty if the event is not free of charge and user is creating a new event or editing an event with "Kostenlos" in costs value
     }
   }, [isFreeOfCharge, editEvent]);
 
+  // Toggles the 'isFreeOfCharge' state to reflect the event's charge status.
   const handleToggle = () => {
     setIsFreeOfCharge(!isFreeOfCharge);
   };
 
+  // Redirects the user to the main page upon form cancellation.
   const handleCancel = () => {
     router.push("/");
   };
