@@ -20,19 +20,20 @@ import {
 } from "./EventForm.styled";
 
 import { useState, useEffect } from "react";
-
 import Button from "../Button/Button";
-
 import SwitchButton from "../SwitchButton/SwitchButton";
-
 import { useRouter } from "next/router";
 
-export default function EventForm({ updateDatabase, event }) {
+// Component definition for EventForm, receiving updateDatabase function and event object(When called from edit page) as props
+
+export default function EventForm({ updateDatabase, event: editEvent }) {
   const router = useRouter();
 
+  // Function to handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Extracting form values into a structured object
     const eventTarget = event.target;
     const eventData = {
       eventName: eventTarget.eventName.value,
@@ -69,27 +70,33 @@ export default function EventForm({ updateDatabase, event }) {
         },
       ],
     };
-    updateDatabase(eventData);
+    const newEventID = await updateDatabase(eventData);
     event.target.reset();
-    router.push("/");
+    router.push(
+      editEvent ? `/events/${editEvent._id}` : `/events/${newEventID}`
+    );
   };
 
   const [isFreeOfCharge, setIsFreeOfCharge] = useState(
-    event?.costs === "Kostenlos"
+    editEvent?.costs === "Kostenlos"
   );
   const [costs, setCosts] = useState(
-    event ? (event.costs === "Kostenlos" ? "Kostenlos" : event.costs) : ""
+    editEvent
+      ? editEvent.costs === "Kostenlos"
+        ? "Kostenlos"
+        : editEvent.costs
+      : ""
   );
 
   useEffect(() => {
     if (isFreeOfCharge) {
       setCosts("Kostenlos");
-    } else if (event) {
-      setCosts(event.costs);
+    } else if (editEvent) {
+      setCosts(editEvent.costs);
     } else {
-      setCosts(""); 
+      setCosts("");
     }
-  }, [isFreeOfCharge, event]);
+  }, [isFreeOfCharge, editEvent]);
 
   const handleToggle = () => {
     setIsFreeOfCharge(!isFreeOfCharge);
@@ -109,7 +116,7 @@ export default function EventForm({ updateDatabase, event }) {
           type="text"
           id="eventName"
           name="eventName"
-          defaultValue={event ? event.eventName : ""}
+          defaultValue={editEvent ? editEvent.eventName : ""}
         />
       </FormSection>
       <FormSection>
@@ -119,7 +126,7 @@ export default function EventForm({ updateDatabase, event }) {
           id="category"
           required
           aria-required="true"
-          defaultValue={event ? event.category : ""}
+          defaultValue={editEvent ? editEvent.category : ""}
         >
           <option value="Aktivismus">Aktivismus</option>
           <option value="Kunst & Kultur">Kunst & Kultur</option>
@@ -136,7 +143,9 @@ export default function EventForm({ updateDatabase, event }) {
             aria-required="true"
             id="startDate"
             name="startDate"
-            defaultValue={event && event.start ? event.start.date : ""}
+            defaultValue={
+              editEvent && editEvent.start ? editEvent.start.date : ""
+            }
           />
           <FormInputTime
             required
@@ -144,7 +153,9 @@ export default function EventForm({ updateDatabase, event }) {
             aria-required="true"
             id="startTime"
             name="startTime"
-            defaultValue={event && event.start ? event.start.time : ""}
+            defaultValue={
+              editEvent && editEvent.start ? editEvent.start.time : ""
+            }
           />
         </FormTimeDateWrapper>
       </FormSection>
@@ -155,13 +166,13 @@ export default function EventForm({ updateDatabase, event }) {
             type="date"
             id="endDate"
             name="endDate"
-            defaultValue={event && event.end ? event.end.date : ""}
+            defaultValue={editEvent && editEvent.end ? editEvent.end.date : ""}
           />
           <FormInputTime
             type="time"
             id="endTime"
             name="endTime"
-            defaultValue={event && event.end ? event.end.time : ""}
+            defaultValue={editEvent && editEvent.end ? editEvent.end.time : ""}
           />
         </FormTimeDateWrapper>
       </FormSection>
@@ -178,7 +189,7 @@ export default function EventForm({ updateDatabase, event }) {
               name="street"
               id="street"
               defaultValue={
-                event && event.location ? event.location.street : ""
+                editEvent && editEvent.location ? editEvent.location.street : ""
               }
             />
           </FullWidth>
@@ -189,7 +200,9 @@ export default function EventForm({ updateDatabase, event }) {
               name="houseNumber"
               id="houseNumber"
               defaultValue={
-                event && event.location ? event.location.houseNumber : ""
+                editEvent && editEvent.location
+                  ? editEvent.location.houseNumber
+                  : ""
               }
             />
           </FixedSize>
@@ -201,7 +214,9 @@ export default function EventForm({ updateDatabase, event }) {
               type="text"
               name="zip"
               id="zip"
-              defaultValue={event && event.location ? event.location.zip : ""}
+              defaultValue={
+                editEvent && editEvent.location ? editEvent.location.zip : ""
+              }
             />
           </FixedSize>
           <FullWidth>
@@ -210,7 +225,9 @@ export default function EventForm({ updateDatabase, event }) {
               type="text"
               name="city"
               id="city"
-              defaultValue={event && event.location ? event.location.city : ""}
+              defaultValue={
+                editEvent && editEvent.location ? editEvent.location.city : ""
+              }
             />
           </FullWidth>
         </FlexContainer>
@@ -240,8 +257,8 @@ export default function EventForm({ updateDatabase, event }) {
           required
           aria-required="true"
           defaultValue={
-            event && event.organization
-              ? event.organization.organizationName
+            editEvent && editEvent.organization
+              ? editEvent.organization.organizationName
               : ""
           }
         />
@@ -255,8 +272,8 @@ export default function EventForm({ updateDatabase, event }) {
           required
           aria-required="true"
           defaultValue={
-            event && event.organization
-              ? event.organization.organizationContact
+            editEvent && editEvent.organization
+              ? editEvent.organization.organizationContact
               : ""
           }
         />
@@ -269,7 +286,7 @@ export default function EventForm({ updateDatabase, event }) {
           name="shortDescription"
           required
           aria-required="true"
-          defaultValue={event ? event.shortDescription : ""}
+          defaultValue={editEvent ? editEvent.shortDescription : ""}
         />
         <SubtitleRight>Erscheint in der Event Vorschau</SubtitleRight>
       </FormSection>
@@ -280,7 +297,7 @@ export default function EventForm({ updateDatabase, event }) {
           name="longDescription"
           required
           aria-required="true"
-          defaultValue={event ? event.longDescription : ""}
+          defaultValue={editEvent ? editEvent.longDescription : ""}
         />
         <SubtitleRight>Erscheint auf der Event Seite</SubtitleRight>
       </FormSection>
@@ -293,8 +310,8 @@ export default function EventForm({ updateDatabase, event }) {
           $addmarginbottom
           placeholder="http://"
           defaultValue={
-            event && event.links && event.links.length > 0
-              ? event.links[0].url
+            editEvent && editEvent.links && editEvent.links.length > 0
+              ? editEvent.links[0].url
               : ""
           }
         />
@@ -305,8 +322,8 @@ export default function EventForm({ updateDatabase, event }) {
           name="linkDescription"
           placeholder="Link Beschreibung"
           defaultValue={
-            event && event.links && event.links.length > 0
-              ? event.links[0].linkDescription
+            editEvent && editEvent.links && editEvent.links.length > 0
+              ? editEvent.links[0].linkDescription
               : ""
           }
         />
@@ -319,7 +336,7 @@ export default function EventForm({ updateDatabase, event }) {
           name="imageURL"
           placeholder="http://"
           $addmarginbottom
-          defaultValue={event && event.image ? event.image.src : ""}
+          defaultValue={editEvent && editEvent.image ? editEvent.image.src : ""}
         />
         <FormLabel htmlFor="alt">Bild Beschreibung</FormLabel>
         <FormInput
@@ -327,7 +344,7 @@ export default function EventForm({ updateDatabase, event }) {
           id="alt"
           name="alt"
           placeholder="Beschreibe dein Bild"
-          defaultValue={event && event.image ? event.image.alt : ""}
+          defaultValue={editEvent && editEvent.image ? editEvent.image.alt : ""}
         />
       </ImageURLWrapper>
       <FormButtonWrapper>

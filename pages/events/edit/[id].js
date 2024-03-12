@@ -27,6 +27,7 @@ export default function EditEvent() {
 
     if (response.ok) {
       mutate();
+      return response;
     }
   }
   return (
