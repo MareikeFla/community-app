@@ -87,7 +87,7 @@ export default function EventForm({ updateDatabase, event }) {
     } else if (event) {
       setCosts(event.costs);
     } else {
-      setCosts(""); // Set default or keep previous value
+      setCosts(""); 
     }
   }, [isFreeOfCharge, event]);
 
