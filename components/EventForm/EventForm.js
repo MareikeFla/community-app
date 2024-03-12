@@ -304,7 +304,6 @@ export default function EventForm({ updateDatabase, event }) {
           id="linkDescription"
           name="linkDescription"
           placeholder="Link Beschreibung"
-          $addmarginbottom
           defaultValue={
             event && event.links && event.links.length > 0
               ? event.links[0].linkDescription
