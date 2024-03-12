@@ -1,4 +1,5 @@
 import BackButton from "@/components/BackButton/BackButton";
+import CategoryHeader from "@/components/CategoryHeader/CategoryHeader";
 import EventList from "@/components/EventList/EventList";
 import FetchingError from "@/components/FetchingError/FetchingError";
 import Loading from "@/components/Loading/Loading";
@@ -6,27 +7,39 @@ import MessageCard from "@/components/MessageCard/MessageCard";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
-export default function HomePage() {
+export default function CategoryPage() {
   const router = useRouter();
+  const { category } = router.query;
 
-  const { data, isLoading, error } = useSWR(
-    `/api/categories/${router.query.category}`
-  );
+  const {
+    data: events,
+    isLoading: eventLoading,
+    error: eventError,
+  } = useSWR(category ? `/api/categories/${category}` : null);
 
-  if (isLoading) {
+  const {
+    data: categories,
+    isLoading: categoryLoading,
+    error: categoryError,
+  } = useSWR("/api/categories");
+
+  if (categoryLoading || eventLoading) {
     return <Loading />;
   }
-  if (error) {
+  if (categoryError || eventError) {
     return <FetchingError />;
   }
+
+  const selectedCategory = categories.find((cat) => cat.slug === category);
 
   return (
     <>
       <BackButton />
-      {data.length === 0 ? (
+      {selectedCategory && <CategoryHeader category={selectedCategory} />}
+      {events.length === 0 ? (
         <MessageCard>Keine Events gefunden...</MessageCard>
       ) : (
-        <EventList events={data} isSorted={false} />
+        <EventList events={events} isSorted={false} />
       )}
     </>
   );
