@@ -1,12 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
 
-export const SearchMessage = styled.h2`
-  font: var(--font_heading-2);
-  color: var(--color_night);
-  margin-bottom: -1.125rem;
-`;
-
 // SearchCard
 
 export const SearchBox = styled.div`
@@ -19,7 +13,7 @@ export const SearchBox = styled.div`
   box-shadow: var(--shadow_card);
 `;
 
-export const SearchHeader = styled.h1`
+export const SearchCardHeader = styled.h1`
   font: var(--font_heading-1);
   margin-bottom: 1.438rem;
 `;
