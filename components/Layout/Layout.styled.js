@@ -6,5 +6,4 @@ export const MainContent = styled.main`
   top: -9.18rem;
   display: flex;
   flex-direction: column;
-  gap: 2.125rem;
 `;
