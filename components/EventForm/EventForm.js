@@ -17,6 +17,7 @@ import {
   FullWidth,
   SubtitleLeft,
   SubtitleRight,
+  CharacterCounter,
 } from "./EventForm.styled";
 import { useState } from "react";
 import Button from "../Button/Button";
@@ -78,6 +79,15 @@ export default function EventForm({ editFormData }) {
     router.push("/");
   };
 
+  const [count, setCount] = useState(120);
+
+  const recalculateCharacters = (event) => {
+    const Characters = document.getElementById("shortDescritpion");
+    if (Characters < 121) {
+      setCount(120 - event.target.value.length);
+    }
+  };
+
   return (
     <EventFormStyled onSubmit={handleSubmit}>
       <FormSection>
@@ -122,8 +132,8 @@ export default function EventForm({ editFormData }) {
       <FormSection>
         <FormLabel htmlFor="End">Ende</FormLabel>
         <FormTimeDateWrapper>
-          <FormInput type="date" id="endDate" name="endDate" />
-          <FormInputTime type="time" id="endTime" name="endTime" />
+          <FormInput type="date" id="endDate" name="endDate" noValidate />
+          <FormInputTime type="time" id="endTime" name="endTime" noValidate />
         </FormTimeDateWrapper>
       </FormSection>
       <FormSection aria-describedby="Ort des Events">
@@ -190,19 +200,24 @@ export default function EventForm({ editFormData }) {
         />
       </FormSection>
 
-      <FormSection>
+      <FormSection $positionrelative $smallermargin>
         <FormLabel htmlFor="shortDescription">Kurzbeschreibung *</FormLabel>
         <FormDesicriptionField
+          $smallerminheight
           maxlength="120"
           id="shortDescription"
           name="shortDescription"
           required
           aria-required="true"
+          onChange={recalculateCharacters}
         />
+        <CharacterCounter>
+          <span id="characterCounter">{count} </span>Zeichen
+        </CharacterCounter>
         <SubtitleRight>Erscheint in der Event Vorschau</SubtitleRight>
       </FormSection>
 
-      <FormSection>
+      <FormSection $smallermargin>
         <FormLabel htmlFor="longDescription">Beschreibung *</FormLabel>
         <FormDesicriptionField
           id="longDescription"

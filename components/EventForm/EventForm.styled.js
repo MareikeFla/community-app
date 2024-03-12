@@ -1,6 +1,6 @@
 import styled from "styled-components";
 export const EventFormStyled = styled.form`
-  padding-top: 1.875rem;
+  padding-top: 1rem;
   display: flex;
   flex-direction: column;
 
@@ -30,11 +30,13 @@ export const SubtitleLeft = styled.p`
 `;
 
 export const FormSection = styled.div`
-  margin-bottom: 1.25rem;
+  margin-bottom: ${({ $smallermargin }) =>
+    $smallermargin ? "0.5rem" : "1rem"};
+  position: ${({ $positionrelative }) => ($positionrelative ? "relative" : "")};
 `;
 
 export const FormLabel = styled.label`
-  margin-bottom: 0.313rem;
+  margin-bottom: 0.15rem;
   color: var(--color_night);
   font: var(--font_label);
   display: block;
@@ -117,7 +119,7 @@ export const FormCheckboxWrapper = styled.div`
   align-items: center;
   height: 2.875rem;
   padding: 0 0.875rem;
-  margin-bottom: 0.625rem;
+  margin-bottom: 1.1rem;
   border-radius: var(--border-radius_input);
 
   & > * {
@@ -128,7 +130,8 @@ export const FormCheckboxWrapper = styled.div`
 export const FormSelectOption = styled.option``;
 
 export const FormDesicriptionField = styled.textarea`
-  min-height: 7.063rem;
+  min-height: ${({ $smallerminheight }) =>
+    $smallerminheight ? "5.5rem" : "7.063rem"};
   overflow: scroll;
   padding: 0.5rem 0.75rem;
   border: none;
@@ -139,6 +142,7 @@ export const FormDesicriptionField = styled.textarea`
   margin-bottom: ${({ $addmarginbottom }) => ($addmarginbottom ? "20px" : "0")};
   font: var(--font_body);
   color: var(--color_night);
+  resize: none;
 
   &:focus-visible {
     outline: 1px solid var(--color_orange);
@@ -148,14 +152,14 @@ export const FormDesicriptionField = styled.textarea`
 export const FormButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.75rem;
   margin-bottom: 1.875rem;
 `;
 
 export const FormLegend = styled.legend`
   font: var(--font_label);
   color: var(--color_night);
-  margin-bottom: 1.438rem;
+  margin-bottom: 0.8rem;
 `;
 
 export const FormInfoText = styled.p`
@@ -184,4 +188,12 @@ export const FixedSize = styled.div`
 
 export const FullWidth = styled.div`
   width: 100%;
+`;
+export const CharacterCounter = styled.div`
+  display: inline-block;
+  position: absolute;
+  right: 0.4rem;
+  bottom: 1.5rem;
+  font: var(--font_form-note);
+  font-size: 8px;
 `;

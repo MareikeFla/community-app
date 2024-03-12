@@ -7,7 +7,8 @@ export const NewEventCardStyled = styled.div`
   padding: ${(props) =>
     props.pageNotFound ? "3rem 1.5rem 2.75rem" : "3rem 1.5rem 2rem"};
 `;
-export const NewEventCardTitle = styled.p`
+export const NewEventCardTitle = styled.h1`
   font: var(--font_heading-1);
   text-align: center;
+  color: var(--color_night);
 `;
