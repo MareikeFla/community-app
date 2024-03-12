@@ -4,7 +4,6 @@ import Link from "next/link";
 export const CategoryListContainer = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
 `;
 
 export const CategoryListStyled = styled.ul`
