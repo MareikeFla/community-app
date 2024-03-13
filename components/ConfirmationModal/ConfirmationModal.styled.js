@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Card } from "../MessageCard/MessageCard.styled";
+import { Card, Message } from "../MessageCard/MessageCard.styled";
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -13,6 +13,9 @@ export const Backdrop = styled.div`
 `;
 
 export const Dialog = styled(Card)`
+  padding: 1.75rem 2.75rem;
+  margin: auto;
+  text-align: center;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -20,44 +23,17 @@ export const Dialog = styled(Card)`
   z-index: 4;
 `;
 
-export const DialogMessage = styled.p`
-  margin: 0 4rem 1.4rem 4rem;
-  color: var(--color_grey);
-  font: var(--font_body);
-  font-weight: bold;
-  text-align: center;
+export const DialogMessage = styled(Message)`
+  margin-bottom: 1.125rem;
+  min-width: max-content;
+  font-weight: 400;
 `;
 
 export const ButtonWrap = styled.div`
+  font-size: 0.9375rem;
+  min-width: max-content;
   width: 100%;
   display: flex;
   justify-content: center;
-  gap: 10px;
-`;
-
-export const Button = styled.button`
-  padding: 6px 30px;
-  font: var(--font_button-primary);
-  color: var(--color_orange);
-  border: 2px solid var(--color_orange);
-  border-radius: var(--border-radius_button);
-  background-color: var(--color_white);
-  transition: var(--transition_button);
-  cursor: pointer;
-  box-shadow: none;
-  text-transform: uppercase;
-
-  &:hover {
-    background-color: #fff4eb;
-  }
-
-  &.primary {
-    background-color: var(--color_orange);
-    color: var(--color_white);
-    font: var(--font_button-primary);
-  }
-
-  &.primary:hover {
-    background-color: var(--color_light-orange);
-  }
+  gap: 12px;
 `;
