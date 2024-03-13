@@ -2,14 +2,9 @@ import { useRouter } from "next/router";
 import { DeleteButton } from "./DeleteEventButton.styled";
 import Image from "next/image";
 
-export default function DeleteEventButton({ id, showDeleteModal }) {
+export default function DeleteEventButton({ id }) {
   const router = useRouter();
-  const modalContent = {
-    message: "Dieses Event wirklich löschen?",
-    textButtonClose: "Abbrechen",
-    textButtonConfirm: "Löschen",
-    onConfirm: handleDelete,
-  };
+
   async function handleDelete() {
     const response = await fetch(`/api/events/${id}`, {
       method: "DELETE",
@@ -22,12 +17,7 @@ export default function DeleteEventButton({ id, showDeleteModal }) {
   }
 
   return (
-    <DeleteButton
-      title="Löschen"
-      onClick={() => {
-        showDeleteModal(modalContent);
-      }}
-    >
+    <DeleteButton title="Löschen" onClick={() => {}}>
       <Image
         src="/assets/icons/icon_delete.svg"
         alt="Delete button"
