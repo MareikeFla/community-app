@@ -20,11 +20,8 @@ import {
 } from "./EventForm.styled";
 
 import { useState } from "react";
-
 import Button from "../Button/Button";
-
 import SwitchButton from "../SwitchButton/SwitchButton";
-
 import { useRouter } from "next/router";
 
 export default function EventForm({ updateDatabase }) {
