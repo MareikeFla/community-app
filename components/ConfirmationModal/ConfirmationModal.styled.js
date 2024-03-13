@@ -1,15 +1,23 @@
 import styled from "styled-components";
+import { Card } from "../MessageCard/MessageCard.styled";
 
-export const Dialog = styled.dialog`
-  padding: 1.7rem 0;
-  margin: auto;
-  border: none;
-  border-radius: var(--border-radius_card);
+export const Backdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.4;
+  z-index: 3;
+`;
 
-  &::backdrop {
-    background-color: black;
-    opacity: 40%;
-  }
+export const Dialog = styled(Card)`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
 `;
 
 export const DialogMessage = styled.p`
