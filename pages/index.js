@@ -6,19 +6,28 @@ import Loading from "@/components/Loading/Loading";
 import useSWR from "swr";
 
 export default function HomePage() {
-  const { data: events, isLoading, error } = useSWR("/api/events");
+  const {
+    data: events,
+    isLoading: isLoadingEvents,
+    error: errorEvents,
+  } = useSWR("/api/events");
+  const {
+    data: categories,
+    isLoading: isLoadingCategories,
+    error: errorCategories,
+  } = useSWR("/api/categories");
 
-  if (isLoading) {
+  if (isLoadingEvents || isLoadingCategories) {
     return <Loading />;
   }
-  if (error) {
+  if (errorEvents || errorCategories) {
     return <FetchingError />;
   }
 
   return (
     <>
       <WelcomeCard />
-      <CategoryList />
+      <CategoryList categories={categories} />
       <EventList events={events} isSorted={false} title={"Aktuelle Events"} />
     </>
   );
