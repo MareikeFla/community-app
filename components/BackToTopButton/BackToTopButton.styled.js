@@ -16,6 +16,7 @@ export const StyledBackToTopButton = styled.button`
   opacity: ${(props) => (props.$showButton ? 1 : 0)};
   transition: var(--transition_button);
   cursor: pointer;
+  z-index: 1;
 
   &:hover {
     background-color: var(--color_light-orange);
