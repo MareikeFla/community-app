@@ -53,10 +53,6 @@ export default function EventForm({ editFormData }) {
       costs: eventTarget.cost.value,
       shortDescription: eventTarget.shortDescription.value,
       longDescription: eventTarget.longDescription.value,
-      image: {
-        src: eventTarget.imageURL.value,
-        alt: eventTarget.alt.value,
-      },
       links: [
         {
           url: eventTarget.linkURL.value,
@@ -64,9 +60,18 @@ export default function EventForm({ editFormData }) {
         },
       ],
     };
-    editFormData(eventData);
+    // try {
+    const response = editFormData(eventData);
+    console.log(response);
+    const { newEventId } = await response.json();
+    console.log(newEventId);
+    router.push(`/events/${newEventId}`);
+
+    // } catch (error) {
+    //   console.log("error");
+    // }
+
     event.target.reset();
-    router.push("/");
   };
 
   const [isChecked, setIsChecked] = useState(false);
@@ -242,6 +247,7 @@ export default function EventForm({ editFormData }) {
       <FormSection>
         <FormLabel htmlFor="linkURL">Link für weitere Infos</FormLabel>
         <FormInput
+          pattern="http://.*"
           type="url"
           id="linkURL"
           name="linkURL"
@@ -250,7 +256,6 @@ export default function EventForm({ editFormData }) {
           $addmarginbottom
         />
         <FormLabel htmlFor="linkDescription">Link Beschreibung</FormLabel>
-
         <FormInput
           type="text"
           id="linkDescription"
