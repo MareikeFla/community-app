@@ -1,9 +1,7 @@
 import styled from "styled-components";
+import Image from "next/image";
 
 export const EditButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: absolute;
   top: 0.625rem;
   right: 0.625rem;
@@ -19,4 +17,8 @@ export const EditButton = styled.button`
   &:hover {
     background-color: var(--color_light-red);
   }
+`;
+
+export const StyledEditIcon = styled(Image)`
+  margin: 2px 0 0 2px;
 `;

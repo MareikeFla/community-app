@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
-import Image from "next/image";
-import { EditButton } from "./EditEventButton.styled";
+import { EditButton, StyledEditIcon } from "./EditEventButton.styled";
 
 export default function EditEventButton({ id }) {
   const router = useRouter();
@@ -10,7 +9,7 @@ export default function EditEventButton({ id }) {
       title="Löschen"
       onClick={() => router.push(`/events/edit/${id}`)}
     >
-      <Image
+      <StyledEditIcon
         src="/assets/icons/icon_edit.svg"
         alt="Edit button"
         width={22}
