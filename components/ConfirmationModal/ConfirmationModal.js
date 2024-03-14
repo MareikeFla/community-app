@@ -49,8 +49,7 @@ export const ConfirmationModal = () => {
   if (!isVisible) return null;
   const { message, textButtonCancel, textButtonConfirm, onConfirm } =
     modalContent;
-  console.log(cancelButtonRef.current);
-  console.log(confirmButtonRef.current);
+
   return (
     <>
       <Backdrop onClick={hideModal} />
