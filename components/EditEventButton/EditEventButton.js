@@ -13,7 +13,7 @@ export default function EditEventButton({ id }) {
       <Image
         src="/assets/icons/icon_edit.svg"
         alt="Edit button"
-        width={18}
+        width={22}
         height={22}
       />
     </EditButton>

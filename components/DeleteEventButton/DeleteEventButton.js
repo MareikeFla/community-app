@@ -31,8 +31,8 @@ export default function DeleteEventButton({ id, showDeleteModal }) {
       <Image
         src="/assets/icons/icon_delete.svg"
         alt="Delete button"
-        width={18}
-        height={22}
+        width={22}
+        height={26}
       />
     </DeleteButton>
   );
