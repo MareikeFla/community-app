@@ -17,6 +17,8 @@ export const ConfirmationModal = () => {
 
   // Trap focus within the modal buttons
   useEffect(() => {
+    console.log(cancelButtonRef.current);
+    console.log(confirmButtonRef.current);
     const handleKeyDown = (event) => {
       if (event.key === "Tab") {
         event.preventDefault(); // Prevent default tab behavior
@@ -43,7 +45,8 @@ export const ConfirmationModal = () => {
   if (!isVisible) return null;
   const { message, textButtonCancel, textButtonConfirm, onConfirm } =
     modalContent;
-
+  console.log(cancelButtonRef.current);
+  console.log(confirmButtonRef.current);
   return (
     <>
       <Backdrop onClick={hideModal} />
@@ -54,7 +57,7 @@ export const ConfirmationModal = () => {
             aria-label="Close modal"
             text={textButtonCancel}
             onClick={hideModal}
-            secondaryButtonRef={cancelButtonRef}
+            ref={cancelButtonRef}
           />
           <Button
             aria-label="Confirm modal"
@@ -69,7 +72,7 @@ export const ConfirmationModal = () => {
                 ? notifySuccess("Erfolgreich!")
                 : notifyError("Ein Fehler ist aufgetreten!");
             }}
-            primaryButtonRef={confirmButtonRef}
+            ref={confirmButtonRef}
           />
         </ButtonWrap>
       </Dialog>
