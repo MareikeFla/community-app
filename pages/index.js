@@ -4,12 +4,12 @@ import EventList from "@/components/EventList/EventList";
 import { Data } from "@/lib/DataContext";
 
 export default function HomePage() {
-  const { events, categories } = Data();
+  const { events } = Data();
 
   return (
     <>
       <WelcomeCard />
-      <CategoryList categories={categories} />
+      <CategoryList />
       <EventList events={events} title={"Aktuelle Events"} />
     </>
   );

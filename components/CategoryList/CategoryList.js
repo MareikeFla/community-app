@@ -5,8 +5,10 @@ import {
 } from "./CategoryList.styled";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import CategoryCard from "../CategoryCard/CategoryCard";
+import { Data } from "@/lib/DataContext";
+export default function CategoryList() {
+  const { categories } = Data();
 
-export default function CategoryList({ categories }) {
   return (
     <>
       <SectionTitle>Was interessiert dich?</SectionTitle>
