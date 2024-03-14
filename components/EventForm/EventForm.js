@@ -110,7 +110,7 @@ export default function EventForm({ editFormData }) {
         </FormSelect>
       </FormSection>
       <FormSection>
-        <FormLabel htmlFor="startDate">Beginn*</FormLabel>
+        <FormLabel htmlFor="startDate">Beginn *</FormLabel>
         <FormTimeDateWrapper>
           <FormInput
             required
@@ -119,6 +119,7 @@ export default function EventForm({ editFormData }) {
             id="startDate"
             name="startDate"
             placeholder="TT/MM/JJ"
+            onClick={(e) => e.currentTarget.showPicker()}
           />
           <FormInputTime
             required
@@ -132,7 +133,13 @@ export default function EventForm({ editFormData }) {
       <FormSection>
         <FormLabel htmlFor="End">Ende</FormLabel>
         <FormTimeDateWrapper>
-          <FormInput type="date" id="endDate" name="endDate" noValidate />
+          <FormInput
+            type="date"
+            id="endDate"
+            name="endDate"
+            noValidate
+            onClick={(e) => e.currentTarget.showPicker()}
+          />
           <FormInputTime type="time" id="endTime" name="endTime" noValidate />
         </FormTimeDateWrapper>
       </FormSection>
@@ -155,7 +162,7 @@ export default function EventForm({ editFormData }) {
         <FlexContainer>
           <FixedSize>
             <FormLabel htmlFor="zip">PLZ</FormLabel>
-            <FormInput type="text" name="zip" id="zip" />
+            <FormInput type="text" name="zip" id="zip" $addmarginbottom />
           </FixedSize>
           <FullWidth>
             <FormLabel htmlFor="city">Ort</FormLabel>
@@ -166,7 +173,11 @@ export default function EventForm({ editFormData }) {
       <FormSection>
         <FormCheckboxWrapper>
           <FormLabel htmlFor="forFree">Kostenlos</FormLabel>
-          <SwitchButton isChecked={!isChecked} toggleCosts={handleToggle} />
+          <SwitchButton
+            aria-label="Kostenloses Event"
+            isChecked={!isChecked}
+            toggleCosts={handleToggle}
+          />
         </FormCheckboxWrapper>
         <FormLabel htmlFor="cost">Kosten *</FormLabel>
         <FormInput
@@ -249,25 +260,6 @@ export default function EventForm({ editFormData }) {
         />
       </FormSection>
 
-      <ImageURLWrapper>
-        <FormLabel htmlFor="imageURL">Bild</FormLabel>
-        <FormInput
-          type="url"
-          id="imageURL"
-          name="imageURL"
-          aria-required="true"
-          placeholder="http://"
-          $addmarginbottom
-        />
-        <FormLabel htmlFor="alt">Bild Beschreibung</FormLabel>
-        <FormInput
-          type="text"
-          id="alt"
-          name="alt"
-          aria-required="true"
-          placeholder="Beschreibe dein Bild"
-        />
-      </ImageURLWrapper>
       <FormButtonWrapper>
         <Button
           color="primary"
