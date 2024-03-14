@@ -3,13 +3,13 @@ import GlobalStyle from "../styles";
 import { SWRConfig } from "swr";
 import { useState, useRef } from "react";
 import React from "react";
-import { ToastContainer } from "react-toastify";
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
 import { StyledToastContainer } from "@/components/Toast/Toast.styled";
+import { DataProvider } from "@/lib/DataContext";
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function App({ Component, pageProps }) {
   const modalRef = useRef();
-
   const [modalInfo, setModalInfo] = useState({
     message: "",
     textButtonClose: "",
@@ -42,14 +42,16 @@ export default function App({ Component, pageProps }) {
       <GlobalStyle />
       <StyledToastContainer />
       <Layout>
-        <SWRConfig value={{ fetcher }}>
-          <Component
-            {...pageProps}
-            openModal={openModal}
-            modalInfo={modalInfo}
-            modalRef={modalRef}
-          />
-        </SWRConfig>
+        <DataProvider>
+          <SWRConfig value={{ fetcher }}>
+            <Component
+              {...pageProps}
+              openModal={openModal}
+              modalInfo={modalInfo}
+              modalRef={modalRef}
+            />
+          </SWRConfig>
+        </DataProvider>
       </Layout>
     </>
   );
