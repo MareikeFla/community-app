@@ -15,10 +15,14 @@ export const ConfirmationModal = () => {
   const cancelButtonRef = useRef(null); // Create a ref for the cancel button
   const confirmButtonRef = useRef(null); // Create a ref for the confirm button
 
+  useEffect(() => {
+    if (isVisible) {
+      cancelButtonRef.current.focus();
+    }
+  }, [isVisible]);
+
   // Trap focus within the modal buttons
   useEffect(() => {
-    console.log(cancelButtonRef.current);
-    console.log(confirmButtonRef.current);
     const handleKeyDown = (event) => {
       if (event.key === "Tab") {
         event.preventDefault(); // Prevent default tab behavior
