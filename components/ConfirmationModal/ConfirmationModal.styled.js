@@ -9,7 +9,7 @@ export const Backdrop = styled.div`
   height: 100%;
   background-color: black;
   opacity: 0.4;
-  z-index: 3;
+  z-index: 9;
 `;
 
 export const Dialog = styled(Card)`
@@ -20,7 +20,7 @@ export const Dialog = styled(Card)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 4;
+  z-index: 10;
 `;
 
 export const DialogMessage = styled(Message)`
