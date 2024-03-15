@@ -15,8 +15,7 @@ export default async function handler(request, response) {
       console.error(error);
       return response.status(400).json({ error: error.message });
     }
-  }
-  if (request.method === "POST") {
+  } else if (request.method === "POST") {
     try {
       const event = request.body;
       const newEvent = await Event.create(event);
