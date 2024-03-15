@@ -5,7 +5,7 @@ import {
 } from "./CategoryList.styled";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import CategoryCard from "../CategoryCard/CategoryCard";
-import { Data } from "@/lib/DataContext";
+import { Data } from "@/lib/Data/DataContext";
 export default function CategoryList() {
   const { categories } = Data();
 

@@ -3,7 +3,7 @@ import EventDetail from "@/components/EventDetail/EventDetail";
 import Loading from "@/components/Loading/Loading";
 import FetchingError from "@/components/FetchingError/FetchingError";
 import { ConfirmationModal } from "@/components/ConfirmationModal/ConfirmationModal";
-import { useFindEventByID } from "@/lib/DataContext";
+import { useFindEventByID } from "@/lib/Data/DataContext";
 
 export default function EventDetailPage({ modalInfo, openModal, modalRef }) {
   const router = useRouter();

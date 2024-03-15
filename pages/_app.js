@@ -4,7 +4,7 @@ import { SWRConfig } from "swr";
 import { useState, useRef } from "react";
 import React from "react";
 import { StyledToastContainer } from "@/components/Toast/Toast.styled";
-import { DataProvider } from "@/lib/DataContext";
+import { DataProvider } from "@/lib/Data/DataContext";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
