@@ -60,18 +60,9 @@ export default function EventForm({ editFormData }) {
         },
       ],
     };
-    // try {
-    const response = editFormData(eventData);
-    console.log(response);
-    const { newEventId } = await response.json();
-    console.log(newEventId);
-    router.push(`/events/${newEventId}`);
-
-    // } catch (error) {
-    //   console.log("error");
-    // }
-
+    editFormData(eventData);
     event.target.reset();
+    router.push("/");
   };
 
   const [isChecked, setIsChecked] = useState(false);
