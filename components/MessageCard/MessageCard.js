@@ -1,10 +1,10 @@
 import BackButton from "../BackButton/BackButton";
-import { Card, ErrorMessage } from "./MessageCard.styled";
+import { Card, Message } from "./MessageCard.styled";
 
 export default function MessageCard({ children }) {
   return (
     <Card $pageNotFound>
-      <ErrorMessage>{children}</ErrorMessage>
+      <Message>{children}</Message>
       <BackButton />
     </Card>
   );

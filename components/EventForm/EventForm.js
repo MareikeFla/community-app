@@ -19,7 +19,9 @@ import {
   SubtitleRight,
 } from "./EventForm.styled";
 
+
 import { useState, useEffect } from "react";
+
 import Button from "../Button/Button";
 import SwitchButton from "../SwitchButton/SwitchButton";
 import { useRouter } from "next/router";
