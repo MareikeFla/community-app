@@ -1,21 +1,19 @@
 import BackButton from "@/components/BackButton/BackButton";
 import CategoryHeader from "@/components/CategoryHeader/CategoryHeader";
 import EventList from "@/components/EventList/EventList";
-
+import Loading from "@/components/Loading/Loading";
 import MessageCard from "@/components/MessageCard/MessageCard";
 import { useRouter } from "next/router";
-import { Data } from "@/lib/DataContext";
+import { Data } from "@/lib/Data/DataContext";
 
 export default function CategoryPage() {
-  const { events, categories } = Data();
+  const { events, categories, getCategoryBySlug } = Data();
   const router = useRouter();
   const { category: categorySlug } = router.query;
-  const [selectedCategory] = categories.filter(
-    (cat) => cat.slug === categorySlug
-  );
+  const selectedCategory = getCategoryBySlug(categorySlug);
 
   if (!selectedCategory) {
-    return;
+    return <Loading />;
   }
 
   const filteredEvents = events.filter(
@@ -23,7 +21,7 @@ export default function CategoryPage() {
   );
 
   if (!filteredEvents) {
-    return;
+    return <Loading />;
   }
 
   return (
