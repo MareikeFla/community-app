@@ -22,6 +22,11 @@ export default createGlobalStyle`
     --color_light-red: #f9847c;
     --color_red: #ff6e63;
     --color_sunset: linear-gradient(to top right, #fea554, #ff5e62);
+    
+    --color_activism: #f65064;
+    --color_art: #a771ba;
+    --color_education: #2ab8e1;
+    --color_sport: #a4c857;
 
     /* Font Styles */
     --font-family: ${nunito_sans.style.fontFamily};
