@@ -12,7 +12,9 @@ export default function NewEvent() {
     });
 
     if (response.ok) {
+      const newEvent = await response.json();
       mutate();
+      return newEvent.id;
     }
   };
 

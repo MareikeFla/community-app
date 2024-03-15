@@ -1,12 +1,10 @@
 import styled from "styled-components";
+import Image from "next/image";
 
-export const DeleteButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+export const EditButton = styled.button`
   position: absolute;
   top: 0.625rem;
-  right: 3rem;
+  right: 0.625rem;
   height: 1.875rem;
   aspect-ratio: 1;
   background-color: var(--color_red);
@@ -19,4 +17,8 @@ export const DeleteButton = styled.button`
   &:hover {
     background-color: var(--color_light-red);
   }
+`;
+
+export const StyledEditIcon = styled(Image)`
+  margin: 2px 0 0 2px;
 `;

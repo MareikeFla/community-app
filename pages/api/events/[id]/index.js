@@ -33,4 +33,10 @@ export default async function handler(request, response) {
     await Event.findByIdAndDelete(id);
     response.status(200).json({ status: `Event ${id} successfully deleted.` });
   }
+
+  if (request.method === "PUT") {
+    const eventData = request.body;
+    await Event.findByIdAndUpdate(id, eventData);
+    return response.status(200).json({ status: `Event ${id} updated!` });
+  }
 }
