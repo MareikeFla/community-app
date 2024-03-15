@@ -45,11 +45,12 @@ export const FormLabel = styled.label`
 export const FormInput = styled.input`
   padding: 0.5rem 0.75rem;
   border: none;
-  background-color: #f5f5f5;
+  background-color: var(--color_pale-grey);
   border-radius: var(--border-radius_input);
   height: 2.5rem;
   width: 100%;
   margin-bottom: ${({ $addmarginbottom }) => ($addmarginbottom ? "20px" : "0")};
+  color: var(--color_grey);
 
   &::placeholder {
     color: var(--color_grey);
@@ -174,12 +175,12 @@ export const FormTimeDateWrapper = styled.div`
 
 export const FlexContainer = styled.div`
   display: flex;
-  gap: 0.75rem;
+  gap: 1.25rem;
   margin-bottom: ${({ $addmarginbottom }) => ($addmarginbottom ? "20px" : "0")};
 `;
 
 export const FixedSize = styled.div`
-  width: 5.125rem;
+  width: 5.5rem;
 `;
 
 export const FullWidth = styled.div`
