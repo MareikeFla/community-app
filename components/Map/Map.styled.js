@@ -7,6 +7,7 @@ export const StyledMapContainer = styled(MapContainer)`
   height: 12.5rem;
   margin-top: 0.5rem;
   border-radius: var(--border-radius_card);
+  z-index: 0;
 `;
 
 export const StyledPopup = styled(Popup)`
