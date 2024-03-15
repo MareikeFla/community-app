@@ -12,6 +12,7 @@ export default function EventDetailPage({ modalInfo, openModal, modalRef }) {
     data: event,
     isLoading,
     error,
+    mutate,
   } = useSWR(`/api/events/${router.query.id}`);
 
   if (isLoading) {
@@ -23,7 +24,7 @@ export default function EventDetailPage({ modalInfo, openModal, modalRef }) {
 
   return (
     <>
-      <EventDetail event={event} showDeleteModal={openModal} />
+      <EventDetail event={event} showDeleteModal={openModal} mutate={mutate} />
       <ConfirmationModal
         modalRef={modalRef}
         modalInfo={modalInfo}

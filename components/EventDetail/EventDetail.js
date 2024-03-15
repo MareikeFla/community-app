@@ -18,7 +18,7 @@ import {
   ListItemMarker,
 } from "./EventDetail.styled";
 
-export default function EventDetail({ event, showDeleteModal }) {
+export default function EventDetail({ event, showDeleteModal, mutate }) {
   if (!event) {
     return (
       <Card pageNotFound>
@@ -90,7 +90,7 @@ export default function EventDetail({ event, showDeleteModal }) {
         </InfoWrapper>
         <CategoryTag category={category} />
       </Card>
-      <CommentSection id={_id} comments={comments} />
+      <CommentSection id={_id} comments={comments} mutate={mutate} />
     </>
   );
 }

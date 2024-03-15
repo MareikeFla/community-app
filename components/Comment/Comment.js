@@ -9,15 +9,14 @@ import {
 } from "./Comment.styled";
 import LikeButton from "../LikeButton/LikeButton";
 import { useState } from "react";
-import { mutate } from "swr";
 
-export default function Comment({ comment }) {
+export default function Comment({ comment, mutate }) {
   const { userImageURL, userName, text, creationDate, isLiked, _id } = comment;
   const [checkIfIsLiked, setCheckIfIsLiked] = useState(isLiked);
 
   const timeElapsed = getTimeElapsed(creationDate);
 
-  async function handleLikeComment(comment) {
+  async function handleLikeComment() {
     const response = await fetch(`/api/comments/${_id}`, {
       method: "PATCH",
       headers: {
