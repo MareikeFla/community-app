@@ -14,7 +14,6 @@ export default function EventPreview({ event }) {
   const { eventName, shortDescription, start, location, category } = event;
   const { date, time } = start;
   const formattedDate = formatDate(date);
-
   return (
     <Card>
       <PreviewTitle>{eventName}</PreviewTitle>
