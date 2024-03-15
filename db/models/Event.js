@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import "./Comment";
+import "./Category";
 
 const { Schema } = mongoose;
 
@@ -20,7 +21,7 @@ const eventSchema = new Schema({
     houseNumber: String,
     country: String,
   },
-  category: String,
+  category: { type: Schema.Types.ObjectId, ref: "Category" },
   organization: {
     organizationName: String,
     organizationContact: String,
