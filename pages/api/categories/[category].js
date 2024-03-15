@@ -10,8 +10,9 @@ export default async function handler(request, response) {
     try {
       const searchedCategory = await Category.findOne({ slug: category });
       const filteredEvents = await Event.find({
-        category: searchedCategory.title,
-      });
+        category: searchedCategory._id,
+      }).populate("category");
+
       return response.status(200).json(filteredEvents);
     } catch (error) {
       console.error(error);
