@@ -2,10 +2,9 @@ import Link from "next/link";
 import styled from "styled-components";
 
 export const NavigationContainer = styled.nav`
-  display: flex;
-  align-items: center;
-  position: relative;
-  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
 
 export const NavIcon = styled.div`
@@ -21,7 +20,7 @@ export const NavIcon = styled.div`
   border-radius: var(--border-radius_square-button);
   padding: 9px 7px;
   cursor: pointer;
-  z-index: 2;
+  z-index: 3;
 
   span {
     height: 3px;
@@ -56,7 +55,7 @@ export const NavMenu = styled.div`
   justify-content: center;
   align-items: center;
   transition: left 0.3s;
-  z-index: 1;
+  z-index: 2;
   overflow: hidden;
 
   ul {

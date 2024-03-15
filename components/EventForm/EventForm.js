@@ -5,7 +5,7 @@ import {
   FormInput,
   FormSelect,
   FormCheckboxWrapper,
-  FormDesicriptionField,
+  FormDescriptionField,
   FormButtonWrapper,
   FormLegend,
   FormInfoText,
@@ -19,15 +19,23 @@ import {
   SubtitleRight,
   CharacterCounter,
 } from "./EventForm.styled";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import Button from "../Button/Button";
 import SwitchButton from "../SwitchButton/SwitchButton";
 import { useRouter } from "next/router";
-export default function EventForm({ editFormData }) {
+
+// EventForm component definition. It receives an updateDatabase function for database operations,
+// and an optional 'editEvent' object for prefilling form fields during event edits.
+
+export default function EventForm({ updateDatabase, event: editEvent }) {
   const router = useRouter();
+
+  // Handles the form submission, packages form data into an object, and updates the database.
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Compiles form data into a structured event object from the form's input fields.
     const eventTarget = event.target;
     const eventData = {
       eventName: eventTarget.eventName.value,
@@ -60,17 +68,44 @@ export default function EventForm({ editFormData }) {
         },
       ],
     };
-    editFormData(eventData);
+    const newEventID = await updateDatabase(eventData); // Calls the updateDatabase function to save the event and retrieves the new or updated event's ID.
+
     event.target.reset();
-    router.push("/");
+    router.push(
+      editEvent ? `/events/${editEvent._id}` : `/events/${newEventID}` // Show event details page after saving
+    );
   };
 
-  const [isChecked, setIsChecked] = useState(false);
+  // Initialize 'free of charge' status based on editEvent's costs or defaults to false.
+  // State 'isFreeOfCharge' controls the switch button and the enabling/disabling of the costs input field. Toggled by the switch button.
+  const initialFreeOfCharge = editEvent
+    ? editEvent.costs === "Kostenlos"
+    : true;
+  const [isFreeOfCharge, setIsFreeOfCharge] = useState(initialFreeOfCharge);
 
+  // Initializes 'costs' state with editEvent's costs or sets it to empty if creating a new event.
+  // State 'costs' is the costs input field value. The input field has an onChange event listener wich calls setCosts to make value editable.
+  const initialCosts = editEvent ? editEvent.costs : "";
+  const [costs, setCosts] = useState(initialCosts);
+
+  // Updates the 'costs' state based on the 'isFreeOfCharge' toggle.
+  // Sets costs to 'Kostenlos' if free, retains existing costs if applicable, or clears if chargeable.
+  useEffect(() => {
+    if (isFreeOfCharge) {
+      setCosts("Kostenlos"); // Show "Kostenlos" in the input field if the event is free of charge
+    } else if (editEvent && editEvent.costs !== "Kostenlos") {
+      setCosts(editEvent.costs); // Show the events costs value, if not "Kostenlos", if the event is not free of charge and user is editing an event
+    } else {
+      setCosts(""); // Costs will be empty if the event is not free of charge and user is creating a new event or editing an event with "Kostenlos" in costs value
+    }
+  }, [isFreeOfCharge, editEvent]);
+
+  // Toggles the 'isFreeOfCharge' state to reflect the event's charge status.
   const handleToggle = () => {
-    setIsChecked(!isChecked);
+    setIsFreeOfCharge(!isFreeOfCharge);
   };
 
+  // Redirects the user to the main page upon form cancellation.
   const handleCancel = () => {
     router.push("/");
   };
@@ -94,11 +129,18 @@ export default function EventForm({ editFormData }) {
           type="text"
           id="eventName"
           name="eventName"
+          defaultValue={editEvent ? editEvent.eventName : ""}
         />
       </FormSection>
       <FormSection>
         <FormLabel htmlFor="category">Kategorie *</FormLabel>
-        <FormSelect name="category" id="category" required aria-required="true">
+        <FormSelect
+          name="category"
+          id="category"
+          required
+          aria-required="true"
+          defaultValue={editEvent ? editEvent.category : ""}
+        >
           <option value="Aktivismus">Aktivismus</option>
           <option value="Kunst & Kultur">Kunst & Kultur</option>
           <option value="Bildung & Wissen">Bildung & Wissen</option>
@@ -114,7 +156,9 @@ export default function EventForm({ editFormData }) {
             aria-required="true"
             id="startDate"
             name="startDate"
-            placeholder="TT/MM/JJ"
+            defaultValue={
+              editEvent && editEvent.start ? editEvent.start.date : ""
+            }
             onClick={(e) => e.currentTarget.showPicker()}
           />
           <FormInputTime
@@ -123,6 +167,9 @@ export default function EventForm({ editFormData }) {
             aria-required="true"
             id="startTime"
             name="startTime"
+            defaultValue={
+              editEvent && editEvent.start ? editEvent.start.time : ""
+            }
           />
         </FormTimeDateWrapper>
       </FormSection>
@@ -133,10 +180,17 @@ export default function EventForm({ editFormData }) {
             type="date"
             id="endDate"
             name="endDate"
+            defaultValue={editEvent && editEvent.end ? editEvent.end.date : ""}
             noValidate
             onClick={(e) => e.currentTarget.showPicker()}
           />
-          <FormInputTime type="time" id="endTime" name="endTime" noValidate />
+          <FormInputTime
+            type="time"
+            id="endTime"
+            name="endTime"
+            defaultValue={editEvent && editEvent.end ? editEvent.end.time : ""}
+            noValidate
+          />
         </FormTimeDateWrapper>
       </FormSection>
       <FormSection aria-describedby="Ort des Events">
@@ -144,36 +198,61 @@ export default function EventForm({ editFormData }) {
           Ort des Events
           <SubtitleLeft>(Für Online Events bitte leer lassen)</SubtitleLeft>
         </FormLegend>
-
         <FlexContainer $addmarginbottom>
           <FullWidth>
             <FormLabel htmlFor="street">Straße</FormLabel>
-            <FormInput type="text" name="street" id="street" />
+            <FormInput
+              type="text"
+              name="street"
+              id="street"
+              defaultValue={
+                editEvent && editEvent.location ? editEvent.location.street : ""
+              }
+            />
           </FullWidth>
           <FixedSize>
             <FormLabel htmlFor="houseNumber">Hnr</FormLabel>
-            <FormInput type="text" name="houseNumber" id="houseNumber" />
+            <FormInput
+              type="text"
+              name="houseNumber"
+              id="houseNumber"
+              defaultValue={
+                editEvent && editEvent.location
+                  ? editEvent.location.houseNumber
+                  : ""
+              }
+            />
           </FixedSize>
         </FlexContainer>
         <FlexContainer>
           <FixedSize>
             <FormLabel htmlFor="zip">PLZ</FormLabel>
-            <FormInput type="text" name="zip" id="zip" $addmarginbottom />
+            <FormInput
+              type="text"
+              name="zip"
+              id="zip"
+              defaultValue={
+                editEvent && editEvent.location ? editEvent.location.zip : ""
+              }
+            />
           </FixedSize>
           <FullWidth>
             <FormLabel htmlFor="city">Ort</FormLabel>
-            <FormInput type="text" name="city" id="city" />
+            <FormInput
+              type="text"
+              name="city"
+              id="city"
+              defaultValue={
+                editEvent && editEvent.location ? editEvent.location.city : ""
+              }
+            />
           </FullWidth>
         </FlexContainer>
       </FormSection>
       <FormSection>
         <FormCheckboxWrapper>
           <FormLabel htmlFor="forFree">Kostenlos</FormLabel>
-          <SwitchButton
-            aria-label="Kostenloses Event"
-            isChecked={!isChecked}
-            toggleCosts={handleToggle}
-          />
+          <SwitchButton isChecked={isFreeOfCharge} toggleCosts={handleToggle} />
         </FormCheckboxWrapper>
         <FormLabel htmlFor="cost">Kosten *</FormLabel>
         <FormInput
@@ -181,11 +260,11 @@ export default function EventForm({ editFormData }) {
           name="cost"
           required
           aria-required="true"
-          disabled={isChecked}
-          placeholder={isChecked ? "Kostenlos" : ""}
+          disabled={isFreeOfCharge}
+          value={costs}
+          onChange={(event) => !isFreeOfCharge && setCosts(event.target.value)}
         />
       </FormSection>
-
       <FormSection>
         <FormLabel htmlFor="organization">Veranstalter *</FormLabel>
         <FormInput
@@ -194,6 +273,11 @@ export default function EventForm({ editFormData }) {
           name="organization"
           required
           aria-required="true"
+          defaultValue={
+            editEvent && editEvent.organization
+              ? editEvent.organization.organizationName
+              : ""
+          }
         />
       </FormSection>
       <FormSection>
@@ -204,6 +288,11 @@ export default function EventForm({ editFormData }) {
           name="contact"
           required
           aria-required="true"
+          defaultValue={
+            editEvent && editEvent.organization
+              ? editEvent.organization.organizationContact
+              : ""
+          }
         />
       </FormSection>
 
@@ -217,6 +306,7 @@ export default function EventForm({ editFormData }) {
           required
           aria-required="true"
           onChange={recalculateCharacters}
+          defaultValue={editEvent ? editEvent.shortDescription : ""}
         />
         <CharacterCounter>
           <span id="characterCounter">{count} </span>Zeichen
@@ -226,15 +316,15 @@ export default function EventForm({ editFormData }) {
 
       <FormSection $smallermargin>
         <FormLabel htmlFor="longDescription">Beschreibung *</FormLabel>
-        <FormDesicriptionField
+        <FormDescriptionField
           id="longDescription"
           name="longDescription"
           required
           aria-required="true"
+          defaultValue={editEvent ? editEvent.longDescription : ""}
         />
         <SubtitleRight>Erscheint auf der Event Seite</SubtitleRight>
       </FormSection>
-
       <FormSection>
         <FormLabel htmlFor="linkURL">Link für weitere Infos</FormLabel>
         <FormInput
@@ -242,17 +332,25 @@ export default function EventForm({ editFormData }) {
           type="url"
           id="linkURL"
           name="linkURL"
-          aria-required="true"
-          placeholder="http://"
           $addmarginbottom
+          placeholder="http://"
+          defaultValue={
+            editEvent && editEvent.links && editEvent.links.length > 0
+              ? editEvent.links[0].url
+              : ""
+          }
         />
         <FormLabel htmlFor="linkDescription">Link Beschreibung</FormLabel>
         <FormInput
           type="text"
           id="linkDescription"
           name="linkDescription"
-          aria-required="true"
           placeholder="Link Beschreibung"
+          defaultValue={
+            editEvent && editEvent.links && editEvent.links.length > 0
+              ? editEvent.links[0].linkDescription
+              : ""
+          }
         />
       </FormSection>
 

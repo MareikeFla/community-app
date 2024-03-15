@@ -14,6 +14,7 @@ export default function CommentSection({ id, comments }) {
       },
       body: JSON.stringify({
         ...user,
+        creationDate: new Date(),
         text: data,
       }),
     });
@@ -23,6 +24,12 @@ export default function CommentSection({ id, comments }) {
     }
   }
 
+  const sortedComments = comments.sort((a, b) => {
+    const dateA = new Date(a.creationDate);
+    const dateB = new Date(b.creationDate);
+    return dateB - dateA;
+  });
+
   return (
     <section>
       <SectionTitle>
@@ -30,7 +37,7 @@ export default function CommentSection({ id, comments }) {
       </SectionTitle>
       <CommentCard>
         <CommentForm onPostComment={handlePostComment} />
-        <CommentList comments={comments} />
+        <CommentList comments={sortedComments} />
       </CommentCard>
     </section>
   );

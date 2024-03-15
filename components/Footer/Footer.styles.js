@@ -5,10 +5,10 @@ export const StyledFooter = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.625rem 1rem;
+  padding: 1.375rem 1rem;
   position: absolute;
-  bottom: 0;
-  width: 100vw;
+  bottom: -10.75rem;
+  width: 100%;
 `;
 
 export const TextFooter = styled.p`

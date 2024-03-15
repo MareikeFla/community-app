@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Divider } from "../EventPreview/EventPreview.styled";
 import Image from "next/image";
 
 export const ProfilePicture = styled(Image)`
@@ -18,6 +17,16 @@ export const CommentHeader = styled.p`
   font: var(--font_label);
   color: var(--color_midnight);
   margin-bottom: 0.375rem;
+  display: flex;
+  gap: 0.375rem;
+`;
+
+export const CommentTime = styled.span`
+  color: var(--color_grey);
+
+  &::first-letter {
+    letter-spacing: 0.375rem;
+  }
 `;
 
 export const CommentBody = styled.p`
