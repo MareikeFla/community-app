@@ -191,5 +191,5 @@ export const CharacterCounter = styled.div`
   right: 0.4rem;
   bottom: 1.5rem;
   font: var(--font_form-note);
-  font-size: 8px;
+  font-size: 9px;
 `;
