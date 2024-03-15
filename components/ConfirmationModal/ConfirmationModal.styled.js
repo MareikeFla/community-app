@@ -1,55 +1,39 @@
 import styled from "styled-components";
+import { Card, Message } from "../MessageCard/MessageCard.styled";
 
-export const Dialog = styled.dialog`
-  padding: 1.7rem 0;
-  margin: auto;
-  border: none;
-  border-radius: var(--border-radius_card);
-
-  &::backdrop {
-    background-color: black;
-    opacity: 40%;
-  }
+export const Backdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.4;
+  z-index: 9;
 `;
 
-export const DialogMessage = styled.p`
-  margin: 0 4rem 1.4rem 4rem;
-  color: var(--color_grey);
-  font: var(--font_body);
-  font-weight: bold;
+export const Dialog = styled(Card)`
+  padding: 1.75rem 2.75rem;
+  margin: auto;
   text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+`;
+
+export const DialogMessage = styled(Message)`
+  margin-bottom: 1.125rem;
+  min-width: max-content;
+  font-weight: 400;
 `;
 
 export const ButtonWrap = styled.div`
+  font-size: 0.9375rem;
+  min-width: max-content;
   width: 100%;
   display: flex;
   justify-content: center;
-  gap: 10px;
-`;
-
-export const Button = styled.button`
-  padding: 6px 30px;
-  font: var(--font_button-primary);
-  color: var(--color_orange);
-  border: 2px solid var(--color_orange);
-  border-radius: var(--border-radius_button);
-  background-color: var(--color_white);
-  transition: var(--transition_button);
-  cursor: pointer;
-  box-shadow: none;
-  text-transform: uppercase;
-
-  &:hover {
-    background-color: #fff4eb;
-  }
-
-  &.primary {
-    background-color: var(--color_orange);
-    color: var(--color_white);
-    font: var(--font_button-primary);
-  }
-
-  &.primary:hover {
-    background-color: var(--color_light-orange);
-  }
+  gap: 12px;
 `;

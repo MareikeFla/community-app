@@ -2,10 +2,9 @@ import { useRouter } from "next/router";
 import EventDetail from "@/components/EventDetail/EventDetail";
 import Loading from "@/components/Loading/Loading";
 import FetchingError from "@/components/FetchingError/FetchingError";
-import { ConfirmationModal } from "@/components/ConfirmationModal/ConfirmationModal";
 import { useFindEventByID } from "@/lib/Data/DataContext";
 
-export default function EventDetailPage({ modalInfo, openModal, modalRef }) {
+export default function EventDetailPage() {
   const router = useRouter();
   const { event, isLoading, error } = useFindEventByID(router.query.id);
 
@@ -18,11 +17,7 @@ export default function EventDetailPage({ modalInfo, openModal, modalRef }) {
 
   return (
     <>
-      <EventDetail event={event} showDeleteModal={openModal} />
-      <ConfirmationModal
-        modalRef={modalRef}
-        modalInfo={modalInfo}
-      ></ConfirmationModal>
+      <EventDetail event={event} />
     </>
   );
 }
