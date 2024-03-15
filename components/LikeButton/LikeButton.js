@@ -1,13 +1,10 @@
 import Image from "next/image";
-import { useState } from "react";
 import { Button, ButtonText } from "./LikeButton.styled";
 
-export default function LikeButton() {
-  const [isLiked, setIsLiked] = useState(false);
-
+export default function LikeButton({ onLikeComment, checkIfIsLiked }) {
   return (
-    <Button onClick={() => setIsLiked(!isLiked)}>
-      {isLiked ? (
+    <Button onClick={onLikeComment}>
+      {checkIfIsLiked ? (
         <Image
           src="/assets/icons/icon_heart-filled.svg"
           alt="heart"
@@ -22,7 +19,7 @@ export default function LikeButton() {
           width={14}
         />
       )}
-      <ButtonText>{isLiked ? "1" : "0"}</ButtonText>
+      <ButtonText>{checkIfIsLiked ? "1" : "0"}</ButtonText>
     </Button>
   );
 }
