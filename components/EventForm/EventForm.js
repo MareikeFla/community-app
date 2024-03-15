@@ -9,7 +9,6 @@ import {
   FormButtonWrapper,
   FormLegend,
   FormInfoText,
-  ImageURLWrapper,
   FormTimeDateWrapper,
   FlexContainer,
   FormInputTime,
@@ -298,7 +297,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
 
       <FormSection $positionrelative $smallermargin>
         <FormLabel htmlFor="shortDescription">Kurzbeschreibung *</FormLabel>
-        <FormDesicriptionField
+        <FormDescriptionField
           $smallerminheight
           maxlength="120"
           id="shortDescription"

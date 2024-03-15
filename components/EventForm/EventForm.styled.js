@@ -129,7 +129,7 @@ export const FormCheckboxWrapper = styled.div`
 
 export const FormSelectOption = styled.option``;
 
-export const FormDesicriptionField = styled.textarea`
+export const FormDescriptionField = styled.textarea`
   min-height: ${({ $smallerminheight }) =>
     $smallerminheight ? "5.5rem" : "7.063rem"};
   overflow: scroll;
@@ -165,10 +165,6 @@ export const FormLegend = styled.legend`
 export const FormInfoText = styled.p`
   font: var(--font_form-note);
   color: var(--color_grey);
-`;
-
-export const ImageURLWrapper = styled.div`
-  margin-bottom: 1.875rem;
 `;
 
 export const FormTimeDateWrapper = styled.div`
