@@ -109,13 +109,20 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
     router.push("/");
   };
 
+  // Calculate the Characters in shortDescription
   const [count, setCount] = useState(120);
 
-  const recalculateCharacters = (event) => {
+  const recalculateCharacters = () => {
     const Characters = document.getElementById("shortDescription").value.length;
     if (Characters < 121) {
       setCount(120 - Characters);
     }
+  };
+  // Auto grow of longDescription textarea
+  const autoGrow = () => {
+    const textareaContainer = document.getElementById("longDescription");
+    textareaContainer.style.height = "auto";
+    textareaContainer.style.height = textareaContainer.scrollHeight + 1 + "px";
   };
 
   return (
@@ -316,6 +323,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
       <FormSection $smallermargin>
         <FormLabel htmlFor="longDescription">Beschreibung *</FormLabel>
         <FormDescriptionField
+          onInput={autoGrow}
           id="longDescription"
           name="longDescription"
           required

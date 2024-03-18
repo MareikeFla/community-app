@@ -20,6 +20,9 @@ export const SubtitleRight = styled.p`
   margin-top: ${({ $addmargintop }) => ($addmargintop ? "0.5rem" : "0")};
   text-align: right;
   color: var(--color_grey);
+  @-moz-document url-prefix() {
+    margin-top: 0.5rem;
+  }
 `;
 
 export const SubtitleLeft = styled.p`
@@ -143,9 +146,14 @@ export const FormDescriptionField = styled.textarea`
   font: var(--font_body);
   color: var(--color_night);
   resize: none;
+  overflow: hidden;
 
   &:focus-visible {
     outline: 1px solid var(--color_orange);
+  }
+
+  &:-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
   }
 `;
 
