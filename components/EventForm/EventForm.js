@@ -112,9 +112,9 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
   const [count, setCount] = useState(120);
 
   const recalculateCharacters = (event) => {
-    const Characters = document.getElementById("shortDescritpion");
+    const Characters = document.getElementById("shortDescription").value.length;
     if (Characters < 121) {
-      setCount(120 - event.target.value.length);
+      setCount(120 - Characters);
     }
   };
 

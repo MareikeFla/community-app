@@ -133,7 +133,6 @@ export const FormSelectOption = styled.option``;
 export const FormDescriptionField = styled.textarea`
   min-height: ${({ $smallerminheight }) =>
     $smallerminheight ? "5.5rem" : "7.063rem"};
-  overflow: scroll;
   padding: 0.5rem 0.75rem;
   border: none;
   background-color: #f5f5f5;
@@ -190,7 +189,7 @@ export const CharacterCounter = styled.div`
   display: inline-block;
   position: absolute;
   right: 0.4rem;
-  bottom: 1.5rem;
+  top: 0.25rem;
   font: var(--font_form-note);
   font-size: 9px;
 `;
