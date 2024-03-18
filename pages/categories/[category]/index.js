@@ -26,6 +26,10 @@ export default function CategoryPage() {
 
   const filteredEvents = filterEventsByCategoryID(selectedCategory._id);
 
+  if (filteredEvents === undefined) {
+    return;
+  }
+
   return (
     <>
       <BackButton />
