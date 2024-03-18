@@ -1,5 +1,3 @@
-import Loading from "../Loading/Loading";
-import FetchingError from "../FetchingError/FetchingError";
 import CategoryCardUI from "../CategoryCardUI/CategoryCardUI";
 import { useData } from "@/lib/useData";
 
