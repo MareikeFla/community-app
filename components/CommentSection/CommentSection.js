@@ -1,4 +1,3 @@
-import { user } from "@/lib/user";
 import { CommentCard } from "./CommentSection.styled";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import CommentForm from "../CommentForm/CommentForm";
