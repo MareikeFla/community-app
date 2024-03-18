@@ -24,7 +24,7 @@ import { useState, useEffect } from "react";
 import Button from "../Button/Button";
 import SwitchButton from "../SwitchButton/SwitchButton";
 import { useRouter } from "next/router";
-import useSWR from "swr";
+import { useData } from "@/lib/useData";
 
 // EventForm component definition. It receives an updateDatabase function for database operations,
 // and an optional 'editEvent' object for prefilling form fields during event edits.
@@ -32,7 +32,7 @@ import useSWR from "swr";
 export default function EventForm({ updateDatabase, event: editEvent }) {
   const router = useRouter();
 
-  const { data: categories, isLoading, error } = useSWR("/api/categories");
+  const { data: categories, isLoading, error } = useData().categories;
 
   if (isLoading) {
     return;
@@ -161,7 +161,9 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
           }
         >
           {categories.map((cat) => (
-            <option value={cat._id}>{cat.title}</option>
+            <option key={cat._id} value={cat._id}>
+              {cat.title}
+            </option>
           ))}
         </FormSelect>
       </FormSection>
