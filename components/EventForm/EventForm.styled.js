@@ -21,7 +21,7 @@ export const SubtitleRight = styled.p`
   text-align: right;
   color: var(--color_grey);
   @-moz-document url-prefix() {
-    margin-top: 0.5rem;
+    margin-top: 0.25rem;
   }
 `;
 
