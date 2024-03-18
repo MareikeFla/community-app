@@ -10,8 +10,7 @@ import Loading from "../Loading/Loading";
 import FetchingError from "../FetchingError/FetchingError";
 
 export default function CategoryList() {
-  const { categories } = useData();
-  const { data, isLoading, error } = categories;
+  const { data: categories, isLoading, error } = useData().categories;
 
   if (isLoading) {
     return <Loading />;
@@ -25,7 +24,7 @@ export default function CategoryList() {
       <SectionTitle>Was interessiert dich?</SectionTitle>
       <CategoryListContainer>
         <CategoryListStyled>
-          {data.map((category) => (
+          {categories.map((category) => (
             <CategoryLink
               key={category._id}
               href={`/categories/${category.slug}`}
