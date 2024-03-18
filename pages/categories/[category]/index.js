@@ -12,11 +12,8 @@ export default function CategoryPage() {
   const router = useRouter();
   const { category } = router.query;
 
-  const {
-    data: categories,
-    isLoading: categoriesLoading,
-    error: categoriesError,
-  } = useData().categories;
+  const { categories, isLoadingCategories, errorCategories } =
+    useData().fetchedCategories;
 
   const {
     data: events,
@@ -24,10 +21,10 @@ export default function CategoryPage() {
     error: eventError,
   } = useSWR(category ? `/api/categories/${category}` : null);
 
-  if (categoriesLoading || eventLoading) {
+  if (isLoadingCategories || eventLoading) {
     return <Loading />;
   }
-  if (categoriesError || eventError) {
+  if (errorCategories || eventError) {
     return <FetchingError />;
   }
 

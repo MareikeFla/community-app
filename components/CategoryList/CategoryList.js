@@ -10,12 +10,13 @@ import Loading from "../Loading/Loading";
 import FetchingError from "../FetchingError/FetchingError";
 
 export default function CategoryList() {
-  const { data: categories, isLoading, error } = useData().categories;
+  const { categories, isLoadingCategories, errorCategories } =
+    useData().fetchedCategories;
 
-  if (isLoading) {
+  if (isLoadingCategories) {
     return <Loading />;
   }
-  if (error) {
+  if (errorCategories) {
     return <FetchingError />;
   }
 
