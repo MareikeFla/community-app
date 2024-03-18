@@ -144,7 +144,9 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
           id="category"
           required
           aria-required="true"
-          defaultValue={editEvent ? editEvent.category : ""}
+          defaultValue={
+            editEvent && editEvent.category ? editEvent.category._id : ""
+          }
         >
           {categories.map((cat) => (
             <option value={cat._id}>{cat.title}</option>
