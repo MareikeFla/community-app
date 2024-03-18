@@ -32,12 +32,13 @@ import { useData } from "@/lib/useData";
 export default function EventForm({ updateDatabase, event: editEvent }) {
   const router = useRouter();
 
-  const { data: categories, isLoading, error } = useData().categories;
+  const { categories, isLoadingCategories, errorCategories } =
+    useData().fetchedCategories;
 
-  if (isLoading) {
+  if (isLoadingCategories) {
     return;
   }
-  if (error) {
+  if (errorCategories) {
     return;
   }
 
