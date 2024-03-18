@@ -3,15 +3,15 @@ import CategoryList from "@/components/CategoryList/CategoryList";
 import EventList from "@/components/EventList/EventList";
 import FetchingError from "@/components/FetchingError/FetchingError";
 import Loading from "@/components/Loading/Loading";
-import useSWR from "swr";
+import { useData } from "@/lib/useData";
 
 export default function HomePage() {
-  const { data: events, isLoading, error } = useSWR("/api/events");
+  const { events, isLoadingEvents, errorEvents } = useData().fetchedEvents;
 
-  if (isLoading) {
+  if (isLoadingEvents) {
     return <Loading />;
   }
-  if (error) {
+  if (errorEvents) {
     return <FetchingError />;
   }
 
