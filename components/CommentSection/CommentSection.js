@@ -8,24 +8,6 @@ import { useData } from "@/lib/useData";
 export default function CommentSection({ id, comments, mutate }) {
   const { addComment } = useData();
 
-  async function handlePostComment(data) {
-    const response = await fetch(`/api/events/${id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...user,
-        creationDate: new Date(),
-        text: data,
-      }),
-    });
-
-    if (response.ok) {
-      mutate(`/api/events/${id}`);
-    }
-  }
-
   const sortedComments = comments.sort((a, b) => {
     const dateA = new Date(a.creationDate);
     const dateB = new Date(b.creationDate);
