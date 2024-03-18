@@ -3,20 +3,17 @@ import EventDetail from "@/components/EventDetail/EventDetail";
 import useSWR from "swr";
 import Loading from "@/components/Loading/Loading";
 import FetchingError from "@/components/FetchingError/FetchingError";
+import { useData } from "@/lib/useData";
 
 export default function EventDetailPage() {
   const router = useRouter();
+  const { getEventByID } = useData();
+  const { event, isLoadingEvent, errorEvent } = getEventByID(router.query.id);
 
-  const {
-    data: event,
-    isLoading,
-    error,
-  } = useSWR(`/api/events/${router.query.id}`);
-
-  if (isLoading) {
+  if (isLoadingEvent) {
     return <Loading />;
   }
-  if (error) {
+  if (errorEvent) {
     return <FetchingError />;
   }
 
