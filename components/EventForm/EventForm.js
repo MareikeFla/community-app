@@ -19,18 +19,27 @@ import {
   SubtitleRight,
 } from "./EventForm.styled";
 
-
 import { useState, useEffect } from "react";
 
 import Button from "../Button/Button";
 import SwitchButton from "../SwitchButton/SwitchButton";
 import { useRouter } from "next/router";
+import useSWR from "swr";
 
 // EventForm component definition. It receives an updateDatabase function for database operations,
 // and an optional 'editEvent' object for prefilling form fields during event edits.
 
 export default function EventForm({ updateDatabase, event: editEvent }) {
   const router = useRouter();
+
+  const { data: categories, isLoading, error } = useSWR("/api/categories");
+
+  if (isLoading) {
+    return;
+  }
+  if (error) {
+    return;
+  }
 
   // Handles the form submission, packages form data into an object, and updates the database.
   const handleSubmit = async (event) => {
@@ -137,10 +146,9 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
           aria-required="true"
           defaultValue={editEvent ? editEvent.category : ""}
         >
-          <option value="Aktivismus">Aktivismus</option>
-          <option value="Kunst & Kultur">Kunst & Kultur</option>
-          <option value="Bildung & Wissen">Bildung & Wissen</option>
-          <option value="Sport & Fitness">Sport & Fitness</option>
+          {categories.map((cat) => (
+            <option value={cat._id}>{cat.title}</option>
+          ))}
         </FormSelect>
       </FormSection>
       <FormSection>
