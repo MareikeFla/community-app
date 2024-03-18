@@ -1,5 +1,4 @@
 import EventFormContainer from "@/components/EventForm/EventFormContainer";
-import { mutate } from "swr";
 import { useRouter } from "next/router";
 import Loading from "@/components/Loading/Loading";
 import FetchingError from "@/components/FetchingError/FetchingError";
