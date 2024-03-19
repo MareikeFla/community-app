@@ -2,6 +2,7 @@ import BackButton from "../BackButton/BackButton";
 import CategoryTag from "../CategoryTag/CategoryTag";
 import CommentSection from "../CommentSection/CommentSection";
 import DeleteEventButton from "../DeleteEventButton/DeleteEventButton";
+import EditEventButton from "../EditEventButton/EditEventButton";
 import Map from "../Map";
 import { formatDate } from "@/lib/formatDate";
 import {
@@ -18,7 +19,9 @@ import {
   ListItemMarker,
 } from "./EventDetail.styled";
 
-export default function EventDetail({ event, showDeleteModal, mutate }) {
+
+export default function EventDetail({ event }) {
+
   if (!event) {
     return (
       <Card pageNotFound>
@@ -52,7 +55,9 @@ export default function EventDetail({ event, showDeleteModal, mutate }) {
     <>
       <Card>
         <BackButton />
-        <DeleteEventButton id={_id} showDeleteModal={showDeleteModal} />
+
+        <EditEventButton id={_id} />
+        <DeleteEventButton id={_id} />
         <EventName>{eventName}</EventName>
         <Description>{longDescription}</Description>
         <InfoWrapper>

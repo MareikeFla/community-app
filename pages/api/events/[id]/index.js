@@ -21,7 +21,9 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     try {
-      const event = await Event.findById(id).populate("comments");
+      const event = await Event.findById(id)
+        .populate("comments")
+        .populate("category");
       return response.status(200).json(event);
     } catch (error) {
       console.error(error);
@@ -32,5 +34,11 @@ export default async function handler(request, response) {
   if (request.method === "DELETE") {
     await Event.findByIdAndDelete(id);
     response.status(200).json({ status: `Event ${id} successfully deleted.` });
+  }
+
+  if (request.method === "PUT") {
+    const eventData = request.body;
+    await Event.findByIdAndUpdate(id, eventData);
+    return response.status(200).json({ status: `Event ${id} updated!` });
   }
 }

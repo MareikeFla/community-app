@@ -3,9 +3,8 @@ import EventDetail from "@/components/EventDetail/EventDetail";
 import useSWR from "swr";
 import Loading from "@/components/Loading/Loading";
 import FetchingError from "@/components/FetchingError/FetchingError";
-import { ConfirmationModal } from "@/components/ConfirmationModal/ConfirmationModal";
 
-export default function EventDetailPage({ modalInfo, openModal, modalRef }) {
+export default function EventDetailPage() {
   const router = useRouter();
 
   const {
@@ -24,11 +23,10 @@ export default function EventDetailPage({ modalInfo, openModal, modalRef }) {
 
   return (
     <>
-      <EventDetail event={event} showDeleteModal={openModal} mutate={mutate} />
-      <ConfirmationModal
-        modalRef={modalRef}
-        modalInfo={modalInfo}
-      ></ConfirmationModal>
+
+
+      <EventDetail event={event} />
+
     </>
   );
 }
