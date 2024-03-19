@@ -6,7 +6,7 @@ import {
   CategoryInfoHeading,
 } from "./CategoryCardUI.styled";
 
-export default function CategoryCardUI({ category, filteredEvents }) {
+export default function CategoryCardUI({ category, categoryEventCount }) {
   const { imageSource, imageAlt, title } = category;
   return (
     <CategoryCardContainer>
@@ -20,8 +20,7 @@ export default function CategoryCardUI({ category, filteredEvents }) {
       <CategoryInfoContainer>
         <CategoryInfoHeading>{title}</CategoryInfoHeading>
         <CategoryInfo>
-          {filteredEvents.length}{" "}
-          {filteredEvents.length === 1 ? "Event" : "Events"}
+          {categoryEventCount} {categoryEventCount === 1 ? " Event" : " Events"}
         </CategoryInfo>
       </CategoryInfoContainer>
     </CategoryCardContainer>
