@@ -9,7 +9,6 @@ import {
   FormButtonWrapper,
   FormLegend,
   FormInfoText,
-  ImageURLWrapper,
   FormTimeDateWrapper,
   FlexContainer,
   FormInputTime,
@@ -17,6 +16,7 @@ import {
   FullWidth,
   SubtitleLeft,
   SubtitleRight,
+  CharacterCounter,
 } from "./EventForm.styled";
 
 import { useState, useEffect } from "react";
@@ -71,10 +71,6 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
       costs: eventTarget.cost.value,
       shortDescription: eventTarget.shortDescription.value,
       longDescription: eventTarget.longDescription.value,
-      image: {
-        src: eventTarget.imageURL.value,
-        alt: eventTarget.alt.value,
-      },
       links: [
         {
           url: eventTarget.linkURL.value,
@@ -124,6 +120,22 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
     router.push("/");
   };
 
+  // Calculate the Characters in shortDescription
+  const [count, setCount] = useState(120);
+
+  const recalculateCharacters = (event) => {
+    const Characters = event.target.value.length;
+    if (Characters < 121) {
+      setCount(120 - Characters);
+    }
+  };
+  // Auto grow of longDescription textarea
+  const autoGrow = (event) => {
+    const textareaContainer = event.target;
+    textareaContainer.style.height = "auto";
+    textareaContainer.style.height = textareaContainer.scrollHeight + 1 + "px";
+  };
+
   return (
     <EventFormStyled onSubmit={handleSubmit}>
       <FormSection>
@@ -154,7 +166,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
         </FormSelect>
       </FormSection>
       <FormSection>
-        <FormLabel htmlFor="startDate">Beginn*</FormLabel>
+        <FormLabel htmlFor="startDate">Beginn *</FormLabel>
         <FormTimeDateWrapper>
           <FormInput
             required
@@ -165,6 +177,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
             defaultValue={
               editEvent && editEvent.start ? editEvent.start.date : ""
             }
+            onClick={(e) => e.currentTarget.showPicker()}
           />
           <FormInputTime
             required
@@ -186,12 +199,15 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
             id="endDate"
             name="endDate"
             defaultValue={editEvent && editEvent.end ? editEvent.end.date : ""}
+            noValidate
+            onClick={(e) => e.currentTarget.showPicker()}
           />
           <FormInputTime
             type="time"
             id="endTime"
             name="endTime"
             defaultValue={editEvent && editEvent.end ? editEvent.end.time : ""}
+            noValidate
           />
         </FormTimeDateWrapper>
       </FormSection>
@@ -297,21 +313,29 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
           }
         />
       </FormSection>
-      <FormSection>
+
+      <FormSection $positionrelative $smallermargin>
         <FormLabel htmlFor="shortDescription">Kurzbeschreibung *</FormLabel>
         <FormDescriptionField
-          maxLength="120"
+          $smallerminheight
+          maxlength="120"
           id="shortDescription"
           name="shortDescription"
           required
           aria-required="true"
+          onChange={recalculateCharacters}
           defaultValue={editEvent ? editEvent.shortDescription : ""}
         />
+        <CharacterCounter>
+          <span id="characterCounter">{count} </span>Zeichen
+        </CharacterCounter>
         <SubtitleRight>Erscheint in der Event Vorschau</SubtitleRight>
       </FormSection>
-      <FormSection>
+
+      <FormSection $smallermargin>
         <FormLabel htmlFor="longDescription">Beschreibung *</FormLabel>
         <FormDescriptionField
+          onInput={autoGrow}
           id="longDescription"
           name="longDescription"
           required
@@ -323,6 +347,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
       <FormSection>
         <FormLabel htmlFor="linkURL">Link für weitere Infos</FormLabel>
         <FormInput
+          pattern="http://.*"
           type="url"
           id="linkURL"
           name="linkURL"
@@ -347,25 +372,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
           }
         />
       </FormSection>
-      <ImageURLWrapper>
-        <FormLabel htmlFor="imageURL">Bild</FormLabel>
-        <FormInput
-          type="url"
-          id="imageURL"
-          name="imageURL"
-          placeholder="http://"
-          $addmarginbottom
-          defaultValue={editEvent && editEvent.image ? editEvent.image.src : ""}
-        />
-        <FormLabel htmlFor="alt">Bild Beschreibung</FormLabel>
-        <FormInput
-          type="text"
-          id="alt"
-          name="alt"
-          placeholder="Beschreibe dein Bild"
-          defaultValue={editEvent && editEvent.image ? editEvent.image.alt : ""}
-        />
-      </ImageURLWrapper>
+
       <FormButtonWrapper>
         <Button
           color="primary"
