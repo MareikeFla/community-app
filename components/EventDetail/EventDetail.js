@@ -19,7 +19,7 @@ import {
   ListItemMarker,
 } from "./EventDetail.styled";
 
-export default function EventDetail({ event, mutate }) {
+export default function EventDetail({ event }) {
   if (!event) {
     return (
       <Card pageNotFound>

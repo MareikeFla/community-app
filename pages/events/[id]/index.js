@@ -12,7 +12,6 @@ export default function EventDetailPage() {
   );
 
   if (isLoadingEvent) {
-
     return <Loading />;
   }
   if (errorEvent) {
@@ -23,7 +22,7 @@ export default function EventDetailPage() {
 
   return (
     <>
-      <EventDetail event={event} mutate={mutate} />
+      <EventDetail event={event} />
     </>
   );
 }
