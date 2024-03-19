@@ -1,33 +1,57 @@
-import { useGetTimeElapsed } from "@/lib/useGetTimeElapsed";
+import { getTimeElapsed } from "@/lib/getTimeElapsed";
 import {
   CommentBody,
   CommentContainer,
   CommentHeader,
+  CommentText,
   CommentTime,
   ProfilePicture,
 } from "./Comment.styled";
+import LikeButton from "../LikeButton/LikeButton";
+import { useState } from "react";
 
-export default function Comment({ comment }) {
-  const { userImageURL, userName, text, creationDate } = comment;
+export default function Comment({ comment, mutate }) {
+  const { userImageURL, userName, text, creationDate, isLiked, _id } = comment;
+  const [checkIfIsLiked, setCheckIfIsLiked] = useState(isLiked);
 
-  const timeElapsed = useGetTimeElapsed(creationDate);
+  const timeElapsed = getTimeElapsed(creationDate);
+
+  async function handleLikeComment() {
+    const response = await fetch(`/api/comments/${_id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id,
+        isLiked: !checkIfIsLiked,
+      }),
+    });
+
+    if (response.ok) {
+      setCheckIfIsLiked(!checkIfIsLiked);
+      mutate();
+    }
+  }
 
   return (
-    <article>
-      <CommentContainer>
-        <ProfilePicture
-          src={userImageURL}
-          alt="profile picture"
-          height={36}
-          width={36}
+    <CommentContainer>
+      <ProfilePicture
+        src={userImageURL}
+        alt="profile picture"
+        height={36}
+        width={36}
+      />
+      <CommentText>
+        <CommentHeader>
+          {userName} <CommentTime>·{creationDate && timeElapsed}</CommentTime>
+        </CommentHeader>
+        <CommentBody>{text}</CommentBody>
+        <LikeButton
+          onLikeComment={handleLikeComment}
+          checkIfIsLiked={checkIfIsLiked}
         />
-        <div>
-          <CommentHeader>
-            {userName} <CommentTime>·{creationDate && timeElapsed}</CommentTime>
-          </CommentHeader>
-          <CommentBody>{text}</CommentBody>
-        </div>
-      </CommentContainer>
-    </article>
+      </CommentText>
+    </CommentContainer>
   );
 }

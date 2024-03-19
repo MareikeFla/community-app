@@ -5,7 +5,9 @@ import CommentList from "../CommentList/CommentList";
 import { useData } from "@/lib/useData";
 
 export default function CommentSection({ id, comments, mutate }) {
+
   const { addComment } = useData();
+
 
   const sortedComments = comments.sort((a, b) => {
     const dateA = new Date(a.creationDate);
@@ -23,6 +25,7 @@ export default function CommentSection({ id, comments, mutate }) {
           onPostComment={(comment) => addComment(id, comment, mutate)}
         />
         <CommentList comments={sortedComments} />
+
       </CommentCard>
     </section>
   );
