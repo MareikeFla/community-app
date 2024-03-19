@@ -8,12 +8,10 @@ import {
   ProfilePicture,
 } from "./Comment.styled";
 import LikeButton from "../LikeButton/LikeButton";
-import { useState } from "react";
 import { useData } from "@/lib/useData";
 
-export default function Comment({ comment, mutate }) {
+export default function Comment({ comment, mutateEvent }) {
   const { userImageURL, userName, text, creationDate, isLiked, _id } = comment;
-  const [checkIfIsLiked, setCheckIfIsLiked] = useState(isLiked);
   const { updateComment } = useData();
 
   const timeElapsed = getTimeElapsed(creationDate);
@@ -32,10 +30,8 @@ export default function Comment({ comment, mutate }) {
         </CommentHeader>
         <CommentBody>{text}</CommentBody>
         <LikeButton
-          onLikeComment={() =>
-            updateComment(_id, checkIfIsLiked, setCheckIfIsLiked, mutate)
-          }
-          checkIfIsLiked={checkIfIsLiked}
+          onLikeComment={() => updateComment(_id, isLiked, mutateEvent)}
+          checkIfIsLiked={isLiked}
         />
       </CommentText>
     </CommentContainer>
