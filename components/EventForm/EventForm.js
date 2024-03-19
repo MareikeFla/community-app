@@ -112,15 +112,15 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
   // Calculate the Characters in shortDescription
   const [count, setCount] = useState(120);
 
-  const recalculateCharacters = () => {
-    const Characters = document.getElementById("shortDescription").value.length;
+  const recalculateCharacters = (event) => {
+    const Characters = event.target.value.length;
     if (Characters < 121) {
       setCount(120 - Characters);
     }
   };
   // Auto grow of longDescription textarea
-  const autoGrow = () => {
-    const textareaContainer = document.getElementById("longDescription");
+  const autoGrow = (event) => {
+    const textareaContainer = event.target;
     textareaContainer.style.height = "auto";
     textareaContainer.style.height = textareaContainer.scrollHeight + 1 + "px";
   };
