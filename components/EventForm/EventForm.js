@@ -73,7 +73,6 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
   // Handles the form submission, packages form data into an object, and updates the database.
   const handleSubmit = async (event) => {
     const eventData = getEventData(event);
-
     const newEventID = await updateDatabase(eventData); // Calls the updateDatabase function to save the event and retrieves the new or updated event's ID.
     event.target.reset();
     router.push(
