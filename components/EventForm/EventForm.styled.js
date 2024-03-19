@@ -121,6 +121,7 @@ export const FormCheckboxWrapper = styled.div`
   height: 2.875rem;
   padding: 0 0.875rem;
   margin-bottom: 1.1rem;
+  margin-top: 0.25rem;
   border-radius: var(--border-radius_input);
 
   & > * {
@@ -188,7 +189,7 @@ export const FormTimeDateWrapper = styled.div`
 export const FlexContainer = styled.div`
   display: flex;
   gap: 1.25rem;
-  margin-bottom: ${({ $addmarginbottom }) => ($addmarginbottom ? "20px" : "0")};
+  margin-bottom: ${({ $addmarginbottom }) => ($addmarginbottom ? "1rem" : "0")};
 `;
 
 export const FixedSize = styled.div`
