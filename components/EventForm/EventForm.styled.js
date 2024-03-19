@@ -108,9 +108,6 @@ export const FormSelect = styled.select`
     outline: 1px solid var(--color_orange);
   }
 
-  &::-ms-expand {
-    padding-right: 1rem;
-  }
   &:hover {
     cursor: pointer;
   }
@@ -159,9 +156,17 @@ export const FormDescriptionField = styled.textarea`
 
 export const FormButtonWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   gap: 0.75rem;
   margin-bottom: 1.875rem;
+  margin-top: 1rem;
+  button {
+    justify-content: center;
+  }
+  @media (min-width: 376px) {
+    flex-direction: row;
+  }
 `;
 
 export const FormLegend = styled.legend`
