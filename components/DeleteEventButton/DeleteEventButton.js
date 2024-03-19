@@ -1,11 +1,9 @@
-import { useRouter } from "next/router";
 import { DeleteButton } from "./DeleteEventButton.styled";
 import Image from "next/image";
 import { useModal } from "@/lib/useModal";
 import { useData } from "@/lib/useData";
 
 export default function DeleteEventButton({ id }) {
-  const router = useRouter();
   const { deleteEvent } = useData();
 
   const { showModal } = useModal();
@@ -13,7 +11,7 @@ export default function DeleteEventButton({ id }) {
     message: "Dieses Event wirklich löschen?",
     textButtonCancel: "Abbrechen",
     textButtonConfirm: "Löschen",
-    onConfirm: () => deleteEvent(id, router),
+    onConfirm: () => deleteEvent(id),
   };
 
   return (
