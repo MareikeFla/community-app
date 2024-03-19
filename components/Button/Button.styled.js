@@ -10,13 +10,14 @@ export const PrimaryButton = styled.button`
   font: var(--font_button-primary);
   display: flex;
   align-items: center;
+  transition: var(--transition_button);
+  cursor: pointer;
 
   p {
     text-align: center;
   }
   &:hover {
     background: rgba(254, 183, 118, 0.15);
-    cursor: pointer;
   }
 `;
 
