@@ -69,9 +69,11 @@ export default function EventDetail({ event }) {
           </Info>
           <InfoTitle>Ort</InfoTitle>
           <Info>
-            {zip && street && houseNumber && city
-              ? `${street} ${houseNumber}, ${zip}, ${city}`
-              : "Online"}
+            {!zip && !street && !houseNumber && !city
+              ? "Online"
+              : `${street || ""} ${houseNumber || ""}${
+                  street || houseNumber ? "," : ""
+                } ${zip || ""} ${city || ""}`}
           </Info>
           <InfoTitle>Kosten</InfoTitle>
           <Info>{costs}</Info>
