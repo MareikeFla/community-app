@@ -18,27 +18,23 @@ import {
   SubtitleLeft,
   SubtitleRight,
 } from "./EventForm.styled";
-
-
 import { useState, useEffect } from "react";
-
 import Button from "../Button/Button";
 import SwitchButton from "../SwitchButton/SwitchButton";
 import { useRouter } from "next/router";
+import { useModal } from "@/lib/useModal";
 
 // EventForm component definition. It receives an updateDatabase function for database operations,
 // and an optional 'editEvent' object for prefilling form fields during event edits.
 
 export default function EventForm({ updateDatabase, event: editEvent }) {
   const router = useRouter();
+  const { showModal } = useModal();
 
-  // Handles the form submission, packages form data into an object, and updates the database.
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    // Compiles form data into a structured event object from the form's input fields.
+  // Compiles form data into a structured event object from the form's input fields.
+  function getEventData(event) {
     const eventTarget = event.target;
-    const eventData = {
+    return {
       eventName: eventTarget.eventName.value,
       start: {
         date: eventTarget.startDate.value,
@@ -73,12 +69,17 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
         },
       ],
     };
-    const newEventID = await updateDatabase(eventData); // Calls the updateDatabase function to save the event and retrieves the new or updated event's ID.
+  }
+  // Handles the form submission, packages form data into an object, and updates the database.
+  const handleSubmit = async (event) => {
+    const eventData = getEventData(event);
 
+    const newEventID = await updateDatabase(eventData); // Calls the updateDatabase function to save the event and retrieves the new or updated event's ID.
     event.target.reset();
     router.push(
       editEvent ? `/events/${editEvent._id}` : `/events/${newEventID}` // Show event details page after saving
     );
+    return newEventID ? true : false;
   };
 
   // Initialize 'free of charge' status based on editEvent's costs or defaults to false.
@@ -89,7 +90,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
   const [isFreeOfCharge, setIsFreeOfCharge] = useState(initialFreeOfCharge);
 
   // Initializes 'costs' state with editEvent's costs or sets it to empty if creating a new event.
-  // State 'costs' is the costs input field value. The input field has an onChange event listener wich calls setCosts to make value editable.
+  // State 'costs' is the costs input field value. The input field has an onChange event listener which calls setCosts to make value editable.
   const initialCosts = editEvent ? editEvent.costs : "";
   const [costs, setCosts] = useState(initialCosts);
 
@@ -116,7 +117,17 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
   };
 
   return (
-    <EventFormStyled onSubmit={handleSubmit}>
+    <EventFormStyled
+      onSubmit={(event) => {
+        event.preventDefault();
+        showModal({
+          message: "Event speichern?", // Default message
+          textButtonCancel: "Abbrechen", // Default text for the cancel button
+          textButtonConfirm: "Speichern", // Default text for the confirm button
+          onConfirm: () => handleSubmit(event),
+        });
+      }}
+    >
       <FormSection>
         <FormLabel htmlFor="eventName">Event Name *</FormLabel>
         <FormInput
