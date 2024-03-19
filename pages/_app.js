@@ -5,12 +5,16 @@ import React from "react";
 import { StyledToastContainer } from "@/components/Toast/Toast.styled";
 import { ModalProvider } from "@/lib/useModal";
 import { ConfirmationModal } from "@/components/ConfirmationModal/ConfirmationModal";
+import { SessionProvider } from "next-auth/react";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-export default function App({ Component, pageProps }) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   return (
-    <>
+    <SessionProvider session={session}>
       <GlobalStyle />
       <StyledToastContainer />
       <Layout>
@@ -21,6 +25,6 @@ export default function App({ Component, pageProps }) {
           </ModalProvider>
         </SWRConfig>
       </Layout>
-    </>
+    </SessionProvider>
   );
 }
