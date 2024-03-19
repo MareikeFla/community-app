@@ -8,6 +8,7 @@ const commentSchema = new Schema({
   text: { type: String },
   userImageURL: { type: String },
   text: { type: String },
+  isLiked: { type: Boolean },
 });
 
 const Comment =

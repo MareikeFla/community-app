@@ -1,6 +1,6 @@
 import styled from "styled-components";
 export const EventFormStyled = styled.form`
-  padding-top: 1.875rem;
+  padding-top: 1rem;
   display: flex;
   flex-direction: column;
 
@@ -20,6 +20,9 @@ export const SubtitleRight = styled.p`
   margin-top: ${({ $addmargintop }) => ($addmargintop ? "0.5rem" : "0")};
   text-align: right;
   color: var(--color_grey);
+  @-moz-document url-prefix() {
+    margin-top: 0.25rem;
+  }
 `;
 
 export const SubtitleLeft = styled.p`
@@ -30,11 +33,13 @@ export const SubtitleLeft = styled.p`
 `;
 
 export const FormSection = styled.div`
-  margin-bottom: 1.25rem;
+  margin-bottom: ${({ $smallermargin }) =>
+    $smallermargin ? "0.5rem" : "1rem"};
+  position: ${({ $positionrelative }) => ($positionrelative ? "relative" : "")};
 `;
 
 export const FormLabel = styled.label`
-  margin-bottom: 0.313rem;
+  margin-bottom: 0.15rem;
   color: var(--color_night);
   font: var(--font_label);
   display: block;
@@ -43,11 +48,12 @@ export const FormLabel = styled.label`
 export const FormInput = styled.input`
   padding: 0.5rem 0.75rem;
   border: none;
-  background-color: #f5f5f5;
+  background-color: var(--color_pale-grey);
   border-radius: var(--border-radius_input);
   height: 2.5rem;
   width: 100%;
   margin-bottom: ${({ $addmarginbottom }) => ($addmarginbottom ? "20px" : "0")};
+  color: var(--color_grey);
 
   &::placeholder {
     color: var(--color_grey);
@@ -102,9 +108,6 @@ export const FormSelect = styled.select`
     outline: 1px solid var(--color_orange);
   }
 
-  &::-ms-expand {
-    padding-right: 1rem;
-  }
   &:hover {
     cursor: pointer;
   }
@@ -117,7 +120,8 @@ export const FormCheckboxWrapper = styled.div`
   align-items: center;
   height: 2.875rem;
   padding: 0 0.875rem;
-  margin-bottom: 0.625rem;
+  margin-bottom: 1.1rem;
+  margin-top: 0.25rem;
   border-radius: var(--border-radius_input);
 
   & > * {
@@ -128,8 +132,8 @@ export const FormCheckboxWrapper = styled.div`
 export const FormSelectOption = styled.option``;
 
 export const FormDescriptionField = styled.textarea`
-  min-height: 7.063rem;
-  overflow: scroll;
+  min-height: ${({ $smallerminheight }) =>
+    $smallerminheight ? "5.5rem" : "7.063rem"};
   padding: 0.5rem 0.75rem;
   border: none;
   background-color: #f5f5f5;
@@ -139,32 +143,42 @@ export const FormDescriptionField = styled.textarea`
   margin-bottom: ${({ $addmarginbottom }) => ($addmarginbottom ? "20px" : "0")};
   font: var(--font_body);
   color: var(--color_night);
+  resize: none;
+  overflow: hidden;
 
   &:focus-visible {
     outline: 1px solid var(--color_orange);
+  }
+
+  &:-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
   }
 `;
 
 export const FormButtonWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.75rem;
   margin-bottom: 1.875rem;
+  margin-top: 1rem;
+  button {
+    justify-content: center;
+  }
+  @media (min-width: 376px) {
+    flex-direction: row;
+  }
 `;
 
 export const FormLegend = styled.legend`
   font: var(--font_label);
   color: var(--color_night);
-  margin-bottom: 1.438rem;
+  margin-bottom: 0.8rem;
 `;
 
 export const FormInfoText = styled.p`
   font: var(--font_form-note);
   color: var(--color_grey);
-`;
-
-export const ImageURLWrapper = styled.div`
-  margin-bottom: 1.875rem;
 `;
 
 export const FormTimeDateWrapper = styled.div`
@@ -174,14 +188,22 @@ export const FormTimeDateWrapper = styled.div`
 
 export const FlexContainer = styled.div`
   display: flex;
-  gap: 0.75rem;
-  margin-bottom: ${({ $addmarginbottom }) => ($addmarginbottom ? "20px" : "0")};
+  gap: 1.25rem;
+  margin-bottom: ${({ $addmarginbottom }) => ($addmarginbottom ? "1rem" : "0")};
 `;
 
 export const FixedSize = styled.div`
-  width: 5.125rem;
+  width: 5.5rem;
 `;
 
 export const FullWidth = styled.div`
   width: 100%;
+`;
+export const CharacterCounter = styled.div`
+  display: inline-block;
+  position: absolute;
+  right: 0.4rem;
+  top: 0.25rem;
+  font: var(--font_form-note);
+  font-size: 9px;
 `;

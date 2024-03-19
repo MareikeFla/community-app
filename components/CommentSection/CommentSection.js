@@ -5,7 +5,7 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 import CommentForm from "../CommentForm/CommentForm";
 import CommentList from "../CommentList/CommentList";
 
-export default function CommentSection({ id, comments }) {
+export default function CommentSection({ id, comments, mutate }) {
   async function handlePostComment(data) {
     const response = await fetch(`/api/events/${id}`, {
       method: "POST",
@@ -37,7 +37,7 @@ export default function CommentSection({ id, comments }) {
       </SectionTitle>
       <CommentCard>
         <CommentForm onPostComment={handlePostComment} />
-        <CommentList comments={sortedComments} />
+        <CommentList comments={sortedComments} mutate={mutate} />
       </CommentCard>
     </section>
   );

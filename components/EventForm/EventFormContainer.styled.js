@@ -10,4 +10,5 @@ export const EventFormContainerStyled = styled.div`
 export const EventFormTitle = styled.p`
   font: var(--font_heading-1);
   text-align: center;
+  color: var(--color_night);
 `;
