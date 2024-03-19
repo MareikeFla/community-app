@@ -11,6 +11,7 @@ export default function EventDetailPage() {
     data: event,
     isLoading,
     error,
+    mutate,
   } = useSWR(`/api/events/${router.query.id}`);
 
   if (isLoading) {
@@ -22,7 +23,7 @@ export default function EventDetailPage() {
 
   return (
     <>
-      <EventDetail event={event} />
+      <EventDetail event={event} mutate={mutate} />
     </>
   );
 }
