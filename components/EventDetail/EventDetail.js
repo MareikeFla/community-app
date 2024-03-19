@@ -44,7 +44,6 @@ export default function EventDetail({ event }) {
     category,
     comments,
   } = event;
-  if (!organization) return null;
   const { organizationName, organizationContact } = organization;
   const { street, houseNumber, zip, city, latitude, longitude } = location;
 
