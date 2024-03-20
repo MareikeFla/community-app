@@ -6,22 +6,19 @@ import {
   Heading,
   Illustration,
   LinksContainer,
+  Paragraph,
 } from "./WelcomeCard.styled";
 import { signIn, useSession } from "next-auth/react";
 
 export default function WelcomeCard() {
   const { data: session } = useSession();
 
-  const loggedIn = () => !!session;
-
-  console.log(loggedIn());
-
   return (
-    <Card>
+    <Card $loggedIn={session}>
       {session ? (
-        <Content $loggedIn={loggedIn()}>
-          <Heading>Willkommen, {session.user.name}!</Heading>
-          <p>Was möchtest du tun?</p>
+        <Content>
+          <Heading $loggedIn>Willkommen, {session.user.name}!</Heading>
+          <Paragraph>Was möchtest du machen?</Paragraph>
           <LinksContainer>
             <ArrowLink href="/events/search">Event finden</ArrowLink>
             <ArrowLink href="/events/new">Event teilen</ArrowLink>

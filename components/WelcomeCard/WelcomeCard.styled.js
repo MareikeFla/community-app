@@ -23,16 +23,24 @@ export const Content = styled.div`
   }
 `;
 
-export const LinksContainer = styled.div``;
-
 export const Heading = styled.h1`
   font: var(--font_heading-1);
   color: var(--color_night);
-  margin-bottom: 1rem;
-
+  margin-bottom: ${(props) => (props.$loggedIn ? ".313rem" : "1rem")};
   @media (min-width: 768px) {
     margin-bottom: 1.5rem;
   }
+`;
+
+export const Paragraph = styled.p`
+  font: var(--font_body);
+  color: var(--color_night);
+  margin-bottom: 1.125rem;
+`;
+
+export const LinksContainer = styled.div`
+  display: flex;
+  gap: 0.875rem;
 `;
 
 export const Button = styled(Link)`
