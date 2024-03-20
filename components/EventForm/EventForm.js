@@ -377,13 +377,8 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
       </FormSection>
 
       <FormButtonWrapper>
-        <Button
-          color="primary"
-          type="button"
-          text="Abbrechen"
-          onClick={handleCancel}
-        />
-        <Button color="secondary" type="submit" text="Absenden" />
+        <Button type="button" text="Abbrechen" onClick={handleCancel} />
+        <Button color="primary" type="submit" text="Absenden" />
       </FormButtonWrapper>
       <FormInfoText>* Pflichtfeld</FormInfoText>
     </EventFormStyled>
