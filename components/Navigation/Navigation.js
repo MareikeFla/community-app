@@ -4,7 +4,9 @@ import {
   NavIcon,
   NavMenu,
   NavLink,
+  NavButton,
 } from "./Navigation.styled";
+import { signOut } from "next-auth/react";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,6 +33,16 @@ export default function Navigation() {
             <NavLink href="/events/new" onClick={toggleMenu}>
               Event erstellen
             </NavLink>
+          </li>
+          <li>
+            <NavButton
+              onClick={() => {
+                signOut();
+                toggleMenu();
+              }}
+            >
+              Abmelden
+            </NavButton>
           </li>
         </ul>
       </NavMenu>

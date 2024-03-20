@@ -81,3 +81,19 @@ export const NavLink = styled(Link)`
     background-color: rgba(255, 255, 255, 0.04);
   }
 `;
+export const NavButton = styled.button`
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  font: var(--font_heading-3);
+  color: var(--color_white);
+  background-color: var(--color_midnight);
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-align: center;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+  }
+`;
