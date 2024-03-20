@@ -4,7 +4,6 @@ import EventList from "@/components/EventList/EventList";
 import FetchingError from "@/components/FetchingError/FetchingError";
 import Loading from "@/components/Loading/Loading";
 import { useData } from "@/lib/useData";
-import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function HomePage() {
   const { events, isLoadingEvents, errorEvents } = useData().fetchedEvents;
@@ -15,7 +14,6 @@ export default function HomePage() {
   if (errorEvents) {
     return <FetchingError />;
   }
-  console.log(session);
 
   return (
     <>
