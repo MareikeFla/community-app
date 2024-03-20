@@ -1,12 +1,9 @@
 import NextAuth from "next-auth";
-
 import GithubProvider from "next-auth/providers/github";
-
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
-
 import clientPromise from "@/db/mongodb";
-
 import dbConnect from "@/db/connect";
+import User from "@/db/models/User";
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -27,8 +24,8 @@ export default NextAuth({
 
       const currentUser = await User.findById(user.id);
 
-      if (currentUser.favoritePonies == null) {
-        currentUser.favoritePonies = [];
+      if (currentUser.events == null) {
+        currentUser.events = [];
 
         currentUser.save();
       }
