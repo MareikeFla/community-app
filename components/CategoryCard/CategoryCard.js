@@ -1,17 +1,14 @@
-import useSWR from "swr";
-import Loading from "../Loading/Loading";
-import FetchingError from "../FetchingError/FetchingError";
 import CategoryCardUI from "../CategoryCardUI/CategoryCardUI";
+import { useData } from "@/lib/useData";
 
 export default function CategoryCard({ category }) {
-  const { data, isLoading, error } = useSWR(`api/categories/${category.slug}`);
+  const { filterEventsByCategoryID } = useData();
+  const categoryEventCount = filterEventsByCategoryID(category._id).length;
 
-  if (isLoading) {
-    return <Loading />;
-  }
-  if (error) {
-    return <FetchingError />;
-  }
-
-  return <CategoryCardUI filteredEvents={data} category={category} />;
+  return (
+    <CategoryCardUI
+      categoryEventCount={categoryEventCount}
+      category={category}
+    />
+  );
 }

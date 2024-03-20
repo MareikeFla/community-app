@@ -6,6 +6,7 @@ import { StyledToastContainer } from "@/components/Toast/Toast.styled";
 import { ModalProvider } from "@/lib/useModal";
 import { ConfirmationModal } from "@/components/ConfirmationModal/ConfirmationModal";
 import { SessionProvider } from "next-auth/react";
+import { DataProvider } from "@/lib/useData";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -14,7 +15,7 @@ export default function App({
   pageProps: { session, ...pageProps },
 }) {
   return (
-    <SessionProvider session={session}>
+    <DataProvider>
       <GlobalStyle />
       <StyledToastContainer />
       <Layout>
@@ -25,6 +26,6 @@ export default function App({
           </ModalProvider>
         </SWRConfig>
       </Layout>
-    </SessionProvider>
+    </DataProvider>
   );
 }

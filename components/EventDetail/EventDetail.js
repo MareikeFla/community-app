@@ -19,7 +19,7 @@ import {
   ListItemMarker,
 } from "./EventDetail.styled";
 
-export default function EventDetail({ event, mutate }) {
+export default function EventDetail({ event }) {
   if (!event) {
     return (
       <Card pageNotFound>
@@ -94,7 +94,7 @@ export default function EventDetail({ event, mutate }) {
         </InfoWrapper>
         <CategoryTag category={category} />
       </Card>
-      <CommentSection id={_id} comments={comments} mutate={mutate} />
+      <CommentSection id={_id} comments={comments} mutateEvent={event.mutate} />
     </>
   );
 }
