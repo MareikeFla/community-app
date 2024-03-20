@@ -10,7 +10,8 @@ export const Card = styled.div`
   box-shadow: var(--shadow_card);
 
   @media (min-width: 375px) {
-    grid-template-columns: 1fr minmax(8.875rem, 15%);
+    grid-template-columns: ${(props) =>
+      props.$loggedIn ? "1fr" : "1fr minmax(8.875rem, 15%)"};
   }
 `;
 
@@ -21,6 +22,8 @@ export const Content = styled.div`
     padding-right: 0.5rem;
   }
 `;
+
+export const LinksContainer = styled.div``;
 
 export const Heading = styled.h1`
   font: var(--font_heading-1);
