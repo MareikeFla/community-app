@@ -15,17 +15,19 @@ export default function App({
   pageProps: { session, ...pageProps },
 }) {
   return (
-    <DataProvider>
-      <GlobalStyle />
-      <StyledToastContainer />
-      <Layout>
-        <SWRConfig value={{ fetcher }}>
-          <ModalProvider>
-            <Component {...pageProps} />
-            <ConfirmationModal />
-          </ModalProvider>
-        </SWRConfig>
-      </Layout>
-    </DataProvider>
+    <SessionProvider session={session}>
+      <DataProvider>
+        <GlobalStyle />
+        <StyledToastContainer />
+        <Layout>
+          <SWRConfig value={{ fetcher }}>
+            <ModalProvider>
+              <Component {...pageProps} />
+              <ConfirmationModal />
+            </ModalProvider>
+          </SWRConfig>
+        </Layout>
+      </DataProvider>
+    </SessionProvider>
   );
 }
