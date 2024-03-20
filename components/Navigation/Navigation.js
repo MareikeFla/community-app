@@ -6,10 +6,11 @@ import {
   NavLink,
   NavButton,
 } from "./Navigation.styled";
-import { signOut } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const { data: session } = useSession();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -34,16 +35,29 @@ export default function Navigation() {
               Event erstellen
             </NavLink>
           </li>
-          <li>
-            <NavButton
-              onClick={() => {
-                signOut();
-                toggleMenu();
-              }}
-            >
-              Abmelden
-            </NavButton>
-          </li>
+          {session ? (
+            <li>
+              <NavButton
+                onClick={() => {
+                  signOut();
+                  toggleMenu();
+                }}
+              >
+                Abmelden
+              </NavButton>
+            </li>
+          ) : (
+            <li>
+              <NavButton
+                onClick={() => {
+                  signIn();
+                  toggleMenu();
+                }}
+              >
+                Anmelden
+              </NavButton>
+            </li>
+          )}
         </ul>
       </NavMenu>
     </NavigationContainer>
