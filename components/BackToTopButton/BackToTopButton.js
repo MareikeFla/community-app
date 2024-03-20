@@ -1,5 +1,6 @@
 import { useScrollToTop } from "@/lib/useScrollToTop";
-import { StyledBackToTopButton, Icon } from "./BackToTopButton.styled";
+import { StyledBackToTopButton } from "./BackToTopButton.styled";
+import Image from "next/image";
 
 export default function BackToTopButton() {
   const { showButton, scrollToTop } = useScrollToTop();
@@ -10,7 +11,12 @@ export default function BackToTopButton() {
       $showButton={showButton}
       onClick={scrollToTop}
     >
-      <Icon src="assets/icons/icon_arrow-up.svg" alt="Back To Top" />
+      <Image
+        src="assets/icons/icon_arrow-up.svg"
+        alt="Back To Top"
+        width={17}
+        height={11}
+      />
     </StyledBackToTopButton>
   );
 }

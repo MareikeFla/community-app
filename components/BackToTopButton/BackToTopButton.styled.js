@@ -22,5 +22,3 @@ export const StyledBackToTopButton = styled.button`
     background-color: var(--color_light-orange);
   }
 `;
-
-export const Icon = styled.img``;
