@@ -14,6 +14,7 @@ export const PrimaryButton = styled.button`
   cursor: pointer;
 
   &:hover {
+    border: 2px solid var(--color_light-orange);
     background-color: var(--color_light-orange);
   }
 `;
