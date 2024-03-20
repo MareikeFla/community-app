@@ -65,7 +65,7 @@ export const ConfirmationModal = () => {
           <Button
             aria-label="Confirm modal"
             text={textButtonConfirm}
-            color="secondary"
+            color="primary"
             onClick={async () => {
               const success = await onConfirm();
               if (success === undefined) {
