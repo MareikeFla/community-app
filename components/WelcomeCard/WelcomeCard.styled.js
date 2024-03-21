@@ -34,7 +34,8 @@ export const Heading = styled.h1`
 
 export const Paragraph = styled.p`
   font: var(--font_body);
-  color: var(--color_night);
+  font-size: 1.125rem;
+  font-weight: 400;
   margin-bottom: 1.125rem;
 `;
 
