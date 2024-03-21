@@ -20,7 +20,7 @@ export default function WelcomeCard() {
           <Heading $loggedIn>Willkommen, {session.user.name}!</Heading>
           <Paragraph>Was möchtest du machen?</Paragraph>
           <LinksContainer>
-            <ArrowLink href="/events/search">Event finden</ArrowLink>
+            <ArrowLink href="/search">Event finden</ArrowLink>
             <ArrowLink href="/events/new">Event teilen</ArrowLink>
           </LinksContainer>
         </Content>
