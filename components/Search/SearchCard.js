@@ -1,5 +1,4 @@
 import { SearchBox, SearchCardHeader, SearchBar } from "./Search.styled";
-import BackButton from "../BackButton/BackButton";
 export default function SearchCard({
   handleSubmit,
   debouncedInputChange,
@@ -7,7 +6,6 @@ export default function SearchCard({
 }) {
   return (
     <SearchBox>
-      <BackButton />
       <SearchCardHeader>Wonach suchst Du?</SearchCardHeader>
       <form onSubmit={(event) => handleSubmit(event)}>
         <SearchBar
