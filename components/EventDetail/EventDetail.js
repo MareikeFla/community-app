@@ -42,6 +42,7 @@ export default function EventDetail({ event }) {
     category,
     comments,
   } = event;
+  if (!organization) return null;
   const { organizationName, organizationContact } = organization;
   const { street, houseNumber, zip, city, latitude, longitude } = location;
 
@@ -93,7 +94,7 @@ export default function EventDetail({ event }) {
         </InfoWrapper>
         <CategoryTag category={category} />
       </Card>
-      <CommentSection id={_id} comments={comments} />
+      <CommentSection id={_id} comments={comments} mutateEvent={event.mutate} />
     </>
   );
 }

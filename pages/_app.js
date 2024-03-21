@@ -5,12 +5,13 @@ import React from "react";
 import { StyledToastContainer } from "@/components/Toast/Toast.styled";
 import { ModalProvider } from "@/lib/useModal";
 import { ConfirmationModal } from "@/components/ConfirmationModal/ConfirmationModal";
+import { DataProvider } from "@/lib/useData";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function App({ Component, pageProps }) {
   return (
-    <>
+    <DataProvider>
       <GlobalStyle />
       <StyledToastContainer />
       <Layout>
@@ -21,6 +22,6 @@ export default function App({ Component, pageProps }) {
           </ModalProvider>
         </SWRConfig>
       </Layout>
-    </>
+    </DataProvider>
   );
 }

@@ -6,7 +6,7 @@ export const ProfilePicture = styled(Image)`
   object-fit: cover;
 `;
 
-export const CommentContainer = styled.div`
+export const CommentContainer = styled.article`
   display: flex;
   gap: 0.75rem;
   border-top: 1px solid var(--color_light-grey);
@@ -31,4 +31,9 @@ export const CommentTime = styled.span`
 
 export const CommentBody = styled.p`
   font: var(--font_info);
+`;
+export const CommentText = styled.section`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `;

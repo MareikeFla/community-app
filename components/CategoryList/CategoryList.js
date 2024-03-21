@@ -5,17 +5,18 @@ import {
 } from "./CategoryList.styled";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import CategoryCard from "../CategoryCard/CategoryCard";
-import useSWR from "swr";
+import { useData } from "@/lib/useData";
 import Loading from "../Loading/Loading";
 import FetchingError from "../FetchingError/FetchingError";
 
 export default function CategoryList() {
-  const { data: categories, isLoading, error } = useSWR("/api/categories");
+  const { categories, isLoadingCategories, errorCategories } =
+    useData().fetchedCategories;
 
-  if (isLoading) {
+  if (isLoadingCategories) {
     return <Loading />;
   }
-  if (error) {
+  if (errorCategories) {
     return <FetchingError />;
   }
 
