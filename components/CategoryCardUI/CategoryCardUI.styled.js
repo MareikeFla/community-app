@@ -7,16 +7,23 @@ export const CategoryCardContainer = styled.li`
   box-shadow: var(--shadow_card);
 `;
 
+export const ImageContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 67%;
+`;
+
 export const CategoryImage = styled(Image)`
+  position: relative;
   width: 100%;
   height: auto;
-  object-fit: cover;
   border-top-left-radius: var(--border-radius_card);
   border-top-right-radius: var(--border-radius_card);
 `;
 
 export const CategoryInfoContainer = styled.section`
-  padding: 0.313rem 0.75rem 0.688rem 0.75rem;
+  padding: 0.75rem 0.75rem 0.688rem;
 `;
 
 export const CategoryInfoHeading = styled.h3`

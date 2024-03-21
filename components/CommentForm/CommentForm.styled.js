@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { SecondaryButton } from "../Button/Button.styled";
+import { PrimaryButton } from "../Button/Button.styled";
 
 export const CommentFormContainer = styled.form`
   display: flex;
@@ -24,6 +24,6 @@ export const CommentFormTextarea = styled.textarea`
   }
 `;
 
-export const CommentButton = styled(SecondaryButton)`
+export const CommentButton = styled(PrimaryButton)`
   align-self: end;
 `;

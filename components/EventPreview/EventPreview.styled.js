@@ -20,9 +20,10 @@ export const PreviewDescription = styled.p`
 
 export const InfoContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 0.438rem;
-  gap: 0.75rem;
+  gap: 0.188rem 0.75rem;
 `;
 
 export const Icon = styled.img`

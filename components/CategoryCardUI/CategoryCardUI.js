@@ -1,5 +1,6 @@
 import {
   CategoryCardContainer,
+  ImageContainer,
   CategoryImage,
   CategoryInfo,
   CategoryInfoContainer,
@@ -10,13 +11,15 @@ export default function CategoryCardUI({ category, categoryEventCount }) {
   const { imageSource, imageAlt, title } = category;
   return (
     <CategoryCardContainer>
-      <CategoryImage
-        src={imageSource}
-        alt={imageAlt}
-        height={126}
-        width={183}
-        priority
-      />
+      <ImageContainer>
+        <CategoryImage
+          src={imageSource}
+          alt={imageAlt}
+          layout="fill"
+          objectFit="cover"
+          priority
+        />
+      </ImageContainer>
       <CategoryInfoContainer>
         <CategoryInfoHeading>{title}</CategoryInfoHeading>
         <CategoryInfo>

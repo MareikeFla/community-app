@@ -36,7 +36,7 @@ export const Button = styled(Link)`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font: var(--font_button-primary);
+  font: var(--font_button);
   color: var(--color_white);
   text-transform: uppercase;
   text-decoration: none;

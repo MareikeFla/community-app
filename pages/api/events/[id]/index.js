@@ -32,8 +32,28 @@ export default async function handler(request, response) {
   }
 
   if (request.method === "DELETE") {
-    await Event.findByIdAndDelete(id);
-    response.status(200).json({ status: `Event ${id} successfully deleted.` });
+    try {
+      const event = await Event.findById(id);
+
+      if (!event) {
+        return response.status(404).json({ status: "Event not found" });
+      }
+
+      if (event.comments.length) {
+        await Comment.deleteMany({ _id: { $in: event.comments } });
+      }
+
+      await Event.findByIdAndDelete(id);
+
+      response
+        .status(200)
+        .json({
+          status: `Event ${id} and related comments successfully deleted.`,
+        });
+    } catch (error) {
+      console.error(error);
+      response.status(400).json({ error: error.message });
+    }
   }
 
   if (request.method === "PUT") {

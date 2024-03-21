@@ -17,7 +17,11 @@ export default function Map({ event }) {
 
   const CustomIcon = new Icon({
     iconUrl: "/assets/icons/map_pin.png",
+    shadowUrl: "/assets/icons/map_pin-shadow.png",
+    iconSize: [25, 36],
+    shadowSize: [41, 41],
     iconAnchor: [12.5, 36],
+    shadowAnchor: [12.5, 42],
     popupAnchor: [0, -40],
   });
 
