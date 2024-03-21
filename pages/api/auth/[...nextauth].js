@@ -3,7 +3,6 @@ import GithubProvider from "next-auth/providers/github";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/db/mongodb";
 import dbConnect from "@/db/connect";
-import User from "@/db/models/User";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export default NextAuth({
@@ -21,6 +20,7 @@ export default NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
+        // this is only here in order to make it easier for people to test the application
         if (
           credentials.username === "test" &&
           credentials.password === "test"
@@ -51,8 +51,6 @@ export default NextAuth({
       return token;
     },
     async session({ session, token }) {
-      dbConnect();
-
       if (token) {
         session.accessToken = token.accessToken;
         session.user.id = token.id;
