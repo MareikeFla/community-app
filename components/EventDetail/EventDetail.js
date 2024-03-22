@@ -18,8 +18,11 @@ import {
   ListItemLink,
   ListItemMarker,
 } from "./EventDetail.styled";
+import { useSession } from "next-auth/react";
 
 export default function EventDetail({ event }) {
+  const { data: session } = useSession();
+  const userId = session?.user.id;
   if (!event) {
     return (
       <Card pageNotFound>
@@ -41,6 +44,7 @@ export default function EventDetail({ event }) {
     links,
     category,
     comments,
+    createdBy,
   } = event;
   if (!organization) return null;
   const { organizationName, organizationContact } = organization;
@@ -52,10 +56,12 @@ export default function EventDetail({ event }) {
   return (
     <>
       <Card>
-        <BackButton />
-
-        <EditEventButton id={_id} />
-        <DeleteEventButton id={_id} />
+        {createdBy === userId ? (
+          <>
+            <EditEventButton id={_id} />
+            <DeleteEventButton id={_id} />
+          </>
+        ) : null}
         <EventName>{eventName}</EventName>
         <Description>{longDescription}</Description>
         <InfoWrapper>
