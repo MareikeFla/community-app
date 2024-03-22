@@ -67,6 +67,10 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
     handleCancel,
     handleCostsChange,
     MAX_CHAR_COUNT,
+    linkURL,
+    linkDescription,
+    handleLinkURLChange,
+    handleLinkDescriptionChange,
   } = useEventForm(editEvent);
 
   // Effect to update costs state based on the isFreeOfCharge flag or editEvent data
@@ -287,9 +291,10 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
           type="url"
           id="linkURL"
           name="linkURL"
+          value={linkURL}
+          onChange={(event) => handleLinkURLChange(event)}
           $addmarginbottom
           placeholder="http://"
-          defaultValue={editEvent?.links[0]?.url || ""}
         />
         <FormLabel htmlFor="linkDescription">Link Beschreibung</FormLabel>
         <FormInput
@@ -297,7 +302,9 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
           id="linkDescription"
           name="linkDescription"
           placeholder="Link Beschreibung"
-          defaultValue={editEvent?.links[0]?.linkDescription || ""}
+          value={linkDescription}
+          onChange={(event) => handleLinkDescriptionChange(event)}
+          disabled={!linkURL}
         />
       </FormSection>
 
