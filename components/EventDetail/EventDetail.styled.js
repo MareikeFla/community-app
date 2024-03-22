@@ -23,6 +23,20 @@ export const EventName = styled.h1`
 
 export const Description = styled.p`
   font: var(--font_body);
+  white-space: pre-wrap;
+`;
+
+export const ExpandCollapseButton = styled.button`
+  border: none;
+  background-color: var(--color_body);
+  color: var(--color_orange);
+  font: var(--font_body);
+`;
+
+export const DescriptionContainer = styled.div`
+  overflow: hidden;
+  max-height: ${(props) => props.$containerHeight};
+  transition: max-height 0.9s ease-in-out;
 `;
 
 export const InfoWrapper = styled.div`

@@ -19,6 +19,8 @@ import {
   ListItemMarker,
 } from "./EventDetail.styled";
 
+import ExpandableText from "./ExpandableText";
+
 export default function EventDetail({ event }) {
   if (!event) {
     return (
@@ -57,7 +59,7 @@ export default function EventDetail({ event }) {
         <EditEventButton id={_id} />
         <DeleteEventButton id={_id} />
         <EventName>{eventName}</EventName>
-        <Description>{longDescription}</Description>
+        <ExpandableText text={longDescription} />
         <InfoWrapper>
           <InfoTitle>Beginn</InfoTitle>
           <Info>
