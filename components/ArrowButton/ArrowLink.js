@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { ButtonWrapper, IconWrapper } from "./ArrowButton.styled";
+import { IconWrapper, LinkWrapper } from "./ArrowButton.styled";
 
-export default function ArrowButton({ onClick, children }) {
+export default function ArrowLink({ href, children }) {
   return (
-    <ButtonWrapper onClick={onClick}>
+    <LinkWrapper href={href}>
       {children}
       <IconWrapper>
         <Image
@@ -13,6 +13,6 @@ export default function ArrowButton({ onClick, children }) {
           height={14}
         />
       </IconWrapper>
-    </ButtonWrapper>
+    </LinkWrapper>
   );
 }
