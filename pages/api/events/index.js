@@ -7,13 +7,26 @@ export default async function handler(request, response) {
   if (request.method === "GET") {
     try {
       const today = new Date().toISOString().split("T")[0];
-      const events = await Event.find({
+      let events = await Event.find({
         "end.date": { $gte: today },
       }).populate("category");
 
       if (!events) {
         return response.status(404).json({ status: "Not Found" });
       }
+      events = events.map((event) => {
+        const eventObject = event.toObject();
+        return {
+          ...eventObject,
+          isFreeOfCharge: eventObject.costs === "Kostenlos",
+          isOnlineEvent:
+            !eventObject.location.street &&
+            !eventObject.location.houseNumber &&
+            !eventObject.location.zip &&
+            !eventObject.location.city,
+        };
+      });
+
       return response.status(200).json(events);
     } catch (error) {
       console.error(error);

@@ -24,7 +24,16 @@ export default async function handler(request, response) {
       const event = await Event.findById(id)
         .populate("comments")
         .populate("category");
-      return response.status(200).json(event);
+
+      const eventObject = event.toObject();
+      eventObject.isFreeOfCharge = eventObject.costs === "Kostenlos";
+      eventObject.isOnlineEvent =
+        !eventObject.location.street &&
+        !eventObject.location.houseNumber &&
+        !eventObject.location.zip &&
+        !eventObject.location.city;
+
+      return response.status(200).json(eventObject);
     } catch (error) {
       console.error(error);
       return response.status(400).json({ error: error.message });
@@ -45,11 +54,9 @@ export default async function handler(request, response) {
 
       await Event.findByIdAndDelete(id);
 
-      response
-        .status(200)
-        .json({
-          status: `Event ${id} and related comments successfully deleted.`,
-        });
+      response.status(200).json({
+        status: `Event ${id} and related comments successfully deleted.`,
+      });
     } catch (error) {
       console.error(error);
       response.status(400).json({ error: error.message });
