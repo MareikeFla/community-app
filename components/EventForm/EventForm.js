@@ -293,7 +293,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
           id="linkURL"
           name="linkURL"
           required={isLinkRequired}
-          defaultValue={editEvent.links[0].url || ""}
+          defaultValue={editEvent?.links[0]?.url || ""}
           $addmarginbottom
           placeholder="http://"
         />
@@ -303,7 +303,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
           id="linkDescription"
           name="linkDescription"
           placeholder="Link Beschreibung"
-          defaultValue={editEvent.links[0].linkDescription || ""}
+          defaultValue={editEvent?.links[0]?.linkDescription || ""}
           onChange={(event) => checkIfCorrespondingFieldIsRequired(event)} // Set the link URL required if a link description is entered
         />
       </FormSection>
