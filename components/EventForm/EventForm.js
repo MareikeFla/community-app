@@ -67,10 +67,9 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
     handleCancel,
     handleCostsChange,
     MAX_CHAR_COUNT,
-    linkURL,
-    linkDescription,
-    handleLinkURLChange,
-    handleLinkDescriptionChange,
+    isStreetRequired,
+    isLinkRequired,
+    checkIfCorrespondingFieldIsRequired,
   } = useEventForm(editEvent);
 
   // Effect to update costs state based on the isFreeOfCharge flag or editEvent data
@@ -178,6 +177,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
               type="text"
               name="street"
               id="street"
+              required={isStreetRequired}
               defaultValue={editEvent?.location?.street || ""}
             />
           </FullWidth>
@@ -188,6 +188,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
               name="houseNumber"
               id="houseNumber"
               defaultValue={editEvent?.location?.houseNumber || ""}
+              onChange={(event) => checkIfCorrespondingFieldIsRequired(event)} // Set the street required if a house number is entered
             />
           </FixedSize>
         </FlexContainer>
@@ -291,8 +292,8 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
           type="url"
           id="linkURL"
           name="linkURL"
-          value={linkURL}
-          onChange={(event) => handleLinkURLChange(event)}
+          required={isLinkRequired}
+          defaultValue={editEvent.links[0].url || ""}
           $addmarginbottom
           placeholder="http://"
         />
@@ -302,9 +303,8 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
           id="linkDescription"
           name="linkDescription"
           placeholder="Link Beschreibung"
-          value={linkDescription}
-          onChange={(event) => handleLinkDescriptionChange(event)}
-          disabled={!linkURL}
+          defaultValue={editEvent.links[0].linkDescription || ""}
+          onChange={(event) => checkIfCorrespondingFieldIsRequired(event)} // Set the link URL required if a link description is entered
         />
       </FormSection>
 
