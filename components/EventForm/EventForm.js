@@ -83,6 +83,15 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
     }
   }, [isFreeOfCharge, editEvent]);
 
+  useEffect(() => {
+    if (editEvent && editEvent.longDescription) {
+      const event = {
+        target: document.getElementById("longDescription"),
+      };
+      autoGrow(event);
+    }
+  }, [editEvent]);
+
   if (isLoadingCategories) {
     return <Loading />;
   }
