@@ -47,7 +47,7 @@ export default function ExpandableText({ text }) {
             aria-controls="Event-Beschreibung"
             onClick={toggleIsExpanded}
           >
-            {isExpanded ? "weniger" : "... mehr"}
+            {isExpanded ? " weniger" : "... mehr"}
           </ExpandCollapseButton>
         )}
       </Description>
