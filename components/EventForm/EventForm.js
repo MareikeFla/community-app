@@ -3,11 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useData } from "@/lib/useData";
-import {
-  autoGrow,
-  useEventForm,
-  getFormattedTodayDate,
-} from "@/lib/useEventForm";
+import { autoGrow, useEventForm } from "@/lib/useEventForm";
 
 // Styling imports
 
@@ -137,7 +133,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
             aria-required="true"
             id="startDate"
             name="startDate"
-            min={editEvent ? startDate : getFormattedTodayDate()}
+            min={editEvent ? startDate : getFormattedTodaysDate()}
             value={startDate}
             onClick={(event) => event.currentTarget.showPicker()}
             onChange={(event) => handleStartDateChange(event)}
