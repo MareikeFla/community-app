@@ -36,8 +36,9 @@ import { useSession } from "next-auth/react";
 // and an optional 'editEvent' object for prefilling form fields during event edits.
 import Loading from "../Loading/Loading";
 import FetchingError from "../FetchingError/FetchingError";
+import { getFormattedTodaysDate } from "@/lib/dateHelpers";
 
-export default function EventForm({ updateDatabase, event: editEvent }) {
+export default function EventForm({ onSubmit, event: editEvent }) {
   const router = useRouter();
   const { showModal } = useModal();
   const { data: session } = useSession();
@@ -96,7 +97,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
   }
 
   return (
-    <EventFormStyled onSubmit={(event) => handleSubmit(event, updateDatabase)}>
+    <EventFormStyled onSubmit={(event) => handleSubmit(event, onSubmit)}>
       <FormSection>
         <FormLabel htmlFor="eventName">Event Name *</FormLabel>
         <FormInput
