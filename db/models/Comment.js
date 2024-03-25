@@ -9,6 +9,8 @@ const commentSchema = new Schema({
   userImageURL: { type: String },
   text: { type: String },
   isLiked: { type: Boolean },
+  parentComment: { type: Schema.Types.ObjectId, ref: "Comment" }, // Referenz auf den übergeordneten Kommentar
+  childComments: [{ type: Schema.Types.ObjectId, ref: "Comment" }], // Liste von untergeordneten Kommentaren
 });
 
 const Comment =
