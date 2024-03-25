@@ -17,7 +17,7 @@ export default function ExpandableText({ text }) {
   }
 
   useEffect(() => {
-    // Reset containerHeight wen changing isExpanded
+    // Reset containerHeight when changing isExpanded
     if (containerRef.current) {
       setContainerHeight(`${containerRef.current.scrollHeight}px`);
     }
