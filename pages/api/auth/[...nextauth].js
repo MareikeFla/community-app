@@ -2,8 +2,8 @@ import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/db/mongodb";
-import dbConnect from "@/db/connect";
 import CredentialsProvider from "next-auth/providers/credentials";
+import User from "@/db/models/User";
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -21,14 +21,13 @@ export default NextAuth({
       },
       async authorize(credentials) {
         // this is only here in order to make it easier for people to test the application
+        const testUser = await User.findOne({ email: "testuser@example.com" });
+
         if (
           credentials.username === "test" &&
           credentials.password === "test"
         ) {
-          return {
-            name: "Test User",
-            email: "testuser@example.com",
-          };
+          return testUser;
         } else {
           return null;
         }

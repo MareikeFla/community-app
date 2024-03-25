@@ -25,6 +25,7 @@ import SwitchButton from "../SwitchButton/SwitchButton";
 import { useRouter } from "next/router";
 import { useModal } from "@/lib/useModal";
 import { useData } from "@/lib/useData";
+import { useSession } from "next-auth/react";
 
 // EventForm component definition. It receives an updateDatabase function for database operations,
 // and an optional 'editEvent' object for prefilling form fields during event edits.
@@ -32,21 +33,18 @@ import { useData } from "@/lib/useData";
 export default function EventForm({ updateDatabase, event: editEvent }) {
   const router = useRouter();
   const { showModal } = useModal();
+  const { data: session } = useSession();
+  const userID = session?.user.id;
 
   const { categories, isLoadingCategories, errorCategories } =
     useData().fetchedCategories;
-
-  if (isLoadingCategories) {
-    return;
-  }
-  if (errorCategories) {
-    return;
-  }
 
   // Compiles form data into a structured event object from the form's input fields.
   function getEventData(event) {
     const eventTarget = event.target;
     return {
+      createdBy: userID,
+
       eventName: eventTarget.eventName.value,
       start: {
         date: eventTarget.startDate.value,
@@ -138,6 +136,13 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
     textareaContainer.style.height = "auto";
     textareaContainer.style.height = textareaContainer.scrollHeight + 1 + "px";
   };
+
+  if (isLoadingCategories) {
+    return;
+  }
+  if (errorCategories) {
+    return;
+  }
 
   return (
     <EventFormStyled
@@ -333,7 +338,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
         <FormLabel htmlFor="shortDescription">Kurzbeschreibung *</FormLabel>
         <FormDescriptionField
           $smallerminheight
-          maxlength="120"
+          maxLength="120"
           id="shortDescription"
           name="shortDescription"
           required
