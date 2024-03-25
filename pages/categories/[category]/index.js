@@ -1,4 +1,3 @@
-import BackButton from "@/components/BackButton/BackButton";
 import CategoryHeader from "@/components/CategoryHeader/CategoryHeader";
 import EventList from "@/components/EventList/EventList";
 import FetchingError from "@/components/FetchingError/FetchingError";
@@ -32,7 +31,6 @@ export default function CategoryPage() {
 
   return (
     <>
-      <BackButton />
       {selectedCategory && <CategoryHeader category={selectedCategory} />}
       {filteredEvents.length === 0 ? (
         <MessageCard>Keine Events gefunden...</MessageCard>

@@ -1,4 +1,3 @@
-import BackButton from "../BackButton/BackButton";
 import CategoryTag from "../CategoryTag/CategoryTag";
 import CommentSection from "../CommentSection/CommentSection";
 import DeleteEventButton from "../DeleteEventButton/DeleteEventButton";
@@ -27,7 +26,6 @@ export default function EventDetail({ event }) {
     return (
       <Card pageNotFound>
         <ErrorMessage>Seite nicht gefunden.</ErrorMessage>
-        <BackButton />
       </Card>
     );
   }

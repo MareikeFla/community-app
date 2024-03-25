@@ -9,7 +9,7 @@ export const SearchBox = styled.div`
   text-align: center;
   color: var(--color_night);
   border-radius: var(--border-radius_card);
-  padding: 3rem 1.5rem 2rem 1.5rem;
+  padding: 2rem 1.5rem 2rem 1.5rem;
   box-shadow: var(--shadow_card);
 `;
 
