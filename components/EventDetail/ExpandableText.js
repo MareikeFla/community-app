@@ -6,6 +6,9 @@ import {
 } from "./EventDetail.styled";
 
 export default function ExpandableText({ text }) {
+  if (!text.length) {
+    return null;
+  }
   const COLLAPSED_TEXT_LENGTH = 500;
 
   const [isExpanded, setIsExpanded] = useState(false);
@@ -29,10 +32,6 @@ export default function ExpandableText({ text }) {
       });
     }
   }, [isExpanded]);
-
-  if (!text.length) {
-    return null;
-  }
 
   return (
     <DescriptionContainer

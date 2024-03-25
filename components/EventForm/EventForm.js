@@ -321,7 +321,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
         <FormLabel htmlFor="shortDescription">Kurzbeschreibung *</FormLabel>
         <FormDescriptionField
           $smallerminheight
-          maxlength="120"
+          maxLength="120"
           id="shortDescription"
           name="shortDescription"
           required
