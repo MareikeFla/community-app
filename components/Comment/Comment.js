@@ -15,6 +15,7 @@ import ReplyList from "../ReplyList/ReplyList";
 import { useEffect } from "react";
 import LikeButton from "../LikeButton/LikeButton";
 import { useData } from "@/lib/useData";
+import { FlexContainer } from "./Comment.styled";
 
 export default function Comment({ comment, onPostReply, mutateEvent }) {
   const { userImageURL, userName, text, creationDate, isLiked, _id } = comment;
@@ -33,34 +34,34 @@ export default function Comment({ comment, onPostReply, mutateEvent }) {
     // Funktion zum Posten einer Antwort für diesen Kommentar
     // Implementieren Sie diese Funktion entsprechend Ihrer Anforderungen
     console.log(onPostReply);
-    onPostReply(replyText, commentId);
+    onPostReply(replyText, _id);
   };
 
   return (
-    <CommentContainer>
-      <ProfilePicture
-        src={userImageURL}
-        alt="profile picture"
-        height={36}
-        width={36}
-      />
-      <CommentText>
-        <CommentHeader>
-          {userName} <CommentTime>·{creationDate && timeElapsed}</CommentTime>
-        </CommentHeader>
-        <CommentBody>{text}</CommentBody>
-        <LikeButton
-          onLikeComment={() => updateComment(_id, isLiked, mutateEvent)}
-          checkIfIsLiked={isLiked}
+    <article>
+      <CommentContainer>
+        <ProfilePicture
+          src={userImageURL}
+          alt="profile picture"
+          height={36}
+          width={36}
         />
-      </CommentText>
-      <div>
-        <CommentHeader>
-          {userName} <CommentTime>·{creationDate && timeElapsed}</CommentTime>
-        </CommentHeader>
-        <CommentBody>{text}</CommentBody>
-        <ReplyButton onClick={handleReplyForm} text="Antworten" />
-      </div>
+        <CommentText>
+          <CommentHeader>
+            {userName} <CommentTime>·{creationDate && timeElapsed}</CommentTime>
+          </CommentHeader>
+          <CommentBody>{text}</CommentBody>
+          <FlexContainer>
+            <ReplyButton onClick={handleReplyForm} text="Antworten" />
+
+            <LikeButton
+              onLikeComment={() => updateComment(_id, isLiked, mutateEvent)}
+              checkIfIsLiked={isLiked}
+            />
+          </FlexContainer>
+        </CommentText>
+      </CommentContainer>
+
       <ReplyList replies={replies} />
       {isReplyFormOpen && (
         <ReplyCommentForm
@@ -68,6 +69,6 @@ export default function Comment({ comment, onPostReply, mutateEvent }) {
           onPostReply={handlePostReply}
         />
       )}
-    </CommentContainer>
+    </article>
   );
 }

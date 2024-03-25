@@ -31,9 +31,15 @@ export const CommentTime = styled.span`
 
 export const CommentBody = styled.p`
   font: var(--font_info);
+  margin-bottom: 0.375rem;
 `;
 export const CommentText = styled.section`
   display: flex;
   flex-direction: column;
   flex: 1;
+`;
+
+export const FlexContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
