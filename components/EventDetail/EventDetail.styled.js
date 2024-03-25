@@ -29,7 +29,7 @@ export const Description = styled.p`
 export const ExpandCollapseButton = styled.button`
   border: none;
   cursor: pointer;
-  background-color: var(--color_body);
+  background-color: var(--color_white);
   color: var(--color_orange);
   font: var(--font_body);
 `;

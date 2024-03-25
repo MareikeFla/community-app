@@ -40,13 +40,15 @@ export default function ExpandableText({ text }) {
       $containerHeight={containerHeight}
     >
       <Description id="Event-Beschreibung">
-        {isExpanded ? text : text.substring(0, COLLAPSED_TEXT_LENGTH)}
+        {isExpanded
+          ? text + " "
+          : text.substring(0, COLLAPSED_TEXT_LENGTH) + "... "}
         {text.length > COLLAPSED_TEXT_LENGTH && (
           <ExpandCollapseButton
             aria-controls="Event-Beschreibung"
             onClick={toggleIsExpanded}
           >
-            {isExpanded ? " weniger" : "... mehr"}
+            {isExpanded ? "weniger" : "mehr"}
           </ExpandCollapseButton>
         )}
       </Description>
