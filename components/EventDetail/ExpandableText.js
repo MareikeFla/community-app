@@ -13,7 +13,7 @@ export default function ExpandableText({ text }) {
 
   const [isExpanded, setIsExpanded] = useState(false);
   const containerRef = useRef(null); // Is used to get the container height for the css transition and as a hook to scoll to when shrinking
-  const [containerHeight, setContainerHeight] = useState("auto");
+  const [containerHeight, setContainerHeight] = useState("0px");
 
   function toggleIsExpanded() {
     setIsExpanded(!isExpanded);
