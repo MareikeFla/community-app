@@ -1,5 +1,6 @@
 import dbConnect from "@/db/connect";
 import Event from "@/db/models/Event";
+import enrichEventObject from "@/lib/enrichEventObject";
 
 export default async function handler(request, response) {
   await dbConnect();
@@ -14,18 +15,7 @@ export default async function handler(request, response) {
       if (!events) {
         return response.status(404).json({ status: "Not Found" });
       }
-      events = events.map((event) => {
-        const eventObject = event.toObject();
-        return {
-          ...eventObject,
-          isFreeOfCharge: eventObject.costs === "Kostenlos",
-          isOnlineEvent:
-            !eventObject.location.street &&
-            !eventObject.location.houseNumber &&
-            !eventObject.location.zip &&
-            !eventObject.location.city,
-        };
-      });
+      events = events.map((event) => enrichEventObject(event));
 
       return response.status(200).json(events);
     } catch (error) {

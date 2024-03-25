@@ -1,6 +1,7 @@
 import dbConnect from "@/db/connect";
 import Event from "@/db/models/Event";
 import Comment from "@/db/models/Comment";
+import enrichEventObject from "@/lib/enrichEventObject";
 
 export default async function handler(request, response) {
   await dbConnect();
@@ -25,13 +26,7 @@ export default async function handler(request, response) {
         .populate("comments")
         .populate("category");
 
-      const eventObject = event.toObject();
-      eventObject.isFreeOfCharge = eventObject.costs === "Kostenlos";
-      eventObject.isOnlineEvent =
-        !eventObject.location.street &&
-        !eventObject.location.houseNumber &&
-        !eventObject.location.zip &&
-        !eventObject.location.city;
+      const eventObject = enrichEventObject(event);
 
       return response.status(200).json(eventObject);
     } catch (error) {
