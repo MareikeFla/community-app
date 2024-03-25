@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useData } from "@/lib/useData";
-import { autoGrow, useEventForm } from "@/lib/useEventForm";
+import { useEventForm } from "@/lib/useEventForm";
 
 // Styling imports
 
@@ -79,15 +79,6 @@ export default function EventForm({ onSubmit, event: editEvent }) {
       setCosts("");
     }
   }, [isFreeOfCharge, editEvent]);
-
-  useEffect(() => {
-    if (editEvent && editEvent.longDescription) {
-      const event = {
-        target: document.getElementById("longDescription"),
-      };
-      autoGrow(event);
-    }
-  }, [editEvent]);
 
   if (isLoadingCategories) {
     return <Loading />;
@@ -264,7 +255,8 @@ export default function EventForm({ onSubmit, event: editEvent }) {
       <FormSection $positionrelative $smallermargin>
         <FormLabel htmlFor="shortDescription">Kurzbeschreibung *</FormLabel>
         <FormDescriptionField
-          $smallerminheight
+          maxRows={3}
+          minRows={2}
           maxLength={MAX_CHAR_COUNT}
           id="shortDescription"
           name="shortDescription"
@@ -282,7 +274,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
       <FormSection $smallermargin>
         <FormLabel htmlFor="longDescription">Beschreibung *</FormLabel>
         <FormDescriptionField
-          onInput={autoGrow}
+          minRows={2}
           id="longDescription"
           name="longDescription"
           required

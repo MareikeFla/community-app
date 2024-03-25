@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import TextareaAutosize from "react-textarea-autosize";
+
 export const EventFormStyled = styled.form`
   padding-top: 1rem;
   display: flex;
@@ -131,14 +133,11 @@ export const FormCheckboxWrapper = styled.div`
 
 export const FormSelectOption = styled.option``;
 
-export const FormDescriptionField = styled.textarea`
-  min-height: ${({ $smallerminheight }) =>
-    $smallerminheight ? "5.5rem" : "7.063rem"};
+export const FormDescriptionField = styled(TextareaAutosize)`
   padding: 0.5rem 0.75rem;
   border: none;
   background-color: #f5f5f5;
   border-radius: var(--border-radius_input);
-  height: 2.5rem;
   width: 100%;
   margin-bottom: ${({ $addmarginbottom }) => ($addmarginbottom ? "20px" : "0")};
   font: var(--font_body);
