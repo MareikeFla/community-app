@@ -40,7 +40,6 @@ export default function AutoResizingTextArea({ initialLongDescription }) {
         id="longDescription"
         name="longDescription"
         required
-        aria-required="true"
       />
     </TextAreaContainer>
   );
