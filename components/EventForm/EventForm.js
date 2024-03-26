@@ -88,7 +88,17 @@ export default function EventForm({ onSubmit, event: editEvent }) {
   }
 
   return (
-    <EventFormStyled onSubmit={(event) => handleSubmit(event, onSubmit)}>
+    <EventFormStyled
+      onSubmit={(event) => {
+        event.preventDefault();
+        showModal({
+          message: "Event speichern?", // Default message
+          textButtonCancel: "Abbrechen", // Default text for the cancel button
+          textButtonConfirm: "Speichern", // Default text for the confirm button
+          onConfirm: () => handleSubmit(event),
+        });
+      }}
+    >
       <FormSection>
         <FormLabel htmlFor="eventName">Event Name *</FormLabel>
         <FormInput
@@ -251,7 +261,6 @@ export default function EventForm({ onSubmit, event: editEvent }) {
           defaultValue={editEvent?.organization?.organizationContact || ""}
         />
       </FormSection>
-
       <FormSection $positionrelative $smallermargin>
         <FormLabel htmlFor="shortDescription">Kurzbeschreibung *</FormLabel>
         <FormDescriptionField
@@ -270,7 +279,6 @@ export default function EventForm({ onSubmit, event: editEvent }) {
         </CharacterCounter>
         <SubtitleRight>Erscheint in der Event Vorschau</SubtitleRight>
       </FormSection>
-
       <FormSection $smallermargin>
         <FormLabel htmlFor="longDescription">Beschreibung *</FormLabel>
         <FormDescriptionField
@@ -305,7 +313,6 @@ export default function EventForm({ onSubmit, event: editEvent }) {
           onChange={(event) => checkIfCorrespondingFieldIsRequired(event)} // Set the link URL required if a link description is entered
         />
       </FormSection>
-
       <FormButtonWrapper>
         <Button type="button" text="Abbrechen" onClick={handleCancel} />
         <Button color="primary" type="submit" text="Absenden" />
