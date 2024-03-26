@@ -1,7 +1,6 @@
 // Functionall imports
 
 import { useEffect } from "react";
-import { useRouter } from "next/router";
 import { useData } from "@/lib/useData";
 import { useEventForm } from "@/lib/useEventForm";
 
@@ -30,7 +29,6 @@ import {
 import Button from "../Button/Button";
 import SwitchButton from "../SwitchButton/SwitchButton";
 import { useModal } from "@/lib/useModal";
-import { useSession } from "next-auth/react";
 
 // EventForm component definition. It receives an updateDatabase function for database operations,
 // and an optional 'editEvent' object for prefilling form fields during event edits.
@@ -39,7 +37,6 @@ import FetchingError from "../FetchingError/FetchingError";
 import { getFormattedTodaysDate } from "@/lib/dateHelpers";
 
 export default function EventForm({ onSubmit, event: editEvent }) {
-  const router = useRouter();
   const { showModal } = useModal();
 
   // Using custom hook to fetch categories data
