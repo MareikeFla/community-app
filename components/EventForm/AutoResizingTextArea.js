@@ -32,7 +32,7 @@ export default function AutoResizingTextArea({ initialLongDescription }) {
         {input + "\n"}
       </TextAreaMirror>
       <FormDescriptionField
-        spellcheck="false"
+        spellCheck="false"
         $longDescriptionHeight={longDescriptionHeight}
         className="auto-resizing-textarea"
         value={longDescription}
