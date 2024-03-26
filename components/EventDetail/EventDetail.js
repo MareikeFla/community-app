@@ -20,7 +20,7 @@ import {
 import { useSession } from "next-auth/react";
 
 import ExpandableText from "./ExpandableText";
-import { locationToString } from "@/lib/fomatLocation";
+
 import { locationToString } from "@/lib/formatLocation";
 
 export default function EventDetail({ event }) {
