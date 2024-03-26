@@ -133,7 +133,11 @@ export const FormCheckboxWrapper = styled.div`
 
 export const FormSelectOption = styled.option``;
 
-export const FormDescriptionField = styled(TextareaAutosize)`
+export const FormDescriptionField = styled.textarea`
+  height: ${({ $longDescriptionHeight }) =>
+    $longDescriptionHeight + "px" || "2.5rem"};
+  min-height: ${({ $smallerminheight }) =>
+    $smallerminheight ? "5.5rem" : "7.063rem"};
   padding: 0.5rem 0.75rem;
   border: none;
   background-color: #f5f5f5;

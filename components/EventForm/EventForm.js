@@ -62,6 +62,8 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     isStreetRequired,
     isLinkRequired,
     checkIfCorrespondingFieldIsRequired,
+    longDescriptionHeight,
+    setLongDescriptionHeight,
   } = useEventForm(editEvent);
 
   // Effect to update costs state based on the isFreeOfCharge flag or editEvent data
@@ -259,8 +261,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
       <FormSection $positionrelative $smallermargin>
         <FormLabel htmlFor="shortDescription">Kurzbeschreibung *</FormLabel>
         <FormDescriptionField
-          maxRows={3}
-          minRows={2}
+          $smallerminheight
           maxLength={MAX_CHAR_COUNT}
           id="shortDescription"
           name="shortDescription"
@@ -277,12 +278,16 @@ export default function EventForm({ onSubmit, event: editEvent }) {
       <FormSection $smallermargin>
         <FormLabel htmlFor="longDescription">Beschreibung *</FormLabel>
         <FormDescriptionField
-          minRows={2}
+          $longDescriptionHeight={longDescriptionHeight}
           id="longDescription"
           name="longDescription"
           required
           aria-required="true"
           defaultValue={editEvent?.longDescription || ""}
+          onInput={(event) => {
+            console.log(event.target.scrollHeight);
+            setLongDescriptionHeight(event.target.scrollHeight);
+          }}
         />
         <SubtitleRight>Erscheint auf der Event Seite</SubtitleRight>
       </FormSection>
