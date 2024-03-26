@@ -41,8 +41,6 @@ import { getFormattedTodaysDate } from "@/lib/dateHelpers";
 export default function EventForm({ onSubmit, event: editEvent }) {
   const router = useRouter();
   const { showModal } = useModal();
-  const { data: session } = useSession();
-  const userID = session?.user.id;
 
   // Using custom hook to fetch categories data
   const { categories, isLoadingCategories, errorCategories } =
@@ -95,7 +93,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
           message: "Event speichern?", // Default message
           textButtonCancel: "Abbrechen", // Default text for the cancel button
           textButtonConfirm: "Speichern", // Default text for the confirm button
-          onConfirm: () => handleSubmit(event),
+          onConfirm: () => handleSubmit(event, onSubmit),
         });
       }}
     >
