@@ -11,7 +11,7 @@ export default function AutoResizingTextArea({ initialLongDescription }) {
     initialLongDescription
   );
 
-  const [longDescriptionHeight, setLongDescriptionHeight] = useState("auto");
+  const [longDescriptionHeight, setLongDescriptionHeight] = useState(0);
   const mirror = useRef();
 
   const handleChange = (event) => {
