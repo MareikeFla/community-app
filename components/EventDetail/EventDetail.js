@@ -19,6 +19,8 @@ import {
 } from "./EventDetail.styled";
 import { useSession } from "next-auth/react";
 
+import ExpandableText from "./ExpandableText";
+
 export default function EventDetail({ event }) {
   const { data: session } = useSession();
   const userId = session?.user.id;
@@ -61,7 +63,7 @@ export default function EventDetail({ event }) {
           </>
         ) : null}
         <EventName>{eventName}</EventName>
-        <Description>{longDescription}</Description>
+        <ExpandableText text={longDescription} />
         <InfoWrapper>
           <InfoTitle>Beginn</InfoTitle>
           <Info>
