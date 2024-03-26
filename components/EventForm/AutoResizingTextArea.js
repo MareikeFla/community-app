@@ -24,7 +24,7 @@ export default function AutoResizingTextArea({ initialLongDescription }) {
     const newHeight = mirrorHeight > minHeight ? mirrorHeight : minHeight;
     setLongDescriptionHeight(newHeight);
     setLongDescription(input);
-  }, [mirror, input]);
+  }, [input]);
 
   return (
     <TextAreaContainer $longDescriptionHeight={longDescriptionHeight}>
