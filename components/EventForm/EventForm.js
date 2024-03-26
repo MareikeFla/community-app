@@ -29,6 +29,7 @@ import {
 import Button from "../Button/Button";
 import SwitchButton from "../SwitchButton/SwitchButton";
 import { useModal } from "@/lib/useModal";
+import AutoResizingTextArea from "./AutoResizingTextArea";
 
 // EventForm component definition. It receives an updateDatabase function for database operations,
 // and an optional 'editEvent' object for prefilling form fields during event edits.
@@ -62,6 +63,8 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     isStreetRequired,
     isLinkRequired,
     checkIfCorrespondingFieldIsRequired,
+    longDescription,
+    setLongDescription,
     longDescriptionHeight,
     setLongDescriptionHeight,
   } = useEventForm(editEvent);
@@ -261,7 +264,6 @@ export default function EventForm({ onSubmit, event: editEvent }) {
       <FormSection $positionrelative $smallermargin>
         <FormLabel htmlFor="shortDescription">Kurzbeschreibung *</FormLabel>
         <FormDescriptionField
-          $smallerminheight
           maxLength={MAX_CHAR_COUNT}
           id="shortDescription"
           name="shortDescription"
@@ -277,17 +279,8 @@ export default function EventForm({ onSubmit, event: editEvent }) {
       </FormSection>
       <FormSection $smallermargin>
         <FormLabel htmlFor="longDescription">Beschreibung *</FormLabel>
-        <FormDescriptionField
-          $longDescriptionHeight={longDescriptionHeight}
-          id="longDescription"
-          name="longDescription"
-          required
-          aria-required="true"
-          defaultValue={editEvent?.longDescription || ""}
-          onInput={(event) => {
-            console.log(event.target.scrollHeight);
-            setLongDescriptionHeight(event.target.scrollHeight);
-          }}
+        <AutoResizingTextArea
+          initialLongDescription={editEvent?.longDescription || ""}
         />
         <SubtitleRight>Erscheint auf der Event Seite</SubtitleRight>
       </FormSection>
