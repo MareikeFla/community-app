@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const EventFormStyled = styled.form`
   padding-top: 1rem;
   display: flex;
@@ -18,6 +19,7 @@ export const EventFormStyled = styled.form`
 export const SubtitleRight = styled.p`
   font: var(--font_form-note);
   margin-top: ${({ $addmargintop }) => ($addmargintop ? "0.5rem" : "0")};
+
   text-align: right;
   color: var(--color_grey);
   @-moz-document url-prefix() {
@@ -132,19 +134,26 @@ export const FormCheckboxWrapper = styled.div`
 export const FormSelectOption = styled.option``;
 
 export const FormDescriptionField = styled.textarea`
-  min-height: ${({ $smallerminheight }) =>
-    $smallerminheight ? "5.5rem" : "7.063rem"};
   padding: 0.5rem 0.75rem;
   border: none;
   background-color: #f5f5f5;
   border-radius: var(--border-radius_input);
-  height: 2.5rem;
   width: 100%;
   margin-bottom: ${({ $addmarginbottom }) => ($addmarginbottom ? "20px" : "0")};
   font: var(--font_body);
   color: var(--color_night);
   resize: none;
   overflow: hidden;
+
+  &.auto-resizing-textarea {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: ${({ $longDescriptionHeight }) =>
+      $longDescriptionHeight + "px" || "auto"};
+  }
 
   &:focus-visible {
     outline: 1px solid var(--color_orange);
@@ -153,6 +162,27 @@ export const FormDescriptionField = styled.textarea`
   &:-webkit-scrollbar {
     display: none; /* Safari and Chrome */
   }
+`;
+
+export const TextAreaContainer = styled.div`
+  position: relative;
+  height: ${({ $longDescriptionHeight }) =>
+    $longDescriptionHeight + "px" || "auto"};
+`;
+
+export const TextAreaMirror = styled.div`
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font: var(--font_body);
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: auto;
+  height: auto;
+  resize: none;
 `;
 
 export const FormButtonWrapper = styled.div`

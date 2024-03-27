@@ -18,7 +18,7 @@ export default function NewEvent() {
       ) : (
         <EventFormContainer
           title={"Erstelle ein neues Event"}
-          updateDatabase={(eventData) => createEvent(eventData)}
+          onSubmit={(eventData) => createEvent(eventData)}
         />
       )}
     </>

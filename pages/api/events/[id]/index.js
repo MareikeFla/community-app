@@ -1,6 +1,7 @@
 import dbConnect from "@/db/connect";
 import Event from "@/db/models/Event";
 import Comment from "@/db/models/Comment";
+import enrichEventObject from "@/lib/enrichEventObject";
 
 export default async function handler(request, response) {
   await dbConnect();
@@ -24,7 +25,10 @@ export default async function handler(request, response) {
       const event = await Event.findById(id)
         .populate("comments")
         .populate("category");
-      return response.status(200).json(event);
+
+      const eventObject = enrichEventObject(event);
+
+      return response.status(200).json(eventObject);
     } catch (error) {
       console.error(error);
       return response.status(400).json({ error: error.message });
@@ -45,11 +49,9 @@ export default async function handler(request, response) {
 
       await Event.findByIdAndDelete(id);
 
-      response
-        .status(200)
-        .json({
-          status: `Event ${id} and related comments successfully deleted.`,
-        });
+      response.status(200).json({
+        status: `Event ${id} and related comments successfully deleted.`,
+      });
     } catch (error) {
       console.error(error);
       response.status(400).json({ error: error.message });

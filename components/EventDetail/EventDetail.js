@@ -3,7 +3,7 @@ import CommentSection from "../CommentSection/CommentSection";
 import DeleteEventButton from "../DeleteEventButton/DeleteEventButton";
 import EditEventButton from "../EditEventButton/EditEventButton";
 import Map from "../Map";
-import { formatDate } from "@/lib/formatDate";
+import { formatDate } from "@/lib/dateHelpers";
 import {
   Card,
   ErrorMessage,
@@ -20,6 +20,8 @@ import {
 import { useSession } from "next-auth/react";
 
 import ExpandableText from "./ExpandableText";
+
+import { locationToString } from "@/lib/formatLocation";
 
 export default function EventDetail({ event }) {
   const { data: session } = useSession();
@@ -45,10 +47,11 @@ export default function EventDetail({ event }) {
     category,
     comments,
     createdBy,
+    isOnlineEvent,
   } = event;
   if (!organization) return null;
   const { organizationName, organizationContact } = organization;
-  const { street, houseNumber, zip, city, latitude, longitude } = location;
+  const { latitude, longitude } = location;
 
   const formattedStartDate = formatDate(start.date);
   const formattedEndDate = formatDate(end.date);
@@ -74,13 +77,7 @@ export default function EventDetail({ event }) {
             {formattedEndDate}, {end.time} Uhr
           </Info>
           <InfoTitle>Ort</InfoTitle>
-          <Info>
-            {!zip && !street && !houseNumber && !city
-              ? "Online"
-              : `${street || ""} ${houseNumber || ""}${
-                  street || houseNumber ? "," : ""
-                } ${zip || ""} ${city || ""}`}
-          </Info>
+          <Info>{isOnlineEvent ? "Online" : locationToString(location)}</Info>
           <InfoTitle>Kosten</InfoTitle>
           <Info>{costs}</Info>
           <InfoTitle>Veranstalter</InfoTitle>

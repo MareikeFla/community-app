@@ -1,3 +1,11 @@
+// Functionall imports
+
+import { useEffect } from "react";
+import { useData } from "@/lib/useData";
+import { useEventForm } from "@/lib/useEventForm";
+
+// Styling imports
+
 import {
   EventFormStyled,
   FormSection,
@@ -18,130 +26,65 @@ import {
   SubtitleRight,
   CharacterCounter,
 } from "./EventForm.styled";
-
-import { useState, useEffect } from "react";
 import Button from "../Button/Button";
 import SwitchButton from "../SwitchButton/SwitchButton";
-import { useRouter } from "next/router";
 import { useModal } from "@/lib/useModal";
-import { useData } from "@/lib/useData";
-import { useSession } from "next-auth/react";
+import AutoResizingTextArea from "./AutoResizingTextArea";
 
 // EventForm component definition. It receives an updateDatabase function for database operations,
 // and an optional 'editEvent' object for prefilling form fields during event edits.
+import Loading from "../Loading/Loading";
+import FetchingError from "../FetchingError/FetchingError";
+import { getFormattedTodaysDate } from "@/lib/dateHelpers";
 
-export default function EventForm({ updateDatabase, event: editEvent }) {
-  const router = useRouter();
+export default function EventForm({ onSubmit, event: editEvent }) {
   const { showModal } = useModal();
-  const { data: session } = useSession();
-  const userID = session?.user.id;
 
+  // Using custom hook to fetch categories data
   const { categories, isLoadingCategories, errorCategories } =
     useData().fetchedCategories;
 
-  // Compiles form data into a structured event object from the form's input fields.
-  function getEventData(event) {
-    const eventTarget = event.target;
-    return {
-      createdBy: userID,
+  // Custom hook to manage form state and logic
+  const {
+    isFreeOfCharge,
+    setIsFreeOfCharge,
+    costs,
+    setCosts,
+    count,
+    recalculateCharacters,
+    startDate,
+    endDate,
+    handleStartDateChange,
+    handleEndDateChange,
+    handleSubmit,
+    handleCancel,
+    handleCostsChange,
+    MAX_CHAR_COUNT,
+    isStreetRequired,
+    isLinkRequired,
+    checkIfCorrespondingFieldIsRequired,
+    longDescription,
+    setLongDescription,
+    longDescriptionHeight,
+    setLongDescriptionHeight,
+  } = useEventForm(editEvent);
 
-      eventName: eventTarget.eventName.value,
-      start: {
-        date: eventTarget.startDate.value,
-        time: eventTarget.startTime.value,
-      },
-      end: {
-        date: eventTarget.endDate.value,
-        time: eventTarget.endTime.value,
-      },
-      location: {
-        city: eventTarget.city.value,
-        zip: eventTarget.zip.value,
-        street: eventTarget.street.value,
-        houseNumber: eventTarget.houseNumber.value,
-      },
-      category: eventTarget.category.value,
-      organization: {
-        organizationName: eventTarget.organization.value,
-        organizationContact: eventTarget.contact.value,
-      },
-      costs: eventTarget.cost.value,
-      shortDescription: eventTarget.shortDescription.value,
-      longDescription: eventTarget.longDescription.value,
-      links: [
-        {
-          url: eventTarget.linkURL.value,
-          linkDescription: eventTarget.linkDescription.value,
-        },
-      ],
-    };
-  }
-  // Handles the form submission, packages form data into an object, and updates the database.
-  const handleSubmit = async (event) => {
-    const eventData = getEventData(event);
-    const newEventID = await updateDatabase(eventData); // Calls the updateDatabase function to save the event and retrieves the new or updated event's ID.
-    event.target.reset();
-    router.push(
-      editEvent ? `/events/${editEvent._id}` : `/events/${newEventID}` // Show event details page after saving
-    );
-    return newEventID ? true : false;
-  };
-
-  // Initialize 'free of charge' status based on editEvent's costs or defaults to false.
-  // State 'isFreeOfCharge' controls the switch button and the enabling/disabling of the costs input field. Toggled by the switch button.
-  const initialFreeOfCharge = editEvent
-    ? editEvent.costs === "Kostenlos"
-    : true;
-  const [isFreeOfCharge, setIsFreeOfCharge] = useState(initialFreeOfCharge);
-
-  // Initializes 'costs' state with editEvent's costs or sets it to empty if creating a new event.
-  // State 'costs' is the costs input field value. The input field has an onChange event listener which calls setCosts to make value editable.
-  const initialCosts = editEvent ? editEvent.costs : "";
-  const [costs, setCosts] = useState(initialCosts);
-
-  // Updates the 'costs' state based on the 'isFreeOfCharge' toggle.
-  // Sets costs to 'Kostenlos' if free, retains existing costs if applicable, or clears if chargeable.
+  // Effect to update costs state based on the isFreeOfCharge flag or editEvent data
   useEffect(() => {
     if (isFreeOfCharge) {
-      setCosts("Kostenlos"); // Show "Kostenlos" in the input field if the event is free of charge
+      setCosts("Kostenlos");
     } else if (editEvent && editEvent.costs !== "Kostenlos") {
-      setCosts(editEvent.costs); // Show the events costs value, if not "Kostenlos", if the event is not free of charge and user is editing an event
+      setCosts(editEvent.costs);
     } else {
-      setCosts(""); // Costs will be empty if the event is not free of charge and user is creating a new event or editing an event with "Kostenlos" in costs value
+      setCosts("");
     }
   }, [isFreeOfCharge, editEvent]);
 
-  // Toggles the 'isFreeOfCharge' state to reflect the event's charge status.
-  const handleToggle = () => {
-    setIsFreeOfCharge(!isFreeOfCharge);
-  };
-
-  // Redirects the user to the main page upon form cancellation.
-  const handleCancel = () => {
-    router.push("/");
-  };
-
-  // Calculate the Characters in shortDescription
-  const [count, setCount] = useState(120);
-
-  const recalculateCharacters = (event) => {
-    const Characters = event.target.value.length;
-    if (Characters < 121) {
-      setCount(120 - Characters);
-    }
-  };
-  // Auto grow of longDescription textarea
-  const autoGrow = (event) => {
-    const textareaContainer = event.target;
-    textareaContainer.style.height = "auto";
-    textareaContainer.style.height = textareaContainer.scrollHeight + 1 + "px";
-  };
-
   if (isLoadingCategories) {
-    return;
+    return <Loading />;
   }
   if (errorCategories) {
-    return;
+    return <FetchingError />;
   }
 
   return (
@@ -152,7 +95,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
           message: "Event speichern?", // Default message
           textButtonCancel: "Abbrechen", // Default text for the cancel button
           textButtonConfirm: "Speichern", // Default text for the confirm button
-          onConfirm: () => handleSubmit(event),
+          onConfirm: () => handleSubmit(event, onSubmit),
         });
       }}
     >
@@ -164,7 +107,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
           type="text"
           id="eventName"
           name="eventName"
-          defaultValue={editEvent ? editEvent.eventName : ""}
+          defaultValue={editEvent?.eventName || ""}
         />
       </FormSection>
       <FormSection>
@@ -174,9 +117,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
           id="category"
           required
           aria-required="true"
-          defaultValue={
-            editEvent && editEvent.category ? editEvent.category._id : ""
-          }
+          defaultValue={editEvent?.category?._id || ""}
         >
           {categories.map((cat) => (
             <option key={cat._id} value={cat._id}>
@@ -194,10 +135,10 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
             aria-required="true"
             id="startDate"
             name="startDate"
-            defaultValue={
-              editEvent && editEvent.start ? editEvent.start.date : ""
-            }
-            onClick={(e) => e.currentTarget.showPicker()}
+            min={editEvent ? startDate : getFormattedTodaysDate()}
+            value={startDate}
+            onClick={(event) => event.currentTarget.showPicker()}
+            onChange={(event) => handleStartDateChange(event)}
           />
           <FormInputTime
             required
@@ -205,9 +146,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
             aria-required="true"
             id="startTime"
             name="startTime"
-            defaultValue={
-              editEvent && editEvent.start ? editEvent.start.time : ""
-            }
+            defaultValue={editEvent?.start?.time || ""}
           />
         </FormTimeDateWrapper>
       </FormSection>
@@ -218,15 +157,17 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
             type="date"
             id="endDate"
             name="endDate"
-            defaultValue={editEvent && editEvent.end ? editEvent.end.date : ""}
+            min={startDate}
+            value={endDate}
             noValidate
-            onClick={(e) => e.currentTarget.showPicker()}
+            onClick={(event) => event.currentTarget.showPicker()}
+            onChange={(event) => handleEndDateChange(event)}
           />
           <FormInputTime
             type="time"
             id="endTime"
             name="endTime"
-            defaultValue={editEvent && editEvent.end ? editEvent.end.time : ""}
+            defaultValue={editEvent?.end?.time || ""}
             noValidate
           />
         </FormTimeDateWrapper>
@@ -243,9 +184,8 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
               type="text"
               name="street"
               id="street"
-              defaultValue={
-                editEvent && editEvent.location ? editEvent.location.street : ""
-              }
+              required={isStreetRequired}
+              defaultValue={editEvent?.location?.street || ""}
             />
           </FullWidth>
           <FixedSize>
@@ -254,11 +194,8 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
               type="text"
               name="houseNumber"
               id="houseNumber"
-              defaultValue={
-                editEvent && editEvent.location
-                  ? editEvent.location.houseNumber
-                  : ""
-              }
+              defaultValue={editEvent?.location?.houseNumber || ""}
+              onChange={(event) => checkIfCorrespondingFieldIsRequired(event)} // Set the street required if a house number is entered
             />
           </FixedSize>
         </FlexContainer>
@@ -269,9 +206,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
               type="text"
               name="zip"
               id="zip"
-              defaultValue={
-                editEvent && editEvent.location ? editEvent.location.zip : ""
-              }
+              defaultValue={editEvent?.location?.zip || ""}
             />
           </FixedSize>
           <FullWidth>
@@ -280,9 +215,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
               type="text"
               name="city"
               id="city"
-              defaultValue={
-                editEvent && editEvent.location ? editEvent.location.city : ""
-              }
+              defaultValue={editEvent?.location?.city || ""}
             />
           </FullWidth>
         </FlexContainer>
@@ -290,17 +223,20 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
       <FormSection>
         <FormCheckboxWrapper>
           <FormLabel htmlFor="forFree">Kostenlos</FormLabel>
-          <SwitchButton isChecked={isFreeOfCharge} toggleCosts={handleToggle} />
+          <SwitchButton
+            isChecked={isFreeOfCharge}
+            toggleIsFreeOfCharge={() => setIsFreeOfCharge(!isFreeOfCharge)}
+          />
         </FormCheckboxWrapper>
-        <FormLabel htmlFor="cost">Kosten *</FormLabel>
+        <FormLabel htmlFor="costs">Kosten *</FormLabel>
         <FormInput
-          id="cost"
-          name="cost"
+          id="costs"
+          name="costs"
           required
           aria-required="true"
           disabled={isFreeOfCharge}
           value={costs}
-          onChange={(event) => !isFreeOfCharge && setCosts(event.target.value)}
+          onChange={(event) => handleCostsChange(event)}
         />
       </FormSection>
       <FormSection>
@@ -311,11 +247,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
           name="organization"
           required
           aria-required="true"
-          defaultValue={
-            editEvent && editEvent.organization
-              ? editEvent.organization.organizationName
-              : ""
-          }
+          defaultValue={editEvent?.organization?.organizationName || ""}
         />
       </FormSection>
       <FormSection>
@@ -326,58 +258,43 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
           name="contact"
           required
           aria-required="true"
-          defaultValue={
-            editEvent && editEvent.organization
-              ? editEvent.organization.organizationContact
-              : ""
-          }
+          defaultValue={editEvent?.organization?.organizationContact || ""}
         />
       </FormSection>
-
       <FormSection $positionrelative $smallermargin>
         <FormLabel htmlFor="shortDescription">Kurzbeschreibung *</FormLabel>
         <FormDescriptionField
-          $smallerminheight
-          maxLength="120"
+          maxLength={MAX_CHAR_COUNT}
           id="shortDescription"
           name="shortDescription"
           required
           aria-required="true"
           onChange={recalculateCharacters}
-          defaultValue={editEvent ? editEvent.shortDescription : ""}
+          defaultValue={editEvent?.shortDescription || ""}
         />
         <CharacterCounter>
           <span id="characterCounter">{count} </span>Zeichen
         </CharacterCounter>
         <SubtitleRight>Erscheint in der Event Vorschau</SubtitleRight>
       </FormSection>
-
       <FormSection $smallermargin>
         <FormLabel htmlFor="longDescription">Beschreibung *</FormLabel>
-        <FormDescriptionField
-          onInput={autoGrow}
-          id="longDescription"
-          name="longDescription"
-          required
-          aria-required="true"
-          defaultValue={editEvent ? editEvent.longDescription : ""}
+        <AutoResizingTextArea
+          initialLongDescription={editEvent?.longDescription || ""}
         />
         <SubtitleRight>Erscheint auf der Event Seite</SubtitleRight>
       </FormSection>
       <FormSection>
         <FormLabel htmlFor="linkURL">Link für weitere Infos</FormLabel>
         <FormInput
-          pattern="http://.*"
+          pattern="https?://.*"
           type="url"
           id="linkURL"
           name="linkURL"
+          required={isLinkRequired}
+          defaultValue={editEvent?.links[0]?.url || ""}
           $addmarginbottom
           placeholder="http://"
-          defaultValue={
-            editEvent && editEvent.links && editEvent.links.length > 0
-              ? editEvent.links[0].url
-              : ""
-          }
         />
         <FormLabel htmlFor="linkDescription">Link Beschreibung</FormLabel>
         <FormInput
@@ -385,22 +302,13 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
           id="linkDescription"
           name="linkDescription"
           placeholder="Link Beschreibung"
-          defaultValue={
-            editEvent && editEvent.links && editEvent.links.length > 0
-              ? editEvent.links[0].linkDescription
-              : ""
-          }
+          defaultValue={editEvent?.links[0]?.linkDescription || ""}
+          onChange={(event) => checkIfCorrespondingFieldIsRequired(event)} // Set the link URL required if a link description is entered
         />
       </FormSection>
-
       <FormButtonWrapper>
-        <Button
-          color="primary"
-          type="button"
-          text="Abbrechen"
-          onClick={handleCancel}
-        />
-        <Button color="secondary" type="submit" text="Absenden" />
+        <Button type="button" text="Abbrechen" onClick={handleCancel} />
+        <Button color="primary" type="submit" text="Absenden" />
       </FormButtonWrapper>
       <FormInfoText>* Pflichtfeld</FormInfoText>
     </EventFormStyled>
