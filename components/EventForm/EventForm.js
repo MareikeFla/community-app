@@ -48,9 +48,6 @@ export default function EventForm({ onSubmit, event: editEvent }) {
   const {
     eventFormStates,
     updateEventFormStates,
-    isFreeOfCharge,
-    isFreeOfChargeText,
-    setIsFreeOfCharge,
     count,
     recalculateCharacters,
     startDate,
@@ -69,27 +66,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     setLongDescriptionHeight,
   } = useEventForm(editEvent);
 
-  const { costs } = eventFormStates;
-
-  // Effect to update costs state based on the isFreeOfCharge flag or editEvent data
-  useEffect(() => {
-    if (isFreeOfCharge) {
-      updateEventFormStates({
-        type: "changeCosts",
-        value: isFreeOfChargeText,
-      });
-    } else if (editEvent && editEvent.costs !== isFreeOfChargeText) {
-      updateEventFormStates({
-        type: "changeCosts",
-        value: editEvent.costs,
-      });
-    } else {
-      updateEventFormStates({
-        type: "changeCosts",
-        value: "",
-      });
-    }
-  }, [isFreeOfCharge, editEvent]);
+  const { costs, isFreeOfCharge } = eventFormStates;
 
   if (isLoadingCategories) {
     return <Loading />;
@@ -236,7 +213,11 @@ export default function EventForm({ onSubmit, event: editEvent }) {
           <FormLabel htmlFor="forFree">Kostenlos</FormLabel>
           <SwitchButton
             isChecked={isFreeOfCharge}
-            toggleIsFreeOfCharge={() => setIsFreeOfCharge(!isFreeOfCharge)}
+            toggleIsFreeOfCharge={() =>
+              updateEventFormStates({
+                type: "handleFreeOfChargeAndCostsRelation",
+              })
+            }
           />
         </FormCheckboxWrapper>
         <FormLabel htmlFor="costs">Kosten *</FormLabel>
