@@ -56,8 +56,15 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     validateFormAndSubmit,
   } = useEventForm(editEvent);
 
-  const { costs, isFreeOfCharge, startDate, endDate, startTime, endTime } =
-    eventFormStates;
+  const {
+    costs,
+    isFreeOfCharge,
+    startDate,
+    endDate,
+    startTime,
+    endTime,
+    charactersLeft,
+  } = eventFormStates;
 
   if (isLoadingCategories) {
     return <Loading />;
@@ -158,7 +165,6 @@ export default function EventForm({ onSubmit, event: editEvent }) {
               })
             }
           />
-
           <FormInputTime
             type="time"
             id="endTime"
@@ -286,11 +292,16 @@ export default function EventForm({ onSubmit, event: editEvent }) {
           name="shortDescription"
           required
           aria-required="true"
-          onChange={recalculateCharacters}
+          onChange={(event) =>
+            updateEventFormStates({
+              type: "recalculateCharactersLeft",
+              value: event.target.value.length,
+            })
+          }
           defaultValue={editEvent?.shortDescription || ""}
         />
         <CharacterCounter>
-          <span id="characterCounter">{count} </span>Zeichen
+          <span id="characterCounter">{charactersLeft} </span>Zeichen
         </CharacterCounter>
         <SubtitleRight>Erscheint in der Event Vorschau</SubtitleRight>
       </FormSection>
