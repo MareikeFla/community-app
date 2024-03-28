@@ -237,3 +237,8 @@ export const CharacterCounter = styled.div`
   font: var(--font_form-note);
   font-size: 9px;
 `;
+
+export const InvalidFieldMessage = styled.p`
+  font: var(--font_form-note);
+  color: red;
+`;
