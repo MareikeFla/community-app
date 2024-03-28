@@ -1,7 +1,7 @@
 // Functionall imports
 
 import { useData } from "@/lib/useData";
-import { useEventForm } from "@/lib/useEventForm";
+import { useEventFormStates } from "@/lib/useEventFormStates";
 
 // Styling imports
 
@@ -48,7 +48,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     handleCancel,
     MAX_CHAR_COUNT,
     validateFormAndSubmit,
-  } = useEventForm(editEvent);
+  } = useEventFormStates(editEvent);
 
   const {
     costs,
