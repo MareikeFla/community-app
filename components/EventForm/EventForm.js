@@ -224,6 +224,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
               name="zip"
               id="zip"
               defaultValue={editEvent?.location?.zip || ""}
+              pattern="^[0-9]{5}$"
             />
           </FixedSize>
           <FullWidth>
