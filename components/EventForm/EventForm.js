@@ -110,7 +110,11 @@ export default function EventForm({ onSubmit, event: editEvent }) {
             aria-required="true"
             id="startDate"
             name="startDate"
-            min={editEvent ? editEvent?.startDate : getFormattedTodaysDate()}
+            min={
+              editEvent?.creationDate
+                ? editEvent.creationDate
+                : getFormattedTodaysDate()
+            }
             value={startDate}
             onClick={(event) => event.currentTarget.showPicker()}
             onChange={(event) =>

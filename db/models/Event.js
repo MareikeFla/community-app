@@ -7,6 +7,7 @@ const { Schema } = mongoose;
 
 const eventSchema = new Schema({
   createdBy: { type: Schema.Types.ObjectId, ref: "User" },
+  creationDate: String,
   eventName: String,
   start: {
     date: String,
