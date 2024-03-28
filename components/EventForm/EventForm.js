@@ -37,15 +37,14 @@ import FetchingError from "../FetchingError/FetchingError";
 import { getFormattedTodaysDate } from "@/lib/dateHelpers";
 
 export default function EventForm({ onSubmit, event: editEvent }) {
-  // Using custom hook to fetch categories data
   const { categories, isLoadingCategories, errorCategories } =
     useData().fetchedCategories;
 
-  // Custom hook to manage form state and logic
   const {
     eventFormStates,
     updateEventFormStates,
     eventFormErrors,
+    formFieldRefs,
     handleCancel,
     MAX_CHAR_COUNT,
     validateFormAndSubmit,
@@ -149,6 +148,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
         <FormLabel htmlFor="End">Ende</FormLabel>
         <FormTimeDateWrapper>
           <FormInput
+            ref={formFieldRefs.endDate}
             type="date"
             id="endDate"
             name="endDate"
@@ -163,6 +163,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
             }
           />
           <FormInputTime
+            ref={formFieldRefs.endTime}
             type="time"
             id="endTime"
             name="endTime"
