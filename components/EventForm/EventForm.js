@@ -1,6 +1,5 @@
 // Functionall imports
 
-import { useEffect } from "react";
 import { useData } from "@/lib/useData";
 import { useEventForm } from "@/lib/useEventForm";
 
@@ -25,10 +24,10 @@ import {
   SubtitleLeft,
   SubtitleRight,
   CharacterCounter,
+  InvalidFieldMessage,
 } from "./EventForm.styled";
 import Button from "../Button/Button";
 import SwitchButton from "../SwitchButton/SwitchButton";
-import { useModal } from "@/lib/useModal";
 import AutoResizingTextArea from "./AutoResizingTextArea";
 
 // EventForm component definition. It receives an updateDatabase function for database operations,
@@ -38,8 +37,6 @@ import FetchingError from "../FetchingError/FetchingError";
 import { getFormattedTodaysDate } from "@/lib/dateHelpers";
 
 export default function EventForm({ onSubmit, event: editEvent }) {
-  const { showModal } = useModal();
-
   // Using custom hook to fetch categories data
   const { categories, isLoadingCategories, errorCategories } =
     useData().fetchedCategories;
@@ -48,18 +45,15 @@ export default function EventForm({ onSubmit, event: editEvent }) {
   const {
     eventFormStates,
     updateEventFormStates,
+    eventFormErrors,
     count,
     recalculateCharacters,
-    handleSubmit,
     handleCancel,
     MAX_CHAR_COUNT,
     isStreetRequired,
     isLinkRequired,
     checkIfCorrespondingFieldIsRequired,
-    longDescription,
-    setLongDescription,
-    longDescriptionHeight,
-    setLongDescriptionHeight,
+    validateFormAndSubmit,
   } = useEventForm(editEvent);
 
   const { costs, isFreeOfCharge, startDate, endDate } = eventFormStates;
@@ -75,12 +69,9 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     <EventFormStyled
       onSubmit={(event) => {
         event.preventDefault();
-        showModal({
-          message: "Event speichern?", // Default message
-          textButtonCancel: "Abbrechen", // Default text for the cancel button
-          textButtonConfirm: "Speichern", // Default text for the confirm button
-          onConfirm: () => handleSubmit(event, onSubmit),
-        });
+        const data = new FormData(event.target);
+        const formData = Object.fromEntries(data);
+        validateFormAndSubmit(formData, onSubmit);
       }}
     >
       <FormSection>
@@ -119,7 +110,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
             aria-required="true"
             id="startDate"
             name="startDate"
-            min={editEvent ? startDate : getFormattedTodaysDate()}
+            min={editEvent ? editEvent?.startDate : getFormattedTodaysDate()}
             value={startDate}
             onClick={(event) => event.currentTarget.showPicker()}
             onChange={(event) =>
@@ -146,7 +137,6 @@ export default function EventForm({ onSubmit, event: editEvent }) {
             type="date"
             id="endDate"
             name="endDate"
-            min={startDate}
             value={endDate}
             noValidate
             onClick={(event) => event.currentTarget.showPicker()}
@@ -157,6 +147,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
               })
             }
           />
+
           <FormInputTime
             type="time"
             id="endTime"
@@ -165,6 +156,9 @@ export default function EventForm({ onSubmit, event: editEvent }) {
             noValidate
           />
         </FormTimeDateWrapper>
+        {eventFormErrors?.endDate && (
+          <InvalidFieldMessage>{eventFormErrors.endDate}</InvalidFieldMessage>
+        )}
       </FormSection>
       <FormSection aria-describedby="Ort des Events">
         <FormLegend>
