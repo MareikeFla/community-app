@@ -46,13 +46,8 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     eventFormStates,
     updateEventFormStates,
     eventFormErrors,
-    count,
-    recalculateCharacters,
     handleCancel,
     MAX_CHAR_COUNT,
-    isStreetRequired,
-    isLinkRequired,
-    checkIfCorrespondingFieldIsRequired,
     validateFormAndSubmit,
   } = useEventForm(editEvent);
 
@@ -64,6 +59,8 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     startTime,
     endTime,
     charactersLeft,
+    isStreetRequired,
+    isLinkRequired,
   } = eventFormStates;
 
   if (isLoadingCategories) {
@@ -209,7 +206,13 @@ export default function EventForm({ onSubmit, event: editEvent }) {
               name="houseNumber"
               id="houseNumber"
               defaultValue={editEvent?.location?.houseNumber || ""}
-              onChange={(event) => checkIfCorrespondingFieldIsRequired(event)} // Set the street required if a house number is entered
+              onChange={(event) =>
+                updateEventFormStates({
+                  type: "setCorrespondingFieldRequired",
+                  value: event.target.value,
+                  correspondingField: "street",
+                })
+              }
             />
           </FixedSize>
         </FlexContainer>
@@ -331,7 +334,13 @@ export default function EventForm({ onSubmit, event: editEvent }) {
           name="linkDescription"
           placeholder="Link Beschreibung"
           defaultValue={editEvent?.links[0]?.linkDescription || ""}
-          onChange={(event) => checkIfCorrespondingFieldIsRequired(event)} // Set the link URL required if a link description is entered
+          onChange={(event) =>
+            updateEventFormStates({
+              type: "setCorrespondingFieldRequired",
+              value: event.target.value,
+              correspondingField: "link",
+            })
+          }
         />
       </FormSection>
       <FormButtonWrapper>
