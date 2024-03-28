@@ -56,7 +56,8 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     validateFormAndSubmit,
   } = useEventForm(editEvent);
 
-  const { costs, isFreeOfCharge, startDate, endDate } = eventFormStates;
+  const { costs, isFreeOfCharge, startDate, endDate, startTime, endTime } =
+    eventFormStates;
 
   if (isLoadingCategories) {
     return <Loading />;
@@ -130,7 +131,13 @@ export default function EventForm({ onSubmit, event: editEvent }) {
             aria-required="true"
             id="startTime"
             name="startTime"
-            defaultValue={editEvent?.start?.time || ""}
+            value={startTime}
+            onChange={(event) =>
+              updateEventFormStates({
+                type: "changeStartTime",
+                value: event.target.value,
+              })
+            }
           />
         </FormTimeDateWrapper>
       </FormSection>
@@ -156,12 +163,21 @@ export default function EventForm({ onSubmit, event: editEvent }) {
             type="time"
             id="endTime"
             name="endTime"
-            defaultValue={editEvent?.end?.time || ""}
+            value={endTime}
             noValidate
+            onChange={(event) =>
+              updateEventFormStates({
+                type: "changeEndTime",
+                value: event.target.value,
+              })
+            }
           />
         </FormTimeDateWrapper>
         {eventFormErrors?.endDate && (
           <InvalidFieldMessage>{eventFormErrors.endDate}</InvalidFieldMessage>
+        )}
+        {eventFormErrors?.endTime && (
+          <InvalidFieldMessage>{eventFormErrors.endTime}</InvalidFieldMessage>
         )}
       </FormSection>
       <FormSection aria-describedby="Ort des Events">
