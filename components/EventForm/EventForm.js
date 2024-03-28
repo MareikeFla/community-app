@@ -50,10 +50,6 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     updateEventFormStates,
     count,
     recalculateCharacters,
-    startDate,
-    endDate,
-    handleStartDateChange,
-    handleEndDateChange,
     handleSubmit,
     handleCancel,
     MAX_CHAR_COUNT,
@@ -66,7 +62,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     setLongDescriptionHeight,
   } = useEventForm(editEvent);
 
-  const { costs, isFreeOfCharge } = eventFormStates;
+  const { costs, isFreeOfCharge, startDate, endDate } = eventFormStates;
 
   if (isLoadingCategories) {
     return <Loading />;
@@ -126,7 +122,12 @@ export default function EventForm({ onSubmit, event: editEvent }) {
             min={editEvent ? startDate : getFormattedTodaysDate()}
             value={startDate}
             onClick={(event) => event.currentTarget.showPicker()}
-            onChange={(event) => handleStartDateChange(event)}
+            onChange={(event) =>
+              updateEventFormStates({
+                type: "changeStartDate",
+                value: event.target.value,
+              })
+            }
           />
           <FormInputTime
             required
@@ -149,7 +150,12 @@ export default function EventForm({ onSubmit, event: editEvent }) {
             value={endDate}
             noValidate
             onClick={(event) => event.currentTarget.showPicker()}
-            onChange={(event) => handleEndDateChange(event)}
+            onChange={(event) =>
+              updateEventFormStates({
+                type: "changeEndDate",
+                value: event.target.value,
+              })
+            }
           />
           <FormInputTime
             type="time"
