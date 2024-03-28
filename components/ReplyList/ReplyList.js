@@ -1,13 +1,13 @@
 import Reply from "../Reply/Reply";
-import { List } from "../CommentList/CommentList.styled";
+import { List } from "./ReplyList.styled";
 
-export default function ReplyList({ replies }) {
+export default function ReplyList({ replies, mutateEvent }) {
   if (replies) {
     return (
       <List>
         {replies.map((reply) => (
           <li key={reply._id}>
-            <Reply reply={reply} />
+            <Reply reply={reply} mutateEvent={mutateEvent} />
           </li>
         ))}
       </List>

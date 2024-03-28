@@ -23,10 +23,6 @@ export const CommentHeader = styled.p`
 
 export const CommentTime = styled.span`
   color: var(--color_grey);
-
-  &::first-letter {
-    letter-spacing: 0.375rem;
-  }
 `;
 
 export const CommentBody = styled.p`

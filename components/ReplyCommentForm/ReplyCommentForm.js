@@ -5,17 +5,12 @@ import {
   JustifyRight,
 } from "./ReplyCommentForm.styled";
 import Button from "../Button/Button";
-import { FlexContainer } from "../Comment/Comment.styled";
 
-export default function ReplyCommentForm({ parentComment, onPostReply }) {
-  const { addComment } = useData();
+export default function ReplyCommentForm({ onPostReply }) {
   const handleReplyFormSubmit = (event) => {
     event.preventDefault();
     const replyText = event.target.reply.value;
-    if (onPostReply) {
-      addComment(id, replyText, parentComment);
-      console.log("test");
-    }
+    onPostReply(replyText);
     event.target.reset();
   };
 

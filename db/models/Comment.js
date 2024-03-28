@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import "./Event";
 
 const { Schema } = mongoose;
 
@@ -9,7 +10,8 @@ const commentSchema = new Schema({
   userImageURL: { type: String },
   text: { type: String },
   isLiked: { type: Boolean },
-  parentComment: { type: Schema.Types.ObjectId, ref: "Comment" }, // Referenz auf den übergeordneten Kommentar
+  parentCommentId: { type: Schema.Types.ObjectId, ref: "Comment" }, // Referenz auf den übergeordneten Kommentar
+  parentEventId: { type: Schema.Types.ObjectId, ref: "Event" },
 });
 
 const Comment =
