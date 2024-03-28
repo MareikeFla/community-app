@@ -46,10 +46,11 @@ export default function EventForm({ onSubmit, event: editEvent }) {
 
   // Custom hook to manage form state and logic
   const {
+    eventFormStates,
+    updateEventFormStates,
     isFreeOfCharge,
+    isFreeOfChargeText,
     setIsFreeOfCharge,
-    costs,
-    setCosts,
     count,
     recalculateCharacters,
     startDate,
@@ -58,7 +59,6 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     handleEndDateChange,
     handleSubmit,
     handleCancel,
-    handleCostsChange,
     MAX_CHAR_COUNT,
     isStreetRequired,
     isLinkRequired,
@@ -69,14 +69,25 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     setLongDescriptionHeight,
   } = useEventForm(editEvent);
 
+  const { costs } = eventFormStates;
+
   // Effect to update costs state based on the isFreeOfCharge flag or editEvent data
   useEffect(() => {
     if (isFreeOfCharge) {
-      setCosts("Kostenlos");
-    } else if (editEvent && editEvent.costs !== "Kostenlos") {
-      setCosts(editEvent.costs);
+      updateEventFormStates({
+        type: "changeCosts",
+        value: isFreeOfChargeText,
+      });
+    } else if (editEvent && editEvent.costs !== isFreeOfChargeText) {
+      updateEventFormStates({
+        type: "changeCosts",
+        value: editEvent.costs,
+      });
     } else {
-      setCosts("");
+      updateEventFormStates({
+        type: "changeCosts",
+        value: "",
+      });
     }
   }, [isFreeOfCharge, editEvent]);
 
@@ -236,7 +247,12 @@ export default function EventForm({ onSubmit, event: editEvent }) {
           aria-required="true"
           disabled={isFreeOfCharge}
           value={costs}
-          onChange={(event) => handleCostsChange(event)}
+          onChange={(event) =>
+            updateEventFormStates({
+              type: "changeCosts",
+              value: event.target.value,
+            })
+          }
         />
       </FormSection>
       <FormSection>
