@@ -44,7 +44,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     eventFormStates,
     updateEventFormStates,
     eventFormErrors,
-    formFieldRefs,
+    invalidFormFieldRefs,
     handleCancel,
     MAX_CHAR_COUNT,
     validateFormAndSubmit,
@@ -152,7 +152,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
         <FormLabel htmlFor="End">Ende</FormLabel>
         <FormTimeDateWrapper>
           <FormInput
-            ref={formFieldRefs.endDate}
+            ref={invalidFormFieldRefs.endDate}
             type="date"
             id="endDate"
             name="endDate"
@@ -167,7 +167,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
             }
           />
           <FormInputTime
-            ref={formFieldRefs.endTime}
+            ref={invalidFormFieldRefs.endTime}
             type="time"
             id="endTime"
             name="endTime"
