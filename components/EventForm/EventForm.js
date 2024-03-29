@@ -74,6 +74,10 @@ export default function EventForm({ onSubmit, event: editEvent }) {
       onSubmit={(event) => {
         event.preventDefault();
         const data = new FormData(event.target);
+        data.append(
+          "creationDate",
+          editEvent.creationDate || getFormattedTodaysDate()
+        );
         const formData = Object.fromEntries(data);
         validateFormAndSubmit(formData, onSubmit);
       }}
