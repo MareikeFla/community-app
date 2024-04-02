@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
 import "./Category";
+import "./User";
 
 const { Schema } = mongoose;
 
 const eventSchema = new Schema({
+  createdBy: { type: Schema.Types.ObjectId, ref: "User" },
   eventName: String,
   start: {
     date: String,

@@ -4,9 +4,9 @@ import {
   SwitchBackground,
   SwitchHandle,
 } from "./SwitchButton.styled";
-export default function SwitchButton({ toggleCosts, isChecked }) {
+export default function SwitchButton({ toggleIsFreeOfCharge, isChecked }) {
   return (
-    <SwitchContainer onClick={toggleCosts}>
+    <SwitchContainer onClick={toggleIsFreeOfCharge}>
       <SwitchInput htmlFor="switch" $checked={isChecked} type="checkbox" />
       <SwitchBackground $checked={isChecked} />
       <SwitchHandle $checked={isChecked} />

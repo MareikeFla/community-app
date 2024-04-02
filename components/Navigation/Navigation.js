@@ -30,11 +30,13 @@ export default function Navigation() {
               Home
             </NavLink>
           </li>
-          <li>
-            <NavLink href="/events/new" onClick={toggleMenu}>
-              Event erstellen
-            </NavLink>
-          </li>
+          {session ? (
+            <li>
+              <NavLink href="/events/new" onClick={toggleMenu}>
+                Event erstellen
+              </NavLink>
+            </li>
+          ) : null}
           {session ? (
             <li>
               <NavButton

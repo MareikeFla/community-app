@@ -1,5 +1,6 @@
 import dbConnect from "@/db/connect";
 import Event from "@/db/models/Event";
+import enrichEventObject from "@/lib/enrichEventObject";
 
 export default async function handler(request, response) {
   await dbConnect();
@@ -7,13 +8,15 @@ export default async function handler(request, response) {
   if (request.method === "GET") {
     try {
       const today = new Date().toISOString().split("T")[0];
-      const events = await Event.find({
+      let events = await Event.find({
         "end.date": { $gte: today },
       }).populate("category");
 
       if (!events) {
         return response.status(404).json({ status: "Not Found" });
       }
+      events = events.map((event) => enrichEventObject(event));
+
       return response.status(200).json(events);
     } catch (error) {
       console.error(error);

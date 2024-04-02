@@ -1,6 +1,7 @@
 import dbConnect from "@/db/connect";
 import Event from "@/db/models/Event";
 import Comment from "@/db/models/Comment";
+import enrichEventObject from "@/lib/enrichEventObject";
 
 export default async function handler(request, response) {
   await dbConnect();
