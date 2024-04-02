@@ -42,6 +42,7 @@ const eventSchema = new Schema({
     },
   ],
   comments: { type: [Schema.Types.ObjectId], ref: "Comment" },
+  attendeeCount: Number,
 });
 
 const Event = mongoose.models.Event || mongoose.model("Event", eventSchema);
