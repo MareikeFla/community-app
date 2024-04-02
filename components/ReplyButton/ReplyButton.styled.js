@@ -5,4 +5,9 @@ export const ReplyButtonStyled = styled.button`
   font: var(--font_info);
   border: none;
   background-color: var(--color_white);
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;

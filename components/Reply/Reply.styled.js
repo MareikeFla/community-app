@@ -10,7 +10,7 @@ export const ReplyContainer = styled.article`
   display: flex;
   gap: 0.75rem;
   border-top: 1px solid var(--color_light-grey);
-  padding: 1.5rem 0 1.375rem;
+  padding: 1.5rem 0 1rem;
 `;
 
 export const ReplyHeader = styled.p`
