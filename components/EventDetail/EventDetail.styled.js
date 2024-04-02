@@ -5,7 +5,7 @@ export const Card = styled.div`
   border-radius: var(--border-radius_card);
   box-shadow: var(--shadow_card);
   padding: ${(props) =>
-    props.pageNotFound ? "3rem 1.5rem 2.75rem" : "3rem 1.5rem 2rem"};
+    props.pageNotFound ? "3rem 1.5rem 2.75rem" : "3rem 1.5rem 0.75rem"};
 `;
 
 export const ErrorMessage = styled.h2`
@@ -86,4 +86,20 @@ export const ListItemMarker = styled.span`
   position: absolute;
   bottom: 0.188rem;
   color: var(--color_red);
+`;
+
+export const ButtonWrapper = styled.section`
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+`;
+export const AttendeeWrapper = styled.section`
+  text-align: right;
+  border-top: 1px solid var(--color_light-grey);
+  margin-top: 1.375rem;
+  margin-inline: -1.5rem;
+  padding-top: 0.75rem;
+  padding-inline: 1.5rem;
+  font: var(--font_label);
+  color: var(--color_night);
 `;
