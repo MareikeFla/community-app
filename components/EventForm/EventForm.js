@@ -10,6 +10,8 @@ import {
   FormLegend,
   FormInfoText,
   FormTimeDateWrapper,
+  FileInput,
+  UploadButton,
   FlexContainer,
   FormInputTime,
   FixedSize,
@@ -18,14 +20,15 @@ import {
   SubtitleRight,
   CharacterCounter,
 } from "./EventForm.styled";
-
-import { useState, useEffect } from "react";
 import Button from "../Button/Button";
 import SwitchButton from "../SwitchButton/SwitchButton";
+import { upload } from "@/lib/upload";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useModal } from "@/lib/useModal";
 import { useData } from "@/lib/useData";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 // EventForm component definition. It receives an updateDatabase function for database operations,
 // and an optional 'editEvent' object for prefilling form fields during event edits.
@@ -38,6 +41,8 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
 
   const { categories, isLoadingCategories, errorCategories } =
     useData().fetchedCategories;
+
+  const [selectedImage, setSelectedImage] = useState(null);
 
   // Compiles form data into a structured event object from the form's input fields.
   function getEventData(event) {
@@ -68,6 +73,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
       costs: eventTarget.cost.value,
       shortDescription: eventTarget.shortDescription.value,
       longDescription: eventTarget.longDescription.value,
+      image: null,
       links: [
         {
           url: eventTarget.linkURL.value,
@@ -78,7 +84,11 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
   }
   // Handles the form submission, packages form data into an object, and updates the database.
   const handleSubmit = async (event) => {
-    const eventData = getEventData(event);
+    let eventData = getEventData(event);
+    if (selectedImage) {
+      const uploadedImage = await upload(selectedImage);
+      eventData.image = uploadedImage;
+    }
     const newEventID = await updateDatabase(eventData); // Calls the updateDatabase function to save the event and retrieves the new or updated event's ID.
     event.target.reset();
     router.push(
@@ -363,6 +373,26 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
           defaultValue={editEvent ? editEvent.longDescription : ""}
         />
         <SubtitleRight>Erscheint auf der Event Seite</SubtitleRight>
+      </FormSection>
+      <FormSection>
+        <FormLabel htmlFor="image">Bild</FormLabel>
+        <FileInput
+          type="file"
+          id="image"
+          name="image"
+          accept="image/jpeg, image/png"
+          onChange={(event) => setSelectedImage(event.target.files[0])}
+        />
+        <UploadButton htmlFor="image">
+          {" "}
+          <Image
+            src="/assets/icons/icon_image-upload.svg"
+            alt="Bild hochladen"
+            width={22}
+            height={22}
+          />
+          Bild hochladen
+        </UploadButton>
       </FormSection>
       <FormSection>
         <FormLabel htmlFor="linkURL">Link für weitere Infos</FormLabel>
