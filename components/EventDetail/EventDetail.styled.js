@@ -46,8 +46,8 @@ export const EventName = styled.h1`
   font: var(--font_heading-1);
   color: var(--color_night);
   text-align: center;
-  ${({ withImage }) =>
-    withImage &&
+  ${({ $withImage }) =>
+    $withImage &&
     css`
       position: absolute;
       bottom: 1rem;
