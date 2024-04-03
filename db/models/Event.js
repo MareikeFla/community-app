@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import "./Comment";
 import "./Category";
 import "./User";
 
@@ -41,8 +40,6 @@ const eventSchema = new Schema({
       linkDescription: String,
     },
   ],
-  comments: { type: [Schema.Types.ObjectId], ref: "Comment" },
-  attendeeCount: Number,
 });
 
 const Event = mongoose.models.Event || mongoose.model("Event", eventSchema);
