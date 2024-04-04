@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import "./Event";
+import "./User";
 
 const { Schema } = mongoose;
 
@@ -12,6 +13,7 @@ const commentSchema = new Schema({
   isLiked: { type: Boolean },
   parentCommentId: { type: Schema.Types.ObjectId, ref: "Comment" }, // Referenz auf den übergeordneten Kommentar
   parentEventId: { type: Schema.Types.ObjectId, ref: "Event" },
+  createdBy: { type: Schema.Types.ObjectId, ref: "User" },
 });
 
 const Comment =
