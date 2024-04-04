@@ -1,25 +1,27 @@
 import styled from "styled-components";
+import Image from "next/image";
+
 export const EventFormStyled = styled.form`
   padding-top: 1rem;
   display: flex;
   flex-direction: column;
 
   input::placeholder {
-    color: var(--color_grey);
     font: var(--font_body);
+    color: var(--color_grey);
   }
 
   input {
     font: var(--font_body);
-    color: var(--color_night);
+    color: var(--color_grey);
   }
 `;
 
 export const SubtitleRight = styled.p`
   font: var(--font_form-note);
-  margin-top: ${({ $addmargintop }) => ($addmargintop ? "0.5rem" : "0")};
-  text-align: right;
   color: var(--color_grey);
+  text-align: right;
+  margin-top: ${({ $addmargintop }) => ($addmargintop ? "0.5rem" : "0")};
   @-moz-document url-prefix() {
     margin-top: 0.25rem;
   }
@@ -27,8 +29,6 @@ export const SubtitleRight = styled.p`
 
 export const SubtitleLeft = styled.p`
   font: var(--font_form-note);
-  /* margin-top: 0.5rem; */
-  text-align: left;
   color: var(--color_grey);
 `;
 
@@ -39,30 +39,37 @@ export const FormSection = styled.div`
 `;
 
 export const FormLabel = styled.label`
-  margin-bottom: 0.15rem;
-  color: var(--color_night);
-  font: var(--font_label);
   display: block;
+  font: var(--font_label);
+  color: var(--color_night);
+  margin-bottom: 0.15rem;
+
+  div {
+    font: var(--font_form-note);
+    color: var(--color_grey);
+    margin-bottom: 0.188rem;
+  }
 `;
 
 export const FormInput = styled.input`
-  padding: 0.5rem 0.75rem;
-  border: none;
-  background-color: var(--color_pale-grey);
-  border-radius: var(--border-radius_input);
-  height: 2.5rem;
-  width: 100%;
-  margin-bottom: ${({ $addmarginbottom }) => ($addmarginbottom ? "20px" : "0")};
   color: var(--color_grey);
+  background-color: var(--color_pale-grey);
+  border: none;
+  border-radius: var(--border-radius_input);
+  width: 100%;
+  height: 2.5rem;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: ${({ $addmarginbottom }) =>
+    $addmarginbottom ? "1.25rem" : "0"};
 
   &::placeholder {
     color: var(--color_grey);
   }
 
   &[type="date"] {
+    font: var(--font_body);
     color: var(--color_grey);
     text-transform: uppercase;
-    font: var(--font_body);
   }
 
   &[type="date"]::-webkit-calendar-picker-indicator {
@@ -74,13 +81,14 @@ export const FormInput = styled.input`
   }
 
   &[type="time"] {
-    color: var(--color_grey);
     font: var(--font_body);
+    color: var(--color_grey);
   }
 
   &:focus-visible {
     outline: 1px solid var(--color_orange);
   }
+
   &[type="date"]:hover {
     cursor: pointer;
   }
@@ -88,21 +96,21 @@ export const FormInput = styled.input`
 
 export const FormInputTime = styled(FormInput)`
   width: 7.5rem;
+
   &:hover {
     cursor: pointer;
   }
 `;
 
 export const FormSelect = styled.select`
-  padding: 0.5rem;
-
-  border: none;
-  background-color: #f5f5f5;
-  width: 100%;
-  color: var(--color_grey);
-  height: 2.5rem;
-  border-radius: var(--border-radius_input);
   font: var(--font_body);
+  color: var(--color_grey);
+  background-color: var(--color_pale-grey);
+  width: 100%;
+  height: 2.5rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: var(--border-radius_input);
 
   &:focus-visible {
     outline: 1px solid var(--color_orange);
@@ -113,36 +121,91 @@ export const FormSelect = styled.select`
   }
 `;
 
-export const FormCheckboxWrapper = styled.div`
-  border: 1px solid var(--color_light-grey);
+export const FileInput = styled.input`
+  display: none;
+`;
+
+export const UploadButton = styled.label`
+  margin: auto auto 0.5rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  height: 2.875rem;
-  padding: 0 0.875rem;
-  margin-bottom: 1.1rem;
-  margin-top: 0.25rem;
+  gap: 0.375rem;
+  padding: 0.938rem 1.25rem 0.875rem;
+  background-color: var(--color_white);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color_orange);
+  text-transform: uppercase;
+  border: 2px solid var(--color_light-grey);
+  border-radius: var(--border-radius_card);
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--color_orange);
+  }
+`;
+
+export const UploadPreviewContainer = styled.div`
+  position: relative;
+  margin: auto;
+  height: 14.75rem;
+
+  @media (min-width: 1024px) {
+    height: 19rem;
+  }
+`;
+
+export const UploadPreview = styled(Image)`
+  border-radius: var(--border-radius_card);
+  object-fit: cover;
+`;
+
+export const FormCheckboxWrapper = styled.div`
+  padding: 0.625rem 0.875rem;
+  margin: ${({ $consentMargin }) =>
+    $consentMargin ? "0.5rem 0 0.25rem" : "0.25rem 0 1.125rem"};
+  border: 1px solid var(--color_light-grey);
   border-radius: var(--border-radius_input);
 
   & > * {
     margin: 0;
   }
+
+  label {
+    color: var(--color_night);
+    font: var(--font_label);
+  }
+
+  p {
+    font: var(--font_info);
+    margin-top: 0.438rem;
+  }
 `;
 
-export const FormSelectOption = styled.option``;
+export const FlexWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const ErrorMessage = styled.p`
+  color: var(--color_red);
+`;
 
 export const FormDescriptionField = styled.textarea`
-  min-height: ${({ $smallerminheight }) =>
-    $smallerminheight ? "5.5rem" : "7.063rem"};
-  padding: 0.5rem 0.75rem;
-  border: none;
-  background-color: #f5f5f5;
-  border-radius: var(--border-radius_input);
-  height: 2.5rem;
-  width: 100%;
-  margin-bottom: ${({ $addmarginbottom }) => ($addmarginbottom ? "20px" : "0")};
   font: var(--font_body);
   color: var(--color_night);
+  background-color: var(--color_pale-grey);
+  border: none;
+  border-radius: var(--border-radius_input);
+  width: 100%;
+  height: 2.5rem;
+  min-height: ${({ $smallerminheight }) =>
+    $smallerminheight ? "5.5rem" : "7.063rem"};
+  margin-bottom: ${({ $addmarginbottom }) =>
+    $addmarginbottom ? "1.25rem" : "0"};
+  padding: 0.5rem 0.75rem;
   resize: none;
   overflow: hidden;
 
@@ -162,10 +225,12 @@ export const FormButtonWrapper = styled.div`
   gap: 0.75rem;
   margin-bottom: 1.875rem;
   margin-top: 1rem;
+
   button {
     justify-content: center;
   }
-  @media (min-width: 376px) {
+
+  @media (min-width: 375px) {
     flex-direction: row;
   }
 `;
@@ -173,7 +238,7 @@ export const FormButtonWrapper = styled.div`
 export const FormLegend = styled.legend`
   font: var(--font_label);
   color: var(--color_night);
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.813rem;
 `;
 
 export const FormInfoText = styled.p`
@@ -202,8 +267,8 @@ export const FullWidth = styled.div`
 export const CharacterCounter = styled.div`
   display: inline-block;
   position: absolute;
-  right: 0.4rem;
   top: 0.25rem;
+  right: 0.438rem;
   font: var(--font_form-note);
-  font-size: 9px;
+  font-size: 0.563rem;
 `;
