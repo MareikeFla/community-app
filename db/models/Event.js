@@ -32,8 +32,9 @@ const eventSchema = new Schema({
   shortDescription: String,
   longDescription: String,
   image: {
-    src: String,
-    alt: String,
+    type: new Schema({
+      url: String,
+    }),
   },
   links: [
     {
