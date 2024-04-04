@@ -3,25 +3,35 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 import CommentForm from "../CommentForm/CommentForm";
 import CommentList from "../CommentList/CommentList";
 import { useData } from "@/lib/useData";
+import { useSession } from "next-auth/react";
 
-export default function CommentSection({ id, comments }) {
+export default function CommentSection({ id }) {
+  const { data: session } = useSession();
   const { addComment, fetchedComments } = useData();
-  const eventComments = fetchedComments.comments.filter(
-    (comment) => comment.parentEventId === id
-  );
-  const sortedComments = eventComments.sort((a, b) => {
-    const dateA = new Date(a.creationDate);
-    const dateB = new Date(b.creationDate);
-    return dateB - dateA;
-  });
+  const userId = session?.user.id;
+
+  const sortedComments = fetchedComments?.comments
+    ?.filter((comment) => comment.parentEventId === id)
+    .sort((a, b) => {
+      const dateA = new Date(a.creationDate);
+      const dateB = new Date(b.creationDate);
+      return dateB - dateA;
+    });
+
+  console.log("comments", sortedComments);
 
   return (
     <section>
       <SectionTitle>
-        {comments.length} {comments.length === 1 ? "Kommentar" : "Kommentare"}
+        {fetchedComments.length}{" "}
+        {fetchedComments.length === 1 ? "Kommentar" : "Kommentare"}
       </SectionTitle>
       <CommentCard>
-        <CommentForm onPostComment={(comment) => addComment(id, comment)} />
+        {session ? (
+          <CommentForm
+            onPostComment={(comment) => addComment(id, comment, userId)}
+          />
+        ) : null}
         <CommentList
           comments={sortedComments}
           mutateComments={fetchedComments.mutateComments}
