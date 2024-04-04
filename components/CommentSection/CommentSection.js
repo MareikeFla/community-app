@@ -18,8 +18,6 @@ export default function CommentSection({ id }) {
       return dateB - dateA;
     });
 
-  console.log("comments", sortedComments);
-
   return (
     <section>
       <SectionTitle>

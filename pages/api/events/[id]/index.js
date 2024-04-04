@@ -5,9 +5,7 @@ import enrichEventObject from "@/lib/enrichEventObject";
 
 export default async function handler(request, response) {
   await dbConnect();
-  console.log("before", request.query.id);
   const { id } = request.query;
-  console.log("after", request.query.id);
 
   if (request.method === "GET") {
     try {
