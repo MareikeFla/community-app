@@ -5,13 +5,17 @@ import {
   FormInput,
   FormSelect,
   FormCheckboxWrapper,
+  FlexWrapper,
   FormDescriptionField,
   FormButtonWrapper,
+  ErrorMessage,
   FormLegend,
   FormInfoText,
   FormTimeDateWrapper,
   FileInput,
   UploadButton,
+  UploadPreviewContainer,
+  UploadPreview,
   FlexContainer,
   FormInputTime,
   FixedSize,
@@ -20,6 +24,8 @@ import {
   SubtitleRight,
   CharacterCounter,
 } from "./EventForm.styled";
+import { DeleteButton } from "../DeleteEventButton/DeleteEventButton.styled";
+import Image from "next/image";
 import Button from "../Button/Button";
 import SwitchButton from "../SwitchButton/SwitchButton";
 import { upload } from "@/lib/upload";
@@ -28,7 +34,6 @@ import { useRouter } from "next/router";
 import { useModal } from "@/lib/useModal";
 import { useData } from "@/lib/useData";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
 
 // EventForm component definition. It receives an updateDatabase function for database operations,
 // and an optional 'editEvent' object for prefilling form fields during event edits.
@@ -43,6 +48,10 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
     useData().fetchedCategories;
 
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isImageSelected, setIsImageSelected] = useState(selectedImage);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [isConsentChecked, setIsConsentChecked] = useState(false);
+  const [submitAttempted, setSubmitAttempted] = useState(false);
 
   // Compiles form data into a structured event object from the form's input fields.
   function getEventData(event) {
@@ -82,6 +91,7 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
       ],
     };
   }
+
   // Handles the form submission, packages form data into an object, and updates the database.
   const handleSubmit = async (event) => {
     let eventData = getEventData(event);
@@ -131,6 +141,27 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
     router.push("/");
   };
 
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedImage(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+      setIsImageSelected(true);
+    } else {
+      setIsImageSelected(false);
+    }
+  };
+
+  const handleDeleteImage = () => {
+    setSelectedImage(null);
+    setImagePreview(null);
+    setIsImageSelected(false);
+  };
+
   // Calculate the Characters in shortDescription
   const [count, setCount] = useState(120);
 
@@ -158,12 +189,18 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
     <EventFormStyled
       onSubmit={(event) => {
         event.preventDefault();
-        showModal({
-          message: "Event speichern?", // Default message
-          textButtonCancel: "Abbrechen", // Default text for the cancel button
-          textButtonConfirm: "Speichern", // Default text for the confirm button
-          onConfirm: () => handleSubmit(event),
-        });
+        setSubmitAttempted(true);
+        if (
+          !selectedImage ||
+          (selectedImage && isImageSelected && isConsentChecked)
+        ) {
+          showModal({
+            message: "Event speichern?", // Default message
+            textButtonCancel: "Abbrechen", // Default text for the cancel button
+            textButtonConfirm: "Speichern", // Default text for the confirm button
+            onConfirm: () => handleSubmit(event),
+          });
+        }
       }}
     >
       <FormSection>
@@ -299,8 +336,10 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
       </FormSection>
       <FormSection>
         <FormCheckboxWrapper>
-          <FormLabel htmlFor="forFree">Kostenlos</FormLabel>
-          <SwitchButton isChecked={isFreeOfCharge} toggleCosts={handleToggle} />
+          <FlexWrapper>
+            <label htmlFor="forFree">Kostenlos</label>
+            <SwitchButton isChecked={isFreeOfCharge} onChange={handleToggle} />
+          </FlexWrapper>
         </FormCheckboxWrapper>
         <FormLabel htmlFor="cost">Kosten *</FormLabel>
         <FormInput
@@ -375,24 +414,81 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
         <SubtitleRight>Erscheint auf der Event Seite</SubtitleRight>
       </FormSection>
       <FormSection>
-        <FormLabel htmlFor="image">Bild</FormLabel>
+        <FormLabel htmlFor="image">
+          Bild <div>(JPG/PNG, Querformat empfohlen)</div>
+        </FormLabel>
         <FileInput
           type="file"
           id="image"
           name="image"
           accept="image/jpeg, image/png"
-          onChange={(event) => setSelectedImage(event.target.files[0])}
+          onChange={handleImageChange}
         />
         <UploadButton htmlFor="image">
-          {" "}
-          <Image
-            src="/assets/icons/icon_image-upload.svg"
-            alt="Bild hochladen"
-            width={22}
-            height={22}
-          />
-          Bild hochladen
+          {isImageSelected ? (
+            <>
+              <Image
+                src="/assets/icons/icon_replace.svg"
+                alt="Bild ersetzen"
+                width={22}
+                height={22}
+              />
+              Bild ersetzen
+            </>
+          ) : (
+            <>
+              <Image
+                src="/assets/icons/icon_image-upload.svg"
+                alt="Bild hochladen"
+                width={22}
+                height={22}
+              />
+              Bild hochladen
+            </>
+          )}
         </UploadButton>
+        {imagePreview && (
+          <UploadPreviewContainer>
+            <UploadPreview
+              src={imagePreview}
+              alt="Bildvorschau"
+              fill
+              sizes="100vw 100vh"
+            />
+            <DeleteButton
+              $uploadPreview
+              title="Bild entfernen"
+              onClick={() => handleDeleteImage()}
+            >
+              <Image
+                src="/assets/icons/icon_delete.svg"
+                alt="Bild entfernen"
+                width={21}
+                height={23}
+              />
+            </DeleteButton>
+          </UploadPreviewContainer>
+        )}
+        {isImageSelected && (
+          <FormCheckboxWrapper $consentMargin>
+            <FlexWrapper>
+              <label htmlFor="imageConsent">
+                Einwilligung zur Bildfreigabe *
+              </label>
+              <SwitchButton
+                isChecked={isConsentChecked}
+                onChange={() => setIsConsentChecked(!isConsentChecked)}
+              />
+            </FlexWrapper>
+            <p>
+              Ich besitze alle erforderlichen Rechte an dem ausgewählten Bild
+              und bin mit der Verwendung einverstanden.
+            </p>
+            {submitAttempted && !isConsentChecked && (
+              <ErrorMessage>Bitte bestätigen, um fortzufahren.</ErrorMessage>
+            )}
+          </FormCheckboxWrapper>
+        )}
       </FormSection>
       <FormSection>
         <FormLabel htmlFor="linkURL">Link für weitere Infos</FormLabel>
