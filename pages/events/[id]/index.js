@@ -6,7 +6,10 @@ import { useData } from "@/lib/useData";
 
 export default function EventDetailPage() {
   const router = useRouter();
+  console.log("events/id - before", router.query.id);
+
   const { getEventByID } = useData();
+  console.log("events/id - after", router.query.id);
   const { event, isLoadingEvent, errorEvent, mutateEvent } = getEventByID(
     router.query.id
   );
