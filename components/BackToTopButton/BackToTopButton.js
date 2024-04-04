@@ -12,7 +12,7 @@ export default function BackToTopButton() {
       onClick={scrollToTop}
     >
       <Image
-        src="assets/icons/icon_arrow-up.svg"
+        src="/assets/icons/icon_arrow-up.svg"
         alt="Back To Top"
         width={17}
         height={11}
