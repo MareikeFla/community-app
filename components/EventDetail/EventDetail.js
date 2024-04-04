@@ -28,7 +28,7 @@ export default function EventDetail({ event }) {
   const userId = session?.user.id;
   if (!event) {
     return (
-      <Card pageNotFound>
+      <Card $pageNotFound>
         <ErrorMessage>Seite nicht gefunden.</ErrorMessage>
       </Card>
     );
@@ -99,7 +99,7 @@ export default function EventDetail({ event }) {
         </InfoWrapper>
         <CategoryTag category={category} />
       </Card>
-      <CommentSection id={_id} mutateEvent={event.mutate} />
+      <CommentSection id={_id} />
     </>
   );
 }
