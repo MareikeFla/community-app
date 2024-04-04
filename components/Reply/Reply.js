@@ -10,7 +10,7 @@ import {
 import { useData } from "@/lib/useData";
 import LikeButton from "../LikeButton/LikeButton";
 export default function Reply({ reply }) {
-  const { userImageURL, userName, text, creationDate, _id, isLiked } = reply;
+  const { text, creationDate, _id, isLiked, createdBy } = reply;
   const { updateComment } = useData();
 
   const timeElapsed = getTimeElapsed(creationDate);
@@ -19,14 +19,15 @@ export default function Reply({ reply }) {
     <article>
       <ReplyContainer>
         <ProfilePicture
-          src={userImageURL}
+          src={createdBy.image}
           alt="profile picture"
           height={36}
           width={36}
         />
         <ReplyText>
           <ReplyHeader>
-            {userName} <ReplyTime> · {creationDate && timeElapsed}</ReplyTime>
+            {createdBy.name}{" "}
+            <ReplyTime> · {creationDate && timeElapsed}</ReplyTime>
           </ReplyHeader>
           <ReplyBody>
             {text}
