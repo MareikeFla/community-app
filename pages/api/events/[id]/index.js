@@ -2,6 +2,8 @@ import dbConnect from "@/db/connect";
 import Event from "@/db/models/Event";
 import Comment from "@/db/models/Comment";
 import enrichEventObject from "@/lib/enrichEventObject";
+import { getSession } from "next-auth/react";
+import User from "@/db/models/User";
 
 export default async function handler(request, response) {
   await dbConnect();
@@ -9,10 +11,29 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     try {
+      const session = await getSession({ req: request });
+
       const event = await Event.findById(id).populate("category");
-      return response.status(200).json(event);
+
+      const attendeeCount = await User.countDocuments({
+        attendedEvents: event._id,
+      });
+      if (!session) {
+        const eventObject = enrichEventObject(event, attendeeCount);
+        return response.status(200).json(eventObject);
+      }
+
+      const user = await User.findById(session.user.id);
+
+      const eventAttendedByUser = user.attendedEvents.includes(event._id);
+      const eventObject = enrichEventObject(
+        event,
+        attendeeCount,
+        eventAttendedByUser
+      );
+
+      return response.status(200).json(eventObject);
     } catch (error) {
-      console.error(error);
       return response.status(400).json({ error: error.message });
     }
   }
@@ -35,7 +56,6 @@ export default async function handler(request, response) {
         status: `Event ${id} and related comments successfully deleted.`,
       });
     } catch (error) {
-      console.error(error);
       response.status(400).json({ error: error.message });
     }
   }

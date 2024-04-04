@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import "./Event";
 
 const { Schema } = mongoose;
 
@@ -6,7 +7,8 @@ const userSchema = new Schema({
   creationDate: { type: Date, default: new Date() },
   name: { type: String, required: true },
   email: { type: String, required: true },
-  image: { type: String, required: true },
+  image: String,
+  attendedEvents: { type: [Schema.Types.ObjectId], ref: "Event" },
 });
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);

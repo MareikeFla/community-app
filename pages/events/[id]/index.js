@@ -22,7 +22,7 @@ export default function EventDetailPage() {
 
   return (
     <>
-      <EventDetail event={event} />
+      <EventDetail event={event} mutateEvent={mutateEvent} />
     </>
   );
 }
