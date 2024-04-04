@@ -13,7 +13,7 @@ export default function CategoryHeader({ category }) {
       <CategoryImage
         src={imageSource}
         alt={imageAlt}
-        sizes="100vw"
+        sizes="100vw 100vh"
         fill
         priority
       />

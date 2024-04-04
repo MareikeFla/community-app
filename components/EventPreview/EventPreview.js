@@ -21,7 +21,12 @@ export default function EventPreview({ event }) {
     <>
       {image && (
         <ImageContainer>
-          <EventImage src={image.url} alt={eventName} fill sizes="100vw" />
+          <EventImage
+            src={image.url}
+            alt={eventName}
+            fill
+            sizes="100vw 100vh"
+          />
         </ImageContainer>
       )}
       <Card $withImage={image}>

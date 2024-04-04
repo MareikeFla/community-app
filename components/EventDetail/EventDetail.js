@@ -71,7 +71,7 @@ export default function EventDetail({ event }) {
             src={image.url}
             alt={eventName}
             fill
-            sizes="100vw"
+            sizes="100vw 100vh"
             priority
           />
         </EventHeader>
