@@ -24,7 +24,7 @@ import { locationToString } from "@/lib/formatLocation";
 import JoinButton from "../JoinButton/JoinButton";
 import { useData } from "@/lib/useData";
 
-export default function EventDetail({ event, mutateEvent }) {
+export default function EventDetail({ event }) {
   const { joinEvent } = useData();
   const { data: session } = useSession();
   const userId = session?.user.id;
@@ -106,7 +106,7 @@ export default function EventDetail({ event, mutateEvent }) {
           {session ? (
             <JoinButton
               onJoinEvent={() => {
-                joinEvent(userId, _id, mutateEvent);
+                joinEvent(userId, _id);
               }}
               isAttendedByUser={isAttendedByUser}
             />
