@@ -4,13 +4,24 @@ import CommentForm from "../CommentForm/CommentForm";
 import CommentList from "../CommentList/CommentList";
 import { useData } from "@/lib/useData";
 import { useSession } from "next-auth/react";
+import Loading from "../Loading/Loading";
+import FetchingError from "../FetchingError/FetchingError";
 
 export default function CommentSection({ id }) {
   const { data: session } = useSession();
   const { addComment, fetchedComments } = useData();
+  const { comments, isLoadingComments, errorComments, mutateComments } =
+    fetchedComments;
   const userId = session?.user.id;
 
-  const sortedComments = fetchedComments?.comments
+  if (isLoadingComments) {
+    return <Loading />;
+  }
+  if (errorComments) {
+    return <FetchingError />;
+  }
+
+  const sortedComments = comments
     ?.filter((comment) => comment.parentEventId === id)
     .sort((a, b) => {
       const dateA = new Date(a.creationDate);
@@ -21,8 +32,8 @@ export default function CommentSection({ id }) {
   return (
     <section>
       <SectionTitle>
-        {fetchedComments.length}{" "}
-        {fetchedComments.length === 1 ? "Kommentar" : "Kommentare"}
+        {sortedComments.length}{" "}
+        {sortedComments.length === 1 ? "Kommentar" : "Kommentare"}
       </SectionTitle>
       <CommentCard>
         {session ? (
@@ -32,7 +43,7 @@ export default function CommentSection({ id }) {
         ) : null}
         <CommentList
           comments={sortedComments}
-          mutateComments={fetchedComments.mutateComments}
+          mutateComments={mutateComments}
         />
       </CommentCard>
     </section>
