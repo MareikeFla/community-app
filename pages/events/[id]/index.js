@@ -16,9 +16,5 @@ export default function EventDetailPage() {
     return <FetchingError />;
   }
 
-  return (
-    <>
-      <EventDetail event={event} />
-    </>
-  );
+  return <EventDetail event={event} />;
 }
