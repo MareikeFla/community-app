@@ -32,8 +32,9 @@ export default function CommentSection({ id }) {
   return (
     <section>
       <SectionTitle>
-        {sortedComments.length}{" "}
-        {sortedComments.length === 1 ? "Kommentar" : "Kommentare"}
+        {`${sortedComments.length} Kommentar${
+          sortedComments.length === 1 ? "" : "e"
+        }`}
       </SectionTitle>
       <CommentCard>
         {session ? (
