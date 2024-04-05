@@ -103,14 +103,12 @@ export default function EventDetail({ event }) {
         </InfoWrapper>
         <ButtonWrapper>
           <CategoryTag category={category} />
-          {session ? (
+          {session && (
             <JoinButton
-              onJoinEvent={() => {
-                joinEvent(userId, _id);
-              }}
+              onJoinEvent={() => joinEvent(userId, _id)}
               isAttendedByUser={isAttendedByUser}
             />
-          ) : null}
+          )}
         </ButtonWrapper>
         <AttendeeWrapper>{attendeeCount} Teilnehmende</AttendeeWrapper>
       </Card>

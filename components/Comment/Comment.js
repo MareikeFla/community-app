@@ -49,9 +49,9 @@ export default function Comment({ comment }) {
           </CommentHeader>
           <CommentBody>{text}</CommentBody>
           <FlexContainer>
-            {session ? (
+            {session && (
               <ReplyButton onClick={handleReplyForm} text="Antworten" />
-            ) : null}
+            )}
 
             <LikeButton
               onLikeComment={() => updateComment(_id, isLiked)}
