@@ -82,7 +82,6 @@ export default function EventForm({ updateDatabase, event: editEvent }) {
       costs: eventTarget.cost.value,
       shortDescription: eventTarget.shortDescription.value,
       longDescription: eventTarget.longDescription.value,
-      image: null,
       links: [
         {
           url: eventTarget.linkURL.value,
