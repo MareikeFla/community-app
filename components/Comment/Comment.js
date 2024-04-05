@@ -34,7 +34,7 @@ export default function Comment({ comment }) {
   };
 
   return (
-    <article>
+    <li>
       <CommentContainer>
         <ProfilePicture
           src={createdBy.image}
@@ -70,6 +70,6 @@ export default function Comment({ comment }) {
         />
       )}
       <ReplyList replies={replies} />
-    </article>
+    </li>
   );
 }
