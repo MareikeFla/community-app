@@ -8,7 +8,6 @@ import {
   Card,
   ErrorMessage,
   EventName,
-  Description,
   InfoWrapper,
   InfoTitle,
   Info,
@@ -16,16 +15,20 @@ import {
   ListItem,
   ListItemLink,
   ListItemMarker,
+  ButtonWrapper,
+  AttendeeWrapper,
 } from "./EventDetail.styled";
 import { useSession } from "next-auth/react";
-
 import ExpandableText from "./ExpandableText";
-
 import { locationToString } from "@/lib/formatLocation";
+import JoinButton from "../JoinButton/JoinButton";
+import { useData } from "@/lib/useData";
 
-export default function EventDetail({ event }) {
+export default function EventDetail({ event, mutateEvent }) {
+  const { joinEvent } = useData();
   const { data: session } = useSession();
   const userId = session?.user.id;
+
   if (!event) {
     return (
       <Card $pageNotFound>
@@ -47,12 +50,13 @@ export default function EventDetail({ event }) {
     category,
     createdBy,
     isOnlineEvent,
+    isAttendedByUser,
+    attendeeCount,
   } = event;
 
   if (!organization) return null;
   const { organizationName, organizationContact } = organization;
   const { latitude, longitude } = location;
-
   const formattedStartDate = formatDate(start.date);
   const formattedEndDate = formatDate(end.date);
 
@@ -97,7 +101,18 @@ export default function EventDetail({ event }) {
           </LinkList>
           {longitude && latitude && <Map event={event} />}
         </InfoWrapper>
-        <CategoryTag category={category} />
+        <ButtonWrapper>
+          <CategoryTag category={category} />
+          {session ? (
+            <JoinButton
+              onJoinEvent={() => {
+                joinEvent(userId, _id, mutateEvent);
+              }}
+              isAttendedByUser={isAttendedByUser}
+            />
+          ) : null}
+        </ButtonWrapper>
+        <AttendeeWrapper>{attendeeCount} Teilnehmende</AttendeeWrapper>
       </Card>
       <CommentSection id={_id} />
     </>
