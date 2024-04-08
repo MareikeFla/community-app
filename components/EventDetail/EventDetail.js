@@ -48,7 +48,6 @@ export default function EventDetail({ event }) {
     organization,
     links,
     category,
-    createdBy,
     isOnlineEvent,
     isAttendedByUser,
     attendeeCount,
@@ -63,7 +62,7 @@ export default function EventDetail({ event }) {
   return (
     <>
       <Card>
-        {createdBy === userId ? (
+        {event.createdBy === userId ? (
           <>
             <EditEventButton id={_id} />
             <DeleteEventButton id={_id} />
