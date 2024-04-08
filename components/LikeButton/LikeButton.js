@@ -7,8 +7,6 @@ export default function LikeButton({
   numberOfLikes,
   userIsLoggedIn,
 }) {
-  console.log(numberOfLikes);
-
   return (
     <Button onClick={onLikeComment} disabled={userIsLoggedIn}>
       {checkIfIsLiked ? (
