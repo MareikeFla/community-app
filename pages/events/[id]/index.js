@@ -7,9 +7,7 @@ import { useData } from "@/lib/useData";
 export default function EventDetailPage() {
   const router = useRouter();
   const { getEventByID } = useData();
-  const { event, isLoadingEvent, errorEvent, mutateEvent } = getEventByID(
-    router.query.id
-  );
+  const { event, isLoadingEvent, errorEvent } = getEventByID(router.query.id);
 
   if (isLoadingEvent) {
     return <Loading />;
@@ -18,11 +16,5 @@ export default function EventDetailPage() {
     return <FetchingError />;
   }
 
-  event.mutate = mutateEvent;
-
-  return (
-    <>
-      <EventDetail event={event} mutateEvent={mutateEvent} />
-    </>
-  );
+  return <EventDetail event={event} />;
 }

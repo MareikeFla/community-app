@@ -3,28 +3,48 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 import CommentForm from "../CommentForm/CommentForm";
 import CommentList from "../CommentList/CommentList";
 import { useData } from "@/lib/useData";
+import { useSession } from "next-auth/react";
+import Loading from "../Loading/Loading";
+import FetchingError from "../FetchingError/FetchingError";
 
-export default function CommentSection({ id, comments }) {
+export default function CommentSection({ id }) {
+  const { data: session } = useSession();
   const { addComment, fetchedComments } = useData();
-  const eventComments = fetchedComments.comments.filter(
-    (comment) => comment.parentEventId === id
-  );
-  const sortedComments = eventComments.sort((a, b) => {
-    const dateA = new Date(a.creationDate);
-    const dateB = new Date(b.creationDate);
-    return dateB - dateA;
-  });
+  const { comments, isLoadingComments, errorComments, mutateComments } =
+    fetchedComments;
+  const userId = session?.user.id;
+
+  if (isLoadingComments) {
+    return <Loading />;
+  }
+  if (errorComments) {
+    return <FetchingError />;
+  }
+
+  const sortedComments = comments
+    ?.filter((comment) => comment.parentEventId === id)
+    .sort((a, b) => {
+      const dateA = new Date(a.creationDate);
+      const dateB = new Date(b.creationDate);
+      return dateB - dateA;
+    });
 
   return (
     <section>
       <SectionTitle>
-        {comments.length} {comments.length === 1 ? "Kommentar" : "Kommentare"}
+        {`${sortedComments.length} Kommentar${
+          sortedComments.length === 1 ? "" : "e"
+        }`}
       </SectionTitle>
       <CommentCard>
-        <CommentForm onPostComment={(comment) => addComment(id, comment)} />
+        {session ? (
+          <CommentForm
+            onPostComment={(comment) => addComment(id, comment, userId)}
+          />
+        ) : null}
         <CommentList
           comments={sortedComments}
-          mutateComments={fetchedComments.mutateComments}
+          mutateComments={mutateComments}
         />
       </CommentCard>
     </section>

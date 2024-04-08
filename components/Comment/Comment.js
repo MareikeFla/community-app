@@ -15,9 +15,12 @@ import ReplyList from "../ReplyList/ReplyList";
 import LikeButton from "../LikeButton/LikeButton";
 import { useData } from "@/lib/useData";
 import { FlexContainer } from "./Comment.styled";
+import { useSession } from "next-auth/react";
 
-export default function Comment({ comment, mutateComments }) {
-  const { userImageURL, userName, text, creationDate, isLiked, _id } = comment;
+export default function Comment({ comment }) {
+  const { data: session } = useSession();
+  const userId = session?.user.id;
+  const { text, creationDate, isLiked, _id, createdBy } = comment;
   const { updateComment, addReply, fetchedComments } = useData();
   const timeElapsed = getTimeElapsed(creationDate);
 
@@ -31,22 +34,24 @@ export default function Comment({ comment, mutateComments }) {
   };
 
   return (
-    <article>
+    <li>
       <CommentContainer>
         <ProfilePicture
-          src={userImageURL}
+          src={createdBy.image}
           alt="profile picture"
           height={36}
           width={36}
         />
         <CommentText>
           <CommentHeader>
-            {userName}{" "}
+            {createdBy.name}{" "}
             <CommentTime> · {creationDate && timeElapsed}</CommentTime>
           </CommentHeader>
           <CommentBody>{text}</CommentBody>
           <FlexContainer>
-            <ReplyButton onClick={handleReplyForm} text="Antworten" />
+            {session && (
+              <ReplyButton onClick={handleReplyForm} text="Antworten" />
+            )}
 
             <LikeButton
               onLikeComment={() => updateComment(_id, isLiked)}
@@ -57,9 +62,14 @@ export default function Comment({ comment, mutateComments }) {
       </CommentContainer>
 
       {isReplyFormOpen && (
-        <ReplyCommentForm onPostReply={(event) => addReply(_id, event)} />
+        <ReplyCommentForm
+          onPostReply={(event) => {
+            addReply(_id, event, userId);
+            handleReplyForm();
+          }}
+        />
       )}
       <ReplyList replies={replies} />
-    </article>
+    </li>
   );
 }

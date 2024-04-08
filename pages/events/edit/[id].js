@@ -25,7 +25,7 @@ export default function EditEvent() {
 
   return (
     <>
-      {userId === event.createdBy ? (
+      {userId === event?.createdBy ? (
         <EventFormContainer
           title={"Event bearbeiten"}
           onSubmit={(eventData) => updateEvent(eventData, id)}
