@@ -25,7 +25,7 @@ export default async function handler(request, response) {
 
       const user = await User.findById(session.user.id);
 
-      const eventAttendedByUser = user.attendedEvents.includes(event._id);
+      const eventAttendedByUser = user.attendedEvents?.includes(event._id);
       const eventObject = enrichEventObject(
         event,
         attendeeCount,
