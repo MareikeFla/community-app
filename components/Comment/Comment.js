@@ -33,6 +33,8 @@ export default function Comment({ comment }) {
     setIsReplyFormOpen((prevState) => !prevState);
   };
 
+  const commentIsLikedByUser = isLiked.includes(userId);
+
   return (
     <li>
       <CommentContainer>
@@ -54,8 +56,10 @@ export default function Comment({ comment }) {
             )}
 
             <LikeButton
-              onLikeComment={() => updateComment(_id, isLiked)}
-              checkIfIsLiked={isLiked}
+              userIsLoggedIn={!session}
+              onLikeComment={() => updateComment(_id, userId)}
+              checkIfIsLiked={commentIsLikedByUser}
+              numberOfLikes={isLiked && isLiked.length > 0 ? isLiked.length : 0}
             />
           </FlexContainer>
         </CommentText>
