@@ -26,14 +26,14 @@ import { locationToString } from "@/lib/formatLocation";
 import JoinButton from "../JoinButton/JoinButton";
 import { useData } from "@/lib/useData";
 
-export default function EventDetail({ event, mutateEvent }) {
+export default function EventDetail({ event }) {
   const { joinEvent } = useData();
   const { data: session } = useSession();
   const userId = session?.user.id;
 
   if (!event) {
     return (
-      <Card pageNotFound>
+      <Card $pageNotFound>
         <ErrorMessage>Seite nicht gefunden.</ErrorMessage>
       </Card>
     );
@@ -51,12 +51,11 @@ export default function EventDetail({ event, mutateEvent }) {
     image,
     links,
     category,
-    comments,
-    createdBy,
     isOnlineEvent,
     isAttendedByUser,
     attendeeCount,
   } = event;
+
   if (!organization) return null;
   const { organizationName, organizationContact } = organization;
   const { latitude, longitude } = location;
@@ -65,26 +64,26 @@ export default function EventDetail({ event, mutateEvent }) {
 
   return (
     <>
-      {image ? (
-        <EventHeader>
-          {createdBy === userId ? (
-            <>
-              <EditEventButton id={_id} />
-              <DeleteEventButton id={_id} />
-            </>
-          ) : null}
-          <EventName $withImage={image}>{eventName}</EventName>
-          <EventImage
-            src={image.url}
-            alt={eventName}
-            fill
-            sizes="100vw 100vh"
-            priority
-          />
-        </EventHeader>
-      ) : null}
-      <Card $withImage={image} $userId={userId} $createdBy={createdBy}>
-        {createdBy === userId ? (
+{image ? (
+  <EventHeader>
+    {event.createdBy === userId ? (
+      <>
+        <EditEventButton id={_id} />
+        <DeleteEventButton id={_id} />
+      </>
+    ) : null}
+    <EventName $withImage={image}>{eventName}</EventName>
+    <EventImage
+      src={image.url}
+      alt={eventName}
+      fill
+      sizes="100vw 100vh"
+      priority
+    />
+  </EventHeader>
+) : null}
+<Card $withImage={image} $userId={userId} $createdBy={event.createdBy}>
+  {event.createdBy === userId ? (
           <>
             <EditEventButton id={_id} />
             <DeleteEventButton id={_id} />
@@ -124,18 +123,16 @@ export default function EventDetail({ event, mutateEvent }) {
         </InfoWrapper>
         <ButtonWrapper>
           <CategoryTag category={category} />
-          {session ? (
+          {session && (
             <JoinButton
-              onJoinEvent={() => {
-                joinEvent(userId, _id, mutateEvent);
-              }}
+              onJoinEvent={() => joinEvent(userId, _id)}
               isAttendedByUser={isAttendedByUser}
             />
-          ) : null}
+          )}
         </ButtonWrapper>
         <AttendeeWrapper>{attendeeCount} Teilnehmende</AttendeeWrapper>
       </Card>
-      <CommentSection id={_id} comments={comments} mutateEvent={event.mutate} />
+      <CommentSection id={_id} />
     </>
   );
 }
