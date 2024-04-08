@@ -200,9 +200,6 @@ export const FormDescriptionField = styled.textarea`
   border: none;
   border-radius: var(--border-radius_input);
   width: 100%;
-  height: 2.5rem;
-  min-height: ${({ $smallerminheight }) =>
-    $smallerminheight ? "5.5rem" : "7.063rem"};
   margin-bottom: ${({ $addmarginbottom }) =>
     $addmarginbottom ? "1.25rem" : "0"};
   padding: 0.5rem 0.75rem;
