@@ -9,10 +9,15 @@ import {
 } from "./Reply.styled";
 import { useData } from "@/lib/useData";
 import LikeButton from "../LikeButton/LikeButton";
+import { useSession } from "next-auth/react";
+
 export default function Reply({ reply }) {
+  const { data: session } = useSession();
+  const userId = session?.user.id;
   const { text, creationDate, _id, isLiked, createdBy } = reply;
   const { updateComment } = useData();
 
+  const replyIsLikedByUser = isLiked.includes(userId);
   const timeElapsed = getTimeElapsed(creationDate);
 
   return (
@@ -32,8 +37,10 @@ export default function Reply({ reply }) {
           <ReplyBody>
             {text}
             <LikeButton
-              onLikeComment={() => updateComment(_id, isLiked)}
-              checkIfIsLiked={isLiked}
+              userIsLoggedIn={!session}
+              onLikeComment={() => updateComment(_id, userId)}
+              checkIfIsLiked={replyIsLikedByUser}
+              numberOfLikes={isLiked && isLiked.length > 0 ? isLiked.length : 0}
             />
           </ReplyBody>
         </ReplyText>

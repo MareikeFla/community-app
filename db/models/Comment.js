@@ -10,7 +10,7 @@ const commentSchema = new Schema({
   text: { type: String },
   userImageURL: { type: String },
   text: { type: String },
-  isLiked: { type: Boolean },
+  isLiked: { type: [Schema.Types.ObjectId], ref: "User" },
   parentCommentId: { type: Schema.Types.ObjectId, ref: "Comment" }, // Referenz auf den übergeordneten Kommentar
   parentEventId: { type: Schema.Types.ObjectId, ref: "Event" },
   createdBy: { type: Schema.Types.ObjectId, ref: "User" },
