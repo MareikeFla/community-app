@@ -10,12 +10,12 @@ export const Card = styled.div`
   box-shadow: var(--shadow_card);
   padding: ${({ $withImage, pageNotFound, $createdBy, $userId }) =>
     $withImage
-      ? "1.5rem 1.5rem 2rem"
+      ? "1.5rem 1.5rem 0.75rem"
       : pageNotFound
       ? "3rem 1.5rem 2.75rem"
       : $createdBy !== $userId
-      ? "2rem 1.5rem 2rem"
-      : "3rem 1.5rem 2rem"};
+      ? "2rem 1.5rem 0.75rem"
+      : "3rem 1.5rem 0.75rem"};
 `;
 
 export const ErrorMessage = styled.h2`
