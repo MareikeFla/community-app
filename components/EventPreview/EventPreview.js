@@ -10,7 +10,7 @@ import {
   PreviewTitle,
   PreviewDescription,
 } from "./EventPreview.styled";
-import { formatDate } from "@/lib/formatDate";
+import { formatDate } from "@/lib/dateHelpers";
 
 export default function EventPreview({ event }) {
   const { image, eventName, shortDescription, start, location, category } =

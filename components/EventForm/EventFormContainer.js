@@ -3,11 +3,11 @@ import {
   EventFormTitle,
 } from "./EventFormContainer.styled";
 import EventForm from "./EventForm";
-export default function EventFormContainer({ title, updateDatabase, event }) {
+export default function EventFormContainer({ title, onSubmit, event }) {
   return (
     <EventFormContainerStyled>
       <EventFormTitle>{title}</EventFormTitle>
-      <EventForm updateDatabase={updateDatabase} event={event} />
+      <EventForm onSubmit={onSubmit} event={event} />
     </EventFormContainerStyled>
   );
 }

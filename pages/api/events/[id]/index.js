@@ -1,32 +1,39 @@
 import dbConnect from "@/db/connect";
 import Event from "@/db/models/Event";
 import Comment from "@/db/models/Comment";
+import enrichEventObject from "@/lib/enrichEventObject";
+import { getSession } from "next-auth/react";
+import User from "@/db/models/User";
 
 export default async function handler(request, response) {
   await dbConnect();
   const { id } = request.query;
 
-  if (request.method === "POST") {
-    try {
-      const newComment = await Comment.create(request.body);
-      const event = await Event.findById(id);
-      event.comments.push(newComment._id);
-      await event.save();
-
-      response.status(201).json(newComment);
-    } catch (error) {
-      return response.status(400).json({ error: error.message });
-    }
-  }
-
   if (request.method === "GET") {
     try {
-      const event = await Event.findById(id)
-        .populate("comments")
-        .populate("category");
-      return response.status(200).json(event);
+      const session = await getSession({ req: request });
+
+      const event = await Event.findById(id).populate("category");
+
+      const attendeeCount = await User.countDocuments({
+        attendedEvents: event._id,
+      });
+      if (!session) {
+        const eventObject = enrichEventObject(event, attendeeCount);
+        return response.status(200).json(eventObject);
+      }
+
+      const user = await User.findById(session.user.id);
+
+      const eventAttendedByUser = user.attendedEvents.includes(event._id);
+      const eventObject = enrichEventObject(
+        event,
+        attendeeCount,
+        eventAttendedByUser
+      );
+
+      return response.status(200).json(eventObject);
     } catch (error) {
-      console.error(error);
       return response.status(400).json({ error: error.message });
     }
   }
@@ -45,13 +52,10 @@ export default async function handler(request, response) {
 
       await Event.findByIdAndDelete(id);
 
-      response
-        .status(200)
-        .json({
-          status: `Event ${id} and related comments successfully deleted.`,
-        });
+      response.status(200).json({
+        status: `Event ${id} and related comments successfully deleted.`,
+      });
     } catch (error) {
-      console.error(error);
       response.status(400).json({ error: error.message });
     }
   }

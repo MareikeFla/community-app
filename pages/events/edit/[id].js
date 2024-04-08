@@ -28,7 +28,7 @@ export default function EditEvent() {
       {userId === event.createdBy ? (
         <EventFormContainer
           title={"Event bearbeiten"}
-          updateDatabase={(eventData) => updateEvent(eventData, id)}
+          onSubmit={(eventData) => updateEvent(eventData, id)}
           event={event}
         />
       ) : (

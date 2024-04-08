@@ -209,6 +209,16 @@ export const FormDescriptionField = styled.textarea`
   resize: none;
   overflow: hidden;
 
+  &.auto-resizing-textarea {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: ${({ $longDescriptionHeight }) =>
+      $longDescriptionHeight + "px" || "auto"};
+  }
+
   &:focus-visible {
     outline: 1px solid var(--color_orange);
   }
@@ -216,6 +226,27 @@ export const FormDescriptionField = styled.textarea`
   &:-webkit-scrollbar {
     display: none; /* Safari and Chrome */
   }
+`;
+
+export const TextAreaContainer = styled.div`
+  position: relative;
+  height: ${({ $longDescriptionHeight }) =>
+    $longDescriptionHeight + "px" || "auto"};
+`;
+
+export const TextAreaMirror = styled.div`
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font: var(--font_body);
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: auto;
+  height: auto;
+  resize: none;
 `;
 
 export const FormButtonWrapper = styled.div`
