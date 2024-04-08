@@ -80,10 +80,6 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     isStreetRequired,
     isLinkRequired,
     checkIfCorrespondingFieldIsRequired,
-    longDescription,
-    setLongDescription,
-    longDescriptionHeight,
-    setLongDescriptionHeight,
   } = useEventForm(editEvent);
 
   // Updates the 'costs' state based on the 'isFreeOfCharge' toggle.
