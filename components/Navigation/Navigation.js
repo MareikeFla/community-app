@@ -31,11 +31,18 @@ export default function Navigation() {
             </NavLink>
           </li>
           {session ? (
-            <li>
-              <NavLink href="/events/new" onClick={toggleMenu}>
-                Event erstellen
-              </NavLink>
-            </li>
+            <>
+              <li>
+                <NavLink href="/events/new" onClick={toggleMenu}>
+                  Event erstellen
+                </NavLink>
+              </li>
+              <li>
+                <NavLink href="/user/id" onClick={toggleMenu}>
+                  Mein Profil
+                </NavLink>
+              </li>
+            </>
           ) : null}
           {session ? (
             <li>
