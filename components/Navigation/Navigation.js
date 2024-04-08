@@ -11,7 +11,6 @@ import { signIn, signOut, useSession } from "next-auth/react";
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session } = useSession();
-
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -38,7 +37,7 @@ export default function Navigation() {
                 </NavLink>
               </li>
               <li>
-                <NavLink href="/user/id" onClick={toggleMenu}>
+                <NavLink href={"/profile"} onClick={toggleMenu}>
                   Mein Profil
                 </NavLink>
               </li>
