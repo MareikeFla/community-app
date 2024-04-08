@@ -18,7 +18,11 @@ export default function CommentSection({ id, comments }) {
   return (
     <section>
       <SectionTitle>
-        {comments.length} {comments.length === 1 ? "Kommentar" : "Kommentare"}
+        {comments && comments.length > 0
+          ? `${comments.length} ${
+              comments.length === 1 ? "Kommentar" : "Kommentare"
+            }`
+          : "Kommentare"}
       </SectionTitle>
       <CommentCard>
         <CommentForm onPostComment={(comment) => addComment(id, comment)} />
