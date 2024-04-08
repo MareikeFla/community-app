@@ -1,9 +1,16 @@
 import Image from "next/image";
 import { Button, ButtonText } from "./LikeButton.styled";
 
-export default function LikeButton({ onLikeComment, checkIfIsLiked }) {
+export default function LikeButton({
+  onLikeComment,
+  checkIfIsLiked,
+  numberOfLikes,
+  userIsLoggedIn,
+}) {
+  console.log(numberOfLikes);
+
   return (
-    <Button onClick={onLikeComment}>
+    <Button onClick={onLikeComment} disabled={userIsLoggedIn}>
       {checkIfIsLiked ? (
         <Image
           src="/assets/icons/icon_heart-filled.svg"
@@ -19,7 +26,7 @@ export default function LikeButton({ onLikeComment, checkIfIsLiked }) {
           width={14}
         />
       )}
-      <ButtonText>{checkIfIsLiked ? "1" : "0"}</ButtonText>
+      <ButtonText>{numberOfLikes}</ButtonText>
     </Button>
   );
 }
