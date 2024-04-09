@@ -19,10 +19,12 @@ export const CommentHeader = styled.p`
   margin-bottom: 0.375rem;
   display: flex;
   gap: 0.375rem;
+  align-items: center;
 `;
 
 export const CommentTime = styled.span`
   color: var(--color_grey);
+  flex: 1;
 `;
 
 export const CommentBody = styled.p`
