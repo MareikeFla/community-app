@@ -9,7 +9,14 @@ export default function LikeButton({
 }) {
   return (
     <Button onClick={onLikeComment} disabled={userIsLoggedIn}>
-      {checkIfIsLiked ? (
+      {userIsLoggedIn ? (
+        <Image
+          src="/assets/icons/icon_heart-filled.svg"
+          alt="heart"
+          height={12}
+          width={14}
+        />
+      ) : checkIfIsLiked ? (
         <Image
           src="/assets/icons/icon_heart-filled.svg"
           alt="heart"
