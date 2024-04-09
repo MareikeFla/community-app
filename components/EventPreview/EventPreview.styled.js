@@ -1,10 +1,28 @@
 import styled from "styled-components";
+import Image from "next/image";
 
 export const Card = styled.li`
   background-color: var(--color_white);
-  border-radius: var(--border-radius_card);
+  border-radius: ${({ $withImage }) =>
+    $withImage
+      ? "0 0 var(--border-radius_card) var(--border-radius_card)"
+      : "var(--border-radius_card)"};
   box-shadow: var(--shadow_card);
   padding: 1.25rem 1.5rem 0.313rem;
+`;
+
+export const ImageContainer = styled.div`
+  position: relative;
+  height: 14.75rem;
+  display: flex;
+  justify-content: center;
+`;
+
+export const EventImage = styled(Image)`
+  border-top-left-radius: var(--border-radius_card);
+  border-top-right-radius: var(--border-radius_card);
+  object-fit: cover;
+  box-shadow: 0px -2px 12px 0px rgba(91, 95, 98, 0.2);
 `;
 
 export const PreviewTitle = styled.h2`

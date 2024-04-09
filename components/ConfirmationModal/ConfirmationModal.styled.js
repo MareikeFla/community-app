@@ -13,7 +13,7 @@ export const Backdrop = styled.div`
 `;
 
 export const Dialog = styled(Card)`
-  padding: 1.75rem 2.75rem;
+  padding: 1.75rem 1.5rem;
   margin: auto;
   text-align: center;
   position: fixed;

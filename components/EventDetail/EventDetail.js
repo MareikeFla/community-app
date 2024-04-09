@@ -7,6 +7,8 @@ import { formatDate } from "@/lib/dateHelpers";
 import {
   Card,
   ErrorMessage,
+  EventHeader,
+  EventImage,
   EventName,
   InfoWrapper,
   InfoTitle,
@@ -46,6 +48,7 @@ export default function EventDetail({ event }) {
     location,
     costs,
     organization,
+    image,
     links,
     category,
     isOnlineEvent,
@@ -61,14 +64,32 @@ export default function EventDetail({ event }) {
 
   return (
     <>
-      <Card>
-        {event.createdBy === userId ? (
+{image ? (
+  <EventHeader>
+    {event.createdBy === userId ? (
+      <>
+        <EditEventButton id={_id} />
+        <DeleteEventButton id={_id} />
+      </>
+    ) : null}
+    <EventName $withImage={image}>{eventName}</EventName>
+    <EventImage
+      src={image.url}
+      alt={eventName}
+      fill
+      sizes="100vw 100vh"
+      priority
+    />
+  </EventHeader>
+) : null}
+<Card $withImage={image} $userId={userId} $createdBy={event.createdBy}>
+  {event.createdBy === userId ? (
           <>
             <EditEventButton id={_id} />
             <DeleteEventButton id={_id} />
           </>
         ) : null}
-        <EventName>{eventName}</EventName>
+        {!image && <EventName>{eventName}</EventName>}
         <ExpandableText text={longDescription} />
         <InfoWrapper>
           <InfoTitle>Beginn</InfoTitle>

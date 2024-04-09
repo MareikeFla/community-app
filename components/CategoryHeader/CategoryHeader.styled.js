@@ -28,4 +28,5 @@ export const CategoryTitle = styled.h1`
 
 export const CategoryImage = styled(Image)`
   border-radius: var(--border-radius_card);
+  object-fit: cover;
 `;

@@ -1,11 +1,21 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import Image from "next/image";
 
 export const Card = styled.div`
   background-color: var(--color_white);
-  border-radius: var(--border-radius_card);
+  border-radius: ${({ $withImage }) =>
+    $withImage
+      ? "0 0 var(--border-radius_card) var(--border-radius_card)"
+      : "var(--border-radius_card)"};
   box-shadow: var(--shadow_card);
-  padding: ${({ $pageNotFound }) =>
-    $pageNotFound ? "3rem 1.5rem 2.75rem" : "3rem 1.5rem 2rem"};
+  padding: ${({ $withImage, pageNotFound, $createdBy, $userId }) =>
+    $withImage
+      ? "1.5rem 1.5rem 0.75rem"
+      : pageNotFound
+      ? "3rem 1.5rem 2.75rem"
+      : $createdBy !== $userId
+      ? "2rem 1.5rem 0.75rem"
+      : "3rem 1.5rem 0.75rem"};
 `;
 
 export const ErrorMessage = styled.h2`
@@ -14,11 +24,43 @@ export const ErrorMessage = styled.h2`
   text-align: center;
 `;
 
+export const EventHeader = styled.div`
+  position: relative;
+  height: 14.75rem;
+  display: flex;
+  justify-content: center;
+
+  @media (min-width: 1024px) {
+    height: 19rem;
+  }
+`;
+
+export const EventImage = styled(Image)`
+  border-top-left-radius: var(--border-radius_card);
+  border-top-right-radius: var(--border-radius_card);
+  object-fit: cover;
+`;
+
 export const EventName = styled.h1`
   margin-bottom: 1.125rem;
   font: var(--font_heading-1);
   color: var(--color_night);
   text-align: center;
+  ${({ $withImage }) =>
+    $withImage &&
+    css`
+      position: absolute;
+      bottom: 1rem;
+      font: var(--font_heading-1);
+      color: var(--color_night);
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.85);
+      border-radius: 4px;
+      padding: 0.438rem 0.625rem 0.25rem 0.625rem;
+      margin-bottom: 0;
+      max-width: 90%;
+      z-index: 1;
+    `}
 `;
 
 export const Description = styled.p`
