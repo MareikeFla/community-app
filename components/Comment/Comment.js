@@ -101,11 +101,7 @@ export default function Comment({ comment }) {
           }}
         />
       )}
-      <ReplyList
-        onEditComment={handleEditComment}
-        isEditingComment={isEditingComment}
-        replies={replies}
-      />
+      <ReplyList replies={replies} />
     </li>
   );
 }
