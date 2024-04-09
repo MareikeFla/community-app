@@ -57,7 +57,7 @@ export default function Comment({ comment }) {
             {userId === createdBy._id && (
               <EditCommentButton
                 onEditComment={handleEditComment}
-                isEditingComment={isEditingComment}
+                isEditing={isEditingComment}
               ></EditCommentButton>
             )}
           </CommentHeader>
