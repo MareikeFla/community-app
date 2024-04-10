@@ -7,6 +7,7 @@ import {
   CommentFormTextarea,
   EditButtonSection,
 } from "./CommentForm.styled";
+import { useModal } from "@/lib/useModal";
 
 export default function CommentForm({
   onPostComment,
@@ -14,6 +15,16 @@ export default function CommentForm({
   comment = {},
 }) {
   const { deleteComment } = useData();
+
+  const { showModal } = useModal();
+
+  const modalContent = {
+    message: "Diesen Kommentar wirklich löschen?",
+    textButtonCancel: "Abbrechen",
+    textButtonConfirm: "Löschen",
+    onConfirm: () => deleteComment(comment._id),
+  };
+
   function handleSubmitComment(event) {
     event.preventDefault();
     onPostComment(event.target.comment.value);
@@ -35,7 +46,7 @@ export default function CommentForm({
       {isEditing ? (
         <EditButtonSection>
           <DeleteCommentButton
-            onDeleteComment={() => deleteComment(comment._id)}
+            onDeleteComment={() => showModal(modalContent)}
           />
           <CommentButton type="submit" $editing={isEditing}>
             Absenden
