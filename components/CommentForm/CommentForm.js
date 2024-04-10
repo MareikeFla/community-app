@@ -1,8 +1,11 @@
+import { useData } from "@/lib/useData";
+import DeleteCommentButton from "../DeleteCommentButton/DeleteCommentButton";
 import {
   CommentButton,
   CommentFormContainer,
   CommentFormLabel,
   CommentFormTextarea,
+  EditButtonSection,
 } from "./CommentForm.styled";
 
 export default function CommentForm({
@@ -10,11 +13,13 @@ export default function CommentForm({
   isEditing,
   comment = {},
 }) {
+  const { deleteComment } = useData();
   function handleSubmitComment(event) {
     event.preventDefault();
     onPostComment(event.target.comment.value);
     event.target.reset();
   }
+
   return (
     <CommentFormContainer onSubmit={handleSubmitComment} $editing={isEditing}>
       <CommentFormLabel htmlFor="comment" $hidden={isEditing}>
@@ -27,9 +32,18 @@ export default function CommentForm({
         $editing={isEditing}
         required
       ></CommentFormTextarea>
-      <CommentButton type="submit" $editing={isEditing}>
-        Absenden
-      </CommentButton>
+      {isEditing ? (
+        <EditButtonSection>
+          <DeleteCommentButton
+            onDeleteComment={() => deleteComment(comment._id)}
+          />
+          <CommentButton type="submit" $editing={isEditing}>
+            Absenden
+          </CommentButton>
+        </EditButtonSection>
+      ) : (
+        <CommentButton type="submit">Absenden</CommentButton>
+      )}
     </CommentFormContainer>
   );
 }
