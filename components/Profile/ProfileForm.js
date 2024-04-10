@@ -8,32 +8,23 @@ import {
 import { FormInfoText } from "../EventForm/EventForm.styled";
 import { FormButtonWrapper } from "../EventForm/EventForm.styled";
 import Button from "../Button/Button";
-import { useData } from "@/lib/useData";
 import { useModal } from "@/lib/useModal";
 
-export default function ProfileForm({ toggleEditMode, session }) {
-  const user = session?.user;
-  const { updateUser } = useData();
+export default function ProfileForm({
+  toggleEditMode,
+  userInfo,
+  handleSubmit,
+}) {
   const { showModal } = useModal();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const userData = await updateUser(event, user);
-    if (userData) {
-      session.user = userData;
-      toggleEditMode();
-      return true;
-    } else {
-      toggleEditMode();
-      return false;
-    }
-  };
+  const [profilePicture] = userInfo.filter((info) => info.key === "image");
+  const filteredUserinfo = userInfo.filter((info) => info.key !== "image");
 
   return (
     <StyledProfile>
       <PictureProfile
-        src={user?.image}
-        alt="profile picture"
+        src={profilePicture.value}
+        alt={profilePicture.text}
         height={128}
         width={128}
       />
@@ -48,25 +39,23 @@ export default function ProfileForm({ toggleEditMode, session }) {
           });
         }}
       >
-        <ProfileFormSection>
-          <ProfileFormLabel htmlFor="name">Name *</ProfileFormLabel>
-          <ProfilInputField
-            required
-            type="text"
-            name="name"
-            id="name"
-            defaultValue={user?.name}
-          ></ProfilInputField>
-        </ProfileFormSection>
-        <ProfileFormSection>
-          <ProfileFormLabel htmlFor="email">E-Mail</ProfileFormLabel>
-          <ProfilInputField
-            type="text"
-            name="email"
-            id="email"
-            defaultValue={user?.email}
-          ></ProfilInputField>
-        </ProfileFormSection>
+        {filteredUserinfo.map((info) => {
+          const { key, text, value, isRequired } = info;
+          return (
+            <ProfileFormSection key={key}>
+              <ProfileFormLabel htmlFor={key}>
+                {text} {isRequired && "*"}
+              </ProfileFormLabel>
+              <ProfilInputField
+                required={key === "name"}
+                type="text"
+                name={key}
+                id={key}
+                defaultValue={value}
+              ></ProfilInputField>
+            </ProfileFormSection>
+          );
+        })}
         <FormButtonWrapper>
           <Button type="button" text="Abbrechen" onClick={toggleEditMode} />
           <Button color="primary" type="submit" text="Speichern" />
