@@ -16,7 +16,7 @@ import LikeButton from "../LikeButton/LikeButton";
 import { useData } from "@/lib/useData";
 import { FlexContainer } from "./Comment.styled";
 
-export default function Comment({ comment, mutateComments }) {
+export default function Comment({ comment }) {
   const { userImageURL, userName, text, creationDate, isLiked, _id } = comment;
   const { updateComment, addReply, fetchedComments } = useData();
   const timeElapsed = getTimeElapsed(creationDate);
