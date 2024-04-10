@@ -39,7 +39,7 @@ export default NextAuth({
   session: {
     strategy: "jwt",
   },
-
+  secret: process.env.SECRET,
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
