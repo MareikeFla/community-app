@@ -9,9 +9,12 @@ import {
   FormSection,
 } from "../EventForm/EventForm.styled";
 
+export const pictureSize = 128;
+const overlapping = 32;
+
 export const StyledProfile = styled(Card)`
   position: relative;
-  margin: 3rem 0 0 0;
+  margin-top: 2rem;
   padding: 6rem 1.5rem 2rem 1.5rem;
   display: flex;
   flex-direction: column;
@@ -21,7 +24,12 @@ export const StyledProfile = styled(Card)`
 export const UserName = styled.h1`
   font: var(--font_heading-1);
   color: var(--color_midnight);
-  margin: 1.5rem 0;
+  margin: 1.125rem 0;
+`;
+
+export const UserDetail = styled.p`
+  font: var(--font_body);
+  margin-bottom: 0.375rem;
 `;
 
 export const PictureProfile = styled(Image)`
