@@ -18,10 +18,15 @@ export default function ProfileForm({ toggleEditMode, session }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const wasSuccessful = await updateUser(event, user);
-
-    toggleEditMode();
-    return wasSuccessful;
+    const userData = await updateUser(event, user);
+    if (userData) {
+      session.user = userData;
+      toggleEditMode();
+      return true;
+    } else {
+      toggleEditMode();
+      return false;
+    }
   };
 
   return (
