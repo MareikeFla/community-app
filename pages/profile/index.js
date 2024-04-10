@@ -2,22 +2,36 @@ import MessageCard from "@/components/MessageCard/MessageCard";
 import ArrowButton from "@/components/ArrowButton/ArrowButton";
 import Profile from "@/components/Profile/Profile";
 import ProfileForm from "@/components/Profile/ProfileForm";
-import { signIn, useSession, getSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Loading from "@/components/Loading/Loading";
-
-import { useEffect, useState } from "react";
+import { useData } from "@/lib/useData";
+import { useState } from "react";
+import { formatedUserInfo } from "@/lib/profile/profileHelper";
 
 export default function profilePage() {
-  let { data: session, status } = useSession();
+  const { data: session, status, update: updateSession } = useSession();
+  const { updateUser } = useData();
   const [editMode, setEditMode] = useState(false);
 
   function toggleEditMode() {
     setEditMode(!editMode);
   }
 
-  if (status === "loading") {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const wasSuccsessfull = await updateUser(event, session.user);
+    if (wasSuccsessfull) {
+      updateSession();
+    }
+    toggleEditMode();
+    return wasSuccsessfull;
+  };
+
+  if (status === "loading" || (status === "authenticated" && !session)) {
     return <Loading />;
   }
+  const userInfo = formatedUserInfo(session);
+
   if (!session) {
     return (
       <MessageCard>
@@ -27,13 +41,14 @@ export default function profilePage() {
     );
   } else if (!editMode) {
     return (
-      <Profile toggleEditMode={toggleEditMode} session={session}></Profile>
+      <Profile toggleEditMode={toggleEditMode} userInfo={userInfo}></Profile>
     );
   } else if (editMode) {
     return (
       <ProfileForm
         toggleEditMode={toggleEditMode}
-        session={session}
+        userInfo={userInfo}
+        handleSubmit={handleSubmit}
       ></ProfileForm>
     );
   }
