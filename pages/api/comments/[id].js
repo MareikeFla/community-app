@@ -3,7 +3,7 @@ import Comment from "@/db/models/Comment";
 
 export default async function handler(request, response) {
   await dbConnect();
-  const { _id, userId } = request.body;
+  const { _id, userId, text } = request.body;
   if (request.method === "PATCH") {
     try {
       const comment = await Comment.findById(_id);
@@ -22,6 +22,15 @@ export default async function handler(request, response) {
       return response.status(200).json({ status: `Comment updated!` });
     } catch (error) {
       return response.status(500).json({ status: "Internal Server Error" });
+    }
+  }
+
+  if (request.method === "POST") {
+    try {
+      await Comment.findByIdAndUpdate(_id, request.body);
+      return response.status(200).json({ status: `Comment ${_id} edited!` });
+    } catch (error) {
+      return response.status(400).json({ error: error.message });
     }
   }
 }

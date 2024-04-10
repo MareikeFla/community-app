@@ -16,24 +16,30 @@ import LikeButton from "../LikeButton/LikeButton";
 import { useData } from "@/lib/useData";
 import { FlexContainer } from "./Comment.styled";
 import { useSession } from "next-auth/react";
+import EditCommentButton from "../EditCommentButton/EditCommentButton";
+import CommentForm from "../CommentForm/CommentForm";
 
 export default function Comment({ comment }) {
+  const [isEditingComment, setIsEditingComment] = useState(false);
+  const [isReplyFormOpen, setIsReplyFormOpen] = useState();
   const { data: session } = useSession();
   const userId = session?.user.id;
   const { text, creationDate, isLiked, _id, createdBy } = comment;
-  const { updateComment, addReply, fetchedComments } = useData();
+  const { likeComment, addReply, fetchedComments, editComment } = useData();
   const timeElapsed = getTimeElapsed(creationDate);
 
   const replies = fetchedComments.comments.filter(
     (comment) => comment.parentCommentId === _id
   );
-  const [isReplyFormOpen, setIsReplyFormOpen] = useState();
 
   const handleReplyForm = () => {
     setIsReplyFormOpen((prevState) => !prevState);
   };
 
   const commentIsLikedByUser = isLiked.includes(userId);
+  function handleEditComment() {
+    setIsEditingComment(!isEditingComment);
+  }
 
   return (
     <li>
@@ -48,20 +54,42 @@ export default function Comment({ comment }) {
           <CommentHeader>
             {createdBy.name}{" "}
             <CommentTime> · {creationDate && timeElapsed}</CommentTime>
-          </CommentHeader>
-          <CommentBody>{text}</CommentBody>
-          <FlexContainer>
-            {session && (
-              <ReplyButton onClick={handleReplyForm} text="Antworten" />
+            {userId === createdBy._id && (
+              <EditCommentButton
+                onEditComment={handleEditComment}
+                isEditing={isEditingComment}
+              ></EditCommentButton>
             )}
-
-            <LikeButton
-              userIsLoggedIn={!session}
-              onLikeComment={() => updateComment(_id, userId)}
-              checkIfIsLiked={commentIsLikedByUser}
-              numberOfLikes={isLiked && isLiked.length > 0 ? isLiked.length : 0}
+          </CommentHeader>
+          {!isEditingComment ? (
+            <CommentBody>{text}</CommentBody>
+          ) : (
+            <CommentForm
+              isEditing={isEditingComment}
+              comment={comment}
+              onPostComment={(comment) => {
+                editComment(_id, comment);
+                handleEditComment();
+              }}
             />
-          </FlexContainer>
+          )}
+
+          {!isEditingComment && (
+            <FlexContainer>
+              {session && (
+                <ReplyButton onClick={handleReplyForm} text="Antworten" />
+              )}
+
+              <LikeButton
+                userIsLoggedIn={!session}
+                onLikeComment={() => likeComment(_id, userId)}
+                checkIfIsLiked={commentIsLikedByUser}
+                numberOfLikes={
+                  isLiked && isLiked.length > 0 ? isLiked.length : 0
+                }
+              />
+            </FlexContainer>
+          )}
         </CommentText>
       </CommentContainer>
 

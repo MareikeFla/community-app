@@ -23,6 +23,7 @@ export const ReplyHeader = styled.p`
 
 export const ReplyTime = styled.span`
   color: var(--color_grey);
+  flex: 1;
 `;
 
 export const ReplyBody = styled.div`

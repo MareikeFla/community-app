@@ -5,17 +5,31 @@ import {
   CommentFormTextarea,
 } from "./CommentForm.styled";
 
-export default function CommentForm({ onPostComment }) {
+export default function CommentForm({
+  onPostComment,
+  isEditing,
+  comment = {},
+}) {
   function handleSubmitComment(event) {
     event.preventDefault();
     onPostComment(event.target.comment.value);
     event.target.reset();
   }
   return (
-    <CommentFormContainer onSubmit={handleSubmitComment}>
-      <CommentFormLabel htmlFor="comment">Dein Kommentar</CommentFormLabel>
-      <CommentFormTextarea id="comment" rows={5} required></CommentFormTextarea>
-      <CommentButton type="submit">Absenden</CommentButton>
+    <CommentFormContainer onSubmit={handleSubmitComment} $editing={isEditing}>
+      <CommentFormLabel htmlFor="comment" $hidden={isEditing}>
+        Dein Kommentar
+      </CommentFormLabel>
+      <CommentFormTextarea
+        id="comment"
+        rows={isEditing ? "3" : "5"}
+        defaultValue={comment.text}
+        $editing={isEditing}
+        required
+      ></CommentFormTextarea>
+      <CommentButton type="submit" $editing={isEditing}>
+        Absenden
+      </CommentButton>
     </CommentFormContainer>
   );
 }
