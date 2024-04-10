@@ -11,8 +11,8 @@ export default function NewEvent() {
   return (
     <>
       {!session ? (
-        <MessageCard>
-          <p>Bitte melde dich an, um Events zu erstellen:</p>
+        <MessageCard hasButton>
+          <p>Bitte melde dich an, um ein Event zu erstellen.</p>
           <ArrowButton onClick={() => signIn()}>Jetzt Anmelden</ArrowButton>
         </MessageCard>
       ) : (

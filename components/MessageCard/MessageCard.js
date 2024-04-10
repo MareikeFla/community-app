@@ -1,8 +1,8 @@
 import { Card, Message } from "./MessageCard.styled";
 
-export default function MessageCard({ children }) {
+export default function MessageCard({ children, hasButton }) {
   return (
-    <Card $pageNotFound>
+    <Card $hasButton={hasButton}>
       <Message>{children}</Message>
     </Card>
   );
