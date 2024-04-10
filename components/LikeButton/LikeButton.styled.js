@@ -11,6 +11,7 @@ export const Button = styled.button`
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  cursor: pointer;
 `;
 
 export const ButtonText = styled.span`
