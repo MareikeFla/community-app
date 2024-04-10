@@ -1,9 +1,14 @@
 import { EditProfileButton } from "./Profile.styled";
 import { StyledEditIcon } from "../EditEventButton/EditEventButton.styled";
-import { StyledProfile, UserName, PictureProfile } from "./Profile.styled";
+import {
+  StyledProfile,
+  UserName,
+  UserDetail,
+  PictureProfile,
+  pictureSize,
+} from "./Profile.styled";
 
-export default function Profile({ toggleEditMode, session }) {
-  const user = session?.user;
+export default function Profile({ toggleEditMode, userInfo }) {
   return (
     <StyledProfile>
       <EditProfileButton title="Profil bearbeiten" onClick={toggleEditMode}>
@@ -14,14 +19,27 @@ export default function Profile({ toggleEditMode, session }) {
           height={22}
         />
       </EditProfileButton>
-      <PictureProfile
-        src={user?.image}
-        alt="Profile picture"
-        height={128}
-        width={128}
-      />
-      <UserName>{user?.name}</UserName>
-      <p>{user?.email}</p>
+      {userInfo.map((info) => {
+        if (info.key === "name") {
+          return <UserName key={info.key}>{info.value}</UserName>;
+        }
+        if (info.key === "image") {
+          return (
+            <PictureProfile
+              key={info.key}
+              src={info.value}
+              alt={info.text}
+              height={pictureSize}
+              width={pictureSize}
+            />
+          );
+        }
+        return (
+          <UserDetail key={info.key}>
+            {info.text}: {info.value}
+          </UserDetail>
+        );
+      })}
     </StyledProfile>
   );
 }
