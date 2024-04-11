@@ -1,14 +1,15 @@
 import { EditProfileButton } from "./Profile.styled";
 import { StyledEditIcon } from "../EditEventButton/EditEventButton.styled";
+import { StyledProfile, UserName, PictureProfile } from "./Profile.styled";
 import {
-  StyledProfile,
-  UserName,
-  UserDetail,
-  PictureProfile,
-  pictureSize,
-} from "./Profile.styled";
+  InfoWrapper,
+  InfoTitle,
+  Info,
+} from "../EventDetail/EventDetail.styled";
 
 export default function Profile({ toggleEditMode, userInfo }) {
+  const { profilePicture, name, additionalInfo } = userInfo;
+
   return (
     <StyledProfile>
       <EditProfileButton title="Profil bearbeiten" onClick={toggleEditMode}>
@@ -19,27 +20,23 @@ export default function Profile({ toggleEditMode, userInfo }) {
           height={22}
         />
       </EditProfileButton>
-      {userInfo.map((info) => {
-        if (info.key === "name") {
-          return <UserName key={info.key}>{info.value}</UserName>;
-        }
-        if (info.key === "image") {
+      <UserName>{name.value}</UserName>
+      <PictureProfile
+        src={profilePicture.value}
+        alt={profilePicture.text}
+        height={profilePicture.pictureSize}
+        width={profilePicture.pictureSize}
+      />
+      <InfoWrapper>
+        {additionalInfo.map((info) => {
           return (
-            <PictureProfile
-              key={info.key}
-              src={info.value}
-              alt={info.text}
-              height={pictureSize}
-              width={pictureSize}
-            />
+            <>
+              <InfoTitle key={info.key}>{info.text}:</InfoTitle>
+              <Info>{info.value}</Info>
+            </>
           );
-        }
-        return (
-          <UserDetail key={info.key}>
-            {info.text}: {info.value}
-          </UserDetail>
-        );
-      })}
+        })}
+      </InfoWrapper>
     </StyledProfile>
   );
 }
