@@ -63,3 +63,9 @@ export const CommentButton = styled(PrimaryButton)`
   }
 `};
 `;
+
+export const EditButtonSection = styled.section`
+  display: flex;
+  justify-content: end;
+  gap: 0.75rem;
+`;

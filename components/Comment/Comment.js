@@ -41,6 +41,8 @@ export default function Comment({ comment }) {
     setIsEditingComment(!isEditingComment);
   }
 
+  if (!createdBy) return null;
+
   return (
     <li>
       <CommentContainer>
