@@ -2,34 +2,20 @@ import styled from "styled-components";
 import { Card } from "../MessageCard/MessageCard.styled";
 import Image from "next/image";
 import { EditButton } from "../EditEventButton/EditEventButton.styled";
-import {
-  FormInput,
-  FormLabel,
-  EventFormStyled,
-  FormSection,
-} from "../EventForm/EventForm.styled";
-
-export const pictureSize = 128;
-const overlapping = 32;
+import { EventFormStyled, FormInfoText } from "../EventForm/EventForm.styled";
+import { EventName } from "../EventDetail/EventDetail.styled";
 
 export const StyledProfile = styled(Card)`
   position: relative;
   margin-top: 2rem;
-  padding: 6rem 1.5rem 2rem 1.5rem;
+  padding: 6rem 1.5rem 0 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-export const UserName = styled.h1`
-  font: var(--font_heading-1);
-  color: var(--color_midnight);
-  margin: 1.125rem 0;
-`;
-
-export const UserDetail = styled.p`
-  font: var(--font_body);
-  margin-bottom: 0.375rem;
+export const UserName = styled(EventName)`
+  margin: 1.125rem 0 0 0;
 `;
 
 export const PictureProfile = styled(Image)`
@@ -50,8 +36,6 @@ export const ProfileFormStyled = styled(EventFormStyled)`
   width: 100%;
 `;
 
-export const ProfileFormSection = styled(FormSection)``;
-
-export const ProfilInputField = styled(FormInput)``;
-
-export const ProfileFormLabel = styled(FormLabel)``;
+export const ProfileFormInfoText = styled(FormInfoText)`
+  margin-bottom: 1.875rem;
+`;

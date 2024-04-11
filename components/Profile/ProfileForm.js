@@ -1,11 +1,10 @@
 import { StyledProfile, PictureProfile } from "./Profile.styled";
+import { ProfileFormStyled, ProfileFormInfoText } from "./Profile.styled";
 import {
-  ProfileFormStyled,
-  ProfileFormLabel,
-  ProfilInputField,
-  ProfileFormSection,
-} from "./Profile.styled";
-import { FormInfoText } from "../EventForm/EventForm.styled";
+  FormSection,
+  FormInput,
+  FormLabel,
+} from "../EventForm/EventForm.styled";
 import { FormButtonWrapper } from "../EventForm/EventForm.styled";
 import Button from "../Button/Button";
 import { useModal } from "@/lib/useModal";
@@ -16,9 +15,8 @@ export default function ProfileForm({
   handleSubmit,
 }) {
   const { showModal } = useModal();
-
-  const [profilePicture] = userInfo.filter((info) => info.key === "image");
-  const filteredUserinfo = userInfo.filter((info) => info.key !== "image");
+  const { profilePicture, name, additionalInfo } = userInfo;
+  const editableInfo = [name, ...additionalInfo];
 
   return (
     <StyledProfile>
@@ -39,28 +37,28 @@ export default function ProfileForm({
           });
         }}
       >
-        {filteredUserinfo.map((info) => {
+        {editableInfo.map((info) => {
           const { key, text, value, isRequired } = info;
           return (
-            <ProfileFormSection key={key}>
-              <ProfileFormLabel htmlFor={key}>
+            <FormSection key={key}>
+              <FormLabel htmlFor={key}>
                 {text} {isRequired && "*"}
-              </ProfileFormLabel>
-              <ProfilInputField
+              </FormLabel>
+              <FormInput
                 required={key === "name"}
                 type="text"
                 name={key}
                 id={key}
                 defaultValue={value}
-              ></ProfilInputField>
-            </ProfileFormSection>
+              ></FormInput>
+            </FormSection>
           );
         })}
         <FormButtonWrapper>
           <Button type="button" text="Abbrechen" onClick={toggleEditMode} />
           <Button color="primary" type="submit" text="Speichern" />
         </FormButtonWrapper>
-        <FormInfoText>* Pflichtfeld</FormInfoText>
+        <ProfileFormInfoText>* Pflichtfeld</ProfileFormInfoText>
       </ProfileFormStyled>
     </StyledProfile>
   );
