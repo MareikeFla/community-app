@@ -19,7 +19,7 @@ export default function CommentForm({
   const { showModal } = useModal();
 
   const modalContent = {
-    message: "Diesen Kommentar wirklich löschen?",
+    message: "Diesen Kommentar (und eventuelle Antworten) wirklich löschen?",
     textButtonCancel: "Abbrechen",
     textButtonConfirm: "Löschen",
     onConfirm: () => deleteComment(comment._id),
