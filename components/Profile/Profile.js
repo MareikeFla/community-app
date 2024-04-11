@@ -31,7 +31,7 @@ export default function Profile({ toggleEditMode, userInfo }) {
         {additionalInfo.map((info) => {
           return (
             <>
-              <InfoTitle key={info.key}>{info.text}:</InfoTitle>
+              <InfoTitle key={info.key}>{info.text}</InfoTitle>
               <Info>{info.value}</Info>
             </>
           );
