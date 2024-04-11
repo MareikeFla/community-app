@@ -6,6 +6,7 @@ import {
   InfoTitle,
   Info,
 } from "../EventDetail/EventDetail.styled";
+import { Fragment } from "react";
 
 export default function Profile({ toggleEditMode, userInfo }) {
   const { profilePicture, name, additionalInfo } = userInfo;
@@ -30,10 +31,10 @@ export default function Profile({ toggleEditMode, userInfo }) {
       <InfoWrapper>
         {additionalInfo.map((info) => {
           return (
-            <>
-              <InfoTitle key={info.key}>{info.text}</InfoTitle>
+            <Fragment key={info.key}>
+              <InfoTitle>{info.text}</InfoTitle>
               <Info>{info.value}</Info>
-            </>
+            </Fragment>
           );
         })}
       </InfoWrapper>
