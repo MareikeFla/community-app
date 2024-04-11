@@ -6,6 +6,7 @@ import {
   CommentText,
   CommentTime,
   ProfilePicture,
+  NameAndTimeWrapp,
 } from "./Comment.styled";
 
 import ReplyButton from "../ReplyButton/ReplyButton";
@@ -23,8 +24,9 @@ export default function Comment({ comment }) {
   const [isEditingComment, setIsEditingComment] = useState(false);
   const [isReplyFormOpen, setIsReplyFormOpen] = useState();
   const { data: session } = useSession();
-  const userId = session?.user.id;
-  const { text, creationDate, isLiked, _id, createdBy } = comment;
+  const userId = session?.user.id || null;
+  const { text, creationDate, isLiked, _id, createdBy, parentEventId } =
+    comment;
   const { likeComment, addReply, fetchedComments, editComment } = useData();
   const timeElapsed = getTimeElapsed(creationDate);
 
@@ -33,30 +35,30 @@ export default function Comment({ comment }) {
   );
 
   const handleReplyForm = () => {
-    setIsReplyFormOpen((prevState) => !prevState);
+    setIsReplyFormOpen(!isReplyFormOpen);
   };
 
-  const commentIsLikedByUser = isLiked.includes(userId);
   function handleEditComment() {
     setIsEditingComment(!isEditingComment);
   }
-
-  if (!createdBy) return null;
+  const commentIsLikedByUser = isLiked.includes(userId);
 
   return (
     <li>
       <CommentContainer>
         <ProfilePicture
-          src={createdBy.image}
+          src={createdBy?.image || "/assets/images/placeholder.png"}
           alt="profile picture"
           height={36}
           width={36}
         />
         <CommentText>
           <CommentHeader>
-            {createdBy.name}{" "}
-            <CommentTime> · {creationDate && timeElapsed}</CommentTime>
-            {userId === createdBy._id && (
+            <NameAndTimeWrapp>
+              {createdBy?.name || "Gelöschte Person"}
+              <CommentTime>{creationDate && timeElapsed}</CommentTime>
+            </NameAndTimeWrapp>
+            {userId === createdBy?._id && (
               <EditCommentButton
                 onEditComment={handleEditComment}
                 isEditing={isEditingComment}
@@ -77,7 +79,7 @@ export default function Comment({ comment }) {
           )}
 
           {!isEditingComment && (
-            <FlexContainer>
+            <FlexContainer $userIsLoggedIn={session ? true : false}>
               {session && (
                 <ReplyButton onClick={handleReplyForm} text="Antworten" />
               )}
@@ -98,7 +100,7 @@ export default function Comment({ comment }) {
       {isReplyFormOpen && (
         <ReplyCommentForm
           onPostReply={(event) => {
-            addReply(_id, event, userId);
+            addReply(_id, event, userId, parentEventId);
             handleReplyForm();
           }}
         />

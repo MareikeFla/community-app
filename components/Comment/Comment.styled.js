@@ -19,7 +19,8 @@ export const CommentHeader = styled.p`
   margin-bottom: 0.375rem;
   display: flex;
   gap: 0.375rem;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
 `;
 
 export const CommentTime = styled.span`
@@ -39,5 +40,11 @@ export const CommentText = styled.section`
 
 export const FlexContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${({ $userIsLoggedIn }) =>
+    $userIsLoggedIn ? "space-between" : "end"};
+`;
+
+export const NameAndTimeWrapp = styled.div`
+  display: flex;
+  flex-direction: column;
 `;

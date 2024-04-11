@@ -8,15 +8,15 @@ export default function EditCommentButton({ onEditComment, isEditing }) {
         <Image
           src={"/assets/icons/icon_edit-grey.svg"}
           alt="Edit Button"
-          height={14}
-          width={14}
+          height={16}
+          width={16}
         />
       ) : (
         <Image
           src={"/assets/icons/icon_cancel.svg"}
           alt="Cancel Button"
-          height={12}
-          width={12}
+          height={16}
+          width={16}
         />
       )}
     </EditButton>

@@ -19,6 +19,8 @@ export const ReplyHeader = styled.p`
   margin-bottom: 0.375rem;
   display: flex;
   gap: 0.375rem;
+  justify-content: space-between;
+  align-items: flex-start;
 `;
 
 export const ReplyTime = styled.span`

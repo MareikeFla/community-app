@@ -22,17 +22,23 @@ export default function CommentSection({ id }) {
   }
 
   const sortedComments = comments
-    ?.filter((comment) => comment.parentEventId === id)
+    ?.filter(
+      (comment) => comment.parentEventId === id && !comment.parentCommentId
+    )
     .sort((a, b) => {
       const dateA = new Date(a.creationDate);
       const dateB = new Date(b.creationDate);
       return dateB - dateA;
     });
 
+  const numberOfReplies = comments.filter(
+    (comment) => comment.parentEventId === id && comment.parentCommentId
+  ).length;
+
   return (
     <section>
       <SectionTitle>
-        {`${sortedComments?.length} Kommentar${
+        {`${sortedComments?.length + numberOfReplies} Kommentar${
           sortedComments?.length === 1 ? "" : "e"
         }`}
       </SectionTitle>

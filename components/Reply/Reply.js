@@ -7,6 +7,7 @@ import {
   ReplyBody,
   ReplyText,
 } from "./Reply.styled";
+import { NameAndTimeWrapp } from "../Comment/Comment.styled";
 import { useData } from "@/lib/useData";
 import LikeButton from "../LikeButton/LikeButton";
 import { useSession } from "next-auth/react";
@@ -35,8 +36,10 @@ export default function Reply({ reply }) {
         />
         <ReplyText>
           <ReplyHeader>
-            {createdBy.name}{" "}
-            <ReplyTime> · {creationDate && timeElapsed}</ReplyTime>
+            <NameAndTimeWrapp>
+              {createdBy.name}{" "}
+              <ReplyTime>{creationDate && timeElapsed}</ReplyTime>
+            </NameAndTimeWrapp>
             {userId === createdBy._id && (
               <EditCommentButton
                 onEditComment={() => setIsEditingReply(!isEditingReply)}
