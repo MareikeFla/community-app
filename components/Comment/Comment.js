@@ -31,7 +31,6 @@ export default function Comment({ comment }) {
   const replies = fetchedComments.comments.filter(
     (comment) => comment.parentCommentId === _id
   );
-  const foo = "foo";
 
   const handleReplyForm = () => {
     setIsReplyFormOpen((prevState) => !prevState);
