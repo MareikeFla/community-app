@@ -1,0 +1,13 @@
+name: Trigger API Every 2 Minutes
+
+on:
+  schedule:
+    - cron: "*/2 * * * *"
+
+jobs:
+  make-api-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger API Endpoint
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{"key": "value"}' https://yourapi.endpoint.url
