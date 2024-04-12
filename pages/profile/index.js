@@ -19,12 +19,12 @@ export default function ProfilePage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const wasSuccsessfull = await updateUser(event, session.user);
-    if (wasSuccsessfull) {
+    const wasSuccsessful = await updateUser(event, session.user);
+    if (wasSuccsessful) {
       updateSession();
     }
     toggleEditMode();
-    return wasSuccsessfull;
+    return wasSuccsessful;
   };
 
   if (status === "loading" || (status === "authenticated" && !session)) {
