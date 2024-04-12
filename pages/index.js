@@ -7,6 +7,7 @@ import { useData } from "@/lib/useData";
 
 export default function HomePage() {
   const { events, isLoadingEvents, errorEvents } = useData().fetchedEvents;
+  const { addUser } = useData();
 
   if (isLoadingEvents) {
     return <Loading />;
@@ -19,6 +20,10 @@ export default function HomePage() {
     <>
       <WelcomeCard />
       <CategoryList />
+      <button type="button" onClick={() => addUser()}>
+        klick mcih
+      </button>
+
       <EventList events={events} isSorted={false} title={"Aktuelle Events"} />
     </>
   );
