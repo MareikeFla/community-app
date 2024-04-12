@@ -1,6 +1,15 @@
 // pages/api/dailyTask.js
 
 export default async (req, res) => {
+  if (request.method === "POST") {
+    try {
+      await User.create({ name: "test" });
+      response.status(201).json({ status: "User created" });
+    } catch (error) {
+      console.error(error);
+      response.status(400).json({ error: error.message });
+    }
+  }
   if (req.method === "POST") {
     // Logic for POST request
     console.log("Running POST daily task");

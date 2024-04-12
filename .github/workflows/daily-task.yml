@@ -10,4 +10,4 @@ jobs:
     steps:
       - name: Trigger API Endpoint
         run: |
-          curl -X POST -H "Content-Type: application/json" -d '{"key": "value"}' https://yourapi.endpoint.url
+          curl -X POST -H "Content-Type: application/json" -d '{"key": "value"}' https://community-app-git-mareiketestingstuff-mareikeflas-projects.vercel.app/api/dailyTask
