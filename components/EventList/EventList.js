@@ -4,7 +4,7 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 
 export default function EventList({ events = [], isSorted, title }) {
   if (!isSorted) {
-    events.sort((a, b) => new Date(a.start.date) - new Date(b.start.date));
+    events.sort((a, b) => new Date(a?.start?.date) - new Date(b?.start?.date));
   }
 
   return (
@@ -12,7 +12,14 @@ export default function EventList({ events = [], isSorted, title }) {
       {title ? <SectionTitle>{title}</SectionTitle> : null}
       <EventListWrapper>
         {events.map((event) => (
-          <EventDetailsLink key={event._id} href={`/events/${event._id}`}>
+          <EventDetailsLink
+            key={event._id}
+            href={
+              event.isBonnEvent
+                ? `/events/${event._id}?bonn=true`
+                : `/events/${event._id}`
+            }
+          >
             <EventPreview event={event} />
           </EventDetailsLink>
         ))}
