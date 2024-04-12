@@ -10,17 +10,7 @@ export default async (req, res) => {
       response.status(400).json({ error: error.message });
     }
   }
-  if (req.method === "POST") {
-    // Logic for POST request
-    console.log("Running POST daily task");
 
-    // Example of a function that could interact with MongoDB
-    // await someDatabaseOperation();
-
-    res.status(200).json({ message: "POST daily task completed" });
-  } else if (req.method === "GET") {
-    // Logic for GET request
-    console.log("Running GET daily task");
 
     // You can perform read-only operations here, for example:
     // const data = await someDatabaseReadingOperation();
