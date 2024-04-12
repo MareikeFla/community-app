@@ -45,7 +45,7 @@ export default function ProfileForm({
                 {text} {isRequired && "*"}
               </FormLabel>
               <FormInput
-                required={key === "name"}
+                required={isRequired}
                 type="text"
                 name={key}
                 id={key}
