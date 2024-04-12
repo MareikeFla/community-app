@@ -8,7 +8,7 @@ import { useData } from "@/lib/useData";
 import { useState } from "react";
 import { formatedUserInfo } from "@/lib/profile/profileHelper";
 
-export default function profilePage() {
+export default function ProfilePage() {
   const { data: session, status, update: updateSession } = useSession();
   const { updateUser } = useData();
   const [editMode, setEditMode] = useState(false);
