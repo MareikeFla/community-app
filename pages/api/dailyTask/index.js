@@ -1,30 +1,25 @@
 // pages/api/dailyTask.js
-
+import User from "@/db/models/User";
 export default async (req, res) => {
-  if (request.method === "POST") {
+  if (req.method === "POST") {
     try {
-      await User.create({ name: "test" });
-      response.status(201).json({ status: "User created" });
+      // Assuming 'User.create' is a valid operation and 'User' is correctly imported and set up
+      await User.create({ name: "test", email: "sss", image: "ddd" });
+      res.status(201).json({ status: "User created" });
     } catch (error) {
       console.error(error);
-      response.status(400).json({ error: error.message });
+      res.status(400).json({ error: error.message });
     }
-  }
-  if (req.method === "GET") {
-    // Logic for GET request
+  } else if (req.method === "GET") {
     console.log("Running GET daily task");
-
-    // You can perform read-only operations here, for example:
-    // const data = await someDatabaseReadingOperation();
-
+    // Example GET logic
     res.status(200).json({
       message: "GET daily task completed",
       data: {
-        /* some data */
+        // Example data
       },
     });
   } else {
-    // If the method is neither POST nor GET
     res.setHeader("Allow", ["POST", "GET"]);
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
