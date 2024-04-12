@@ -26,11 +26,10 @@ import { locationToString } from "@/lib/formatLocation";
 import JoinButton from "../JoinButton/JoinButton";
 import { useData } from "@/lib/useData";
 
-export default function EventDetail({ event }) {
+export default function EventDetail({ event, mutateEvent }) {
   const { joinEvent } = useData();
   const { data: session } = useSession();
-  const userId = session?.user.id;
-
+  const userId = session?.user.id || null;
   if (!event) {
     return (
       <Card $pageNotFound>
@@ -64,26 +63,26 @@ export default function EventDetail({ event }) {
 
   return (
     <>
-{image ? (
-  <EventHeader>
-    {event.createdBy === userId ? (
-      <>
-        <EditEventButton id={_id} />
-        <DeleteEventButton id={_id} />
-      </>
-    ) : null}
-    <EventName $withImage={image}>{eventName}</EventName>
-    <EventImage
-      src={image.url}
-      alt={eventName}
-      fill
-      sizes="100vw 100vh"
-      priority
-    />
-  </EventHeader>
-) : null}
-<Card $withImage={image} $userId={userId} $createdBy={event.createdBy}>
-  {event.createdBy === userId ? (
+      {image ? (
+        <EventHeader>
+          {event.createdBy === userId ? (
+            <>
+              <EditEventButton id={_id} />
+              <DeleteEventButton id={_id} />
+            </>
+          ) : null}
+          <EventName $withImage={image}>{eventName}</EventName>
+          <EventImage
+            src={image.url}
+            alt={eventName}
+            fill
+            sizes="100vw 100vh"
+            priority
+          />
+        </EventHeader>
+      ) : null}
+      <Card $withImage={image} $userId={userId} $createdBy={event.createdBy}>
+        {event.createdBy === userId ? (
           <>
             <EditEventButton id={_id} />
             <DeleteEventButton id={_id} />
@@ -125,7 +124,7 @@ export default function EventDetail({ event }) {
           <CategoryTag category={category} />
           {session && (
             <JoinButton
-              onJoinEvent={() => joinEvent(userId, _id)}
+              onJoinEvent={() => joinEvent(userId, _id, mutateEvent)}
               isAttendedByUser={isAttendedByUser}
             />
           )}
