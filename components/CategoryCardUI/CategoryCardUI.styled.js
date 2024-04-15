@@ -20,6 +20,7 @@ export const CategoryImage = styled(Image)`
   height: auto;
   border-top-left-radius: var(--border-radius_card);
   border-top-right-radius: var(--border-radius_card);
+  object-fit: cover;
 `;
 
 export const CategoryInfoContainer = styled.section`

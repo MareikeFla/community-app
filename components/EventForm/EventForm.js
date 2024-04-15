@@ -13,11 +13,17 @@ import {
   FormInput,
   FormSelect,
   FormCheckboxWrapper,
+  FlexWrapper,
   FormDescriptionField,
   FormButtonWrapper,
+  ErrorMessage,
   FormLegend,
   FormInfoText,
   FormTimeDateWrapper,
+  FileInput,
+  UploadButton,
+  UploadPreviewContainer,
+  UploadPreview,
   FlexContainer,
   FormInputTime,
   FixedSize,
@@ -26,6 +32,8 @@ import {
   SubtitleRight,
   CharacterCounter,
 } from "./EventForm.styled";
+import { DeleteButton } from "../DeleteEventButton/DeleteEventButton.styled";
+import Image from "next/image";
 import Button from "../Button/Button";
 import SwitchButton from "../SwitchButton/SwitchButton";
 import { useModal } from "@/lib/useModal";
@@ -54,22 +62,28 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     recalculateCharacters,
     startDate,
     endDate,
+    selectedImage,
+    isImageSelected,
+    imagePreview,
+    isConsentChecked,
+    setIsConsentChecked,
+    submitAttempted,
+    setSubmitAttempted,
     handleStartDateChange,
     handleEndDateChange,
+    handleCostsChange,
+    handleImageChange,
+    handleDeleteImage,
     handleSubmit,
     handleCancel,
-    handleCostsChange,
     MAX_CHAR_COUNT,
     isStreetRequired,
     isLinkRequired,
     checkIfCorrespondingFieldIsRequired,
-    longDescription,
-    setLongDescription,
-    longDescriptionHeight,
-    setLongDescriptionHeight,
   } = useEventForm(editEvent);
 
-  // Effect to update costs state based on the isFreeOfCharge flag or editEvent data
+  // Updates the 'costs' state based on the 'isFreeOfCharge' toggle.
+  // Sets costs to 'Kostenlos' if free, retains existing costs if applicable, or clears if chargeable.
   useEffect(() => {
     if (isFreeOfCharge) {
       setCosts("Kostenlos");
@@ -91,12 +105,19 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     <EventFormStyled
       onSubmit={(event) => {
         event.preventDefault();
-        showModal({
-          message: "Event speichern?", // Default message
-          textButtonCancel: "Abbrechen", // Default text for the cancel button
-          textButtonConfirm: "Speichern", // Default text for the confirm button
-          onConfirm: () => handleSubmit(event, onSubmit),
-        });
+        setSubmitAttempted(true);
+        if (
+          !selectedImage ||
+          (selectedImage && isImageSelected && isConsentChecked)
+        ) {
+          showModal({
+            message: "Event speichern?", // Default message
+            textButtonCancel: "Abbrechen", // Default text for the cancel button
+            textButtonConfirm: "Speichern", // Default text for the confirm button
+            onConfirm: () =>
+              handleSubmit(event, onSubmit, selectedImage, editEvent),
+          });
+        }
       }}
     >
       <FormSection>
@@ -222,11 +243,13 @@ export default function EventForm({ onSubmit, event: editEvent }) {
       </FormSection>
       <FormSection>
         <FormCheckboxWrapper>
-          <FormLabel htmlFor="forFree">Kostenlos</FormLabel>
-          <SwitchButton
-            isChecked={isFreeOfCharge}
-            toggleIsFreeOfCharge={() => setIsFreeOfCharge(!isFreeOfCharge)}
-          />
+          <FlexWrapper>
+            <label htmlFor="forFree">Kostenlos</label>
+            <SwitchButton
+              isChecked={isFreeOfCharge}
+              onChange={() => setIsFreeOfCharge(!isFreeOfCharge)}
+            />
+          </FlexWrapper>
         </FormCheckboxWrapper>
         <FormLabel htmlFor="costs">Kosten *</FormLabel>
         <FormInput
@@ -283,6 +306,83 @@ export default function EventForm({ onSubmit, event: editEvent }) {
           initialLongDescription={editEvent?.longDescription || ""}
         />
         <SubtitleRight>Erscheint auf der Event Seite</SubtitleRight>
+      </FormSection>
+      <FormSection>
+        <FormLabel htmlFor="image">
+          Bild <div>(JPG/PNG, Querformat empfohlen)</div>
+        </FormLabel>
+        <FileInput
+          type="file"
+          id="image"
+          name="image"
+          accept="image/jpeg, image/png"
+          onChange={handleImageChange}
+        />
+        <UploadButton htmlFor="image">
+          {isImageSelected ? (
+            <>
+              <Image
+                src="/assets/icons/icon_replace.svg"
+                alt="Bild ersetzen"
+                width={22}
+                height={22}
+              />
+              Bild ersetzen
+            </>
+          ) : (
+            <>
+              <Image
+                src="/assets/icons/icon_image-upload.svg"
+                alt="Bild hochladen"
+                width={22}
+                height={22}
+              />
+              Bild hochladen
+            </>
+          )}
+        </UploadButton>
+        {imagePreview && (
+          <UploadPreviewContainer>
+            <UploadPreview
+              src={imagePreview}
+              alt="Bildvorschau"
+              fill
+              sizes="100vw 100vh"
+            />
+            <DeleteButton
+              $uploadPreview
+              title="Bild entfernen"
+              onClick={() => handleDeleteImage()}
+            >
+              <Image
+                src="/assets/icons/icon_delete.svg"
+                alt="Bild entfernen"
+                width={21}
+                height={23}
+              />
+            </DeleteButton>
+          </UploadPreviewContainer>
+        )}
+        {isImageSelected && (
+          <FormCheckboxWrapper $consentMargin>
+            <FlexWrapper>
+              <label htmlFor="imageConsent">
+                Einwilligung zur Bildfreigabe *
+              </label>
+              <SwitchButton
+                isChecked={isConsentChecked}
+                onChange={() => setIsConsentChecked(!isConsentChecked)}
+              />
+            </FlexWrapper>
+            <p>
+              Ich besitze alle erforderlichen Rechte an dem ausgewählten Bild
+              und bin mit der Verwendung einverstanden.
+            </p>
+            {submitAttempted && !isConsentChecked && (
+              <ErrorMessage>Bitte bestätigen, um fortzufahren.</ErrorMessage>
+            )}
+          </FormCheckboxWrapper>
+        )}
       </FormSection>
       <FormSection>
         <FormLabel htmlFor="linkURL">Link für weitere Infos</FormLabel>

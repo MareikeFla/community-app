@@ -6,7 +6,7 @@ export const DeleteButton = styled.button`
   align-items: center;
   position: absolute;
   top: 0.625rem;
-  right: 3rem;
+  right: ${({ $uploadPreview }) => ($uploadPreview ? "0.625rem" : "3rem")};
   height: 1.875rem;
   aspect-ratio: 1;
   background-color: var(--color_red);

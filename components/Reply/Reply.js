@@ -10,12 +10,16 @@ import {
 import { useData } from "@/lib/useData";
 import LikeButton from "../LikeButton/LikeButton";
 import { useSession } from "next-auth/react";
+import EditCommentButton from "../EditCommentButton/EditCommentButton";
+import CommentForm from "../CommentForm/CommentForm";
+import { useState } from "react";
 
 export default function Reply({ reply }) {
   const { data: session } = useSession();
+  const [isEditingReply, setIsEditingReply] = useState(false);
   const userId = session?.user.id;
   const { text, creationDate, _id, isLiked, createdBy } = reply;
-  const { updateComment } = useData();
+  const { likeComment, editComment } = useData();
 
   const replyIsLikedByUser = isLiked.includes(userId);
   const timeElapsed = getTimeElapsed(creationDate);
@@ -33,15 +37,36 @@ export default function Reply({ reply }) {
           <ReplyHeader>
             {createdBy.name}{" "}
             <ReplyTime> · {creationDate && timeElapsed}</ReplyTime>
+            {userId === createdBy._id && (
+              <EditCommentButton
+                onEditComment={() => setIsEditingReply(!isEditingReply)}
+                isEditing={isEditingReply}
+              ></EditCommentButton>
+            )}
           </ReplyHeader>
           <ReplyBody>
-            {text}
-            <LikeButton
-              userIsLoggedIn={!session}
-              onLikeComment={() => updateComment(_id, userId)}
-              checkIfIsLiked={replyIsLikedByUser}
-              numberOfLikes={isLiked && isLiked.length > 0 ? isLiked.length : 0}
-            />
+            {!isEditingReply ? (
+              <>
+                <p>{text}</p>
+                <LikeButton
+                  userIsLoggedIn={!session}
+                  onLikeComment={() => likeComment(_id, userId)}
+                  checkIfIsLiked={replyIsLikedByUser}
+                  numberOfLikes={
+                    isLiked && isLiked.length > 0 ? isLiked.length : 0
+                  }
+                />
+              </>
+            ) : (
+              <CommentForm
+                isEditing={isEditingReply}
+                comment={reply}
+                onPostComment={(comment) => {
+                  editComment(_id, comment);
+                  setIsEditingReply(!isEditingReply);
+                }}
+              />
+            )}
           </ReplyBody>
         </ReplyText>
       </ReplyContainer>

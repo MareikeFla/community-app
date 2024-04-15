@@ -46,7 +46,7 @@ export default async function handler(request, response) {
         return response.status(404).json({ status: "Event not found" });
       }
 
-      if (event.comments.length) {
+      if (event.comments?.length) {
         await Comment.deleteMany({ _id: { $in: event.comments } });
       }
 

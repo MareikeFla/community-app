@@ -21,7 +21,9 @@ export default NextAuth({
       },
       async authorize(credentials) {
         // this is only here in order to make it easier for people to test the application
-        const testUser = await User.findOne({ email: "testuser@example.com" });
+        const testUser = await User.findOne({
+          _id: "65fbdcb35895e6679be113b3",
+        });
 
         if (
           credentials.username === "test" &&
@@ -39,7 +41,7 @@ export default NextAuth({
   session: {
     strategy: "jwt",
   },
-
+  secret: process.env.NEXTAUTH_JWT_SECRET,
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
@@ -53,6 +55,15 @@ export default NextAuth({
       if (token) {
         session.accessToken = token.accessToken;
         session.user.id = token.id;
+        try {
+          const updatedUser = await User.findById(token.id);
+          session.user = {
+            ...session.user,
+            ...updatedUser.toJSON(),
+          };
+        } catch (error) {
+          console.error("Failed to update session user details", error);
+        }
 
         return session;
       } else {

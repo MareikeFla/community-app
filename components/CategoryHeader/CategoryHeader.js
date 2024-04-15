@@ -13,8 +13,9 @@ export default function CategoryHeader({ category }) {
       <CategoryImage
         src={imageSource}
         alt={imageAlt}
-        layout="fill"
-        objectFit="cover"
+        sizes="100vw 100vh"
+        fill
+        priority
       />
     </CategoryHeaderContainer>
   );

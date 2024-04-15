@@ -15,8 +15,8 @@ export default function CategoryCardUI({ category, categoryEventCount }) {
         <CategoryImage
           src={imageSource}
           alt={imageAlt}
-          layout="fill"
-          objectFit="cover"
+          sizes="100vw 100vh"
+          fill
           priority
         />
       </ImageContainer>

@@ -32,8 +32,8 @@ export default function CommentSection({ id }) {
   return (
     <section>
       <SectionTitle>
-        {`${sortedComments.length} Kommentar${
-          sortedComments.length === 1 ? "" : "e"
+        {`${sortedComments?.length} Kommentar${
+          sortedComments?.length === 1 ? "" : "e"
         }`}
       </SectionTitle>
       <CommentCard>

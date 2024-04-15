@@ -32,8 +32,8 @@ export default function EditEvent() {
           event={event}
         />
       ) : (
-        <MessageCard>
-          <p>Du bist nicht berechtigt, dieses Event zu bearbeiten</p>
+        <MessageCard hasButton>
+          <p>Du bist nicht berechtigt, dieses Event zu bearbeiten.</p>
           {session ? (
             <ArrowLink href="/events/new">Event Erstellen</ArrowLink>
           ) : (
