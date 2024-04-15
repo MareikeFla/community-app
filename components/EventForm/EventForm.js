@@ -85,10 +85,6 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     checkIfCorrespondingFieldIsRequired,
   } = useEventForm(editEvent, categories);
 
-  useEffect(() => {
-    console.log("Unterkategorien:", subCategories);
-  }, [subCategories]);
-
   // Updates the 'costs' state based on the 'isFreeOfCharge' toggle.
   // Sets costs to 'Kostenlos' if free, retains existing costs if applicable, or clears if chargeable.
   useEffect(() => {
