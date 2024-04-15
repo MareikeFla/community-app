@@ -54,6 +54,9 @@ export default function EventForm({ onSubmit, event: editEvent }) {
 
   // Custom hook to manage form state and logic
   const {
+    selectedCategory,
+    setSelectedCategory,
+    subCategories,
     isFreeOfCharge,
     setIsFreeOfCharge,
     costs,
@@ -80,7 +83,11 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     isStreetRequired,
     isLinkRequired,
     checkIfCorrespondingFieldIsRequired,
-  } = useEventForm(editEvent);
+  } = useEventForm(editEvent, categories);
+
+  useEffect(() => {
+    console.log("Unterkategorien:", subCategories);
+  }, [subCategories]);
 
   // Updates the 'costs' state based on the 'isFreeOfCharge' toggle.
   // Sets costs to 'Kostenlos' if free, retains existing costs if applicable, or clears if chargeable.
@@ -138,15 +145,28 @@ export default function EventForm({ onSubmit, event: editEvent }) {
           id="category"
           required
           aria-required="true"
-          defaultValue={editEvent?.category?._id || ""}
+          value={selectedCategory}
+          onChange={(event) => setSelectedCategory(event.target.value)}
         >
-          {categories.map((cat) => (
-            <option key={cat._id} value={cat._id}>
-              {cat.title}
+          <option value="">-- Bitte auswählen --</option>
+          {categories.map(({ _id, title }) => (
+            <option key={_id} value={_id}>
+              {title}
             </option>
           ))}
         </FormSelect>
       </FormSection>
+      {selectedCategory && (
+        <FormSection>
+          <FormLabel>Unterkategorien *</FormLabel>
+          <ul>
+            {subCategories.map(({ _id, title }) => (
+              <li key={_id}>{title}</li>
+            ))}
+          </ul>
+        </FormSection>
+      )}
+
       <FormSection>
         <FormLabel htmlFor="startDate">Beginn *</FormLabel>
         <FormTimeDateWrapper>
