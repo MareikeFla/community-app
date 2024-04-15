@@ -22,17 +22,23 @@ export default function EventPreview({ event }) {
       <Divider />
       <InfoContainer>
         <Info>
-          <Icon src="/assets/icons/icon_date.svg" alt="event date icon" />
+          <Icon
+            src="/assets/icons/icon_date.svg"
+            alt="Veranstaltungs Kalender Symbol"
+          />
           {formattedDate}
         </Info>
         <Info>
-          <Icon src="/assets/icons/icon_time.svg" alt="event time icon" />
+          <Icon
+            src="/assets/icons/icon_time.svg"
+            alt="Veranstaltungs Uhr Symbol"
+          />
           {time}
         </Info>
         <Info>
           <Icon
             src="/assets/icons/icon_location.svg"
-            alt="event location icon"
+            alt="Veranstaltungs Ort Symbol"
           />
           {location.city || "Online"}
         </Info>

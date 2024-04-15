@@ -6,7 +6,7 @@ export default function SearchLink() {
     <SearchLinkStyled href={"/search"}>
       <Image
         src="/assets/icons/icon_search.svg"
-        alt="Search Link"
+        alt="Suchlink"
         width={36}
         height={36}
       />

@@ -69,7 +69,7 @@ export default function EventDetail({ event }) {
           </>
         ) : null}
         <EventName>{eventName}</EventName>
-        <ExpandableText text={longDescription} />
+        <ExpandableText text={longDescription} aria-role="ausklappbarer text" />
         <InfoWrapper>
           <InfoTitle>Beginn</InfoTitle>
           <Info>

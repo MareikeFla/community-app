@@ -25,9 +25,8 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="de">
         <Head>
-          <title>Pin & Join</title>
           <link rel="icon" href="/favicon/favicon.ico" />
           <link
             rel="icon"
@@ -47,6 +46,11 @@ export default class MyDocument extends Document {
             href="/favicon/apple-touch-icon.png"
           />
           <link rel="manifest" href="/favicon/site.webmanifest" />
+          <meta
+            name="description"
+            content="Finde und erstelle Events in deiner Nähe. 
+                                            Deine detaillierte Suche führt dich zu deiner nächsten Veranstaltung. Merk dir gute Events für später und komm mit den Veranstalter:innen ins Gespräch. Entdecke eine Seite, die Inklusion und Vielfalt feiert. Finde Events und werde Teil einer offenen Gemeinschaft."
+          ></meta>
         </Head>
         <body>
           <Main />
