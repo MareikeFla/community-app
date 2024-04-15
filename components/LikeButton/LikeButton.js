@@ -11,12 +11,12 @@ export default function LikeButton({
     <Button
       onClick={onLikeComment}
       disabled={userIsLoggedIn}
-      aria-label="like button"
+      aria-label="gefällt mir Taste"
     >
       {userIsLoggedIn ? (
         <Image
           src="/assets/icons/icon_heart-filled.svg"
-          alt="heart"
+          alt="Herz"
           height={12}
           width={14}
         />
