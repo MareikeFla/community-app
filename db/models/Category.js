@@ -2,13 +2,20 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
+const subCategorySchema = new Schema({
+  title: String,
+  slug: String,
+  imageSource: String,
+  imageAlt: String,
+});
+
 const categorySchema = new Schema({
   title: String,
-  slug: { type: String },
+  slug: String,
   imageSource: String,
   imageAlt: String,
   color: String,
-  subCategories: [{ type: Schema.Types.ObjectId, ref: "Category" }],
+  subCategories: [subCategorySchema],
 });
 
 const Category =
