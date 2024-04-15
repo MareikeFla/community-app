@@ -6,7 +6,7 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     try {
-      const categories = await Category.find();
+      const categories = await Category.find().populate("subCategories");
       if (!categories) {
         return response.status(404).json({ status: "Not Found" });
       }
