@@ -8,6 +8,7 @@ const categorySchema = new Schema({
   imageSource: String,
   imageAlt: String,
   color: String,
+  subCategories: [{ type: Schema.Types.ObjectId, ref: "Category" }],
 });
 
 const Category =
