@@ -14,19 +14,19 @@ export default createGlobalStyle`
     --color_body: #f8f8f9;
     --color_pale-grey: #f5f5f5;
     --color_light-grey: #d8d8d8;
-    --color_grey: #838688;
+    --color_grey: #737678;//#838688
     --color_night: #5b5f62;
     --color_midnight: #434648;
     --color_light-orange: #feb776;
-    --color_orange: #fea554;
+    --color_orange: #f29a4a;//#fea554;
     --color_light-red: #f9847c;
     --color_red: #ff6e63;
     --color_sunset: linear-gradient(to top right, #fea554, #ff5e62);
     
-    --color_activism: #f65064;
-    --color_art: #a771ba;
-    --color_education: #2ab8e1;
-    --color_sport: #a4c857;
+    --color_activism: #ec495d;//#f65064;
+    --color_art: #a269b6;//#a771ba;
+    --color_education: #22a5cb;//#2ab8e1;
+    --color_sport: #98bb4f;//#a4c857;
 
     /* Font Styles */
     --font-family: ${nunito_sans.style.fontFamily};
