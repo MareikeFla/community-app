@@ -26,11 +26,8 @@ export default function CategoryList() {
       <CategoryListContainer>
         <CategoryListStyled>
           {categories.map((category) => (
-            <li>
-              <CategoryLink
-                key={category._id}
-                href={`/categories/${category.slug}`}
-              >
+            <li key={category._id}>
+              <CategoryLink href={`/categories/${category.slug}`}>
                 <CategoryCard category={category} />
               </CategoryLink>
             </li>
