@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
+import Link from "next/link";
 
 export const EventFormStyled = styled.form`
   padding-top: 1rem;
@@ -292,6 +293,7 @@ export const FixedSize = styled.div`
 export const FullWidth = styled.div`
   width: 100%;
 `;
+
 export const CharacterCounter = styled.div`
   display: inline-block;
   position: absolute;
@@ -299,4 +301,25 @@ export const CharacterCounter = styled.div`
   right: 0.438rem;
   font: var(--font_form-note);
   font-size: 0.563rem;
+`;
+
+export const TagList = styled.div`
+  list-style: none;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+`;
+
+export const Tag = styled.button`
+  font: var(--font_tag);
+  color: ${({ selected }) =>
+    selected ? "var(--color_white)" : "var(--color_grey)"};
+  text-transform: uppercase;
+  background-color: ${({ selected, color }) =>
+    selected ? `var(--color_${color})` : "var(--color_white)"};
+  border: 1px solid
+    ${({ selected }) => (selected ? "var(--color_white)" : "var(--color_grey)")};
+  border-radius: var(--border-radius_button);
+  padding: 0.313rem 0.563rem 0.25rem;
+  cursor: pointer;
 `;
