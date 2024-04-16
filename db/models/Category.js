@@ -7,6 +7,7 @@ const subCategorySchema = new Schema({
   slug: String,
   imageSource: String,
   imageAlt: String,
+  parentCategory: { type: Schema.Types.ObjectId, ref: "Category" },
 });
 
 const categorySchema = new Schema({
