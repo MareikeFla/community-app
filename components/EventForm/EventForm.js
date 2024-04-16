@@ -30,6 +30,8 @@ import {
   FullWidth,
   SubtitleLeft,
   SubtitleRight,
+  Tag,
+  TagList,
   CharacterCounter,
 } from "./EventForm.styled";
 import { DeleteButton } from "../DeleteEventButton/DeleteEventButton.styled";
@@ -55,8 +57,8 @@ export default function EventForm({ onSubmit, event: editEvent }) {
   // Custom hook to manage form state and logic
   const {
     selectedCategory,
-    setSelectedCategory,
     subCategories,
+    selectedSubCategories,
     isFreeOfCharge,
     setIsFreeOfCharge,
     costs,
@@ -72,6 +74,8 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     setIsConsentChecked,
     submitAttempted,
     setSubmitAttempted,
+    handleCategoryChange,
+    handleTagClick,
     handleStartDateChange,
     handleEndDateChange,
     handleCostsChange,
@@ -142,9 +146,8 @@ export default function EventForm({ onSubmit, event: editEvent }) {
           required
           aria-required="true"
           value={selectedCategory}
-          onChange={(event) => setSelectedCategory(event.target.value)}
+          onChange={handleCategoryChange}
         >
-          <option value="">-- Bitte auswählen --</option>
           {categories.map(({ _id, title }) => (
             <option key={_id} value={_id}>
               {title}
@@ -152,17 +155,30 @@ export default function EventForm({ onSubmit, event: editEvent }) {
           ))}
         </FormSelect>
       </FormSection>
-      {selectedCategory && (
-        <FormSection>
-          <FormLabel>Unterkategorien *</FormLabel>
-          <ul>
-            {subCategories.map(({ _id, title }) => (
-              <li key={_id}>{title}</li>
-            ))}
-          </ul>
-        </FormSection>
-      )}
+      <FormSection>
+        <FormLabel>Unterkategorien *</FormLabel>
+        <TagList>
+          {subCategories.map(({ _id, title, parentCategory }) => {
+            const mainCategory = categories.find(
+              (cat) => cat._id === parentCategory
+            );
+            const color = mainCategory ? mainCategory.color : "night";
+            const isSelected = selectedSubCategories.includes(_id);
 
+            return (
+              <Tag
+                key={_id}
+                onClick={() => handleTagClick(_id)}
+                color={color}
+                type="button"
+                selected={isSelected}
+              >
+                {title}
+              </Tag>
+            );
+          })}
+        </TagList>
+      </FormSection>
       <FormSection>
         <FormLabel htmlFor="startDate">Beginn *</FormLabel>
         <FormTimeDateWrapper>
