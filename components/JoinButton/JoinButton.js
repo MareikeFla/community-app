@@ -8,14 +8,14 @@ export default function JoinButton({ onJoinEvent, isAttendedByUser }) {
       {isAttendedByUser ? (
         <Image
           src="/assets/icons/icon_heart-filled.svg"
-          alt="heart"
+          alt="Herz"
           height={12}
           width={14}
         />
       ) : (
         <Image
           src="/assets/icons/icon_heart.svg"
-          alt="heart"
+          alt="Herz"
           height={12}
           width={14}
         />

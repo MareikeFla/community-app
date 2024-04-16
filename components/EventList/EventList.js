@@ -12,9 +12,11 @@ export default function EventList({ events = [], isSorted, title }) {
       {title ? <SectionTitle>{title}</SectionTitle> : null}
       <EventListWrapper>
         {events.map((event) => (
-          <EventDetailsLink key={event._id} href={`/events/${event._id}`}>
-            <EventPreview event={event} />
-          </EventDetailsLink>
+          <li>
+            <EventDetailsLink key={event._id} href={`/events/${event._id}`}>
+              <EventPreview event={event} />
+            </EventDetailsLink>
+          </li>
         ))}
       </EventListWrapper>
     </>

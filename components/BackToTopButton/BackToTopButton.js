@@ -13,7 +13,7 @@ export default function BackToTopButton() {
     >
       <Image
         src="/assets/icons/icon_arrow-up.svg"
-        alt="Back To Top"
+        alt="Zurück an den Anfang"
         width={17}
         height={11}
       />

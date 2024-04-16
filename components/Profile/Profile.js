@@ -16,7 +16,7 @@ export default function Profile({ toggleEditMode, userInfo }) {
       <EditProfileButton title="Profil bearbeiten" onClick={toggleEditMode}>
         <StyledEditIcon
           src="/assets/icons/icon_edit.svg"
-          alt="Edit button"
+          alt="Bearbeiten Schaltfläche"
           width={22}
           height={22}
         />

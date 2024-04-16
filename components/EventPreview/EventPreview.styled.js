@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Image from "next/image";
 
-export const Card = styled.li`
+export const Card = styled.div`
   background-color: var(--color_white);
   border-radius: ${({ $withImage }) =>
     $withImage
