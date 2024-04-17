@@ -1,4 +1,4 @@
-import CategoryTag from "../CategoryTag/CategoryTag";
+import CategoryTags from "../CategoryTags/CategoryTags";
 import {
   Card,
   ImageContainer,
@@ -13,8 +13,15 @@ import {
 import { formatDate } from "@/lib/dateHelpers";
 
 export default function EventPreview({ event }) {
-  const { image, eventName, shortDescription, start, location, category } =
-    event;
+  const {
+    image,
+    eventName,
+    shortDescription,
+    start,
+    location,
+    category,
+    subCategories,
+  } = event;
   const { date, time } = start;
   const formattedDate = formatDate(date);
   return (
@@ -32,7 +39,7 @@ export default function EventPreview({ event }) {
       <Card $withImage={image}>
         <PreviewTitle>{eventName}</PreviewTitle>
         <PreviewDescription>{shortDescription}</PreviewDescription>
-        <CategoryTag category={category} />
+        <CategoryTags category={category} subCategories={subCategories} />
         <Divider />
         <InfoContainer>
           <Info>
