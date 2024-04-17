@@ -10,7 +10,7 @@ import {
 import { useData } from "@/lib/useData";
 import LikeButton from "../LikeButton/LikeButton";
 import { useSession } from "next-auth/react";
-import EditCommentButton from "../EditCommentButton/EditCommentButton";
+import EditButton from "../EditButton/EditButton";
 import CommentForm from "../CommentForm/CommentForm";
 import { useState } from "react";
 
@@ -38,10 +38,10 @@ export default function Reply({ reply }) {
             {createdBy.name}{" "}
             <ReplyTime> · {creationDate && timeElapsed}</ReplyTime>
             {userId === createdBy._id && (
-              <EditCommentButton
-                onEditComment={() => setIsEditingReply(!isEditingReply)}
+              <EditButton
+                onEdit={() => setIsEditingReply(!isEditingReply)}
                 isEditing={isEditingReply}
-              ></EditCommentButton>
+              ></EditButton>
             )}
           </ReplyHeader>
           <ReplyBody>

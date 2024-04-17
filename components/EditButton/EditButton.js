@@ -1,9 +1,9 @@
-import { EditButton } from "../EditCommentButton/EditCommentButton.styled";
+import { StyledEditButton } from "./EditButton.styled";
 import Image from "next/image";
 
-export default function EditCommentButton({ onEditComment, isEditing }) {
+export default function EditButton({ onEdit, isEditing }) {
   return (
-    <EditButton onClick={onEditComment}>
+    <StyledEditButton type="button" onClick={onEdit}>
       {!isEditing ? (
         <Image
           src={"/assets/icons/icon_edit-grey.svg"}
@@ -19,6 +19,6 @@ export default function EditCommentButton({ onEditComment, isEditing }) {
           width={12}
         />
       )}
-    </EditButton>
+    </StyledEditButton>
   );
 }

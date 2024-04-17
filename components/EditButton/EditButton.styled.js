@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const EditButton = styled.button`
+export const StyledEditButton = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
