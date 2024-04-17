@@ -21,6 +21,8 @@ const eventSchema = new Schema({
     street: String,
     houseNumber: String,
     country: String,
+    latitude: String,
+    longitude: String,
   },
   category: { type: Schema.Types.ObjectId, ref: "Category" },
   organization: {
