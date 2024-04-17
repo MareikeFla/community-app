@@ -23,6 +23,9 @@ const eventSchema = new Schema({
     country: String,
   },
   category: { type: Schema.Types.ObjectId, ref: "Category" },
+  subCategories: [
+    { type: Schema.Types.ObjectId, ref: "Category.subCategories" },
+  ],
   organization: {
     organizationName: String,
     organizationContact: String,
