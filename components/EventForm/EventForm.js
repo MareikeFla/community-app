@@ -1,9 +1,11 @@
 // Functionall imports
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useData } from "@/lib/useData";
 import { useEventForm } from "@/lib/useEventForm";
-
+import useDebounce from "@/lib/useDebouce";
+import { useModal } from "@/lib/useModal";
+import { getFormattedTodaysDate } from "@/lib/dateHelpers";
 // Styling imports
 
 import {
@@ -31,22 +33,36 @@ import {
   SubtitleLeft,
   SubtitleRight,
   CharacterCounter,
+  LocationList,
+  LocationButton,
+  SearchedText,
 } from "./EventForm.styled";
 import { DeleteButton } from "../DeleteEventButton/DeleteEventButton.styled";
 import Image from "next/image";
 import Button from "../Button/Button";
 import SwitchButton from "../SwitchButton/SwitchButton";
-import { useModal } from "@/lib/useModal";
 import AutoResizingTextArea from "./AutoResizingTextArea";
+import Loading from "../Loading/Loading";
+import FetchingError from "../FetchingError/FetchingError";
+import dynamic from "next/dynamic";
+import EditButton from "../EditButton/EditButton";
+import usePlaceSearch from "@/lib/usePlaceSearch";
+const Map = dynamic(() => import("../Map/Map"), { ssr: false });
 
 // EventForm component definition. It receives an updateDatabase function for database operations,
 // and an optional 'editEvent' object for prefilling form fields during event edits.
-import Loading from "../Loading/Loading";
-import FetchingError from "../FetchingError/FetchingError";
-import { getFormattedTodaysDate } from "@/lib/dateHelpers";
 
 export default function EventForm({ onSubmit, event: editEvent }) {
   const { showModal } = useModal();
+  const { placeList, setPlaceList, getPlaces } = usePlaceSearch();
+  const [searchText, setSearchText] = useState("");
+  const debouncedSearchText = useDebounce(searchText, 500);
+  const [searchedText, setSearchedText] = useState(
+    editEvent ? turnAddressToEditIntoString(editEvent) : ""
+  );
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [eventLocation, setEventLocation] = useState({});
+  const [eventName, setEventName] = useState(editEvent?.eventName || "");
 
   // Using custom hook to fetch categories data
   const { categories, isLoadingCategories, errorCategories } =
@@ -82,6 +98,63 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     checkIfCorrespondingFieldIsRequired,
   } = useEventForm(editEvent);
 
+  useEffect(() => {
+    if (debouncedSearchText) {
+      getPlaces(debouncedSearchText);
+    }
+  }, [debouncedSearchText]);
+
+  function turnAddressIntoEventLocation(item) {
+    setSelectedAddress(item);
+    const eventMapObject = {
+      eventName: eventName,
+      location: {
+        street: item?.address.road || "",
+        houseNumber: item?.address.house_number || "",
+        zip: item?.address.postcode || "",
+        city:
+          item?.address.village ||
+          item?.address.town ||
+          item?.address.city ||
+          "",
+        latitude: item?.lat,
+        longitude: item?.lon,
+      },
+    };
+
+    setEventLocation(eventMapObject);
+  }
+
+  function turnSearchTextIntoString(item) {
+    const addressParts = [
+      item?.address.road || "",
+      item?.address.house_number || "",
+      item?.address.house_number && item?.address.postcode
+        ? `, ${item.address.postcode}`
+        : item?.address.postcode || "",
+      item?.address.village ||
+        item?.address.town ||
+        item?.address.city ||
+        item?.address.city_district ||
+        "",
+    ].filter(Boolean);
+
+    return addressParts.join(" ").trim();
+  }
+
+  function turnAddressToEditIntoString(item) {
+    const addressParts = [
+      item?.location?.street || "",
+      item?.location?.houseNumber || "",
+      item?.location?.houseNumber && item?.location?.zip
+        ? `, ${item?.location?.zip}`
+        : item?.location?.zip || "",
+      item?.location?.city || "",
+    ].filter(Boolean);
+
+    return addressParts.join(" ").trim();
+  }
+
   // Updates the 'costs' state based on the 'isFreeOfCharge' toggle.
   // Sets costs to 'Kostenlos' if free, retains existing costs if applicable, or clears if chargeable.
   useEffect(() => {
@@ -115,7 +188,13 @@ export default function EventForm({ onSubmit, event: editEvent }) {
             textButtonCancel: "Abbrechen", // Default text for the cancel button
             textButtonConfirm: "Speichern", // Default text for the confirm button
             onConfirm: () =>
-              handleSubmit(event, onSubmit, selectedImage, editEvent),
+              handleSubmit(
+                event,
+                onSubmit,
+                selectedImage,
+                editEvent,
+                eventLocation
+              ),
           });
         }
       }}
@@ -128,7 +207,8 @@ export default function EventForm({ onSubmit, event: editEvent }) {
           type="text"
           id="eventName"
           name="eventName"
-          defaultValue={editEvent?.eventName || ""}
+          value={eventName}
+          onChange={(event) => setEventName(event.target.value)}
         />
       </FormSection>
       <FormSection>
@@ -198,48 +278,53 @@ export default function EventForm({ onSubmit, event: editEvent }) {
           Ort des Events
           <SubtitleLeft>(Für Online Events bitte leer lassen)</SubtitleLeft>
         </FormLegend>
-        <FlexContainer $addmarginbottom>
-          <FullWidth>
-            <FormLabel htmlFor="street">Straße</FormLabel>
-            <FormInput
-              type="text"
-              name="street"
-              id="street"
-              required={isStreetRequired}
-              defaultValue={editEvent?.location?.street || ""}
-            />
-          </FullWidth>
-          <FixedSize>
-            <FormLabel htmlFor="houseNumber">Hnr</FormLabel>
-            <FormInput
-              type="text"
-              name="houseNumber"
-              id="houseNumber"
-              defaultValue={editEvent?.location?.houseNumber || ""}
-              onChange={(event) => checkIfCorrespondingFieldIsRequired(event)} // Set the street required if a house number is entered
-            />
-          </FixedSize>
-        </FlexContainer>
         <FlexContainer>
-          <FixedSize>
-            <FormLabel htmlFor="zip">PLZ</FormLabel>
-            <FormInput
-              type="text"
-              name="zip"
-              id="zip"
-              defaultValue={editEvent?.location?.zip || ""}
-            />
-          </FixedSize>
           <FullWidth>
-            <FormLabel htmlFor="city">Ort</FormLabel>
-            <FormInput
-              type="text"
-              name="city"
-              id="city"
-              defaultValue={editEvent?.location?.city || ""}
-            />
+            <FormLabel htmlFor="address">Adresse</FormLabel>
+            {searchedText ? (
+              <FlexContainer>
+                <SearchedText>{searchedText}</SearchedText>
+                <EditButton
+                  onEdit={() => {
+                    setSearchText(searchedText);
+                    setSearchedText(false);
+                  }}
+                >
+                  edit
+                </EditButton>
+              </FlexContainer>
+            ) : (
+              <FlexContainer>
+                <FormInput
+                  type="text"
+                  name="address"
+                  id="address"
+                  required
+                  value={searchText}
+                  onInput={(event) => setSearchText(event.target.value)}
+                />
+              </FlexContainer>
+            )}
+            <LocationList>
+              {placeList.length > 0 &&
+                placeList.map((item) => (
+                  <li key={item?.osm_id}>
+                    <LocationButton
+                      type="button"
+                      onClick={() => {
+                        setSearchedText(turnSearchTextIntoString(item));
+                        setPlaceList([]);
+                        turnAddressIntoEventLocation(item);
+                      }}
+                    >
+                      {turnSearchTextIntoString(item)}
+                    </LocationButton>
+                  </li>
+                ))}
+            </LocationList>
           </FullWidth>
         </FlexContainer>
+        {selectedAddress && <Map event={eventLocation} />}
       </FormSection>
       <FormSection>
         <FormCheckboxWrapper>

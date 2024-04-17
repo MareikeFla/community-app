@@ -300,3 +300,30 @@ export const CharacterCounter = styled.div`
   font: var(--font_form-note);
   font-size: 0.563rem;
 `;
+
+export const LocationList = styled.ul`
+  list-style: none;
+  position: absolute;
+  background-color: var(--color_body);
+  z-index: 1;
+  top: 3.5;
+
+  width: calc(100% - 3rem);
+`;
+
+export const LocationButton = styled.button`
+  font: var(--font_body);
+  color: var(--color_grey);
+  background-color: var(--color_body);
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 0.125rem;
+  border-bottom: 1px solid black;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+`;
+
+export const SearchedText = styled.p`
+  flex: 1;
+`;
