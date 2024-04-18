@@ -306,8 +306,6 @@ export const LocationList = styled.ul`
   position: absolute;
   background-color: var(--color_body);
   z-index: 1;
-  top: 3.5;
-
   width: calc(100% - 3rem);
 `;
 
