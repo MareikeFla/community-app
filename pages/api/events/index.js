@@ -6,7 +6,7 @@ import {
   upDateMetaInfo,
   mergeCategories,
   fetchUniqueEvents,
-  updateDatabase,
+  updateEventDatabase,
   deleteEvent,
   findUniqueEventsInFirstArray,
 } from "@/lib/daylieFetchHelper/functions";
@@ -32,13 +32,12 @@ async function getEvents() {
 export default async function handler(request, response) {
   await dbConnect();
   const metainfo = await fetchData(metainfoUrl, ourDB);
-  const foo = null;
-  console.log(metainfo);
+
   if (request.method === "GET") {
     try {
       let ourEvents = await getEvents();
 
-      if (foo === null) {
+      if (!metainfo.isUpToDate) {
         try {
           const koelnCategories = await fetchData(koelnCategoriesUrl, koelnDB);
           const ourCategories = await fetchData(ourCategoriesUrl, ourDB);
@@ -66,7 +65,7 @@ export default async function handler(request, response) {
               formatedEvents,
               deletedEvents
             );
-            currentEvents.map((event) => updateDatabase(event));
+            currentEvents.map((event) => updateEventDatabase(event));
           }
           upDateMetaInfo();
         } catch (error) {
