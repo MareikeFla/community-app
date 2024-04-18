@@ -55,7 +55,7 @@ export default async function handler(request, response) {
             if (deletedEvents.length > 0) {
               deletedEvents.forEach((event) => deleteEvent(event._id));
             }
-            formatedEvents.map((event) => updateEventDatabase(event));
+            formatedEvents.forEach((event) => updateEventDatabase(event));
           }
           upDateMetaInfo();
         } catch (error) {
