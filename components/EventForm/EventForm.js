@@ -145,7 +145,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
           id="category"
           required
           aria-required="true"
-          value={selectedCategory}
+          value={selectedCategory || (editEvent ? editEvent.category._id : "")}
           onChange={handleCategoryChange}
         >
           {categories.map(({ _id, title }) => (
