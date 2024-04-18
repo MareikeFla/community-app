@@ -20,22 +20,17 @@ import {
   categoryRelation,
 } from "@/lib/daylieFetchHelper/variables";
 
-async function getEvents() {
-  const today = new Date().toISOString().split("T")[0];
-  const events = await Event.find({
-    "end.date": { $gte: today },
-  }).populate("category");
-  events.map((event) => enrichEventObject(event));
-  return events || [];
-}
-
 export default async function handler(request, response) {
   await dbConnect();
   const metainfo = await fetchData(metainfoUrl, ourDB);
 
   if (request.method === "GET") {
     try {
-      let ourEvents = await getEvents();
+      const today = new Date().toISOString().split("T")[0];
+      const ourEvents = await Event.find({
+        "end.date": { $gte: today },
+      }).populate("category");
+      ourEvents.map((event) => enrichEventObject(event));
 
       if (!metainfo.isUpToDate) {
         try {
