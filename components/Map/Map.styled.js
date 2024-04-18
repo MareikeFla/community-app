@@ -4,7 +4,7 @@ import { MapContainer, Popup } from "react-leaflet";
 export const StyledMapContainer = styled(MapContainer)`
   grid-column: 1 / span 2;
   width: 100%;
-  height: 18rem;
+  height: 30dvh;
   margin-top: 0.5rem;
   border-radius: var(--border-radius_card);
   z-index: 0;
