@@ -32,54 +32,53 @@ async function getEvents() {
 export default async function handler(request, response) {
   await dbConnect();
   const metainfo = await fetchData(metainfoUrl, ourDB);
-
-  if (metainfo.isUpToDate && request.method === "GET") {
+  const foo = null;
+  console.log(metainfo);
+  if (request.method === "GET") {
     try {
-      const events = await getEvents();
-      return response.status(200).json(events);
+      let ourEvents = await getEvents();
+
+      if (foo === null) {
+        try {
+          const koelnCategories = await fetchData(koelnCategoriesUrl, koelnDB);
+          const ourCategories = await fetchData(ourCategoriesUrl, ourDB);
+          const koelnEventsInOurDataBase = ourEvents.filter(
+            (event) => event.isFetchedEvent === true
+          );
+          const mergedCategories = mergeCategories(
+            ourCategories,
+            koelnCategories,
+            categoryRelation
+          );
+          const uniqueEvents = await fetchUniqueEvents(mergedCategories);
+          let deletedEvents = [];
+          let currentEvents = [];
+          const formatedEvents = formateEvents(uniqueEvents);
+          if (formatedEvents.length > 0) {
+            deletedEvents = findUniqueEventsInFirstArray(
+              koelnEventsInOurDataBase,
+              formatedEvents
+            );
+            if (deletedEvents.length > 0) {
+              deletedEvents.forEach((event) => deleteEvent(event._id));
+            }
+            currentEvents = findUniqueEventsInFirstArray(
+              formatedEvents,
+              deletedEvents
+            );
+            currentEvents.map((event) => updateDatabase(event));
+          }
+          upDateMetaInfo();
+        } catch (error) {
+          upDateMetaInfo();
+          response.status(400).json({ error: error.message });
+        }
+      }
+
+      return response.status(200).json(ourEvents);
     } catch (error) {
       console.error(error);
       return response.status(400).json({ error: error.message });
-    }
-  }
-
-  if (!metainfo.isUpToDate && request.method === "GET") {
-    try {
-      const koelnCategories = await fetchData(koelnCategoriesUrl, koelnDB);
-      const ourCategories = await fetchData(ourCategoriesUrl, ourDB);
-      const ourEvents = await getEvents();
-      const koelnEventsInOurDataBase = ourEvents.filter(
-        (event) => event.isFetchedEvent === true
-      );
-      const mergedCategories = mergeCategories(
-        ourCategories,
-        koelnCategories,
-        categoryRelation
-      );
-      const uniqueEvents = await fetchUniqueEvents(mergedCategories);
-      let deletedEvents = [];
-      let currentEvents = [];
-      const formatedEvents = formateEvents(uniqueEvents);
-      if (formatedEvents.length > 0) {
-        deletedEvents = findUniqueEventsInFirstArray(
-          koelnEventsInOurDataBase,
-          formatedEvents
-        );
-        if (deletedEvents.length > 0) {
-          deletedEvents.forEach((event) => deleteEvent(event._id));
-        }
-        currentEvents = findUniqueEventsInFirstArray(
-          formatedEvents,
-          deletedEvents
-        );
-        currentEvents.map((event) => updateDatabase(event));
-      }
-      upDateMetaInfo();
-
-      return response.status(200).json(currentEvents);
-    } catch (error) {
-      upDateMetaInfo();
-      response.status(400).json({ error: error.message });
     }
   }
 
