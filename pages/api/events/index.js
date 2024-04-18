@@ -3,7 +3,7 @@ import Event from "@/db/models/Event";
 import enrichEventObject from "@/lib/enrichEventObject";
 import {
   fetchData,
-  upDateMetaInfo,
+  updateMetaInfo,
   mergeCategories,
   fetchUniqueEvents,
   updateEventDatabase,
@@ -57,9 +57,9 @@ export default async function handler(request, response) {
             }
             formatedEvents.forEach((event) => updateEventDatabase(event));
           }
-          upDateMetaInfo();
+          updateMetaInfo();
         } catch (error) {
-          upDateMetaInfo();
+          updateMetaInfo();
           response.status(400).json({ error: error.message });
         }
       }
