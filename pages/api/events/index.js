@@ -19,7 +19,7 @@ import {
   ourCategoriesUrl,
   categoryRelation,
 } from "@/lib/daylieFetchHelper/variables";
-
+const foo = true;
 export default async function handler(request, response) {
   await dbConnect();
   const metainfo = await fetchData(metainfoUrl, ourDB);
@@ -30,7 +30,7 @@ export default async function handler(request, response) {
       const events = await Event.find({
         "end.date": { $gte: today },
       }).populate("category");
-      const ourEvents = ourEvents.map((event) => enrichEventObject(event));
+      const ourEvents = events.map((event) => enrichEventObject(event));
 
       if (!metainfo.isUpToDate) {
         try {
@@ -45,9 +45,8 @@ export default async function handler(request, response) {
             categoryRelation
           );
           const uniqueEvents = await fetchUniqueEvents(mergedCategories);
-          let deletedEvents = [];
-          let currentEvents = [];
           const formatedEvents = formateEvents(uniqueEvents);
+          let deletedEvents = [];
           if (formatedEvents.length > 0) {
             deletedEvents = findUniqueEventsInFirstArray(
               koelnEventsInOurDataBase,
@@ -56,11 +55,7 @@ export default async function handler(request, response) {
             if (deletedEvents.length > 0) {
               deletedEvents.forEach((event) => deleteEvent(event._id));
             }
-            currentEvents = findUniqueEventsInFirstArray(
-              formatedEvents,
-              deletedEvents
-            );
-            currentEvents.map((event) => updateEventDatabase(event));
+            formatedEvents.map((event) => updateEventDatabase(event));
           }
           upDateMetaInfo();
         } catch (error) {
