@@ -27,10 +27,10 @@ export default async function handler(request, response) {
   if (request.method === "GET") {
     try {
       const today = new Date().toISOString().split("T")[0];
-      const ourEvents = await Event.find({
+      const events = await Event.find({
         "end.date": { $gte: today },
       }).populate("category");
-      ourEvents.map((event) => enrichEventObject(event));
+      const ourEvents = ourEvents.map((event) => enrichEventObject(event));
 
       if (!metainfo.isUpToDate) {
         try {
