@@ -6,14 +6,14 @@ export default function EditButton({ onEdit, isEditing }) {
     <StyledEditButton type="button" onClick={onEdit}>
       {!isEditing ? (
         <Image
-          src={"/assets/icons/icon_edit-grey.svg"}
+          src="/assets/icons/icon_edit-grey.svg"
           alt="Edit Button"
           height={14}
           width={14}
         />
       ) : (
         <Image
-          src={"/assets/icons/icon_cancel.svg"}
+          src="/assets/icons/icon_cancel.svg"
           alt="Cancel Button"
           height={12}
           width={12}
