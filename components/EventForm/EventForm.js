@@ -113,9 +113,9 @@ export default function EventForm({ onSubmit, event: editEvent }) {
         houseNumber: item?.address.house_number || "",
         zip: item?.address.postcode || "",
         city:
-          item?.address.village ||
-          item?.address.town ||
           item?.address.city ||
+          item?.address.town ||
+          item?.address.village ||
           "",
         latitude: item?.lat,
         longitude: item?.lon,
@@ -127,14 +127,17 @@ export default function EventForm({ onSubmit, event: editEvent }) {
 
   function turnSearchTextIntoString(item) {
     const addressParts = [
-      item?.address.road || "",
+      item?.address.amenity || "",
+      item?.address.amenity && item?.address.road
+        ? `, ${item.address.road}`
+        : item?.address.road || "",
       item?.address.house_number || "",
       item?.address.house_number && item?.address.postcode
         ? `, ${item.address.postcode}`
         : item?.address.postcode || "",
-      item?.address.village ||
+      item?.address.city ||
         item?.address.town ||
-        item?.address.city ||
+        item?.address.village ||
         item?.address.city_district ||
         "",
     ].filter(Boolean);
@@ -306,7 +309,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
               </FlexContainer>
             )}
             <LocationList>
-              {placeList.length > 0 &&
+              {searchText &&
                 placeList.map((item) => (
                   <li key={item?.osm_id}>
                     <LocationButton
