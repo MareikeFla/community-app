@@ -6,12 +6,12 @@ export default function EditEventButton({ id }) {
 
   return (
     <EditButton
-      title="Löschen"
+      title="Bearbeiten"
       onClick={() => router.push(`/events/edit/${id}`)}
     >
       <StyledEditIcon
         src="/assets/icons/icon_edit.svg"
-        alt="Edit button"
+        alt="Bearbeiten Taste"
         width={22}
         height={22}
       />

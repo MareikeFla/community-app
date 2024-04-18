@@ -8,7 +8,7 @@ export default function ArrowButton({ onClick, children }) {
       <IconWrapper>
         <Image
           src="/assets/icons/icon_arrow-right.svg"
-          alt="Arrow to right"
+          alt="Pfeil nach rechts"
           width={9}
           height={14}
         />

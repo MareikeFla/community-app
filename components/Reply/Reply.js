@@ -29,7 +29,7 @@ export default function Reply({ reply }) {
       <ReplyContainer>
         <ProfilePicture
           src={createdBy.image}
-          alt="profile picture"
+          alt="Profilbild"
           height={36}
           width={36}
         />

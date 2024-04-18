@@ -32,7 +32,7 @@ export default function WelcomeCard() {
           </Content>
           <Illustration
             src="/assets/images/illustration_high-five.svg"
-            alt="Man and woman high-five"
+            alt="Mann und Frau geben sich high-five"
             width={142}
             height={151}
           />

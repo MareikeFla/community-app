@@ -48,7 +48,7 @@ export default function Comment({ comment }) {
       <CommentContainer>
         <ProfilePicture
           src={createdBy.image}
-          alt="profile picture"
+          alt="Profilbild"
           height={36}
           width={36}
         />

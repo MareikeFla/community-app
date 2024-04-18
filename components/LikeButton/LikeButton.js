@@ -8,25 +8,29 @@ export default function LikeButton({
   userIsLoggedIn,
 }) {
   return (
-    <Button onClick={onLikeComment} disabled={userIsLoggedIn}>
+    <Button
+      onClick={onLikeComment}
+      disabled={userIsLoggedIn}
+      aria-label="gefällt mir Taste"
+    >
       {userIsLoggedIn ? (
         <Image
           src="/assets/icons/icon_heart-filled.svg"
-          alt="heart"
+          alt="Herz"
           height={12}
           width={14}
         />
       ) : checkIfIsLiked ? (
         <Image
           src="/assets/icons/icon_heart-filled.svg"
-          alt="heart"
+          alt="Herz"
           height={12}
           width={14}
         />
       ) : (
         <Image
           src="/assets/icons/icon_heart.svg"
-          alt="heart"
+          alt="Herz"
           height={12}
           width={14}
         />

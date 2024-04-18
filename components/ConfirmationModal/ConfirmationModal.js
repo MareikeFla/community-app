@@ -54,16 +54,16 @@ export const ConfirmationModal = () => {
     <>
       <Backdrop onClick={hideModal} />
       <Dialog role="dialog" aria-modal="true">
-        <DialogMessage aria-label="Modal message">{message}</DialogMessage>
+        <DialogMessage aria-label="Modal Nachricht">{message}</DialogMessage>
         <ButtonWrap>
           <Button
-            aria-label="Close modal"
+            aria-label="Modal schließen"
             text={textButtonCancel}
             onClick={hideModal}
             ref={cancelButtonRef}
           />
           <Button
-            aria-label="Confirm modal"
+            aria-label="Modal bestätigen"
             text={textButtonConfirm}
             color="primary"
             onClick={async () => {
