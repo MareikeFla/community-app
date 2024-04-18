@@ -13,7 +13,6 @@ export default async function handler(request, response) {
       }
       metaInfo.isUpToDate = metaInfo.lastFetch === today;
 
-      console.log(metaInfo);
       return response.status(200).json(metaInfo);
     } catch (error) {
       console.error(error);
@@ -23,9 +22,10 @@ export default async function handler(request, response) {
 
   if (request.method === "POST") {
     try {
-      const metaInfo = await MetaInfo.findByIdAndUpdate(id, {
+      await MetaInfo.findByIdAndUpdate(id, {
         lastFetch: today,
       });
+      response.status(200).json({ status: "updated meta info" });
     } catch (error) {
       console.error(error);
       return response.status(400).json({ error: error.message });
