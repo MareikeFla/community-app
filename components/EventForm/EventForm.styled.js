@@ -325,3 +325,20 @@ export const LocationButton = styled.button`
 export const SearchedText = styled.p`
   flex: 1;
 `;
+
+export const SearchContainer = styled(FlexContainer)`
+  position: relative;
+`;
+export const SearchNotification = styled.span`
+  position: absolute;
+  right: 0.5rem;
+  top: 0.75rem;
+  font: var(--font_form-note);
+  color: var(--color_grey);
+  text-align: right;
+`;
+export const SearchLoading = styled.span`
+  position: absolute;
+  right: 0.5rem;
+  top: 0.75rem;
+`;

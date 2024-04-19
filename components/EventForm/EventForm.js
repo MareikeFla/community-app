@@ -36,6 +36,9 @@ import {
   LocationList,
   LocationButton,
   SearchedText,
+  SearchContainer,
+  SearchLoading,
+  SearchNotification,
 } from "./EventForm.styled";
 import { DeleteButton } from "../DeleteEventButton/DeleteEventButton.styled";
 import Image from "next/image";
@@ -64,7 +67,6 @@ export default function EventForm({ onSubmit, event: editEvent }) {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [eventLocation, setEventLocation] = useState({});
   const [eventName, setEventName] = useState(editEvent?.eventName || "");
-  console.log(selectedAddress);
 
   // Using custom hook to fetch categories data
   const { categories, isLoadingCategories, errorCategories } =
@@ -299,23 +301,28 @@ export default function EventForm({ onSubmit, event: editEvent }) {
                 </EditButton>
               </FlexContainer>
             ) : (
-              <FlexContainer>
+              <SearchContainer>
                 <FormInput
                   type="text"
                   name="address"
                   id="address"
-                  required
                   value={searchText}
                   onInput={(event) => setSearchText(event.target.value)}
                 />
-                {placeLoading && <span>X</span>}
-                {placeError && <span>Error</span>}
-                {placeList.length === 0 && <span>Nope</span>}
-              </FlexContainer>
+                {placeLoading && (
+                  <SearchLoading>
+                    <Loading $small />
+                  </SearchLoading>
+                )}
+                {placeList.length === 0 ? (
+                  <SearchNotification>Keine Suchergebnisse</SearchNotification>
+                ) : null}
+                {placeError && <SearchNotification>Error</SearchNotification>}
+              </SearchContainer>
             )}
             <LocationList>
-              {searchText &&
-                placeList.map((item) => (
+              {debouncedSearchText &&
+                placeList?.map((item) => (
                   <li key={item?.osm_id}>
                     <LocationButton
                       type="button"
