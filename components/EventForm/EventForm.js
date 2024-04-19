@@ -54,7 +54,8 @@ const Map = dynamic(() => import("../Map/Map"), { ssr: false });
 
 export default function EventForm({ onSubmit, event: editEvent }) {
   const { showModal } = useModal();
-  const { placeList, setPlaceList, getPlaces } = usePlaceSearch();
+  const { placeList, setPlaceList, getPlaces, placeLoading, placeError } =
+    usePlaceSearch();
   const [searchText, setSearchText] = useState("");
   const debouncedSearchText = useDebounce(searchText, 500);
   const [searchedText, setSearchedText] = useState(
@@ -63,6 +64,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [eventLocation, setEventLocation] = useState({});
   const [eventName, setEventName] = useState(editEvent?.eventName || "");
+  console.log(selectedAddress);
 
   // Using custom hook to fetch categories data
   const { categories, isLoadingCategories, errorCategories } =
@@ -306,6 +308,9 @@ export default function EventForm({ onSubmit, event: editEvent }) {
                   value={searchText}
                   onInput={(event) => setSearchText(event.target.value)}
                 />
+                {placeLoading && <span>X</span>}
+                {placeError && <span>Error</span>}
+                {placeList.length === 0 && <span>Nope</span>}
               </FlexContainer>
             )}
             <LocationList>
