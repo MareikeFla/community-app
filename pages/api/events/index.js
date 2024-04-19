@@ -71,7 +71,7 @@ export default async function handler(request, response) {
     }
   }
 
-  if (request.method === "POST") {
+  if (request.method === "PUT") {
     try {
       const event = request.body;
       const newEvent = await Event.create(event);
