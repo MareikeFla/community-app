@@ -9,8 +9,8 @@ import {
   updateEventDatabase,
   deleteEvent,
   findUniqueEventsInFirstArray,
-} from "@/lib/daylieFetchHelper/functions";
-import { formateEvents } from "@/lib/daylieFetchHelper/formatingData";
+} from "@/lib/dailyFetchHelper/functions";
+import { formateEvents } from "@/lib/dailyFetchHelper/formatingData";
 import {
   ourDB,
   metainfoUrl,
@@ -18,7 +18,7 @@ import {
   koelnCategoriesUrl,
   ourCategoriesUrl,
   categoryRelation,
-} from "@/lib/daylieFetchHelper/variables";
+} from "@/lib/dailyFetchHelper/variables";
 const foo = true;
 export default async function handler(request, response) {
   await dbConnect();
