@@ -5,7 +5,7 @@ import clientPromise from "@/db/mongodb";
 import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/db/models/User";
 
-export default NextAuth({
+export const authOptions = {
   // Configure one or more authentication providers
 
   providers: [
@@ -74,4 +74,6 @@ export default NextAuth({
   theme: {
     colorScheme: "light", // "auto" | "dark" | "light"
   },
-});
+};
+
+export default NextAuth(authOptions);
