@@ -5,6 +5,8 @@ import "./User";
 const { Schema } = mongoose;
 
 const eventSchema = new Schema({
+  isFetchedEvent: Boolean,
+  fetchedId: String,
   createdBy: { type: Schema.Types.ObjectId, ref: "User" },
   eventName: String,
   start: {
