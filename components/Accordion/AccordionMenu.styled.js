@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { Card } from "../MessageCard/MessageCard.styled";
-import { Message } from "../MessageCard/MessageCard.styled";
+import { Card, Message } from "../MessageCard/MessageCard.styled";
 
 export const AccordionWrap = styled.div`
   padding-top: 1rem;

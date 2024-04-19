@@ -1,8 +1,10 @@
-import { AccordionHeader } from "./AccordionMenu.styled";
-import { AccordionTitle } from "./AccordionMenu.styled";
-import { Counter } from "./AccordionMenu.styled";
-import { AccordionBody } from "./AccordionMenu.styled";
-import { StyledArrow } from "./AccordionMenu.styled";
+import {
+  AccordionHeader,
+  AccordionTitle,
+  Counter,
+  AccordionBody,
+  StyledArrow,
+} from "./AccordionMenu.styled";
 
 export default function AccordionSection({
   title = "",
