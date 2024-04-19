@@ -4,7 +4,7 @@ import Comment from "@/db/models/Comment";
 export default async function handler(request, response) {
   await dbConnect();
 
-  if (request.method === "POST") {
+  if (request.method === "PUT") {
     try {
       const newComment = await Comment.create(request.body);
       response.status(201).json(newComment);

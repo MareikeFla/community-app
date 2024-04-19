@@ -60,7 +60,7 @@ export default async function handler(request, response) {
     }
   }
 
-  if (request.method === "PUT") {
+  if (request.method === "POST") {
     const eventData = request.body;
     await Event.findByIdAndUpdate(id, eventData);
     return response.status(200).json({ status: `Event ${id} updated!` });
