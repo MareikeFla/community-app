@@ -97,7 +97,6 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     handleSubmit,
     handleCancel,
     MAX_CHAR_COUNT,
-    isStreetRequired,
     isLinkRequired,
     checkIfCorrespondingFieldIsRequired,
   } = useEventForm(editEvent);
