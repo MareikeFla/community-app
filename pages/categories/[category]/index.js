@@ -23,6 +23,10 @@ export default function CategoryPage() {
 
   const selectedCategory = categories.find((cat) => cat.slug === category);
 
+  if (!selectedCategory) {
+    return <FetchingError />;
+  }
+
   const filteredEvents = filterEventsByCategoryID(selectedCategory._id);
 
   if (filteredEvents === undefined) {
