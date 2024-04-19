@@ -7,15 +7,16 @@ import Loading from "@/components/Loading/Loading";
 import { useData } from "@/lib/useData";
 import { useState } from "react";
 import { formatedUserInfo } from "@/lib/profile/profileHelper";
-import Accordion from "@/components/Accordion/Accordion";
 import AccordionMenu from "@/components/Accordion/AccordionMenu";
+import EventList from "@/components/EventList/EventList";
+import { useRouter } from "next/router";
 
 export default function ProfilePage() {
   const { data: session, status, update: updateSession } = useSession();
   const { updateUser } = useData();
   const [editMode, setEditMode] = useState(false);
-  const [firstStatus, setFirstStatus] = useState(false);
-  const [secondStatus, setSecondStatus] = useState(false);
+  const router = useRouter();
+  const { openSection } = router.query;
   const { events, isLoadingEvents, errorEvents } = useData().fetchedEvents;
 
   function toggleEditMode() {
@@ -51,6 +52,31 @@ export default function ProfilePage() {
 
   session.user.attendedEvents.forEach((id) => attendedEventsIds.add(id));
   attendedEvents = events.filter((event) => attendedEventsIds.has(event._id));
+  const accordionSections = [
+    {
+      id: 0,
+      title: "Erstellte Events",
+      component: EventList,
+      componentsProps: { events: eventsCreatedByUser || [] },
+      counter: eventsCreatedByUser.length,
+      canOpen: eventsCreatedByUser.length !== 0,
+      isHighlighted: eventsCreatedByUser.length !== 0,
+      isOpen: false,
+    },
+    {
+      id: 1,
+      title: "Meine Merkliste",
+      component: EventList,
+      componentsProps: { events: attendedEvents || [] },
+      counter: attendedEvents.length,
+      canOpen: attendedEvents.length !== 0,
+      isHighlighted: attendedEvents.length !== 0,
+      isOpen: false,
+    },
+  ];
+  if (openSection !== undefined && openSection < accordionSections.length) {
+    accordionSections[openSection].isOpen = true;
+  }
 
   if (!session) {
     return (
@@ -74,20 +100,7 @@ export default function ProfilePage() {
             userInfo={userInfo}
           ></Profile>
         )}
-        <AccordionMenu>
-          <Accordion
-            text={"Meine Events"}
-            items={eventsCreatedByUser || []}
-            status={firstStatus}
-            setStatus={setFirstStatus}
-          />
-          <Accordion
-            text={"Merkliste"}
-            items={attendedEvents}
-            status={secondStatus}
-            setStatus={setSecondStatus}
-          />
-        </AccordionMenu>
+        <AccordionMenu sections={accordionSections}></AccordionMenu>
       </>
     );
   }
