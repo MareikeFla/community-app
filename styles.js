@@ -29,7 +29,7 @@ export default createGlobalStyle`
     --color_three: ${colors.three}; // --color_light-grey
     --color_four: ${colors.four}; // --color_grey
     --color_five: ${colors.five} ; // --color_night
-    --color_midnight: #434648; // --color_midnight
+    --color_six: ${colors.six}; // --color_midnight
     --color_light-orange: #ffb169; //  --color_light-orange
     --color_orange: #ff9957; // --color_orange
     --color_light-red: #f9847c; // --color_light-red

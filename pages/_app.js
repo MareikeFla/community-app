@@ -19,6 +19,7 @@ const theme = {
     three: "#d8d8d8", // --color_light-grey
     four: "#737678", // --color_grey
     five: "#5b5f62", // --color_night
+    six: "#434648", // --color_midnight
   },
   fonts: {},
   effects: {},

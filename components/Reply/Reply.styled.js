@@ -15,7 +15,7 @@ export const ReplyContainer = styled.article`
 
 export const ReplyHeader = styled.p`
   font: var(--font_label);
-  color: var(--color_midnight);
+  color: var(--color_six);
   margin-bottom: 0.375rem;
   display: flex;
   gap: 0.375rem;

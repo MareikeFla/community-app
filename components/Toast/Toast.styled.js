@@ -15,6 +15,6 @@ export const StyledToastContainer = styled(ToastContainer)`
 
   .Toastify__close-button:hover,
   .Toastify__close-button:focus {
-    color: var(--color_midnight);
+    color: var(--color_six);
   }
 `;

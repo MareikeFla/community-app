@@ -50,7 +50,7 @@ export const NavMenu = styled.div`
   left: ${({ $isOpen }) => ($isOpen ? "0" : "calc(-100% - 1rem)")};
   width: 100vw;
   height: 100vh;
-  background-color: var(--color_midnight);
+  background-color: var(--color_six);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,7 +87,7 @@ export const NavButton = styled.button`
   padding: 1rem;
   font: var(--font_heading-3);
   color: var(--color_white);
-  background-color: var(--color_midnight);
+  background-color: var(--color_six);
   border: none;
   cursor: pointer;
   text-transform: uppercase;
