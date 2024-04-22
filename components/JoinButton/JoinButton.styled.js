@@ -7,7 +7,7 @@ export const StyledJoinButton = styled.button`
   font: var(--font_tag);
   color: var(--color_grey);
   text-transform: uppercase;
-  border: 2px solid var(--color_grey);
+  border: 1px solid var(--color_grey);
   border-radius: var(--border-radius_button);
   background-color: transparent;
   padding: 0.25rem 0.5rem 0.188rem;
@@ -15,7 +15,7 @@ export const StyledJoinButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    border: 2px solid var(--color_night);
+    border: 1px solid var(--color_night);
     color: var(--color_night);
   }
 `;
