@@ -29,7 +29,7 @@ export const CategoryInfoContainer = styled.section`
 
 export const CategoryInfoHeading = styled.h3`
   font: var(--font_heading-3);
-  color: var(--color_night);
+  color: var(--color_five);
   text-transform: uppercase;
   padding-bottom: 0.125rem;
 `;

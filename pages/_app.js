@@ -14,10 +14,11 @@ import Head from "next/head";
 const theme = {
   colors: {
     white: "#fff",
-    one: "#f8f8f9",
-    two: "#f5f5f5",
-    three: "#d8d8d8",
-    four: "#737678",
+    one: "#f8f8f9", // --color_body
+    two: "#f5f5f5", // --color_pale-grey
+    three: "#d8d8d8", // --color_light-grey
+    four: "#737678", // --color_grey
+    five: "#5b5f62", // --color_night
   },
   fonts: {},
   effects: {},

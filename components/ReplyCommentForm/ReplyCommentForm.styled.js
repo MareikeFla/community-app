@@ -9,7 +9,7 @@ export const ReplyCommentFormContainer = styled.form`
 export const ReplyCommentFormLabel = styled.label`
   font: var(--font_body);
   font-weight: 600;
-  color: var(--color_night);
+  color: var(--color_five);
 `;
 export const ReplyCommentFormTextarea = styled.textarea`
   font: var(--font_body);

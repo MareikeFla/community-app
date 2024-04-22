@@ -9,7 +9,7 @@ export const CommentFormContainer = styled.form`
 export const CommentFormLabel = styled.label`
   font: var(--font_body);
   font-weight: 600;
-  color: var(--color_night);
+  color: var(--color_five);
 
   ${({ $hidden }) =>
     $hidden &&

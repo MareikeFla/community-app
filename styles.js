@@ -28,7 +28,7 @@ export default createGlobalStyle`
     --color_two: ${colors.two}; // --color_pale-grey
     --color_three: ${colors.three}; // --color_light-grey
     --color_four: ${colors.four}; // --color_grey
-    --color_night: #5b5f62; // --color_night
+    --color_five: ${colors.five} ; // --color_night
     --color_midnight: #434648; // --color_midnight
     --color_light-orange: #ffb169; //  --color_light-orange
     --color_orange: #ff9957; // --color_orange

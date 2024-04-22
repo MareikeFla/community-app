@@ -20,7 +20,7 @@ export const Card = styled.div`
 
 export const ErrorMessage = styled.h2`
   font: var(--font_heading-2);
-  color: var(--color_night);
+  color: var(--color_five);
   text-align: center;
 `;
 
@@ -44,7 +44,7 @@ export const EventImage = styled(Image)`
 export const EventName = styled.h1`
   margin-bottom: 1.125rem;
   font: var(--font_heading-1);
-  color: var(--color_night);
+  color: var(--color_five);
   text-align: center;
   ${({ $withImage }) =>
     $withImage &&
@@ -52,7 +52,7 @@ export const EventName = styled.h1`
       position: absolute;
       bottom: 1rem;
       font: var(--font_heading-1);
-      color: var(--color_night);
+      color: var(--color_five);
       text-align: center;
       background-color: rgba(255, 255, 255, 0.85);
       border-radius: 4px;
@@ -94,7 +94,7 @@ export const InfoWrapper = styled.div`
 
 export const InfoTitle = styled.span`
   font: var(--font_label);
-  color: var(--color_night);
+  color: var(--color_five);
 `;
 
 export const Info = styled.p`
@@ -143,5 +143,5 @@ export const AttendeeWrapper = styled.section`
   padding-top: 0.75rem;
   padding-inline: 1.5rem;
   font: var(--font_label);
-  color: var(--color_night);
+  color: var(--color_five);
 `;

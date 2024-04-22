@@ -41,7 +41,7 @@ export const FormSection = styled.div`
 export const FormLabel = styled.label`
   display: block;
   font: var(--font_label);
-  color: var(--color_night);
+  color: var(--color_five);
   margin-bottom: 0.15rem;
 
   div {
@@ -173,7 +173,7 @@ export const FormCheckboxWrapper = styled.div`
   }
 
   label {
-    color: var(--color_night);
+    color: var(--color_five);
     font: var(--font_label);
   }
 
@@ -195,7 +195,7 @@ export const ErrorMessage = styled.p`
 
 export const FormDescriptionField = styled.textarea`
   font: var(--font_body);
-  color: var(--color_night);
+  color: var(--color_five);
   background-color: var(--color_two);
   border: none;
   border-radius: var(--border-radius_input);
@@ -265,7 +265,7 @@ export const FormButtonWrapper = styled.div`
 
 export const FormLegend = styled.legend`
   font: var(--font_label);
-  color: var(--color_night);
+  color: var(--color_five);
   margin-bottom: 0.813rem;
 `;
 

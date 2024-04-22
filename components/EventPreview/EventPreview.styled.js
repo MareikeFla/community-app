@@ -27,7 +27,7 @@ export const EventImage = styled(Image)`
 
 export const PreviewTitle = styled.h2`
   font: var(--font_heading-2);
-  color: var(--color_night);
+  color: var(--color_five);
   margin-bottom: 0.375rem;
 `;
 

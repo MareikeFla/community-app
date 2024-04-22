@@ -10,7 +10,7 @@ export const Card = styled.div`
 
 export const Message = styled.h2`
   font: var(--font_heading-2);
-  color: var(--color_night);
+  color: var(--color_five);
   text-align: center;
 
   a,

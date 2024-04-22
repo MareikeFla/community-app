@@ -25,7 +25,7 @@ export const Content = styled.div`
 
 export const Heading = styled.h1`
   font: var(--font_heading-1);
-  color: var(--color_night);
+  color: var(--color_five);
   margin-bottom: ${(props) => (props.$loggedIn ? ".313rem" : "1rem")};
   @media (min-width: 768px) {
     margin-bottom: 1.5rem;

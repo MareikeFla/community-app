@@ -7,7 +7,7 @@ export const SearchBox = styled.div`
   width: 100%;
   background-color: white;
   text-align: center;
-  color: var(--color_night);
+  color: var(--color_five);
   border-radius: var(--border-radius_card);
   padding: 2rem 1.5rem 2rem 1.5rem;
   box-shadow: var(--shadow_card);

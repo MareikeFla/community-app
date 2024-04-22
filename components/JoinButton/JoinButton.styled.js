@@ -15,7 +15,7 @@ export const StyledJoinButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    border: 2px solid var(--color_night);
-    color: var(--color_night);
+    border: 2px solid var(--color_five);
+    color: var(--color_five);
   }
 `;
