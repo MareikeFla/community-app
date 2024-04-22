@@ -12,6 +12,8 @@ export const ReplyCommentFormLabel = styled.label`
   color: var(--color_five);
 `;
 export const ReplyCommentFormTextarea = styled.textarea`
+  color: var(--color_four);
+
   font: var(--font_body);
   background-color: var(--color_two);
   border: none;

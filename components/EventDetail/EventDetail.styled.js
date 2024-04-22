@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import Image from "next/image";
 
 export const Card = styled.div`
-  background-color: var(--color_white);
+  background-color: var(--color_base);
   border-radius: ${({ $withImage }) =>
     $withImage
       ? "0 0 var(--border-radius_card) var(--border-radius_card)"
@@ -52,7 +52,8 @@ export const EventName = styled.h1`
       position: absolute;
       bottom: 1rem;
       font: var(--font_heading-1);
-      color: var(--color_five);
+      color: ${(props) =>
+        props.theme === "dark" ? "var(--color_three)" : "var(--color_five)"};
       text-align: center;
       background-color: rgba(255, 255, 255, 0.85);
       border-radius: 4px;
@@ -71,7 +72,7 @@ export const Description = styled.p`
 export const ExpandCollapseButton = styled.button`
   border: none;
   cursor: pointer;
-  background-color: var(--color_white);
+  background-color: var(--color_base);
   color: var(--color_eight);
   font: var(--font_body);
 `;

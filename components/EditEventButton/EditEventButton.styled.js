@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Image from "next/image";
 
 export const EditButton = styled.button`
   position: absolute;
@@ -17,8 +16,4 @@ export const EditButton = styled.button`
   &:hover {
     background-color: var(--color_nine);
   }
-`;
-
-export const StyledEditIcon = styled(Image)`
-  margin: 2px 0 0 2px;
 `;

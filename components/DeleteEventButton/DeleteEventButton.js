@@ -3,9 +3,12 @@ import Image from "next/image";
 import { useModal } from "@/lib/useModal";
 import { useData } from "@/lib/useData";
 import { useRouter } from "next/router";
+import { useColorTheme } from "@/lib/useColorTheme";
+import { Delete } from "../SvgIcons/SVGIcons";
 
 export default function DeleteEventButton({ id }) {
   const router = useRouter();
+  const { theme } = useColorTheme();
   const { deleteEvent } = useData();
 
   const { showModal } = useModal();
@@ -31,12 +34,7 @@ export default function DeleteEventButton({ id }) {
         showModal(modalContent);
       }}
     >
-      <Image
-        src="/assets/icons/icon_delete.svg"
-        alt="Löschentaste"
-        width={21}
-        height={23}
-      />
+      <Delete $theme={theme}></Delete>
     </DeleteButton>
   );
 }

@@ -5,7 +5,7 @@ import { useData } from "@/lib/useData";
 import { useEventForm } from "@/lib/useEventForm";
 
 // Styling imports
-
+import { Delete } from "../SvgIcons/SVGIcons";
 import {
   EventFormStyled,
   FormSection,
@@ -38,6 +38,7 @@ import Button from "../Button/Button";
 import SwitchButton from "../SwitchButton/SwitchButton";
 import { useModal } from "@/lib/useModal";
 import AutoResizingTextArea from "./AutoResizingTextArea";
+import { useColorTheme } from "@/lib/useColorTheme";
 
 // EventForm component definition. It receives an updateDatabase function for database operations,
 // and an optional 'editEvent' object for prefilling form fields during event edits.
@@ -47,7 +48,7 @@ import { getFormattedTodaysDate } from "@/lib/dateHelpers";
 
 export default function EventForm({ onSubmit, event: editEvent }) {
   const { showModal } = useModal();
-
+  const { theme } = useColorTheme();
   // Using custom hook to fetch categories data
   const { categories, isLoadingCategories, errorCategories } =
     useData().fetchedCategories;
@@ -354,12 +355,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
               title="Bild entfernen"
               onClick={() => handleDeleteImage()}
             >
-              <Image
-                src="/assets/icons/icon_delete.svg"
-                alt="Bild entfernen"
-                width={21}
-                height={23}
-              />
+              <Delete $theme={theme} />
             </DeleteButton>
           </UploadPreviewContainer>
         )}

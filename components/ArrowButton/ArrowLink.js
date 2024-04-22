@@ -1,17 +1,15 @@
 import Image from "next/image";
 import { IconWrapper, LinkWrapper } from "./ArrowButton.styled";
+import { Arrow } from "../SvgIcons/SVGIcons";
+import { useColorTheme } from "@/lib/useColorTheme";
 
 export default function ArrowLink({ href, children }) {
+  const { theme } = useColorTheme();
   return (
     <LinkWrapper href={href}>
       {children}
       <IconWrapper>
-        <Image
-          src="/assets/icons/icon_arrow-right.svg"
-          alt="Pfeil nach rechts"
-          width={9}
-          height={14}
-        />
+        <Arrow $direction="right" $theme={theme}></Arrow>
       </IconWrapper>
     </LinkWrapper>
   );

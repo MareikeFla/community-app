@@ -1,20 +1,19 @@
 import { useRouter } from "next/router";
-import { EditButton, StyledEditIcon } from "./EditEventButton.styled";
+import { EditButton } from "./EditEventButton.styled";
+import { Edit } from "../SvgIcons/SVGIcons";
+import { useColorTheme } from "@/lib/useColorTheme";
 
 export default function EditEventButton({ id }) {
+  const { theme } = useColorTheme();
   const router = useRouter();
 
   return (
     <EditButton
       title="Bearbeiten"
       onClick={() => router.push(`/events/edit/${id}`)}
+      alt="Bearbeiten Icon"
     >
-      <StyledEditIcon
-        src="/assets/icons/icon_edit.svg"
-        alt="Bearbeiten Taste"
-        width={22}
-        height={22}
-      />
+      <Edit $theme={theme} />
     </EditButton>
   );
 }

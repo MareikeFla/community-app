@@ -24,6 +24,7 @@ export const CommentFormLabel = styled.label`
   `};
 `;
 export const CommentFormTextarea = styled.textarea`
+  color: var(--color_four);
   font: var(--font_body);
   background-color: var(--color_two);
   border: none;
@@ -50,14 +51,14 @@ export const CommentButton = styled(PrimaryButton)`
   padding: 0;
   text-transform: none;
   border: none;
-  background-color: var(--color_white);
+  background-color: var(--color_base);
   cursor: pointer;
 
   &:hover {
     color: var(--color_eight);
     font: var(--font_info);
     border: none;
-    background-color: var(--color_white);
+    background-color: var(--color_base);
     cursor: pointer;
     text-decoration: underline;
   }

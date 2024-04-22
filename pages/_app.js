@@ -12,7 +12,7 @@ import { ThemeProvider } from "styled-components";
 import Head from "next/head";
 
 const light = {
-  white: "#fff", // --color_white
+  base: "#fff", // --color_cards
   one: "#f8f8f9", // --color_body
   two: "#f5f5f5", // --color_pale-grey
   three: "#d8d8d8", // --color_light-grey
@@ -34,13 +34,13 @@ const light = {
 };
 
 const dark = {
-  white: "#fff", // --color_white
-  one: "#f8f8f9", // --color_body
-  two: "#f5f5f5", // --color_pale-grey
-  three: "#d8d8d8", // --color_light-grey
-  four: "#737678", // --color_grey
-  five: "#5b5f62", // --color_night
-  six: "#434648", // --color_midnight
+  base: "#111111", // --color_base
+  one: "#1a1a1a", // --color_body
+  two: "#0f0f0f", // --color_pale-grey
+  three: "#2e2e2e", // --color_light-grey
+  four: "#9a9e9f", // --color_grey
+  five: "#b3b7b9", // --color_night
+  six: "#8f9294", // --color_midnight
   seven: "#ffb169", //  --color_light-orange
   eight: "#ff9957", // --color_orange
   nine: "#f9847c", // --color_light-red
@@ -56,9 +56,8 @@ const dark = {
 };
 
 const theme = {
+  info: "dark",
   colors: dark,
-  fonts: {},
-  effects: {},
 };
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());

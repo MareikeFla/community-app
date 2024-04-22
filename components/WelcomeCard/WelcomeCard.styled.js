@@ -5,7 +5,7 @@ import styled from "styled-components";
 export const Card = styled.div`
   display: grid;
   align-items: center;
-  background-color: var(--color_white);
+  background-color: var(--color_base);
   border-radius: var(--border-radius_card);
   box-shadow: var(--shadow_one);
 
@@ -49,7 +49,7 @@ export const Button = styled(Link)`
   align-items: center;
   gap: 0.5rem;
   font: var(--font_button);
-  color: var(--color_white);
+  color: var(--color_base);
   text-transform: uppercase;
   text-decoration: none;
   background-color: var(--color_eight);

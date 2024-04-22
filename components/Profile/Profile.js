@@ -1,5 +1,4 @@
 import { EditProfileButton } from "./Profile.styled";
-import { StyledEditIcon } from "../EditEventButton/EditEventButton.styled";
 import { StyledProfile, UserName, PictureProfile } from "./Profile.styled";
 import {
   InfoWrapper,
@@ -7,19 +6,16 @@ import {
   Info,
 } from "../EventDetail/EventDetail.styled";
 import { Fragment } from "react";
+import { useColorTheme } from "@/lib/useColorTheme";
+import { Edit } from "../SvgIcons/SVGIcons";
 
 export default function Profile({ toggleEditMode, userInfo }) {
   const { profilePicture, name, additionalInfo } = userInfo;
-
+  const { theme } = useColorTheme();
   return (
     <StyledProfile>
       <EditProfileButton title="Profil bearbeiten" onClick={toggleEditMode}>
-        <StyledEditIcon
-          src="/assets/icons/icon_edit.svg"
-          alt="Bearbeiten Schaltfläche"
-          width={22}
-          height={22}
-        />
+        <Edit $theme={theme}></Edit>
       </EditProfileButton>
       <UserName>{name.value}</UserName>
       <PictureProfile

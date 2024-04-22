@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Button = styled.span`
   font: var(--font_tag);
-  color: var(--color_white);
+  color: var(--color_base);
   text-transform: uppercase;
   background-color: ${(props) => `var(--color_${props.color})`};
   border: none;

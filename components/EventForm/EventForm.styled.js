@@ -132,7 +132,7 @@ export const UploadButton = styled.label`
   align-items: center;
   gap: 0.375rem;
   padding: 0.938rem 1.25rem 0.875rem;
-  background-color: var(--color_white);
+  background-color: var(--color_base);
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--color_eight);

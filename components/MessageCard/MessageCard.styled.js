@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Card = styled.div`
-  background-color: var(--color_white);
+  background-color: var(--color_base);
   border-radius: var(--border-radius_card);
   box-shadow: var(--shadow_one);
   padding: ${({ $hasButton }) =>

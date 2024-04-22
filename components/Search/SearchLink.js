@@ -1,15 +1,12 @@
 import { SearchLinkStyled } from "./Search.styled";
-import Image from "next/image";
+import { SearchIcon } from "../SvgIcons/SVGIcons";
+import { useColorTheme } from "@/lib/useColorTheme";
 
 export default function SearchLink() {
+  const { theme } = useColorTheme();
   return (
     <SearchLinkStyled href={"/search"}>
-      <Image
-        src="/assets/icons/icon_search.svg"
-        alt="Suchlink"
-        width={36}
-        height={36}
-      />
+      <SearchIcon $theme={theme} />
     </SearchLinkStyled>
   );
 }

@@ -7,7 +7,7 @@ const wrapperStyles = css`
   align-items: center;
   gap: 0.5rem;
   font: var(--font_button);
-  color: var(--color_white);
+  color: var(--color_base);
   text-transform: uppercase;
   background-color: var(--color_eight);
   border-radius: var(--border-radius_button);
