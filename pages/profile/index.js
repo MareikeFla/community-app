@@ -93,7 +93,7 @@ export default function ProfilePage() {
             toggleEditMode={toggleEditMode}
             userInfo={userInfo}
             handleSubmit={handleSubmit}
-          ></ProfileForm>
+          />
         ) : (
           <Profile
             toggleEditMode={toggleEditMode}
