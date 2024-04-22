@@ -7,8 +7,17 @@ import { ModalProvider } from "@/lib/useModal";
 import { ConfirmationModal } from "@/components/ConfirmationModal/ConfirmationModal";
 import { SessionProvider } from "next-auth/react";
 import { DataProvider } from "@/lib/useData";
+import { ThemeProvider } from "styled-components";
 
 import Head from "next/head";
+
+const theme = {
+  colors: {
+    white: "#fff",
+  },
+  fonts: {},
+  effects: {},
+};
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -18,21 +27,23 @@ export default function App({
 }) {
   return (
     <SessionProvider session={session}>
-      <Head>
-        <title>Pin & Join</title>
-      </Head>
-      <DataProvider>
-        <GlobalStyle />
-        <StyledToastContainer />
-        <Layout>
-          <SWRConfig value={{ fetcher }}>
-            <ModalProvider>
-              <Component {...pageProps} />
-              <ConfirmationModal />
-            </ModalProvider>
-          </SWRConfig>
-        </Layout>
-      </DataProvider>
+      <ThemeProvider theme={theme}>
+        <Head>
+          <title>Pin & Join</title>
+        </Head>
+        <DataProvider>
+          <GlobalStyle />
+          <StyledToastContainer />
+          <Layout>
+            <SWRConfig value={{ fetcher }}>
+              <ModalProvider>
+                <Component {...pageProps} />
+                <ConfirmationModal />
+              </ModalProvider>
+            </SWRConfig>
+          </Layout>
+        </DataProvider>
+      </ThemeProvider>
     </SessionProvider>
   );
 }
