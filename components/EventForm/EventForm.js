@@ -30,6 +30,8 @@ import {
   FullWidth,
   SubtitleLeft,
   SubtitleRight,
+  Tag,
+  TagList,
   CharacterCounter,
 } from "./EventForm.styled";
 import { DeleteButton } from "../DeleteEventButton/DeleteEventButton.styled";
@@ -54,6 +56,9 @@ export default function EventForm({ onSubmit, event: editEvent }) {
 
   // Custom hook to manage form state and logic
   const {
+    selectedCategory,
+    subCategories,
+    selectedSubCategories,
     isFreeOfCharge,
     setIsFreeOfCharge,
     costs,
@@ -69,6 +74,8 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     setIsConsentChecked,
     submitAttempted,
     setSubmitAttempted,
+    handleCategoryChange,
+    handleTagClick,
     handleStartDateChange,
     handleEndDateChange,
     handleCostsChange,
@@ -80,7 +87,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     isStreetRequired,
     isLinkRequired,
     checkIfCorrespondingFieldIsRequired,
-  } = useEventForm(editEvent);
+  } = useEventForm(editEvent, categories);
 
   // Updates the 'costs' state based on the 'isFreeOfCharge' toggle.
   // Sets costs to 'Kostenlos' if free, retains existing costs if applicable, or clears if chargeable.
@@ -138,14 +145,39 @@ export default function EventForm({ onSubmit, event: editEvent }) {
           id="category"
           required
           aria-required="true"
-          defaultValue={editEvent?.category?._id || ""}
+          value={selectedCategory || (editEvent ? editEvent.category._id : "")}
+          onChange={handleCategoryChange}
         >
-          {categories.map((cat) => (
-            <option key={cat._id} value={cat._id}>
-              {cat.title}
+          {categories.map(({ _id, title }) => (
+            <option key={_id} value={_id}>
+              {title}
             </option>
           ))}
         </FormSelect>
+      </FormSection>
+      <FormSection>
+        <FormLabel>Unterkategorien *</FormLabel>
+        <TagList>
+          {subCategories.map(({ _id, title, parentCategory }) => {
+            const mainCategory = categories.find(
+              (cat) => cat._id === parentCategory
+            );
+            const color = mainCategory ? mainCategory.color : "night";
+            const isSelected = selectedSubCategories.includes(_id);
+
+            return (
+              <Tag
+                key={_id}
+                onClick={() => handleTagClick(_id)}
+                color={color}
+                type="button"
+                selected={isSelected}
+              >
+                {title}
+              </Tag>
+            );
+          })}
+        </TagList>
       </FormSection>
       <FormSection>
         <FormLabel htmlFor="startDate">Beginn *</FormLabel>
