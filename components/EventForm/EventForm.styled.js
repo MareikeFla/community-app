@@ -8,18 +8,18 @@ export const EventFormStyled = styled.form`
 
   input::placeholder {
     font: var(--font_body);
-    color: var(--color_grey);
+    color: var(--color_four);
   }
 
   input {
     font: var(--font_body);
-    color: var(--color_grey);
+    color: var(--color_four);
   }
 `;
 
 export const SubtitleRight = styled.p`
   font: var(--font_form-note);
-  color: var(--color_grey);
+  color: var(--color_four);
   text-align: right;
   margin-top: ${({ $addmargintop }) => ($addmargintop ? "0.5rem" : "0")};
   @-moz-document url-prefix() {
@@ -29,7 +29,7 @@ export const SubtitleRight = styled.p`
 
 export const SubtitleLeft = styled.p`
   font: var(--font_form-note);
-  color: var(--color_grey);
+  color: var(--color_four);
 `;
 
 export const FormSection = styled.div`
@@ -46,13 +46,13 @@ export const FormLabel = styled.label`
 
   div {
     font: var(--font_form-note);
-    color: var(--color_grey);
+    color: var(--color_four);
     margin-bottom: 0.188rem;
   }
 `;
 
 export const FormInput = styled.input`
-  color: var(--color_grey);
+  color: var(--color_four);
   background-color: var(--color_two);
   border: none;
   border-radius: var(--border-radius_input);
@@ -63,12 +63,12 @@ export const FormInput = styled.input`
     $addmarginbottom ? "1.25rem" : "0"};
 
   &::placeholder {
-    color: var(--color_grey);
+    color: var(--color_four);
   }
 
   &[type="date"] {
     font: var(--font_body);
-    color: var(--color_grey);
+    color: var(--color_four);
     text-transform: uppercase;
   }
 
@@ -82,7 +82,7 @@ export const FormInput = styled.input`
 
   &[type="time"] {
     font: var(--font_body);
-    color: var(--color_grey);
+    color: var(--color_four);
   }
 
   &:focus-visible {
@@ -104,7 +104,7 @@ export const FormInputTime = styled(FormInput)`
 
 export const FormSelect = styled.select`
   font: var(--font_body);
-  color: var(--color_grey);
+  color: var(--color_four);
   background-color: var(--color_two);
   width: 100%;
   height: 2.5rem;
@@ -137,7 +137,7 @@ export const UploadButton = styled.label`
   font-weight: 600;
   color: var(--color_orange);
   text-transform: uppercase;
-  border: 2px solid var(--color_light-grey);
+  border: 2px solid var(--color_three);
   border-radius: var(--border-radius_card);
   cursor: pointer;
 
@@ -165,7 +165,7 @@ export const FormCheckboxWrapper = styled.div`
   padding: 0.625rem 0.875rem;
   margin: ${({ $consentMargin }) =>
     $consentMargin ? "0.5rem 0 0.25rem" : "0.25rem 0 1.125rem"};
-  border: 1px solid var(--color_light-grey);
+  border: 1px solid var(--color_three);
   border-radius: var(--border-radius_input);
 
   & > * {
@@ -271,7 +271,7 @@ export const FormLegend = styled.legend`
 
 export const FormInfoText = styled.p`
   font: var(--font_form-note);
-  color: var(--color_grey);
+  color: var(--color_four);
 `;
 
 export const FormTimeDateWrapper = styled.div`

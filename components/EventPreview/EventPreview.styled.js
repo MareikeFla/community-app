@@ -50,12 +50,12 @@ export const Icon = styled.img`
 
 export const Info = styled.p`
   font: var(--font_info);
-  color: var(--color_grey);
+  color: var(--color_four);
 `;
 
 export const Divider = styled.div`
   height: 0.063rem;
-  background-color: var(--color_light-grey);
+  background-color: var(--color_three);
   width: calc(100% + 3rem);
   margin: 1.25rem -1.5rem 0;
 `;

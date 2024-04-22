@@ -16,6 +16,8 @@ const theme = {
     white: "#fff",
     one: "#f8f8f9",
     two: "#f5f5f5",
+    three: "#d8d8d8",
+    four: "#737678",
   },
   fonts: {},
   effects: {},

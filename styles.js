@@ -26,8 +26,8 @@ export default createGlobalStyle`
     --color_white: ${colors.white}; // --color_white
     --color_one: ${colors.one}; //  --color_body
     --color_two: ${colors.two}; // --color_pale-grey
-    --color_light-grey: #d8d8d8; // --color_light-grey
-    --color_grey: #737678; // --color_grey
+    --color_three: ${colors.three}; // --color_light-grey
+    --color_four: ${colors.four}; // --color_grey
     --color_night: #5b5f62; // --color_night
     --color_midnight: #434648; // --color_midnight
     --color_light-orange: #ffb169; //  --color_light-orange
@@ -93,7 +93,7 @@ export default createGlobalStyle`
   body {
     background: var(--color_one);
     font: var(--font_body);
-    color: var(--color_grey);
+    color: var(--color_four);
     hyphens: auto;
     word-break: break-word;
     min-height: 100vh;

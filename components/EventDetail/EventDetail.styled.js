@@ -88,7 +88,7 @@ export const InfoWrapper = styled.div`
   gap: 0.5rem;
   margin: 1.25rem 0 1.875rem;
   padding: 1.125rem 1rem 1rem;
-  border: 1px solid var(--color_light-grey);
+  border: 1px solid var(--color_three);
   border-radius: var(--border-radius_card);
 `;
 
@@ -99,7 +99,7 @@ export const InfoTitle = styled.span`
 
 export const Info = styled.p`
   font: var(--font_info);
-  color: var(--color_grey);
+  color: var(--color_four);
 `;
 
 export const LinkList = styled.ul`
@@ -137,7 +137,7 @@ export const ButtonWrapper = styled.section`
 `;
 export const AttendeeWrapper = styled.section`
   text-align: right;
-  border-top: 1px solid var(--color_light-grey);
+  border-top: 1px solid var(--color_three);
   margin-top: 1.375rem;
   margin-inline: -1.5rem;
   padding-top: 0.75rem;

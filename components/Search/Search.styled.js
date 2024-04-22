@@ -29,10 +29,10 @@ export const SearchBar = styled.input`
   background-repeat: no-repeat;
   padding: 0.5rem 1.75rem 0.5rem 2.688rem;
   width: 100%;
-  color: var(--color_grey);
+  color: var(--color_four);
 
   &::placeholder {
-    color: var(--color_grey);
+    color: var(--color_four);
   }
 
   &:focus {
