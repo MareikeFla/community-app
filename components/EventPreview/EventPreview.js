@@ -46,10 +46,12 @@ export default function EventPreview({ event }) {
             <Icon src="/assets/icons/icon_date.svg" alt="event date icon" />
             {formattedDate}
           </Info>
-          <Info>
-            <Icon src="/assets/icons/icon_time.svg" alt="event time icon" />
-            {time}
-          </Info>
+          {time && (
+            <Info>
+              <Icon src="/assets/icons/icon_time.svg" alt="event time icon" />
+              {time}
+            </Info>
+          )}
           <Info>
             <Icon
               src="/assets/icons/icon_location.svg"

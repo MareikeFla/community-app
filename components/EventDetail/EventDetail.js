@@ -94,11 +94,12 @@ export default function EventDetail({ event, mutateEvent }) {
         <InfoWrapper>
           <InfoTitle>Beginn</InfoTitle>
           <Info>
-            {formattedStartDate}, {start.time} Uhr
+            {formattedStartDate}
+            {start.time && "," + start.time + " Uhr"}
           </Info>
           <InfoTitle>Ende</InfoTitle>
           <Info>
-            {formattedEndDate}, {end.time} Uhr
+            {formattedEndDate} {end.time && "," + end.time + " Uhr"}
           </Info>
           <InfoTitle>Ort</InfoTitle>
           <Info>{isOnlineEvent ? "Online" : locationToString(location)}</Info>

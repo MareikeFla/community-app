@@ -8,6 +8,8 @@ import { ConfirmationModal } from "@/components/ConfirmationModal/ConfirmationMo
 import { SessionProvider } from "next-auth/react";
 import { DataProvider } from "@/lib/useData";
 
+import Head from "next/head";
+
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function App({
@@ -16,6 +18,9 @@ export default function App({
 }) {
   return (
     <SessionProvider session={session}>
+      <Head>
+        <title>Pin & Join</title>
+      </Head>
       <DataProvider>
         <GlobalStyle />
         <StyledToastContainer />

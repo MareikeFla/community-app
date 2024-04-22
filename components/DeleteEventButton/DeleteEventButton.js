@@ -33,7 +33,7 @@ export default function DeleteEventButton({ id }) {
     >
       <Image
         src="/assets/icons/icon_delete.svg"
-        alt="Delete button"
+        alt="Löschentaste"
         width={21}
         height={23}
       />

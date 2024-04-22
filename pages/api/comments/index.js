@@ -4,7 +4,7 @@ import Comment from "@/db/models/Comment";
 export default async function handler(request, response) {
   await dbConnect();
 
-  if (request.method === "POST") {
+  if (request.method === "PUT") {
     try {
       const newComment = await Comment.create(request.body);
       response.status(201).json(newComment);
@@ -15,7 +15,10 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     try {
-      const comments = await Comment.find().populate("createdBy");
+      const comments = await Comment.find().populate({
+        path: "createdBy",
+        select: "name image",
+      });
       if (!comments) {
         return response.status(404).json({ status: "Not Found" });
       }
