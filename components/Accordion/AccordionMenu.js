@@ -33,7 +33,7 @@ export default function AccordionMenu({ sections = [] }) {
               newStateObject[id] = !isOpen;
               setAccordionSectionsIsOpen(newStateObject);
             }}
-          ></AccordionSection>
+          />
         );
       })}
     </AccordionWrap>
