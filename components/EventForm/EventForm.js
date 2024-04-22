@@ -49,9 +49,9 @@ import SwitchButton from "../SwitchButton/SwitchButton";
 import AutoResizingTextArea from "./AutoResizingTextArea";
 import Loading from "../Loading/Loading";
 import FetchingError from "../FetchingError/FetchingError";
-import dynamic from "next/dynamic";
 import EditButton from "../EditButton/EditButton";
 import usePlaceSearch from "@/lib/usePlaceSearch";
+import dynamic from "next/dynamic";
 const Map = dynamic(() => import("../Map/Map"), { ssr: false });
 
 // EventForm component definition. It receives an updateDatabase function for database operations,
