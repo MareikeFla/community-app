@@ -41,7 +41,7 @@ export default function Reply({ reply }) {
               <EditButton
                 onEdit={() => setIsEditingReply(!isEditingReply)}
                 isEditing={isEditingReply}
-              ></EditButton>
+              />
             )}
           </ReplyHeader>
           <ReplyBody>

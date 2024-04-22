@@ -60,7 +60,7 @@ export default function Comment({ comment }) {
               <EditButton
                 onEdit={handleEditComment}
                 isEditing={isEditingComment}
-              ></EditButton>
+              />
             )}
           </CommentHeader>
           {!isEditingComment ? (
