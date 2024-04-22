@@ -43,7 +43,7 @@ export const AccordionBody = styled.div`
 
 export const StyledArrow = styled.svg`
   transform: ${({ $isOpen }) => ($isOpen ? "rotate(90deg)" : "rotate(-90deg)")};
-  transition: transform 0.3s;
+  transition: transform 0.4s;
 `;
 
 export const Counter = styled.p`
