@@ -7,11 +7,17 @@ import Loading from "@/components/Loading/Loading";
 import { useData } from "@/lib/useData";
 import { useState } from "react";
 import { formatedUserInfo } from "@/lib/profile/profileHelper";
+import AccordionMenu from "@/components/Accordion/AccordionMenu";
+import EventList from "@/components/EventList/EventList";
+import { useRouter } from "next/router";
 
 export default function ProfilePage() {
   const { data: session, status, update: updateSession } = useSession();
   const { updateUser } = useData();
   const [editMode, setEditMode] = useState(false);
+  const router = useRouter();
+  const { openSection } = router.query;
+  const { events, isLoadingEvents, errorEvents } = useData().fetchedEvents;
 
   function toggleEditMode() {
     setEditMode(!editMode);
@@ -27,10 +33,53 @@ export default function ProfilePage() {
     return wasSuccsessful;
   };
 
-  if (status === "loading" || (status === "authenticated" && !session)) {
+  if (
+    status === "loading" ||
+    (status === "authenticated" && !session) ||
+    isLoadingEvents ||
+    errorEvents
+  ) {
     return <Loading />;
   }
   const userInfo = formatedUserInfo(session);
+
+  const eventsCreatedByUser = events.filter(
+    (event) => event.createdBy === session.user._id
+  );
+
+  const attendedEventsIds = new Set();
+  let attendedEvents = [];
+
+  session.user.attendedEvents.forEach((id) => attendedEventsIds.add(id));
+  attendedEvents = events.filter((event) => attendedEventsIds.has(event._id));
+
+  const accordionSections = [
+    {
+      id: 0,
+      title: "Erstellte Events",
+      component: EventList,
+      componentsProps: { events: eventsCreatedByUser || [] },
+      counter: eventsCreatedByUser.length,
+      counterText: { singular: "Event", plural: "Events" },
+      canOpen: eventsCreatedByUser.length !== 0,
+      isHighlighted: eventsCreatedByUser.length !== 0,
+      isOpen: false,
+    },
+    {
+      id: 1,
+      title: "Meine Merkliste",
+      component: EventList,
+      componentsProps: { events: attendedEvents || [] },
+      counter: attendedEvents.length,
+      counterText: { singular: "Event", plural: "Events" },
+      canOpen: attendedEvents.length !== 0,
+      isHighlighted: attendedEvents.length !== 0,
+      isOpen: false,
+    },
+  ];
+  if (openSection !== undefined && openSection < accordionSections.length) {
+    accordionSections[openSection].isOpen = true;
+  }
 
   if (!session) {
     return (
@@ -39,17 +88,20 @@ export default function ProfilePage() {
         <ArrowButton onClick={() => signIn()}>Jetzt Anmelden</ArrowButton>
       </MessageCard>
     );
-  } else if (!editMode) {
+  } else {
     return (
-      <Profile toggleEditMode={toggleEditMode} userInfo={userInfo}></Profile>
-    );
-  } else if (editMode) {
-    return (
-      <ProfileForm
-        toggleEditMode={toggleEditMode}
-        userInfo={userInfo}
-        handleSubmit={handleSubmit}
-      ></ProfileForm>
+      <>
+        {editMode ? (
+          <ProfileForm
+            toggleEditMode={toggleEditMode}
+            userInfo={userInfo}
+            handleSubmit={handleSubmit}
+          />
+        ) : (
+          <Profile toggleEditMode={toggleEditMode} userInfo={userInfo} />
+        )}
+        <AccordionMenu sections={accordionSections} />
+      </>
     );
   }
 }

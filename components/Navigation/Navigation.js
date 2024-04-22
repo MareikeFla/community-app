@@ -7,6 +7,7 @@ import {
   NavButton,
 } from "./Navigation.styled";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { navigationEntries } from "./navigationEntries";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +15,9 @@ export default function Navigation() {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+const navigationLinks = session 
+    ? navigationEntries 
+    : navigationEntries.filter(entry => !entry.requireSession);
 
   return (
     <NavigationContainer>
@@ -24,48 +28,27 @@ export default function Navigation() {
       </NavIcon>
       <NavMenu $isOpen={isOpen}>
         <ul>
+          {navigationLinks.map((link) => {
+            return (
+              <li key={link.href}>
+                <NavLink href={link.href} onClick={toggleMenu}>
+                  {link.text}
+                </NavLink>
+              </li>
+            );
+          })}
           <li>
-            <NavLink href="/" onClick={toggleMenu}>
-              Home
-            </NavLink>
+            <NavButton
+              onClick={() => {
+                {
+                  session ? signOut() : signIn();
+                }
+                toggleMenu();
+              }}
+            >
+              {session ? "Abmelden" : "Anmelden"}
+            </NavButton>
           </li>
-          {session ? (
-            <>
-              <li>
-                <NavLink href="/events/new" onClick={toggleMenu}>
-                  Event erstellen
-                </NavLink>
-              </li>
-              <li>
-                <NavLink href={"/profile"} onClick={toggleMenu}>
-                  Mein Profil
-                </NavLink>
-              </li>
-            </>
-          ) : null}
-          {session ? (
-            <li>
-              <NavButton
-                onClick={() => {
-                  signOut();
-                  toggleMenu();
-                }}
-              >
-                Abmelden
-              </NavButton>
-            </li>
-          ) : (
-            <li>
-              <NavButton
-                onClick={() => {
-                  signIn();
-                  toggleMenu();
-                }}
-              >
-                Anmelden
-              </NavButton>
-            </li>
-          )}
         </ul>
       </NavMenu>
     </NavigationContainer>
