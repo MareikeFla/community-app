@@ -3,31 +3,22 @@ import { Card, Message } from "../MessageCard/MessageCard.styled";
 
 export const AccordionWrap = styled.div`
   padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 `;
 
 export const AccordionHeader = styled(Card)`
-  display: grid;
-  grid-template-columns: auto 1fr 1fr;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 0.5rem;
-  padding: ${({ $isOpen }) =>
-    $isOpen
-      ? "0.75rem 0.75rem 0.625rem 1.5rem"
-      : "0.75rem 0.75rem 0.5rem 1.5rem"};
-  transition: all 0.3s;
-  box-shadow: ${({ $isOpen, $isHighlighted }) =>
-    $isHighlighted
-      ? "inset 0 2px 0 0 var(--color_orange), var(--shadow_card)"
-      : "inset 0 2px 0 0 var(--color_light-grey), var(--shadow_card)"};
+  padding: 0.75rem 1rem 0.75rem 1rem;
 `;
 export const AccordionTitle = styled(Message)`
   text-align: left;
 `;
-export const Counter = styled.p`
+export const OpenArrow = styled.p`
   justify-self: right;
-  font: var(--font_info);
-  font-weight: 600;
-  color: var(--color_white);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,6 +42,15 @@ export const AccordionBody = styled.div`
 `;
 
 export const StyledArrow = styled.svg`
-  transform: ${({ $isOpen }) => ($isOpen ? "rotate(90deg)" : "rotate(0)")};
+  transform: ${({ $isOpen }) => ($isOpen ? "rotate(90deg)" : "rotate(-90deg)")};
   transition: transform 0.6s;
+`;
+
+export const Counter = styled.p`
+  font: var(--font_info);
+`;
+
+export const TitleCounterWrap = styled.div`
+  display: flex;
+  flex-direction: column;
 `;

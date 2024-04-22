@@ -15,7 +15,6 @@ export default function AccordionMenu({ sections = [] }) {
     <AccordionWrap>
       {sections.map((section) => {
         const id = section.id;
-        section.key = id;
         const isOpen = accordionSectionsIsOpen[id];
 
         return (
@@ -25,6 +24,7 @@ export default function AccordionMenu({ sections = [] }) {
             component={section.component}
             componentsProps={section.componentsProps}
             counter={section.counter}
+            counterText={section.counterText}
             canOpen={section.canOpen}
             isHighlighted={section.isHighlighted}
             isOpen={isOpen}

@@ -52,6 +52,7 @@ export default function ProfilePage() {
 
   session.user.attendedEvents.forEach((id) => attendedEventsIds.add(id));
   attendedEvents = events.filter((event) => attendedEventsIds.has(event._id));
+
   const accordionSections = [
     {
       id: 0,
@@ -59,6 +60,7 @@ export default function ProfilePage() {
       component: EventList,
       componentsProps: { events: eventsCreatedByUser || [] },
       counter: eventsCreatedByUser.length,
+      counterText: { singular: "Event", plural: "Events" },
       canOpen: eventsCreatedByUser.length !== 0,
       isHighlighted: eventsCreatedByUser.length !== 0,
       isOpen: false,
@@ -69,6 +71,7 @@ export default function ProfilePage() {
       component: EventList,
       componentsProps: { events: attendedEvents || [] },
       counter: attendedEvents.length,
+      counterText: { singular: "Event", plural: "Events" },
       canOpen: attendedEvents.length !== 0,
       isHighlighted: attendedEvents.length !== 0,
       isOpen: false,
@@ -95,12 +98,9 @@ export default function ProfilePage() {
             handleSubmit={handleSubmit}
           />
         ) : (
-          <Profile
-            toggleEditMode={toggleEditMode}
-            userInfo={userInfo}
-          />
+          <Profile toggleEditMode={toggleEditMode} userInfo={userInfo} />
         )}
-        <AccordionMenu sections={accordionSections}/>
+        <AccordionMenu sections={accordionSections} />
       </>
     );
   }
