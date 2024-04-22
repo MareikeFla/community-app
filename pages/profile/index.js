@@ -98,7 +98,7 @@ export default function ProfilePage() {
           <Profile
             toggleEditMode={toggleEditMode}
             userInfo={userInfo}
-          ></Profile>
+          />
         )}
         <AccordionMenu sections={accordionSections}></AccordionMenu>
       </>
