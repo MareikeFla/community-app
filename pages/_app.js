@@ -11,28 +11,52 @@ import { ThemeProvider } from "styled-components";
 
 import Head from "next/head";
 
+const light = {
+  white: "#fff", // --color_white
+  one: "#f8f8f9", // --color_body
+  two: "#f5f5f5", // --color_pale-grey
+  three: "#d8d8d8", // --color_light-grey
+  four: "#737678", // --color_grey
+  five: "#5b5f62", // --color_night
+  six: "#434648", // --color_midnight
+  seven: "#ffb169", //  --color_light-orange
+  eight: "#ff9957", // --color_orange
+  nine: "#f9847c", // --color_light-red
+  ten: "#ff6e63", // --color_red
+  eleven: "#4fb386", // --toastify-color-success
+  gradientOne: "linear-gradient(to top right, #fea554, #ff5e62)", // --color_sunset
+  categoryOne: "#ec495d", // --color_activism
+  categoryTwo: "#a269b6", // --color_art
+  categoryThree: "#22a5cb", // --color_education
+  categoryFour: "#98bb4f", // --color_sport
+  shadowOne: "rgba(91, 95, 98, 0.2)", // --shadow_card
+  shadowTwo: "rgba(91, 95, 98, 0.24)", // --shadow_round-button
+};
+
+const dark = {
+  white: "#fff", // --color_white
+  one: "#f8f8f9", // --color_body
+  two: "#f5f5f5", // --color_pale-grey
+  three: "#d8d8d8", // --color_light-grey
+  four: "#737678", // --color_grey
+  five: "#5b5f62", // --color_night
+  six: "#434648", // --color_midnight
+  seven: "#ffb169", //  --color_light-orange
+  eight: "#ff9957", // --color_orange
+  nine: "#f9847c", // --color_light-red
+  ten: "#ff6e63", // --color_red
+  eleven: "#4fb386", // --toastify-color-success
+  gradientOne: "linear-gradient(to top right, #fea554, #ff5e62)", // --color_sunset
+  categoryOne: "#ec495d", // --color_activism
+  categoryTwo: "#a269b6", // --color_art
+  categoryThree: "#22a5cb", // --color_education
+  categoryFour: "#98bb4f", // --color_sport
+  shadowOne: "rgba(91, 95, 98, 0.2)", // --shadow_card
+  shadowTwo: "rgba(91, 95, 98, 0.24)", // --shadow_round-button
+};
+
 const theme = {
-  colors: {
-    white: "#fff",
-    one: "#f8f8f9", // --color_body
-    two: "#f5f5f5", // --color_pale-grey
-    three: "#d8d8d8", // --color_light-grey
-    four: "#737678", // --color_grey
-    five: "#5b5f62", // --color_night
-    six: "#434648", // --color_midnight
-    seven: "#ffb169", //  --color_light-orange
-    eight: "#ff9957", // --color_orange
-    nine: "#f9847c", // --color_light-red
-    ten: "#ff6e63", // --color_red
-    eleven: "#4fb386", // --toastify-color-success
-    gradientOne: "linear-gradient(to top right, #fea554, #ff5e62)", // --color_sunset
-    categoryOne: "#ec495d", // --color_activism
-    categoryTwo: "#a269b6", // --color_art
-    categoryThree: "#22a5cb", // --color_education
-    categoryFour: "#98bb4f", // --color_sport
-    shadowOne: "rgba(91, 95, 98, 0.2)", // --shadow_card
-    shadowTwo: "rgba(91, 95, 98, 0.24)", // --shadow_round-button
-  },
+  colors: dark,
   fonts: {},
   effects: {},
 };
