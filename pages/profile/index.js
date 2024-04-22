@@ -100,7 +100,7 @@ export default function ProfilePage() {
             userInfo={userInfo}
           />
         )}
-        <AccordionMenu sections={accordionSections}></AccordionMenu>
+        <AccordionMenu sections={accordionSections}/>
       </>
     );
   }
