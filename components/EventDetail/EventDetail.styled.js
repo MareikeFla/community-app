@@ -72,7 +72,7 @@ export const ExpandCollapseButton = styled.button`
   border: none;
   cursor: pointer;
   background-color: var(--color_white);
-  color: var(--color_orange);
+  color: var(--color_eight);
   font: var(--font_body);
 `;
 
@@ -116,7 +116,7 @@ export const ListItemLink = styled.a`
   margin-left: 0.75rem;
   vertical-align: top;
   font: var(--font_info);
-  color: var(--color_red);
+  color: var(--color_ten);
   text-decoration: none;
 
   &:hover {
@@ -127,7 +127,7 @@ export const ListItemLink = styled.a`
 export const ListItemMarker = styled.span`
   position: absolute;
   bottom: 0.188rem;
-  color: var(--color_red);
+  color: var(--color_ten);
 `;
 
 export const ButtonWrapper = styled.section`

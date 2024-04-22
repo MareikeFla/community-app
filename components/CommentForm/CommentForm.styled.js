@@ -35,7 +35,7 @@ export const CommentFormTextarea = styled.textarea`
 
   padding: 0.375rem 0.75rem;
   &:focus-visible {
-    outline: 1px solid var(--color_orange);
+    outline: 1px solid var(--color_eight);
   }
 `;
 
@@ -44,7 +44,7 @@ export const CommentButton = styled(PrimaryButton)`
   ${({ $editing }) =>
     $editing &&
     `
-  color: var(--color_orange);
+  color: var(--color_eight);
   font-size: 1rem;
   font: var(--font_info);
   padding: 0;
@@ -54,7 +54,7 @@ export const CommentButton = styled(PrimaryButton)`
   cursor: pointer;
 
   &:hover {
-    color: var(--color_orange);
+    color: var(--color_eight);
     font: var(--font_info);
     border: none;
     background-color: var(--color_white);

@@ -36,7 +36,7 @@ export const SearchBar = styled.input`
   }
 
   &:focus {
-    outline: 2px solid var(--color_orange);
+    outline: 2px solid var(--color_eight);
   }
 `;
 

@@ -6,7 +6,7 @@ export const HeaderBackground = styled.header`
   left: 0;
   width: 100%;
   height: 13.75rem;
-  background-image: var(--color_sunset);
+  background-image: var(--color_gradientOne);
 `;
 
 export const HeaderCutout = styled.svg`

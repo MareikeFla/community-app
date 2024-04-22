@@ -86,7 +86,7 @@ export const FormInput = styled.input`
   }
 
   &:focus-visible {
-    outline: 1px solid var(--color_orange);
+    outline: 1px solid var(--color_eight);
   }
 
   &[type="date"]:hover {
@@ -113,7 +113,7 @@ export const FormSelect = styled.select`
   border-radius: var(--border-radius_input);
 
   &:focus-visible {
-    outline: 1px solid var(--color_orange);
+    outline: 1px solid var(--color_eight);
   }
 
   &:hover {
@@ -135,14 +135,14 @@ export const UploadButton = styled.label`
   background-color: var(--color_white);
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--color_orange);
+  color: var(--color_eight);
   text-transform: uppercase;
   border: 2px solid var(--color_three);
   border-radius: var(--border-radius_card);
   cursor: pointer;
 
   &:hover {
-    border-color: var(--color_orange);
+    border-color: var(--color_eight);
   }
 `;
 
@@ -190,7 +190,7 @@ export const FlexWrapper = styled.div`
 `;
 
 export const ErrorMessage = styled.p`
-  color: var(--color_red);
+  color: var(--color_ten);
 `;
 
 export const FormDescriptionField = styled.textarea`
@@ -217,7 +217,7 @@ export const FormDescriptionField = styled.textarea`
   }
 
   &:focus-visible {
-    outline: 1px solid var(--color_orange);
+    outline: 1px solid var(--color_eight);
   }
 
   &:-webkit-scrollbar {

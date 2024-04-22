@@ -23,7 +23,7 @@ export const PictureProfile = styled(Image)`
   top: -2rem;
   object-fit: cover;
   border-radius: 10rem;
-  border: 4px solid var(--color_orange);
+  border: 4px solid var(--color_eight);
 `;
 
 export const EditProfileButton = styled(EditButton)`

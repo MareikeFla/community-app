@@ -30,11 +30,11 @@ export default createGlobalStyle`
     --color_four: ${colors.four}; // --color_grey
     --color_five: ${colors.five} ; // --color_night
     --color_six: ${colors.six}; // --color_midnight
-    --color_light-orange: #ffb169; //  --color_light-orange
-    --color_orange: #ff9957; // --color_orange
-    --color_light-red: #f9847c; // --color_light-red
-    --color_red: #ff6e63; // --color_red
-    --color_sunset: linear-gradient(to top right, #fea554, #ff5e62); // --color_sunset
+    --color_seven: ${colors.seven}; //  --color_light-orange
+    --color_eight: ${colors.eight}; // --color_orange
+    --color_nine: ${colors.nine}; // --color_light-red
+    --color_ten: ${colors.ten} ; // --color_red
+    --color_gradientOne: ${colors.gradientOne}; // --color_sunset
 
     --color_activism: #ec495d; // --color_activism
     --color_art: #a269b6; // --color_art
@@ -82,7 +82,7 @@ export default createGlobalStyle`
 
     /* Toasts */
     --toastify-color-success: #4fb386; // --toastify-color-success
-    --toastify-color-error: var(--color_red); // --toastify-color-error
+    --toastify-color-error: var(--color_ten); // --toastify-color-error
 
     /* Loading Animation */
     --animation_speed: 2s; // --animation_speed

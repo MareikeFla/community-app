@@ -20,6 +20,11 @@ const theme = {
     four: "#737678", // --color_grey
     five: "#5b5f62", // --color_night
     six: "#434648", // --color_midnight
+    seven: "#ffb169", //  --color_light-orange
+    eight: "#ff9957", // --color_orange
+    nine: "#f9847c", // --color_light-red
+    ten: "#ff6e63", // --color_red
+    gradientOne: "linear-gradient(to top right, #fea554, #ff5e62)", // --color_sunset
   },
   fonts: {},
   effects: {},

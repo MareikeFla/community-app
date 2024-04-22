@@ -14,11 +14,11 @@ export const Spinner = styled.div`
     position: absolute;
     inset: 0px;
     border-radius: 50%;
-    border: 5px solid var(--color_light-orange);
+    border: 5px solid var(--color_seven);
     animation: prixClipFix var(--animation_speed) linear infinite;
   }
   &::after {
-    border-color: var(--color_red);
+    border-color: var(--color_ten);
     animation: prixClipFix var(--animation_speed) linear infinite,
       rotate calc(var(--animation_speed) / 4) linear infinite reverse;
     inset: 6px;

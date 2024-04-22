@@ -20,7 +20,7 @@ export const ReplyCommentFormTextarea = styled.textarea`
   margin: 0.25rem 0 1.875rem;
   padding: 0.375rem 0.75rem;
   &:focus-visible {
-    outline: 1px solid var(--color_orange);
+    outline: 1px solid var(--color_eight);
   }
 `;
 
