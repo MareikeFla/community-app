@@ -14,6 +14,7 @@ import Head from "next/head";
 const theme = {
   colors: {
     white: "#fff",
+    one: "#f8f8f9",
   },
   fonts: {},
   effects: {},

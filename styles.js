@@ -24,7 +24,7 @@ export default createGlobalStyle`
       return `
     /* Color Styles */
     --color_white: ${colors.white}; // --color_white
-    --color_body: #f8f8f9; //  --color_body
+    --color_one: ${colors.one}; //  --color_body
     --color_pale-grey: #f5f5f5; // --color_pale-grey
     --color_light-grey: #d8d8d8; // --color_light-grey
     --color_grey: #737678; // --color_grey
@@ -91,7 +91,7 @@ export default createGlobalStyle`
   }
 
   body {
-    background: var(--color_body);
+    background: var(--color_one);
     font: var(--font_body);
     color: var(--color_grey);
     hyphens: auto;
