@@ -12,7 +12,7 @@ export const StyledBackToTopButton = styled.button`
   background-color: var(--color_eight);
   border: none;
   border-radius: var(--border-radius_round-button);
-  box-shadow: var(--shadow_round-button);
+  box-shadow: var(--shadow_two);
   opacity: ${(props) => (props.$showButton ? 1 : 0)};
   transition: var(--transition_button);
   cursor: pointer;

@@ -10,7 +10,7 @@ export const SearchBox = styled.div`
   color: var(--color_five);
   border-radius: var(--border-radius_card);
   padding: 2rem 1.5rem 2rem 1.5rem;
-  box-shadow: var(--shadow_card);
+  box-shadow: var(--shadow_one);
 `;
 
 export const SearchCardHeader = styled.h1`

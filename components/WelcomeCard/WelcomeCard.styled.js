@@ -7,7 +7,7 @@ export const Card = styled.div`
   align-items: center;
   background-color: var(--color_white);
   border-radius: var(--border-radius_card);
-  box-shadow: var(--shadow_card);
+  box-shadow: var(--shadow_one);
 
   @media (min-width: 375px) {
     grid-template-columns: ${(props) =>

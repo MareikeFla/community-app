@@ -19,7 +19,7 @@ export default createGlobalStyle`
 
   :root {
     ${(props) => {
-      const { colors, fonts, effects } = props.theme;
+      const { colors } = props.theme;
 
       return `
     /* Color Styles */
@@ -36,10 +36,10 @@ export default createGlobalStyle`
     --color_ten: ${colors.ten} ; // --color_red
     --color_gradientOne: ${colors.gradientOne}; // --color_sunset
 
-    --color_activism: #ec495d; // --color_activism
-    --color_art: #a269b6; // --color_art
-    --color_education: #22a5cb; // --color_education
-    --color_sport: #98bb4f; // --color_sport
+    --color_activism: ${colors.categoryOne}; // --color_activism
+    --color_art:${colors.categoryTwo} ; // --color_art
+    --color_education: ${colors.categoryThree}; // --color_education
+    --color_sport:${colors.categoryFour} ; // --color_sport
 
     /* Font Styles */
     --font-family: ${nunito_sans.style.fontFamily}; // --font-family
@@ -75,14 +75,14 @@ export default createGlobalStyle`
     --border-radius_square-button: 6px; // --border-radius_square-button
     --border-radius_round-button: 50px; // --border-radius_round-button
 
-    --shadow_card: 0px 2px 12px 0px rgba(91, 95, 98, 0.2); // --shadow_card
-    --shadow_round-button: 0px 2px 4px 0px rgba(91, 95, 98, 0.24); // --shadow_round-button
+    --shadow_one: 0px 2px 12px 0px ${colors.shadowOne} ; // --shadow_card
+    --shadow_two: 0px 2px 4px 0px ${colors.shadowTwo}; // --shadow_round-button
 
     --transition_button: 0.3s; //  --transition_button
 
     /* Toasts */
-    --toastify-color-success: #4fb386; // --toastify-color-success
-    --toastify-color-error: var(--color_ten); // --toastify-color-error
+    --toastify-color-success:${colors.eleven} ;
+    --toastify-color-error: ${colors.ten}; 
 
     /* Loading Animation */
     --animation_speed: 2s; // --animation_speed

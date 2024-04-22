@@ -4,7 +4,7 @@ import Image from "next/image";
 export const CategoryCardContainer = styled.div`
   background-color: var(--color_white);
   border-radius: var(--border-radius_card);
-  box-shadow: var(--shadow_card);
+  box-shadow: var(--shadow_one);
 `;
 
 export const ImageContainer = styled.div`
