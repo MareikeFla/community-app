@@ -15,6 +15,7 @@ const theme = {
   colors: {
     white: "#fff",
     one: "#f8f8f9",
+    two: "#f5f5f5",
   },
   fonts: {},
   effects: {},

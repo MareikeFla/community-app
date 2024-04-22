@@ -25,7 +25,7 @@ export default createGlobalStyle`
     /* Color Styles */
     --color_white: ${colors.white}; // --color_white
     --color_one: ${colors.one}; //  --color_body
-    --color_pale-grey: #f5f5f5; // --color_pale-grey
+    --color_two: ${colors.two}; // --color_pale-grey
     --color_light-grey: #d8d8d8; // --color_light-grey
     --color_grey: #737678; // --color_grey
     --color_night: #5b5f62; // --color_night
