@@ -59,14 +59,6 @@ export default function EventForm({ onSubmit, event: editEvent }) {
   const { showModal } = useModal();
   const { placeList, setPlaceList, getPlaces, placeLoading, placeError } =
     usePlaceSearch();
-  const [searchText, setSearchText] = useState("");
-  const debouncedSearchText = useDebounce(searchText, 500);
-  const [searchedText, setSearchedText] = useState(
-    editEvent ? turnAddressToEditIntoString(editEvent) : ""
-  );
-  const [selectedAddress, setSelectedAddress] = useState(null);
-  const [eventLocation, setEventLocation] = useState({});
-  const [eventName, setEventName] = useState(editEvent?.eventName || "");
 
   // Using custom hook to fetch categories data
   const { categories, isLoadingCategories, errorCategories } =
@@ -99,7 +91,18 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     MAX_CHAR_COUNT,
     isLinkRequired,
     checkIfCorrespondingFieldIsRequired,
+    eventLocation,
+    setEventLocation,
+    searchText,
+    setSearchText,
+    searchedText,
+    setSearchedText,
+    selectedAddress,
+    setSelectedAddress,
+    eventName,
+    setEventName,
   } = useEventForm(editEvent);
+  const debouncedSearchText = useDebounce(searchText, 500);
 
   useEffect(() => {
     if (debouncedSearchText) {
@@ -148,18 +151,13 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     return addressParts.join(" ").trim();
   }
 
-  function turnAddressToEditIntoString(item) {
-    const addressParts = [
-      item?.location?.street || "",
-      item?.location?.houseNumber || "",
-      item?.location?.houseNumber && item?.location?.zip
-        ? `, ${item?.location?.zip}`
-        : item?.location?.zip || "",
-      item?.location?.city || "",
-    ].filter(Boolean);
-
-    return addressParts.join(" ").trim();
-  }
+  useEffect(() => {
+    if (searchText === "") {
+      setPlaceList([]);
+      setSelectedAddress(null);
+      setEventLocation({});
+    }
+  }, [searchText]);
 
   // Updates the 'costs' state based on the 'isFreeOfCharge' toggle.
   // Sets costs to 'Kostenlos' if free, retains existing costs if applicable, or clears if chargeable.
