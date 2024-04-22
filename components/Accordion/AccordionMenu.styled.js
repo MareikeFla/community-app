@@ -5,7 +5,7 @@ export const AccordionWrap = styled.div`
   padding-top: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.313rem;
 `;
 
 export const AccordionHeader = styled(Card)`
@@ -43,7 +43,7 @@ export const AccordionBody = styled.div`
 
 export const StyledArrow = styled.svg`
   transform: ${({ $isOpen }) => ($isOpen ? "rotate(90deg)" : "rotate(-90deg)")};
-  transition: transform 0.6s;
+  transition: transform 0.3s;
 `;
 
 export const Counter = styled.p`
