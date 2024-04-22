@@ -318,7 +318,8 @@ export const Tag = styled.button`
   background-color: ${({ selected, color }) =>
     selected ? `var(--color_${color})` : "var(--color_white)"};
   border: 1px solid
-    ${({ selected }) => (selected ? "var(--color_white)" : "var(--color_grey)")};
+    ${({ selected, color }) =>
+      selected ? `var(--color_${color})` : "var(--color_grey)"};
   border-radius: var(--border-radius_button);
   padding: 0.313rem 0.563rem 0.25rem;
   cursor: pointer;
