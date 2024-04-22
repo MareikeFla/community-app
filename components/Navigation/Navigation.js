@@ -15,12 +15,9 @@ export default function Navigation() {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-  let navigationLinks = navigationEntries;
-  if (!session) {
-    navigationLinks = navigationEntries.filter(
-      (entry) => entry.requireSession === false
-    );
-  }
+const navigationLinks = session 
+    ? navigationEntries 
+    : navigationEntries.filter(entry => !entry.requireSession);
 
   return (
     <NavigationContainer>
