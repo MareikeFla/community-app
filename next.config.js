@@ -9,6 +9,7 @@ const nextConfig = {
       "avatars.githubusercontent.com",
       "res.cloudinary.com",
       "www.stadt-koeln.de",
+      "www.stadt-koeln.descc-konferenz-visual_claim.jpg",
     ],
   },
   webpack(config) {
