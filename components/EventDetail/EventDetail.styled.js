@@ -2,12 +2,12 @@ import styled, { css } from "styled-components";
 import Image from "next/image";
 
 export const Card = styled.div`
-  background-color: var(--color_white);
+  background-color: var(--color_base);
   border-radius: ${({ $withImage }) =>
     $withImage
       ? "0 0 var(--border-radius_card) var(--border-radius_card)"
       : "var(--border-radius_card)"};
-  box-shadow: var(--shadow_card);
+  box-shadow: var(--shadow_one);
   padding: ${({ $withImage, pageNotFound, $createdBy, $userId }) =>
     $withImage
       ? "1.5rem 1.5rem 0.75rem"
@@ -20,7 +20,7 @@ export const Card = styled.div`
 
 export const ErrorMessage = styled.h2`
   font: var(--font_heading-2);
-  color: var(--color_night);
+  color: var(--color_five);
   text-align: center;
 `;
 
@@ -44,7 +44,7 @@ export const EventImage = styled(Image)`
 export const EventName = styled.h1`
   margin-bottom: 1.125rem;
   font: var(--font_heading-1);
-  color: var(--color_night);
+  color: var(--color_five);
   text-align: center;
   ${({ $withImage }) =>
     $withImage &&
@@ -52,7 +52,7 @@ export const EventName = styled.h1`
       position: absolute;
       bottom: 1rem;
       font: var(--font_heading-1);
-      color: var(--color_night);
+      color: var(--color_five);
       text-align: center;
       background-color: rgba(255, 255, 255, 0.85);
       border-radius: 4px;
@@ -71,8 +71,8 @@ export const Description = styled.p`
 export const ExpandCollapseButton = styled.button`
   border: none;
   cursor: pointer;
-  background-color: var(--color_white);
-  color: var(--color_orange);
+  background-color: var(--color_base);
+  color: var(--color_eight);
   font: var(--font_body);
 `;
 
@@ -88,18 +88,18 @@ export const InfoWrapper = styled.div`
   gap: 0.5rem;
   margin: 1.25rem 0 1.875rem;
   padding: 1.125rem 1rem 1rem;
-  border: 1px solid var(--color_light-grey);
+  border: 1px solid var(--color_three);
   border-radius: var(--border-radius_card);
 `;
 
 export const InfoTitle = styled.span`
   font: var(--font_label);
-  color: var(--color_night);
+  color: var(--color_five);
 `;
 
 export const Info = styled.p`
   font: var(--font_info);
-  color: var(--color_grey);
+  color: var(--color_four);
 `;
 
 export const LinkList = styled.ul`
@@ -116,7 +116,7 @@ export const ListItemLink = styled.a`
   margin-left: 0.75rem;
   vertical-align: top;
   font: var(--font_info);
-  color: var(--color_red);
+  color: var(--color_ten);
   text-decoration: none;
 
   &:hover {
@@ -127,7 +127,7 @@ export const ListItemLink = styled.a`
 export const ListItemMarker = styled.span`
   position: absolute;
   bottom: 0.188rem;
-  color: var(--color_red);
+  color: var(--color_ten);
 `;
 
 export const ButtonWrapper = styled.section`
@@ -138,11 +138,11 @@ export const ButtonWrapper = styled.section`
 
 export const AttendeeWrapper = styled.section`
   text-align: right;
-  border-top: 1px solid var(--color_light-grey);
+  border-top: 1px solid var(--color_three);
   margin-top: 1.375rem;
   margin-inline: -1.5rem;
   padding-top: 0.75rem;
   padding-inline: 1.5rem;
   font: var(--font_label);
-  color: var(--color_night);
+  color: var(--color_five);
 `;

@@ -9,13 +9,13 @@ export const ProfilePicture = styled(Image)`
 export const CommentContainer = styled.article`
   display: flex;
   gap: 0.75rem;
-  border-top: 1px solid var(--color_light-grey);
+  border-top: 1px solid var(--color_three);
   padding: 1.5rem 0 1.375rem;
 `;
 
 export const CommentHeader = styled.p`
   font: var(--font_label);
-  color: var(--color_midnight);
+  color: var(--color_six);
   margin-bottom: 0.375rem;
   display: flex;
   gap: 0.375rem;
@@ -23,7 +23,7 @@ export const CommentHeader = styled.p`
 `;
 
 export const CommentTime = styled.span`
-  color: var(--color_grey);
+  color: var(--color_four);
   flex: 1;
 `;
 

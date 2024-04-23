@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledFooter = styled.footer`
-  background-color: var(--color_midnight);
+  background-color: var(--color_six);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@ export const StyledFooter = styled.footer`
 `;
 
 export const TextFooter = styled.p`
-  color: var(--color_white);
+  color: var(--color_base);
   font: var(--font_footer);
   text-transform: uppercase;
 `;

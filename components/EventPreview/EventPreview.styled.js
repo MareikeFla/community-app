@@ -2,12 +2,12 @@ import styled from "styled-components";
 import Image from "next/image";
 
 export const Card = styled.div`
-  background-color: var(--color_white);
+  background-color: var(--color_base);
   border-radius: ${({ $withImage }) =>
     $withImage
       ? "0 0 var(--border-radius_card) var(--border-radius_card)"
       : "var(--border-radius_card)"};
-  box-shadow: var(--shadow_card);
+  box-shadow: var(--shadow_one);
   padding: 1.25rem 1.5rem 0.313rem;
 `;
 
@@ -27,7 +27,7 @@ export const EventImage = styled(Image)`
 
 export const PreviewTitle = styled.h2`
   font: var(--font_heading-2);
-  color: var(--color_night);
+  color: var(--color_five);
   margin-bottom: 0.375rem;
 `;
 
@@ -50,12 +50,12 @@ export const Icon = styled.img`
 
 export const Info = styled.p`
   font: var(--font_info);
-  color: var(--color_grey);
+  color: var(--color_four);
 `;
 
 export const Divider = styled.div`
   height: 0.063rem;
-  background-color: var(--color_light-grey);
+  background-color: var(--color_three);
   width: calc(100% + 3rem);
   margin: 1.25rem -1.5rem 0;
 `;

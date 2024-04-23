@@ -9,18 +9,18 @@ export const ReplyCommentFormContainer = styled.form`
 export const ReplyCommentFormLabel = styled.label`
   font: var(--font_body);
   font-weight: 600;
-  color: var(--color_night);
+  color: var(--color_five);
 `;
 export const ReplyCommentFormTextarea = styled.textarea`
   font: var(--font_body);
-  background-color: var(--color_pale-grey);
+  background-color: var(--color_two);
   border: none;
   border-radius: var(--border-radius_input);
   resize: none;
   margin: 0.25rem 0 1.875rem;
   padding: 0.375rem 0.75rem;
   &:focus-visible {
-    outline: 1px solid var(--color_orange);
+    outline: 1px solid var(--color_eight);
   }
 `;
 

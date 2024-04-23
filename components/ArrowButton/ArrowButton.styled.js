@@ -7,15 +7,15 @@ const wrapperStyles = css`
   align-items: center;
   gap: 0.5rem;
   font: var(--font_button);
-  color: var(--color_white);
+  color: var(--color_base);
   text-transform: uppercase;
-  background-color: var(--color_orange);
+  background-color: var(--color_eight);
   border-radius: var(--border-radius_button);
   padding: 0.25rem 0.25rem 0.25rem 0.75rem;
   transition: var(--transition_button);
 
   &:hover {
-    background-color: var(--color_light-orange);
+    background-color: var(--color_seven);
   }
 `;
 
@@ -35,6 +35,6 @@ export const IconWrapper = styled.div`
   align-items: center;
   height: 1.625rem;
   aspect-ratio: 1;
-  background-color: var(--color_light-orange);
+  background-color: var(--color_seven);
   border-radius: var(--border-radius_round-button);
 `;

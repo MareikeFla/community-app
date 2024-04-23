@@ -9,16 +9,16 @@ export const StyledBackToTopButton = styled.button`
   right: 1.25rem;
   height: 2.875rem;
   aspect-ratio: 1;
-  background-color: var(--color_orange);
+  background-color: var(--color_eight);
   border: none;
   border-radius: var(--border-radius_round-button);
-  box-shadow: var(--shadow_round-button);
+  box-shadow: var(--shadow_two);
   opacity: ${(props) => (props.$showButton ? 1 : 0)};
   transition: var(--transition_button);
   cursor: pointer;
   z-index: 1;
 
   &:hover {
-    background-color: var(--color_light-orange);
+    background-color: var(--color_seven);
   }
 `;

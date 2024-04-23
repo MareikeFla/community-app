@@ -7,10 +7,10 @@ export const SearchBox = styled.div`
   width: 100%;
   background-color: white;
   text-align: center;
-  color: var(--color_night);
+  color: var(--color_five);
   border-radius: var(--border-radius_card);
   padding: 2rem 1.5rem 2rem 1.5rem;
-  box-shadow: var(--shadow_card);
+  box-shadow: var(--shadow_one);
 `;
 
 export const SearchCardHeader = styled.h1`
@@ -29,14 +29,14 @@ export const SearchBar = styled.input`
   background-repeat: no-repeat;
   padding: 0.5rem 1.75rem 0.5rem 2.688rem;
   width: 100%;
-  color: var(--color_grey);
+  color: var(--color_four);
 
   &::placeholder {
-    color: var(--color_grey);
+    color: var(--color_four);
   }
 
   &:focus {
-    outline: 2px solid var(--color_orange);
+    outline: 2px solid var(--color_eight);
   }
 `;
 

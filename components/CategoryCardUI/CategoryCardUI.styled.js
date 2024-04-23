@@ -2,9 +2,9 @@ import styled from "styled-components";
 import Image from "next/image";
 
 export const CategoryCardContainer = styled.div`
-  background-color: var(--color_white);
+  background-color: var(--color_base);
   border-radius: var(--border-radius_card);
-  box-shadow: var(--shadow_card);
+  box-shadow: var(--shadow_one);
 `;
 
 export const ImageContainer = styled.div`
@@ -29,7 +29,7 @@ export const CategoryInfoContainer = styled.section`
 
 export const CategoryInfoHeading = styled.h3`
   font: var(--font_heading-3);
-  color: var(--color_night);
+  color: var(--color_five);
   text-transform: uppercase;
   padding-bottom: 0.125rem;
 `;
