@@ -9,11 +9,20 @@ import {
   StyledPopup,
 } from "./Map.styled";
 import { Icon } from "leaflet";
+import CenterMap from "./CenterMap";
+import { useRef, useEffect } from "react";
 
 export default function Map({ event }) {
   const { location, eventName } = event;
   const { street, houseNumber, zip, city, latitude, longitude } = location;
   const coordinates = [latitude, longitude];
+  const markerRef = useRef(null);
+
+  useEffect(() => {
+    if (markerRef.current) {
+      markerRef.current.openPopup();
+    }
+  }, [markerRef.current]);
 
   const CustomIcon = new Icon({
     iconUrl: "/assets/icons/map_pin.png",
@@ -26,13 +35,13 @@ export default function Map({ event }) {
   });
 
   return (
-    <StyledMapContainer center={coordinates} zoom={13} scrollWheelZoom={true}>
+    <StyledMapContainer center={coordinates} zoom={15} scrollWheelZoom={true}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={coordinates} icon={CustomIcon}>
-        <StyledPopup>
+      <Marker position={coordinates} icon={CustomIcon} ref={markerRef}>
+        <StyledPopup autoPan={false}>
           <PopupHeader>{eventName}</PopupHeader> <br />
           <PopupBody>
             {street} {houseNumber}
@@ -43,6 +52,7 @@ export default function Map({ event }) {
           </PopupBody>
         </StyledPopup>
       </Marker>
+      <CenterMap event={event} markerRef={markerRef} />
     </StyledMapContainer>
   );
 }

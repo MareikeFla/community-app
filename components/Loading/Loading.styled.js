@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const Spinner = styled.div`
-  width: 48px;
-  height: 48px;
+  width: ${({ $small }) => ($small ? "24px" : "48px")};
+  height: ${({ $small }) => ($small ? "24px" : "48px")};
   border-radius: 50%;
   position: relative;
-  margin: 3rem auto;
+  margin: ${({ $small }) => ($small ? "0" : "3rem auto")};
   animation: rotate var(--animation_speed) linear infinite;
   &::before,
   &::after {
@@ -14,14 +14,14 @@ export const Spinner = styled.div`
     position: absolute;
     inset: 0px;
     border-radius: 50%;
-    border: 5px solid var(--color_seven);
+    border: ${({ $small }) => ($small ? "3px" : "5px")} solid var(--color_seven);
     animation: prixClipFix var(--animation_speed) linear infinite;
   }
   &::after {
     border-color: var(--color_ten);
     animation: prixClipFix var(--animation_speed) linear infinite,
       rotate calc(var(--animation_speed) / 4) linear infinite reverse;
-    inset: 6px;
+    inset: ${({ $small }) => ($small ? "3px" : "6px")};
   }
 
   @keyframes rotate {

@@ -1,4 +1,4 @@
-import CategoryTag from "../CategoryTag/CategoryTag";
+import CategoryTags from "../CategoryTags/CategoryTags";
 import CommentSection from "../CommentSection/CommentSection";
 import DeleteEventButton from "../DeleteEventButton/DeleteEventButton";
 import EditEventButton from "../EditEventButton/EditEventButton";
@@ -53,6 +53,7 @@ export default function EventDetail({ event, mutateEvent }) {
     image,
     links,
     category,
+    subCategories,
     isOnlineEvent,
     isAttendedByUser,
     attendeeCount,
@@ -127,7 +128,7 @@ export default function EventDetail({ event, mutateEvent }) {
           {longitude && latitude && <Map event={event} />}
         </InfoWrapper>
         <ButtonWrapper>
-          <CategoryTag category={category} />
+          <CategoryTags category={category} subCategories={subCategories} />
           {session && (
             <JoinButton
               onJoinEvent={() => joinEvent(userId, _id, mutateEvent)}
