@@ -26,7 +26,7 @@ export const NavIcon = styled.div`
     height: 3px;
     background-color: var(--color_two);
     border-radius: 3px;
-    transition: var(--transition_button);
+    transition: transform var(--transition_button);
 
     &:nth-child(1) {
       transform: ${({ $isOpen }) =>
