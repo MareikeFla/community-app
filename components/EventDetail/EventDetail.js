@@ -32,7 +32,6 @@ export default function EventDetail({ event, mutateEvent }) {
   const { data: session } = useSession();
   const userId = session?.user.id || null;
   const { theme } = useTheme();
-
   if (!event) {
     return (
       <Card $pageNotFound>

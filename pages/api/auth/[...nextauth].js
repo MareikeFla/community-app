@@ -7,7 +7,6 @@ import User from "@/db/models/User";
 
 export const authOptions = {
   // Configure one or more authentication providers
-
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID,
@@ -29,7 +28,10 @@ export const authOptions = {
           credentials.username === "test" &&
           credentials.password === "test"
         ) {
-          return testUser;
+          return {
+            ...testUser.toObject(),
+            colorTheme: testUser.colorTheme || "light",
+          };
         } else {
           return null;
         }
@@ -60,6 +62,7 @@ export const authOptions = {
           session.user = {
             ...session.user,
             ...updatedUser.toJSON(),
+            colorTheme: updatedUser.colorTheme || "light",
           };
         } catch (error) {
           console.error("Failed to update session user details", error);

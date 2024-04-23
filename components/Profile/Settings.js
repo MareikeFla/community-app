@@ -4,7 +4,7 @@ import ColorSwitch from "./ColorSwitch";
 import { useTheme } from "styled-components";
 import { ProfileSection } from "./Profile.styled";
 
-export default function Settings({ id }) {
+export default function Settings({ id, updateColorTheme }) {
   const { theme, toggleColorTheme } = useTheme();
   return (
     <ProfileSection $direction={"column"} id={id}>
@@ -13,7 +13,10 @@ export default function Settings({ id }) {
         <Text>Hell</Text>
         <ColorSwitch
           isChecked={theme === "dark"}
-          onChange={toggleColorTheme}
+          onChange={async () => {
+            toggleColorTheme(theme);
+            await updateColorTheme(theme === "light" ? "dark" : "light");
+          }}
         ></ColorSwitch>
         <Text>Dunkel</Text>
       </FlexBox>

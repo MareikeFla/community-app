@@ -24,7 +24,7 @@ export default function ProfilePage() {
     setEditMode(!editMode);
   }
 
-  const handleSubmit = async (event) => {
+  async function handleSubmit(event) {
     event.preventDefault();
     const wasSuccsessful = await updateUser(event, session.user);
     if (wasSuccsessful) {
@@ -32,7 +32,13 @@ export default function ProfilePage() {
     }
     toggleEditMode();
     return wasSuccsessful;
-  };
+  }
+
+  async function updateColorTheme(theme) {
+    const wasSuccsessful = await updateUser(theme, session.user, "colorTheme");
+
+    return wasSuccsessful;
+  }
 
   if (
     status === "loading" ||
@@ -58,7 +64,7 @@ export default function ProfilePage() {
     {
       id: 3,
       title: "Einstellungen",
-      componentsProps: { id: "settings" },
+      componentsProps: { id: "settings", updateColorTheme },
       component: Settings,
       isOpen: false,
     },

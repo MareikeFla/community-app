@@ -5,11 +5,18 @@ import React, { useEffect, useState } from "react";
 import { StyledToastContainer } from "@/components/Toast/Toast.styled";
 import { ModalProvider } from "@/lib/useModal";
 import { ConfirmationModal } from "@/components/ConfirmationModal/ConfirmationModal";
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider, getSession } from "next-auth/react";
 import { DataProvider } from "@/lib/useData";
 import { ThemeProvider } from "styled-components";
 import Head from "next/head";
-import { toggleTheme, defaultTheme } from "@/lib/colorThemes";
+import {
+  toggleTheme,
+  defaultTheme,
+  lightTheme,
+  darkTheme,
+} from "@/lib/colorThemes";
+import { getServerSession } from "next-auth";
+import { useSession } from "next-auth/react";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function App({
@@ -18,10 +25,27 @@ export default function App({
 }) {
   const [colorTheme, setColorTheme] = useState(defaultTheme);
 
+  async function getUserTheme() {
+    const session = await getSession();
+    return session?.user?.colorTheme || "light";
+  }
+
   function toggleColorTheme() {
     const newTheme = toggleTheme(colorTheme.theme);
     setColorTheme(newTheme);
   }
+  useEffect(() => {
+    const fetchTheme = async () => {
+      const userTheme = await getUserTheme();
+      const theme = {
+        theme: userTheme,
+        colors: userTheme === "light" ? lightTheme : darkTheme,
+      };
+      setColorTheme(theme);
+    };
+    fetchTheme();
+  }, []);
+
   return (
     <SessionProvider session={session}>
       <ThemeProvider theme={{ ...colorTheme, toggleColorTheme }}>
