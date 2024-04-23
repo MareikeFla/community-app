@@ -50,7 +50,7 @@ export default function AccordionSection({
               d="M2 12L7.07813 7.76819C7.55789 7.3684 7.55789 6.63154 7.07813 6.23175L2 1.99997"
               strokeWidth="2.4"
               strokeLinecap="round"
-              stroke="var(--color_white)"
+              stroke="var(--color_base)"
             />
           </StyledArrow>
         </OpenArrow>

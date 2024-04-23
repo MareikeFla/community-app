@@ -36,10 +36,10 @@ export default createGlobalStyle`
     --color_ten: ${colors.ten} ; // --color_red
     --color_gradientOne: ${colors.gradientOne}; // --color_sunset
 
-    --color_activism: ${colors.categoryOne}; // --color_activism
-    --color_art:${colors.categoryTwo} ; // --color_art
-    --color_education: ${colors.categoryThree}; // --color_education
-    --color_sport:${colors.categoryFour} ; // --color_sport
+    --color_activism: ${colors.categoryOne}; 
+    --color_art:${colors.categoryTwo} ; 
+    --color_education: ${colors.categoryThree}; 
+    --color_sport:${colors.categoryFour} ; 
 
     /* Font Styles */
     --font-family: ${nunito_sans.style.fontFamily}; // --font-family

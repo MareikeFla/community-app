@@ -313,13 +313,13 @@ export const TagList = styled.div`
 export const Tag = styled.button`
   font: var(--font_tag);
   color: ${({ selected }) =>
-    selected ? "var(--color_white)" : "var(--color_grey)"};
+    selected ? "var(--color_base)" : "var(--color_four)"};
   text-transform: uppercase;
   background-color: ${({ selected, color }) =>
-    selected ? `var(--color_${color})` : "var(--color_white)"};
+    selected ? `var(--color_${color})` : "var(--color_base)"};
   border: 1px solid
     ${({ selected, color }) =>
-      selected ? `var(--color_${color})` : "var(--color_grey)"};
+      selected ? `var(--color_${color})` : "var(--color_four)"};
   border-radius: var(--border-radius_button);
   padding: 0.313rem 0.563rem 0.25rem;
   cursor: pointer;
@@ -328,15 +328,15 @@ export const Tag = styled.button`
 export const LocationList = styled.ul`
   list-style: none;
   position: absolute;
-  background-color: var(--color_body);
+  background-color: var(--color_one);
   z-index: 1;
   width: calc(100% - 3rem);
 `;
 
 export const LocationButton = styled.button`
   font: var(--font_body);
-  color: var(--color_grey);
-  background-color: var(--color_body);
+  color: var(--color_four);
+  background-color: var(--color_one);
   padding: 0.25rem 0.5rem;
   margin-bottom: 0.125rem;
   border-bottom: 1px solid black;
@@ -358,7 +358,7 @@ export const SearchNotification = styled.span`
   right: 0.5rem;
   top: 0.75rem;
   font: var(--font_form-note);
-  color: var(--color_grey);
+  color: var(--color_four);
   text-align: right;
 `;
 export const SearchLoading = styled.span`
