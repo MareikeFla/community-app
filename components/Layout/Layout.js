@@ -6,10 +6,10 @@ import { LogoHeader, MainContent, Wrapper } from "./Layout.styled";
 import SearchLink from "../Search/SearchLink";
 import Link from "next/link";
 import { Logo } from "../SvgIcons/SVGIcons";
-import { useColorTheme } from "@/lib/useColorTheme";
+import { useTheme } from "styled-components";
 
 export default function Layout({ children }) {
-  const { theme } = useColorTheme();
+  const { theme } = useTheme();
   return (
     <>
       <Header />

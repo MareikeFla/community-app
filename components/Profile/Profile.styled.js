@@ -8,7 +8,7 @@ import { EventName } from "../EventDetail/EventDetail.styled";
 export const StyledProfile = styled(Card)`
   position: relative;
   margin-top: 2rem;
-  padding: 6rem 1.5rem 0 1.5rem;
+  padding: 6rem 1rem 0 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,4 +38,12 @@ export const ProfileFormStyled = styled(EventFormStyled)`
 
 export const ProfileFormInfoText = styled(FormInfoText)`
   margin-bottom: 1.875rem;
+`;
+
+export const ProfileSection = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: ${({ $direction }) => $direction || "row"};
+  justify-content: ${({ $justify }) => $justify || "flex-start"};
+  align-items: ${({ $align }) => $align || "stretch"};
 `;

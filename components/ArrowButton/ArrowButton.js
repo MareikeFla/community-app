@@ -1,9 +1,9 @@
 import { ButtonWrapper, IconWrapper } from "./ArrowButton.styled";
 import { Arrow } from "../SvgIcons/SVGIcons";
-import { useColorTheme } from "@/lib/useColorTheme";
+import { useTheme } from "styled-components";
 
 export default function ArrowButton({ onClick, children }) {
-  const { theme } = useColorTheme();
+  const { theme } = useTheme();
   return (
     <ButtonWrapper onClick={onClick}>
       {children}

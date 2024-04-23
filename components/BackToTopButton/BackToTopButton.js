@@ -1,10 +1,10 @@
 import { useScrollToTop } from "@/lib/useScrollToTop";
 import { StyledBackToTopButton } from "./BackToTopButton.styled";
 import { Arrow } from "../SvgIcons/SVGIcons";
-import { useColorTheme } from "@/lib/useColorTheme";
+import { useTheme } from "styled-components";
 export default function BackToTopButton() {
   const { showButton, scrollToTop } = useScrollToTop();
-  const { theme } = useColorTheme();
+  const { theme } = useTheme();
   return (
     <StyledBackToTopButton
       title="Zurück nach oben"

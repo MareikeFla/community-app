@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import { EditButton } from "./EditEventButton.styled";
 import { Edit } from "../SvgIcons/SVGIcons";
-import { useColorTheme } from "@/lib/useColorTheme";
+import { useTheme } from "styled-components";
 
 export default function EditEventButton({ id }) {
-  const { theme } = useColorTheme();
+  const { theme } = useTheme();
   const router = useRouter();
 
   return (

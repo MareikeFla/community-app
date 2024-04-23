@@ -1,9 +1,9 @@
 import { SearchLinkStyled } from "./Search.styled";
 import { SearchIcon } from "../SvgIcons/SVGIcons";
-import { useColorTheme } from "@/lib/useColorTheme";
+import { useTheme } from "styled-components";
 
 export default function SearchLink() {
-  const { theme } = useColorTheme();
+  const { theme } = useTheme();
   return (
     <SearchLinkStyled href={"/search"}>
       <SearchIcon $theme={theme} />

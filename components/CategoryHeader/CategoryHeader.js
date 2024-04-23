@@ -3,12 +3,12 @@ import {
   CategoryTitle,
   CategoryImage,
 } from "./CategoryHeader.styled";
-import { useColorTheme } from "@/lib/useColorTheme";
+import { useTheme } from "styled-components";
 
 export default function CategoryHeader({ category }) {
   const { imageSource, imageAlt, title } = category;
-  const { theme } = useColorTheme();
-
+  const { theme } = useTheme();
+  console.log(theme);
   return (
     <CategoryHeaderContainer>
       <CategoryTitle theme={theme}>{title}</CategoryTitle>

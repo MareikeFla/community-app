@@ -25,13 +25,13 @@ import ExpandableText from "./ExpandableText";
 import { locationToString } from "@/lib/formatLocation";
 import JoinButton from "../JoinButton/JoinButton";
 import { useData } from "@/lib/useData";
-import { useColorTheme } from "@/lib/useColorTheme";
+import { useTheme } from "styled-components";
 
 export default function EventDetail({ event, mutateEvent }) {
   const { joinEvent } = useData();
   const { data: session } = useSession();
   const userId = session?.user.id || null;
-  const { theme } = useColorTheme();
+  const { theme } = useTheme();
 
   if (!event) {
     return (

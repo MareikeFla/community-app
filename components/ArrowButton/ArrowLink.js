@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { IconWrapper, LinkWrapper } from "./ArrowButton.styled";
 import { Arrow } from "../SvgIcons/SVGIcons";
-import { useColorTheme } from "@/lib/useColorTheme";
+import { useTheme } from "styled-components";
 
 export default function ArrowLink({ href, children }) {
-  const { theme } = useColorTheme();
+  const { theme } = useTheme();
   return (
     <LinkWrapper href={href}>
       {children}

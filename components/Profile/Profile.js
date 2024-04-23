@@ -6,34 +6,49 @@ import {
   Info,
 } from "../EventDetail/EventDetail.styled";
 import { Fragment } from "react";
-import { useColorTheme } from "@/lib/useColorTheme";
+import { useTheme } from "styled-components";
 import { Edit } from "../SvgIcons/SVGIcons";
+import { ProfileSection } from "./Profile.styled";
+import { H2 } from "../Fonts/Fonts.styled";
+import SwitchButton from "../SwitchButton/SwitchButton";
 
 export default function Profile({ toggleEditMode, userInfo }) {
   const { profilePicture, name, additionalInfo } = userInfo;
-  const { theme } = useColorTheme();
+  const { theme, toggleColorTheme } = useTheme();
   return (
     <StyledProfile>
       <EditProfileButton title="Profil bearbeiten" onClick={toggleEditMode}>
         <Edit $theme={theme}></Edit>
       </EditProfileButton>
-      <UserName>{name.value}</UserName>
       <PictureProfile
         src={profilePicture.value}
         alt={profilePicture.text}
         height={profilePicture.pictureSize}
         width={profilePicture.pictureSize}
       />
-      <InfoWrapper>
-        {additionalInfo.map((info) => {
-          return (
-            <Fragment key={info.key}>
-              <InfoTitle>{info.text}</InfoTitle>
-              <Info>{info.value}</Info>
-            </Fragment>
-          );
-        })}
-      </InfoWrapper>
+      <ProfileSection $direction={"column"} $align={"center"}>
+        <UserName>{name.value}</UserName>
+        <InfoWrapper>
+          {additionalInfo.map((info) => {
+            return (
+              <Fragment key={info.key}>
+                <InfoTitle>{info.text}</InfoTitle>
+                <Info>{info.value}</Info>
+              </Fragment>
+            );
+          })}
+        </InfoWrapper>
+      </ProfileSection>
+      <ProfileSection $direction={"column"}>
+        <H2>Einstellungen</H2>
+
+        <SwitchButton
+          isChecked={theme === "light"}
+          onChange={() => {
+            toggleColorTheme(theme);
+          }}
+        ></SwitchButton>
+      </ProfileSection>
     </StyledProfile>
   );
 }

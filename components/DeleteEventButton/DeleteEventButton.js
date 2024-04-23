@@ -3,12 +3,12 @@ import Image from "next/image";
 import { useModal } from "@/lib/useModal";
 import { useData } from "@/lib/useData";
 import { useRouter } from "next/router";
-import { useColorTheme } from "@/lib/useColorTheme";
+import { useTheme } from "styled-components";
 import { Delete } from "../SvgIcons/SVGIcons";
 
 export default function DeleteEventButton({ id }) {
   const router = useRouter();
-  const { theme } = useColorTheme();
+  const { theme } = useTheme();
   const { deleteEvent } = useData();
 
   const { showModal } = useModal();
