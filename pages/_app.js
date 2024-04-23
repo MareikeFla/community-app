@@ -16,14 +16,12 @@ export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }) {
-  function toggleColorTheme(theme) {
-    const newTheme = toggleTheme(theme);
-
-    setColorTheme(newTheme);
-  }
-
   const [colorTheme, setColorTheme] = useState(defaultTheme);
 
+  function toggleColorTheme() {
+    const newTheme = toggleTheme(colorTheme.theme);
+    setColorTheme(newTheme);
+  }
   return (
     <SessionProvider session={session}>
       <ThemeProvider theme={{ ...colorTheme, toggleColorTheme }}>

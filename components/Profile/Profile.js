@@ -44,9 +44,7 @@ export default function Profile({ toggleEditMode, userInfo }) {
 
         <SwitchButton
           isChecked={theme === "light"}
-          onChange={() => {
-            toggleColorTheme(theme);
-          }}
+          onChange={toggleColorTheme}
         ></SwitchButton>
       </ProfileSection>
     </StyledProfile>
