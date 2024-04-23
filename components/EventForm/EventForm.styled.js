@@ -324,3 +324,45 @@ export const Tag = styled.button`
   padding: 0.313rem 0.563rem 0.25rem;
   cursor: pointer;
 `;
+
+export const LocationList = styled.ul`
+  list-style: none;
+  position: absolute;
+  background-color: var(--color_body);
+  z-index: 1;
+  width: calc(100% - 3rem);
+`;
+
+export const LocationButton = styled.button`
+  font: var(--font_body);
+  color: var(--color_grey);
+  background-color: var(--color_body);
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 0.125rem;
+  border-bottom: 1px solid black;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+`;
+
+export const SearchedText = styled.p`
+  flex: 1;
+`;
+
+export const SearchContainer = styled(FlexContainer)`
+  position: relative;
+`;
+export const SearchNotification = styled.span`
+  position: absolute;
+  right: 0.5rem;
+  top: 0.75rem;
+  font: var(--font_form-note);
+  color: var(--color_grey);
+  text-align: right;
+`;
+export const SearchLoading = styled.span`
+  position: absolute;
+  right: 0.5rem;
+  top: 0.75rem;
+`;
