@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Card, Message } from "../MessageCard/MessageCard.styled";
+import MessageCard from "../MessageCard/MessageCard";
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -13,6 +14,10 @@ export const Backdrop = styled.div`
 `;
 
 export const Dialog = styled(Card)`
+  background-color: var(--color_base);
+  border: 2px solid var(--color_eight);
+  border-radius: var(--border-radius_card);
+  box-shadow: var(--shadow_one);
   padding: 1.75rem 1.5rem;
   margin: auto;
   text-align: center;

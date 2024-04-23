@@ -57,7 +57,7 @@ const dark = {
 
 const theme = {
   info: "dark",
-  colors: dark,
+  colors: light,
 };
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
