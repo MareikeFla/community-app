@@ -54,7 +54,7 @@ export const FormLabel = styled.label`
 
 export const FormInput = styled.input`
   color: var(--color_grey);
-  background-color: var(--color_pale-grey);
+  background-color: var(--color_pale_grey);
   border: none;
   border-radius: var(--border-radius_input);
   width: 100%;
@@ -106,7 +106,7 @@ export const FormInputTime = styled(FormInput)`
 export const FormSelect = styled.select`
   font: var(--font_body);
   color: var(--color_grey);
-  background-color: var(--color_pale-grey);
+  background-color: var(--color_pale_grey);
   width: 100%;
   height: 2.5rem;
   padding: 0.5rem;
@@ -197,7 +197,7 @@ export const ErrorMessage = styled.p`
 export const FormDescriptionField = styled.textarea`
   font: var(--font_body);
   color: var(--color_night);
-  background-color: var(--color_pale-grey);
+  background-color: var(--color_pale_grey);
   border: none;
   border-radius: var(--border-radius_input);
   width: 100%;

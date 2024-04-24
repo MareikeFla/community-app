@@ -14,4 +14,5 @@ export const HeaderCutout = styled.svg`
   bottom: 0;
   width: 100%;
   height: 4.125rem;
+  background-color: var(--color_body);
 `;

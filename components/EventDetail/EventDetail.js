@@ -25,11 +25,13 @@ import ExpandableText from "./ExpandableText";
 import { locationToString } from "@/lib/formatLocation";
 import JoinButton from "../JoinButton/JoinButton";
 import { useData } from "@/lib/useData";
+import { useTheme } from "styled-components";
 
 export default function EventDetail({ event, mutateEvent }) {
   const { joinEvent } = useData();
   const { data: session } = useSession();
   const userId = session?.user.id || null;
+  const { theme } = useTheme();
   if (!event) {
     return (
       <Card $pageNotFound>
@@ -72,7 +74,9 @@ export default function EventDetail({ event, mutateEvent }) {
               <DeleteEventButton id={_id} />
             </>
           ) : null}
-          <EventName $withImage={image}>{eventName}</EventName>
+          <EventName $withImage={image} theme={theme}>
+            {eventName}
+          </EventName>
           <EventImage
             src={image.url}
             alt={eventName}

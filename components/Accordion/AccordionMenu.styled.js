@@ -6,6 +6,7 @@ export const AccordionWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.313rem;
+  width: 100%;
 `;
 
 export const AccordionHeader = styled(Card)`

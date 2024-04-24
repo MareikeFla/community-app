@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Card = styled.div`
   background-color: var(--color_white);
   border-radius: var(--border-radius_card);
-  box-shadow: var(--shadow_card);
+  box-shadow: var(--shadow_one);
   padding: ${({ $hasButton }) =>
     $hasButton ? "3rem 1.5rem" : "3rem 1.5rem 2.75rem"};
 `;

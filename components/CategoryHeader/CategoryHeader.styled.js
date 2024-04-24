@@ -16,7 +16,8 @@ export const CategoryHeaderContainer = styled.div`
 
 export const CategoryTitle = styled.h1`
   font: var(--font_heading-category);
-  color: var(--color_night);
+  color: ${(props) =>
+    props.theme === "dark" ? "var(--color_light-grey)" : "var(--color_night)"};
   text-transform: uppercase;
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 4px;

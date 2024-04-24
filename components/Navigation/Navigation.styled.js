@@ -24,9 +24,9 @@ export const NavIcon = styled.div`
 
   span {
     height: 3px;
-    background-color: var(--color_white);
+    background-color: var(--color_pale_grey);
     border-radius: 3px;
-    transition: var(--transition_button);
+    transition: transform var(--transition_button);
 
     &:nth-child(1) {
       transform: ${({ $isOpen }) =>
@@ -78,7 +78,7 @@ export const NavLink = styled(Link)`
   text-align: center;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.04);
+    background-color: var(--color_night);
   }
 `;
 export const NavButton = styled.button`
@@ -94,6 +94,6 @@ export const NavButton = styled.button`
   text-align: center;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.04);
+    background-color: var(--color_night);
   }
 `;

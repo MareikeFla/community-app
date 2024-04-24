@@ -9,6 +9,7 @@ const userSchema = new Schema({
   email: { type: String, required: true },
   image: String,
   attendedEvents: { type: [Schema.Types.ObjectId], ref: "Event" },
+  colorTheme: String,
 });
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);

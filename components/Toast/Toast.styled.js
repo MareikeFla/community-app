@@ -5,7 +5,7 @@ export const StyledToastContainer = styled(ToastContainer)`
   padding: 1rem;
   .Toastify__toast {
     font: var(--font_body);
-    color: var(--color_night);
+    color: #000;
     border-radius: var(--border-radius_card);
   }
 

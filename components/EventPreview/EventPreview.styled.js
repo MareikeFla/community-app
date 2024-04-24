@@ -7,7 +7,7 @@ export const Card = styled.div`
     $withImage
       ? "0 0 var(--border-radius_card) var(--border-radius_card)"
       : "var(--border-radius_card)"};
-  box-shadow: var(--shadow_card);
+  box-shadow: var(--shadow_one);
   padding: 1.25rem 1.5rem 0.313rem;
 `;
 

@@ -7,7 +7,7 @@ import useDebounce from "@/lib/useDebounce";
 import { useModal } from "@/lib/useModal";
 import { getFormattedTodaysDate } from "@/lib/dateHelpers";
 // Styling imports
-
+import { Delete } from "../SvgIcons/SVGIcons";
 import {
   EventFormStyled,
   FormSection,
@@ -52,6 +52,7 @@ import FetchingError from "../FetchingError/FetchingError";
 import EditButton from "../EditButton/EditButton";
 import usePlaceSearch from "@/lib/usePlaceSearch";
 import dynamic from "next/dynamic";
+import { useTheme } from "styled-components";
 const Map = dynamic(() => import("../Map/Map"), { ssr: false });
 
 // EventForm component definition. It receives an updateDatabase function for database operations,
@@ -62,6 +63,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
   const { placeList, setPlaceList, getPlaces, placeLoading, placeError } =
     usePlaceSearch();
 
+  const { theme } = useTheme();
   // Using custom hook to fetch categories data
   const { categories, isLoadingCategories, errorCategories } =
     useData().fetchedCategories;
@@ -483,12 +485,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
               title="Bild entfernen"
               onClick={() => handleDeleteImage()}
             >
-              <Image
-                src="/assets/icons/icon_delete.svg"
-                alt="Bild entfernen"
-                width={21}
-                height={23}
-              />
+              <Delete $theme={theme} />
             </DeleteButton>
           </UploadPreviewContainer>
         )}

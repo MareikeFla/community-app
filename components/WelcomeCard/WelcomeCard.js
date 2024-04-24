@@ -9,9 +9,10 @@ import {
   Paragraph,
 } from "./WelcomeCard.styled";
 import { signIn, useSession } from "next-auth/react";
-
+import { useTheme } from "styled-components";
 export default function WelcomeCard() {
   const { data: session } = useSession();
+  const { theme } = useTheme();
 
   return (
     <Card $loggedIn={session}>
@@ -20,8 +21,12 @@ export default function WelcomeCard() {
           <Heading $loggedIn>Willkommen, {session.user.name}!</Heading>
           <Paragraph>Was möchtest du machen?</Paragraph>
           <LinksContainer>
-            <ArrowLink href="/search">Event finden</ArrowLink>
-            <ArrowLink href="/events/new">Event teilen</ArrowLink>
+            <ArrowLink href="/search" theme={theme}>
+              Event finden
+            </ArrowLink>
+            <ArrowLink href="/events/new" theme={theme}>
+              Event teilen
+            </ArrowLink>
           </LinksContainer>
         </Content>
       ) : (

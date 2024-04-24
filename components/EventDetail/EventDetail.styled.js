@@ -7,7 +7,7 @@ export const Card = styled.div`
     $withImage
       ? "0 0 var(--border-radius_card) var(--border-radius_card)"
       : "var(--border-radius_card)"};
-  box-shadow: var(--shadow_card);
+  box-shadow: var(--shadow_one);
   padding: ${({ $withImage, pageNotFound, $createdBy, $userId }) =>
     $withImage
       ? "1.5rem 1.5rem 0.75rem"
@@ -52,7 +52,10 @@ export const EventName = styled.h1`
       position: absolute;
       bottom: 1rem;
       font: var(--font_heading-1);
-      color: var(--color_night);
+      color: ${(props) =>
+        props.theme === "dark"
+          ? "var(--color_light-grey)"
+          : "var(--color_night)"};
       text-align: center;
       background-color: rgba(255, 255, 255, 0.85);
       border-radius: 4px;

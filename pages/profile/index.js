@@ -10,6 +10,7 @@ import { formatedUserInfo } from "@/lib/profile/profileHelper";
 import AccordionMenu from "@/components/Accordion/AccordionMenu";
 import EventList from "@/components/EventList/EventList";
 import { useRouter } from "next/router";
+import Settings from "@/components/Profile/Settings";
 
 export default function ProfilePage() {
   const { data: session, status, update: updateSession } = useSession();
@@ -23,7 +24,7 @@ export default function ProfilePage() {
     setEditMode(!editMode);
   }
 
-  const handleSubmit = async (event) => {
+  async function handleSubmit(event) {
     event.preventDefault();
     const wasSuccsessful = await updateUser(event, session.user);
     if (wasSuccsessful) {
@@ -31,7 +32,13 @@ export default function ProfilePage() {
     }
     toggleEditMode();
     return wasSuccsessful;
-  };
+  }
+
+  async function updateColorTheme(theme) {
+    const wasSuccsessful = await updateUser(theme, session.user, "colorTheme");
+
+    return wasSuccsessful;
+  }
 
   if (
     status === "loading" ||
@@ -55,6 +62,13 @@ export default function ProfilePage() {
 
   const accordionSections = [
     {
+      id: 3,
+      title: "Einstellungen",
+      componentsProps: { id: "settings", updateColorTheme },
+      component: Settings,
+      isOpen: false,
+    },
+    {
       id: 0,
       title: "Erstellte Events",
       component: EventList,
@@ -76,6 +90,7 @@ export default function ProfilePage() {
       isHighlighted: attendedEvents.length !== 0,
       isOpen: false,
     },
+    ,
   ];
   if (openSection !== undefined && openSection < accordionSections.length) {
     accordionSections[openSection].isOpen = true;
