@@ -14,7 +14,7 @@ export const Backdrop = styled.div`
 `;
 
 export const Dialog = styled(Card)`
-  background-color: var(--color_base);
+  background-color: var(--color_white);
   border: 2px solid var(--color_orange);
   border-radius: var(--border-radius_card);
   box-shadow: var(--shadow_one);

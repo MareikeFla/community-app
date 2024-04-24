@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const SearchBox = styled.div`
   width: 100%;
-  background-color: var(--color_base);
+  background-color: var(--color_white);
   text-align: center;
   color: var(--color_night);
   border-radius: var(--border-radius_card);

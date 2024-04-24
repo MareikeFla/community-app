@@ -72,7 +72,7 @@ export const NavLink = styled(Link)`
   width: 100%;
   padding: 1rem;
   font: var(--font_heading-3);
-  color: var(--color_base);
+  color: var(--color_white);
   text-decoration: none;
   text-transform: uppercase;
   text-align: center;
@@ -86,7 +86,7 @@ export const NavButton = styled.button`
   width: 100%;
   padding: 1rem;
   font: var(--font_heading-3);
-  color: var(--color_base);
+  color: var(--color_white);
   background-color: var(--color_midnight);
   border: none;
   cursor: pointer;

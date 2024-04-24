@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Image from "next/image";
 
 export const CategoryCardContainer = styled.div`
-  background-color: var(--color_base);
+  background-color: var(--color_white);
   border-radius: var(--border-radius_card);
   box-shadow: var(--shadow_one);
 `;

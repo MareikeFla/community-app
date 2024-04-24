@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import Image from "next/image";
 
 export const Card = styled.div`
-  background-color: var(--color_base);
+  background-color: var(--color_white);
   border-radius: ${({ $withImage }) =>
     $withImage
       ? "0 0 var(--border-radius_card) var(--border-radius_card)"
@@ -74,7 +74,7 @@ export const Description = styled.p`
 export const ExpandCollapseButton = styled.button`
   border: none;
   cursor: pointer;
-  background-color: var(--color_base);
+  background-color: var(--color_white);
   color: var(--color_orange);
   font: var(--font_body);
 `;

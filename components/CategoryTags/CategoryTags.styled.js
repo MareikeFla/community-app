@@ -9,7 +9,7 @@ export const CategoryTagList = styled.div`
 
 export const CategoryTag = styled.span`
   font: var(--font_tag);
-  color: var(--color_base);
+  color: var(--color_white);
   text-transform: uppercase;
   background-color: ${({ color }) => `var(--color_${color})`};
   border: none;

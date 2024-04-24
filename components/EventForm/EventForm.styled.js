@@ -133,7 +133,7 @@ export const UploadButton = styled.label`
   align-items: center;
   gap: 0.375rem;
   padding: 0.938rem 1.25rem 0.875rem;
-  background-color: var(--color_base);
+  background-color: var(--color_white);
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--color_orange);
@@ -313,10 +313,10 @@ export const TagList = styled.div`
 export const Tag = styled.button`
   font: var(--font_tag);
   color: ${({ selected }) =>
-    selected ? "var(--color_base)" : "var(--color_grey)"};
+    selected ? "var(--color_white)" : "var(--color_grey)"};
   text-transform: uppercase;
   background-color: ${({ selected, color }) =>
-    selected ? `var(--color_${color})` : "var(--color_base)"};
+    selected ? `var(--color_${color})` : "var(--color_white)"};
   border: 1px solid
     ${({ selected, color }) =>
       selected ? `var(--color_${color})` : "var(--color_grey)"};

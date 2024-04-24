@@ -51,7 +51,7 @@ export const ProfileSection = styled.section`
   padding: 0 1rem;
 
   &#settings {
-    background-color: var(--color_base);
+    background-color: var(--color_white);
     border-radius: var(--border-radius_card);
     box-shadow: var(--shadow_one);
   }
@@ -88,7 +88,7 @@ export const SwitchHandle = styled.div`
   top: 2px;
   width: 20px;
   height: 20px;
-  background-color: var(--color_base);
+  background-color: var(--color_white);
   border-radius: 50%;
   left: ${({ $checked }) => ($checked ? "calc(100% - 22px)" : "2px")};
   transition: left var(--transition_button) ease;

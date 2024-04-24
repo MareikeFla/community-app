@@ -8,24 +8,24 @@ import DeleteSVG from "/public/assets/icons/icon_delete.svg";
 export const SearchIcon = styled(SearchSVG)`
   :nth-child(2) {
     fill: ${({ $theme }) =>
-      $theme === "dark" ? "var(--color_pale_grey)" : "var(--color_base)"};
+      $theme === "dark" ? "var(--color_pale_grey)" : "var(--color_white)"};
   }
 
   :nth-child(3) {
     stroke: ${({ $theme }) =>
-      $theme === "dark" ? "var(--color_pale_grey)" : "var(--color_base)"};
+      $theme === "dark" ? "var(--color_pale_grey)" : "var(--color_white)"};
     stroke-width: 3px;
   }
 `;
 
 export const Logo = styled(LogoSVG)`
   fill: ${({ $theme }) =>
-    $theme === "dark" ? "var(--color_pale_grey)" : "var(--color_base)"};
+    $theme === "dark" ? "var(--color_pale_grey)" : "var(--color_white)"};
 `;
 
 export const Arrow = styled(ArrowSVG)`
   stroke: ${({ $theme }) =>
-    $theme === "dark" ? "var(--color_pale_grey)" : "var(--color_base)"};
+    $theme === "dark" ? "var(--color_pale_grey)" : "var(--color_white)"};
   stroke-width: 3px;
   stroke-linecap: round;
   transform: ${({ $direction }) =>
@@ -37,7 +37,7 @@ export const Arrow = styled(ArrowSVG)`
 
 export const Edit = styled(EditSVG)`
   stroke: ${({ $theme }) =>
-    $theme === "dark" ? "var(--color_pale_grey)" : "var(--color_base)"};
+    $theme === "dark" ? "var(--color_pale_grey)" : "var(--color_white)"};
   stroke-width: 2px;
 
   :nth-child(1),
@@ -49,7 +49,7 @@ export const Edit = styled(EditSVG)`
 
 export const Delete = styled(DeleteSVG)`
   stroke: ${({ $theme }) =>
-    $theme === "dark" ? "var(--color_pale_grey)" : "var(--color_base)"};
+    $theme === "dark" ? "var(--color_pale_grey)" : "var(--color_white)"};
   stroke-width: 2px;
   stroke-linecap: round;
   stroke-linejoin: round;

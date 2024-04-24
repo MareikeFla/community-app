@@ -4,7 +4,7 @@ export const PrimaryButton = styled.button`
   display: flex;
   align-items: center;
   font: var(--font_button);
-  color: var(--color_base);
+  color: var(--color_white);
   text-transform: uppercase;
   border: 2px solid var(--color_orange);
   border-radius: var(--border-radius_button);
@@ -20,7 +20,7 @@ export const PrimaryButton = styled.button`
 `;
 
 export const SecondaryButton = styled(PrimaryButton)`
-  background-color: var(--color_base);
+  background-color: var(--color_white);
   color: var(--color_orange);
 
   &:hover {

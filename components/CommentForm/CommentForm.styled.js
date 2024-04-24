@@ -51,14 +51,14 @@ export const CommentButton = styled(PrimaryButton)`
   padding: 0;
   text-transform: none;
   border: none;
-  background-color: var(--color_base);
+  background-color: var(--color_white);
   cursor: pointer;
 
   &:hover {
     color: var(--color_orange);
     font: var(--font_info);
     border: none;
-    background-color: var(--color_base);
+    background-color: var(--color_white);
     cursor: pointer;
     text-decoration: underline;
   }

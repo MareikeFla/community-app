@@ -23,7 +23,7 @@ export default createGlobalStyle`
 
       return `
     /* Color Styles */
-    --color_base: ${colors.base}; // --color_white
+    --color_white: ${colors.base}; // --color_white
     --color_body: ${colors.body}; //  --color_body
     --color_pale_grey: ${colors.two}; // --color_pale_grey
     --color_light-grey: ${colors.three}; // --color_light-grey

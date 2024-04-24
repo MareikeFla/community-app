@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const EventFormContainerStyled = styled.div`
-  background-color: var(--color_base);
+  background-color: var(--color_white);
   border-radius: var(--border-radius_card);
   box-shadow: var(--shadow_one);
   padding: 2rem 1.5rem 2rem;
