@@ -16,5 +16,5 @@ export const Button = styled.button`
 
 export const ButtonText = styled.span`
   font: var(--font_label);
-  color: var(--color_five);
+  color: var(--color_night);
 `;

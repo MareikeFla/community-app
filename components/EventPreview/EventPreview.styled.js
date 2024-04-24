@@ -27,7 +27,7 @@ export const EventImage = styled(Image)`
 
 export const PreviewTitle = styled.h2`
   font: var(--font_heading-2);
-  color: var(--color_five);
+  color: var(--color_night);
   margin-bottom: 0.375rem;
 `;
 
@@ -50,12 +50,12 @@ export const Icon = styled.img`
 
 export const Info = styled.p`
   font: var(--font_info);
-  color: var(--color_four);
+  color: var(--color_grey);
 `;
 
 export const Divider = styled.div`
   height: 0.063rem;
-  background-color: var(--color_three);
+  background-color: var(--color_light-grey);
   width: calc(100% + 3rem);
   margin: 1.25rem -1.5rem 0;
 `;

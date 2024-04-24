@@ -24,7 +24,7 @@ export const OpenArrow = styled.p`
   justify-content: center;
   align-items: center;
   background-color: ${({ $isHighlighted }) =>
-    $isHighlighted ? "var(--color_eight)" : "var(--color_five)"};
+    $isHighlighted ? "var(--color_orange)" : "var(--color_night)"};
   width: 1.5rem;
   height: 1.5rem;
   aspect-ratio: 1;

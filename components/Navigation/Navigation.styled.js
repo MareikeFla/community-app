@@ -24,7 +24,7 @@ export const NavIcon = styled.div`
 
   span {
     height: 3px;
-    background-color: var(--color_two);
+    background-color: var(--color_pale_grey);
     border-radius: 3px;
     transition: transform var(--transition_button);
 
@@ -50,7 +50,7 @@ export const NavMenu = styled.div`
   left: ${({ $isOpen }) => ($isOpen ? "0" : "calc(-100% - 1rem)")};
   width: 100vw;
   height: 100vh;
-  background-color: var(--color_six);
+  background-color: var(--color_midnight);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,7 +87,7 @@ export const NavButton = styled.button`
   padding: 1rem;
   font: var(--font_heading-3);
   color: var(--color_base);
-  background-color: var(--color_six);
+  background-color: var(--color_midnight);
   border: none;
   cursor: pointer;
   text-transform: uppercase;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledFooter = styled.footer`
-  background-color: var(--color_six);
+  background-color: var(--color_midnight);
   display: flex;
   justify-content: center;
   align-items: center;

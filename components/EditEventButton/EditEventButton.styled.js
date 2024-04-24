@@ -6,7 +6,7 @@ export const EditButton = styled.button`
   right: 0.625rem;
   height: 1.875rem;
   aspect-ratio: 1;
-  background-color: var(--color_ten);
+  background-color: var(--color_red);
   border: none;
   border-radius: var(--border-radius_square-button);
   box-shadow: var(--shadow_button);
@@ -14,6 +14,6 @@ export const EditButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: var(--color_nine);
+    background-color: var(--color_light-red);
   }
 `;

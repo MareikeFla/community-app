@@ -20,7 +20,7 @@ export const Card = styled.div`
 
 export const ErrorMessage = styled.h2`
   font: var(--font_heading-2);
-  color: var(--color_five);
+  color: var(--color_night);
   text-align: center;
 `;
 
@@ -44,7 +44,7 @@ export const EventImage = styled(Image)`
 export const EventName = styled.h1`
   margin-bottom: 1.125rem;
   font: var(--font_heading-1);
-  color: var(--color_five);
+  color: var(--color_night);
   text-align: center;
   ${({ $withImage }) =>
     $withImage &&
@@ -53,7 +53,9 @@ export const EventName = styled.h1`
       bottom: 1rem;
       font: var(--font_heading-1);
       color: ${(props) =>
-        props.theme === "dark" ? "var(--color_three)" : "var(--color_five)"};
+        props.theme === "dark"
+          ? "var(--color_light-grey)"
+          : "var(--color_night)"};
       text-align: center;
       background-color: rgba(255, 255, 255, 0.85);
       border-radius: 4px;
@@ -73,7 +75,7 @@ export const ExpandCollapseButton = styled.button`
   border: none;
   cursor: pointer;
   background-color: var(--color_base);
-  color: var(--color_eight);
+  color: var(--color_orange);
   font: var(--font_body);
 `;
 
@@ -89,18 +91,18 @@ export const InfoWrapper = styled.div`
   gap: 0.5rem;
   margin: 1.25rem 0 1.875rem;
   padding: 1.125rem 1rem 1rem;
-  border: 1px solid var(--color_three);
+  border: 1px solid var(--color_light-grey);
   border-radius: var(--border-radius_card);
 `;
 
 export const InfoTitle = styled.span`
   font: var(--font_label);
-  color: var(--color_five);
+  color: var(--color_night);
 `;
 
 export const Info = styled.p`
   font: var(--font_info);
-  color: var(--color_four);
+  color: var(--color_grey);
 `;
 
 export const LinkList = styled.ul`
@@ -117,7 +119,7 @@ export const ListItemLink = styled.a`
   margin-left: 0.75rem;
   vertical-align: top;
   font: var(--font_info);
-  color: var(--color_ten);
+  color: var(--color_red);
   text-decoration: none;
 
   &:hover {
@@ -128,7 +130,7 @@ export const ListItemLink = styled.a`
 export const ListItemMarker = styled.span`
   position: absolute;
   bottom: 0.188rem;
-  color: var(--color_ten);
+  color: var(--color_red);
 `;
 
 export const ButtonWrapper = styled.section`
@@ -139,11 +141,11 @@ export const ButtonWrapper = styled.section`
 
 export const AttendeeWrapper = styled.section`
   text-align: right;
-  border-top: 1px solid var(--color_three);
+  border-top: 1px solid var(--color_light-grey);
   margin-top: 1.375rem;
   margin-inline: -1.5rem;
   padding-top: 0.75rem;
   padding-inline: 1.5rem;
   font: var(--font_label);
-  color: var(--color_five);
+  color: var(--color_night);
 `;

@@ -18,7 +18,7 @@ export const SwitchBackground = styled.div`
   right: 0;
   bottom: 0;
   background: ${({ $checked }) =>
-    $checked ? "var(--color_gradientOne)" : "var(--color_three)"};
+    $checked ? "var(--color_sunset)" : "var(--color_light-grey)"};
   border-radius: 17px;
   &:hover {
     cursor: pointer;

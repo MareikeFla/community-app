@@ -24,17 +24,17 @@ export default createGlobalStyle`
       return `
     /* Color Styles */
     --color_base: ${colors.base}; // --color_white
-    --color_one: ${colors.one}; //  --color_body
-    --color_two: ${colors.two}; // --color_pale-grey
-    --color_three: ${colors.three}; // --color_light-grey
-    --color_four: ${colors.four}; // --color_grey
-    --color_five: ${colors.five} ; // --color_night
-    --color_six: ${colors.six}; // --color_midnight
-    --color_seven: ${colors.seven}; //  --color_light-orange
-    --color_eight: ${colors.eight}; // --color_orange
-    --color_nine: ${colors.nine}; // --color_light-red
-    --color_ten: ${colors.ten} ; // --color_red
-    --color_gradientOne: ${colors.gradientOne}; // --color_sunset
+    --color_body: ${colors.body}; //  --color_body
+    --color_pale_grey: ${colors.two}; // --color_pale_grey
+    --color_light-grey: ${colors.three}; // --color_light-grey
+    --color_grey: ${colors.four}; // --color_grey
+    --color_night: ${colors.five} ; // --color_night
+    --color_midnight: ${colors.six}; // --color_midnight
+    --color_light-orange: ${colors.seven}; //  --color_light-orange
+    --color_orange: ${colors.eight}; // --color_orange
+    --color_light-red: ${colors.nine}; // --color_light-red
+    --color_red: ${colors.ten} ; // --color_red
+    --color_sunset: ${colors.gradientOne}; // --color_sunset
 
     --color_activism: ${colors.categoryOne}; 
     --color_art:${colors.categoryTwo} ; 
@@ -91,9 +91,9 @@ export default createGlobalStyle`
   }
 
   body {
-    background: var(--color_one);
+    background: var(--color_body);
     font: var(--font_body);
-    color: var(--color_four);
+    color: var(--color_grey);
     hyphens: auto;
     word-break: break-word;
     min-height: 100vh;

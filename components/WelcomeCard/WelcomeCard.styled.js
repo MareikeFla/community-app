@@ -25,7 +25,7 @@ export const Content = styled.div`
 
 export const Heading = styled.h1`
   font: var(--font_heading-1);
-  color: var(--color_five);
+  color: var(--color_night);
   margin-bottom: ${(props) => (props.$loggedIn ? ".313rem" : "1rem")};
   @media (min-width: 768px) {
     margin-bottom: 1.5rem;
@@ -52,13 +52,13 @@ export const Button = styled(Link)`
   color: var(--color_base);
   text-transform: uppercase;
   text-decoration: none;
-  background-color: var(--color_eight);
+  background-color: var(--color_orange);
   border-radius: var(--border-radius_button);
   padding: 0.25rem 0.25rem 0.25rem 0.75rem;
   transition: var(--transition_button);
 
   &:hover {
-    background-color: var(--color_seven);
+    background-color: var(--color_light-orange);
   }
 `;
 
@@ -68,7 +68,7 @@ export const IconWrapper = styled.div`
   align-items: center;
   height: 1.625rem;
   aspect-ratio: 1;
-  background-color: var(--color_seven);
+  background-color: var(--color_light-orange);
   border-radius: var(--border-radius_round-button);
 `;
 

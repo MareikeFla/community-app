@@ -6,7 +6,7 @@ export const SearchBox = styled.div`
   width: 100%;
   background-color: var(--color_base);
   text-align: center;
-  color: var(--color_five);
+  color: var(--color_night);
   border-radius: var(--border-radius_card);
   padding: 2rem 1.5rem 2rem 1.5rem;
   box-shadow: var(--shadow_one);
@@ -18,10 +18,10 @@ export const SearchCardHeader = styled.h1`
 `;
 
 export const SearchBar = styled.input`
-  color: var(--color_four);
+  color: var(--color_grey);
   font: var(--font_body);
   border-radius: var(--border-radius_input);
-  background-color: var(--color_two);
+  background-color: var(--color_pale_grey);
   border: none;
   background-image: url("/assets/icons/icon_search-grey.svg");
   background-size: 2.25rem 2.25rem;
@@ -31,11 +31,11 @@ export const SearchBar = styled.input`
   width: 100%;
 
   &::placeholder {
-    color: var(--color_four);
+    color: var(--color_grey);
   }
 
   &:focus {
-    outline: 2px solid var(--color_eight);
+    outline: 2px solid var(--color_orange);
   }
 `;
 

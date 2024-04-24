@@ -9,7 +9,7 @@ export const CommentFormContainer = styled.form`
 export const CommentFormLabel = styled.label`
   font: var(--font_body);
   font-weight: 600;
-  color: var(--color_five);
+  color: var(--color_night);
 
   ${({ $hidden }) =>
     $hidden &&
@@ -24,9 +24,9 @@ export const CommentFormLabel = styled.label`
   `};
 `;
 export const CommentFormTextarea = styled.textarea`
-  color: var(--color_four);
+  color: var(--color_grey);
   font: var(--font_body);
-  background-color: var(--color_two);
+  background-color: var(--color_pale_grey);
   border: none;
   border-radius: var(--border-radius_input);
   resize: none;
@@ -36,7 +36,7 @@ export const CommentFormTextarea = styled.textarea`
 
   padding: 0.375rem 0.75rem;
   &:focus-visible {
-    outline: 1px solid var(--color_eight);
+    outline: 1px solid var(--color_orange);
   }
 `;
 
@@ -45,7 +45,7 @@ export const CommentButton = styled(PrimaryButton)`
   ${({ $editing }) =>
     $editing &&
     `
-  color: var(--color_eight);
+  color: var(--color_orange);
   font-size: 1rem;
   font: var(--font_info);
   padding: 0;
@@ -55,7 +55,7 @@ export const CommentButton = styled(PrimaryButton)`
   cursor: pointer;
 
   &:hover {
-    color: var(--color_eight);
+    color: var(--color_orange);
     font: var(--font_info);
     border: none;
     background-color: var(--color_base);

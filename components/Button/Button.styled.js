@@ -6,22 +6,22 @@ export const PrimaryButton = styled.button`
   font: var(--font_button);
   color: var(--color_base);
   text-transform: uppercase;
-  border: 2px solid var(--color_eight);
+  border: 2px solid var(--color_orange);
   border-radius: var(--border-radius_button);
-  background-color: var(--color_eight);
+  background-color: var(--color_orange);
   padding: 0.438rem 1.875rem 0.313rem;
   transition: var(--transition_button);
   cursor: pointer;
 
   &:hover {
-    border: 2px solid var(--color_seven);
-    background-color: var(--color_seven);
+    border: 2px solid var(--color_light-orange);
+    background-color: var(--color_light-orange);
   }
 `;
 
 export const SecondaryButton = styled(PrimaryButton)`
   background-color: var(--color_base);
-  color: var(--color_eight);
+  color: var(--color_orange);
 
   &:hover {
     background: rgba(254, 183, 118, 0.15);

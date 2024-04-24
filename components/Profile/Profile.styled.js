@@ -24,7 +24,7 @@ export const PictureProfile = styled(Image)`
   top: -2rem;
   object-fit: cover;
   border-radius: 10rem;
-  border: 4px solid var(--color_eight);
+  border: 4px solid var(--color_orange);
 `;
 
 export const EditProfileButton = styled(EditButton)`
@@ -76,7 +76,7 @@ export const SwitchBackground = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--color_gradientOne);
+  background: var(--color_sunset);
   border-radius: 17px;
   &:hover {
     cursor: pointer;

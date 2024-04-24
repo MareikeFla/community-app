@@ -9,20 +9,20 @@ export const ProfilePicture = styled(Image)`
 export const ReplyContainer = styled.article`
   display: flex;
   gap: 0.75rem;
-  border-top: 1px solid var(--color_three);
+  border-top: 1px solid var(--color_light-grey);
   padding: 1.5rem 0 1rem;
 `;
 
 export const ReplyHeader = styled.p`
   font: var(--font_label);
-  color: var(--color_six);
+  color: var(--color_midnight);
   margin-bottom: 0.375rem;
   display: flex;
   gap: 0.375rem;
 `;
 
 export const ReplyTime = styled.span`
-  color: var(--color_four);
+  color: var(--color_grey);
   flex: 1;
 `;
 

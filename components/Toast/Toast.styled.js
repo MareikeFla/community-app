@@ -10,11 +10,11 @@ export const StyledToastContainer = styled(ToastContainer)`
   }
 
   .Toastify__close-button {
-    color: var(--color_five);
+    color: var(--color_night);
   }
 
   .Toastify__close-button:hover,
   .Toastify__close-button:focus {
-    color: var(--color_six);
+    color: var(--color_midnight);
   }
 `;
