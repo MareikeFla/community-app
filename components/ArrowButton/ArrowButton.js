@@ -4,6 +4,7 @@ import { useTheme } from "styled-components";
 
 export default function ArrowButton({ onClick, children }) {
   const { theme } = useTheme();
+
   return (
     <ButtonWrapper onClick={onClick}>
       {children}

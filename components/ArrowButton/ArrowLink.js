@@ -3,8 +3,7 @@ import { IconWrapper, LinkWrapper } from "./ArrowButton.styled";
 import { Arrow } from "../SvgIcons/SVGIcons";
 import { useTheme } from "styled-components";
 
-export default function ArrowLink({ href, children }) {
-  const { theme } = useTheme();
+export default function ArrowLink({ href, theme, children }) {
   return (
     <LinkWrapper href={href}>
       {children}

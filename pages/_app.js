@@ -15,8 +15,7 @@ import {
   lightTheme,
   darkTheme,
 } from "@/lib/colorThemes";
-import { getServerSession } from "next-auth";
-import { useSession } from "next-auth/react";
+
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function App({

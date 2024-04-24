@@ -25,7 +25,8 @@ export const Logo = styled(LogoSVG)`
 
 export const Arrow = styled(ArrowSVG)`
   stroke: ${({ $theme }) =>
-    $theme === "dark" ? "var(--color_pale_grey)" : "var(--color_white)"};
+    ($theme === "dark" && "var(--color_pale_grey)") ||
+    ($theme === "light" && "var(--color_white)")};
   stroke-width: 3px;
   stroke-linecap: round;
   transform: ${({ $direction }) =>

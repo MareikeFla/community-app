@@ -78,7 +78,7 @@ export const NavLink = styled(Link)`
   text-align: center;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.04);
+    background-color: var(--color_night);
   }
 `;
 export const NavButton = styled.button`
@@ -94,6 +94,6 @@ export const NavButton = styled.button`
   text-align: center;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.04);
+    background-color: var(--color_night);
   }
 `;
