@@ -28,10 +28,7 @@ export const authOptions = {
           credentials.username === "test" &&
           credentials.password === "test"
         ) {
-          return {
-            ...testUser.toObject(),
-            colorTheme: testUser.colorTheme || "light",
-          };
+          return testUser;
         } else {
           return null;
         }
