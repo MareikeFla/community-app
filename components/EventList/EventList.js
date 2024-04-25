@@ -12,8 +12,8 @@ export default function EventList({ events = [], isSorted, title }) {
       {title ? <SectionTitle>{title}</SectionTitle> : null}
       <EventListWrapper>
         {events.map((event) => (
-          <li>
-            <EventDetailsLink key={event._id} href={`/events/${event._id}`}>
+          <li key={event._id}>
+            <EventDetailsLink href={`/events/${event._id}`}>
               <EventPreview event={event} />
             </EventDetailsLink>
           </li>

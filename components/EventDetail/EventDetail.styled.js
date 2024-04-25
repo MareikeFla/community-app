@@ -131,10 +131,11 @@ export const ListItemMarker = styled.span`
 `;
 
 export const ButtonWrapper = styled.section`
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.438rem;
 `;
+
 export const AttendeeWrapper = styled.section`
   text-align: right;
   border-top: 1px solid var(--color_light-grey);

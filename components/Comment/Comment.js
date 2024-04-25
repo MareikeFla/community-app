@@ -16,7 +16,7 @@ import LikeButton from "../LikeButton/LikeButton";
 import { useData } from "@/lib/useData";
 import { FlexContainer } from "./Comment.styled";
 import { useSession } from "next-auth/react";
-import EditCommentButton from "../EditCommentButton/EditCommentButton";
+import EditButton from "../EditButton/EditButton";
 import CommentForm from "../CommentForm/CommentForm";
 
 export default function Comment({ comment }) {
@@ -57,10 +57,10 @@ export default function Comment({ comment }) {
             {createdBy.name}{" "}
             <CommentTime> · {creationDate && timeElapsed}</CommentTime>
             {userId === createdBy._id && (
-              <EditCommentButton
-                onEditComment={handleEditComment}
+              <EditButton
+                onEdit={handleEditComment}
                 isEditing={isEditingComment}
-              ></EditCommentButton>
+              />
             )}
           </CommentHeader>
           {!isEditingComment ? (

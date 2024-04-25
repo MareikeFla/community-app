@@ -1,8 +1,17 @@
 import dbConnect from "@/db/connect";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../auth/[...nextauth]";
 import User from "@/db/models/User";
 
 export default async function handler(request, response) {
   await dbConnect();
+  const session = await getServerSession(request, response, authOptions);
+  if (!session) {
+    return response
+      .status(401)
+      .json({ status: "Unauthorized: Session is required" });
+  }
+
   const { userId, eventId } = request.body;
 
   if (request.method === "POST") {

@@ -6,37 +6,46 @@ import MessageCard from "@/components/MessageCard/MessageCard";
 import { useRouter } from "next/router";
 import { useData } from "@/lib/useData";
 
-export default function CategoryPage() {
+export default function SubcategoryPage() {
   const router = useRouter();
-  const { category } = router.query;
-  const { filterEventsByCategoryID } = useData();
-
-  const { categories, isLoadingCategories, errorCategories } =
-    useData().fetchedCategories;
+  const { category, subcategory } = router.query;
+  const {
+    fetchedCategories,
+    isLoadingCategories,
+    errorCategories,
+    filterEventsBySubCategoryID,
+  } = useData();
 
   if (isLoadingCategories) {
     return <Loading />;
   }
+
   if (errorCategories) {
     return <FetchingError />;
   }
 
-  const selectedCategory = categories.find((cat) => cat.slug === category);
+  const selectedCategory = fetchedCategories.categories.find(
+    (cat) => cat.slug === category
+  );
 
-  if (!selectedCategory) {
+  if (!selectedCategory || !selectedCategory.subCategories) {
     return <FetchingError />;
   }
 
-  const filteredEvents = filterEventsByCategoryID(selectedCategory._id);
+  const selectedSubcategory = selectedCategory.subCategories.find(
+    (subcat) => subcat.slug === subcategory
+  );
 
-  if (filteredEvents === undefined) {
-    return;
+  if (!selectedSubcategory) {
+    return <FetchingError />;
   }
+
+  const filteredEvents = filterEventsBySubCategoryID(selectedSubcategory._id);
 
   return (
     <>
-      {selectedCategory && <CategoryHeader category={selectedCategory} />}
-      {filteredEvents.length === 0 ? (
+      <CategoryHeader category={selectedSubcategory} />
+      {filteredEvents && filteredEvents.length === 0 ? (
         <MessageCard>Keine Events gefunden...</MessageCard>
       ) : (
         <EventList events={filteredEvents} isSorted={false} />

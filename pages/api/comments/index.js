@@ -15,7 +15,10 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     try {
-      const comments = await Comment.find().populate("createdBy");
+      const comments = await Comment.find().populate({
+        path: "createdBy",
+        select: "name image",
+      });
       if (!comments) {
         return response.status(404).json({ status: "Not Found" });
       }

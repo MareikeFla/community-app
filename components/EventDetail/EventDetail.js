@@ -1,4 +1,4 @@
-import CategoryTag from "../CategoryTag/CategoryTag";
+import CategoryTags from "../CategoryTags/CategoryTags";
 import CommentSection from "../CommentSection/CommentSection";
 import DeleteEventButton from "../DeleteEventButton/DeleteEventButton";
 import EditEventButton from "../EditEventButton/EditEventButton";
@@ -50,6 +50,7 @@ export default function EventDetail({ event, mutateEvent }) {
     image,
     links,
     category,
+    subCategories,
     isOnlineEvent,
     isAttendedByUser,
     attendeeCount,
@@ -93,11 +94,12 @@ export default function EventDetail({ event, mutateEvent }) {
         <InfoWrapper>
           <InfoTitle>Beginn</InfoTitle>
           <Info>
-            {formattedStartDate}, {start.time} Uhr
+            {formattedStartDate}
+            {start.time && "," + start.time + " Uhr"}
           </Info>
           <InfoTitle>Ende</InfoTitle>
           <Info>
-            {formattedEndDate}, {end.time} Uhr
+            {formattedEndDate} {end.time && "," + end.time + " Uhr"}
           </Info>
           <InfoTitle>Ort</InfoTitle>
           <Info>{isOnlineEvent ? "Online" : locationToString(location)}</Info>
@@ -121,7 +123,7 @@ export default function EventDetail({ event, mutateEvent }) {
           {longitude && latitude && <Map event={event} />}
         </InfoWrapper>
         <ButtonWrapper>
-          <CategoryTag category={category} />
+          <CategoryTags category={category} subCategories={subCategories} />
           {session && (
             <JoinButton
               onJoinEvent={() => joinEvent(userId, _id, mutateEvent)}
