@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Image from "next/image";
-import Link from "next/link";
 
 export const EventFormStyled = styled.form`
   padding-top: 1rem;
