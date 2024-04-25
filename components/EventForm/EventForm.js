@@ -62,9 +62,11 @@ export default function EventForm({ onSubmit, event: editEvent }) {
   const { placeList, setPlaceList, getPlaces, placeLoading, placeError } =
     usePlaceSearch();
 
-  // Using custom hook to fetch categories data
+  // Using custom hook to fetch categories and a11yicons data
   const { categories, isLoadingCategories, errorCategories } =
     useData().fetchedCategories;
+  const { a11yIcons, isLoadingA11yIcons, errorA11yIcons } =
+    useData().fetchedA11yIcons;
 
   // Custom hook to manage form state and logic
   const {
@@ -84,15 +86,17 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     imagePreview,
     isConsentChecked,
     setIsConsentChecked,
+    selectedA11yTags,
     submitAttempted,
     setSubmitAttempted,
     handleCategoryChange,
-    handleTagClick,
+    handleSubCategoryTagClick,
     handleStartDateChange,
     handleEndDateChange,
     handleCostsChange,
     handleImageChange,
     handleDeleteImage,
+    handleA11yTagClick,
     handleSubmit,
     handleCancel,
     MAX_CHAR_COUNT,
@@ -178,10 +182,10 @@ export default function EventForm({ onSubmit, event: editEvent }) {
     }
   }, [isFreeOfCharge, editEvent]);
 
-  if (isLoadingCategories) {
+  if (isLoadingCategories || isLoadingA11yIcons) {
     return <Loading />;
   }
-  if (errorCategories) {
+  if (errorCategories || errorA11yIcons) {
     return <FetchingError />;
   }
 
@@ -252,7 +256,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
             return (
               <Tag
                 key={_id}
-                onClick={() => handleTagClick(_id)}
+                onClick={() => handleSubCategoryTagClick(_id)}
                 color={color}
                 type="button"
                 selected={isSelected}
@@ -534,6 +538,22 @@ export default function EventForm({ onSubmit, event: editEvent }) {
           defaultValue={editEvent?.links[0]?.linkDescription || ""}
           onChange={(event) => checkIfCorrespondingFieldIsRequired(event)} // Set the link URL required if a link description is entered
         />
+      </FormSection>
+      <FormSection>
+        <FormLabel>Barrierefreiheit</FormLabel>
+        <TagList>
+          {a11yIcons.map((tag) => (
+            <Tag
+              key={tag._id}
+              onClick={() => handleA11yTagClick(tag._id)}
+              selected={selectedA11yTags.includes(tag._id)}
+              type="button"
+              color="red"
+            >
+              {tag.name}
+            </Tag>
+          ))}
+        </TagList>
       </FormSection>
       <FormButtonWrapper>
         <Button type="button" text="Abbrechen" onClick={handleCancel} />
