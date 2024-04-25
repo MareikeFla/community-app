@@ -48,6 +48,7 @@ const eventSchema = new Schema({
       linkDescription: String,
     },
   ],
+  a11yIcons: [{ type: Schema.Types.ObjectId, ref: "A11yIcon" }],
 });
 
 const Event = mongoose.models.Event || mongoose.model("Event", eventSchema);
