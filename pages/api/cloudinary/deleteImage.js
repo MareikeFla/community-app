@@ -6,7 +6,6 @@ export default async function handler(request, response) {
   }
 
   const { public_id } = request.body;
-  console.log("deleteImage", public_id);
 
   try {
     cloudinary.v2.config({
