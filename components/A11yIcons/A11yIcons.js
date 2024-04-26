@@ -38,11 +38,11 @@ export default function A11yIcons({ a11yIcons }) {
   return (
     <A11yIconList>
       {a11yIcons.map((iconId) => {
-        const icon = fetchedIcons.find((item) => item._id === iconId);
-        if (icon && icons[icon.icon]) {
-          const A11yIcon = icons[icon.icon];
+        const fetchedIcon = fetchedIcons.find((item) => item._id === iconId);
+        if (fetchedIcon && icons[fetchedIcon.icon]) {
+          const A11yIcon = icons[fetchedIcon.icon];
           return (
-            <div key={icon._id}>
+            <div key={fetchedIcon._id}>
               <A11yIcon />
             </div>
           );
