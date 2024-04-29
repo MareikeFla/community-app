@@ -24,12 +24,13 @@ export default function EventPreview({ event }) {
   } = event;
   const { date, time } = start;
   const formattedDate = formatDate(date);
+
   return (
     <>
-      {image && (
+      {image && image.url !== "" && (
         <ImageContainer>
           <EventImage
-            src={image.url}
+            src={image?.url}
             alt={eventName}
             fill
             sizes="100vw 100vh"
