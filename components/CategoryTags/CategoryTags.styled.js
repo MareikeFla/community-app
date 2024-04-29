@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const CategoryTagList = styled.div`
-  list-style: none;
   display: inline-flex;
   flex-wrap: wrap;
   gap: 0.5rem 0.438rem;
