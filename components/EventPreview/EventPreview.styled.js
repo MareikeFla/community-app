@@ -57,5 +57,6 @@ export const Divider = styled.div`
   height: 0.063rem;
   background-color: var(--color_light-grey);
   width: calc(100% + 3rem);
-  margin: 1.25rem -1.5rem 0;
+  margin: ${({ $hasA11yIcons }) => ($hasA11yIcons ? "0.563rem" : "1.125rem")} -1.5rem
+    0;
 `;
