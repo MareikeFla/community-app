@@ -47,7 +47,7 @@ export default async function handler(request, response) {
         return response.status(404).json({ status: "Event not found" });
       }
 
-      let imageDeleted = true;
+      let imageDeleted = false;
 
       if (event.image.public_id) {
         try {
@@ -58,6 +58,7 @@ export default async function handler(request, response) {
           });
 
           await cloudinary.v2.uploader.destroy(event.image.public_id);
+          imageDeleted = true;
         } catch (error) {
           console.error("Error deleting image:", error);
           imageDeleted = false;
@@ -94,11 +95,16 @@ export default async function handler(request, response) {
 
   if (request.method === "PATCH") {
     try {
-      const updatedEvent = await Event.findByIdAndUpdate(
-        id,
-        { $unset: { image: "" } },
-        { new: true }
-      );
+      const eventData = request.body;
+
+      if (!eventData.image) {
+        const updatedEvent = await Event.findByIdAndUpdate(
+          id,
+          { $unset: { image: "" } },
+          { new: true }
+        );
+      }
+
       if (!updatedEvent) {
         return response.status(404).json({ error: "Event not found" });
       }
