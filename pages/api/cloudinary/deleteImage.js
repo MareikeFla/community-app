@@ -15,7 +15,9 @@ export default async function handler(request, response) {
       api_secret: process.env.NEXT_PUBLIC_CLOUDINARY_API_SECRET,
     });
 
-    const result = await cloudinary.v2.uploader.destroy(public_id);
+    const result = await cloudinary.v2.uploader.destroy(public_id, {
+      invalidate: true,
+    });
     response.status(200).json({ success: true, result });
   } catch (error) {
     console.error("Error deleting image:", error);
