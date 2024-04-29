@@ -2,7 +2,8 @@ import cloudinary from "cloudinary";
 
 export default async function handler(request, response) {
   if (request.method !== "DELETE") {
-    return response.status(405).json({ message: "Method Not Allowed" });
+    response.status(405).json({ message: "Method Not Allowed" });
+    return;
   }
 
   const { public_id } = request.body;
