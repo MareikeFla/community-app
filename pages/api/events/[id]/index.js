@@ -95,21 +95,13 @@ export default async function handler(request, response) {
 
   if (request.method === "PATCH") {
     try {
-      const eventData = request.body;
-
-      if (!eventData.image) {
-        const updatedEvent = await Event.findByIdAndUpdate(
-          id,
-          { $unset: { image: "" } },
-          { new: true }
-        );
-      }
+      const updatedEvent = await Event.findByIdAndUpdate(id, request.body);
 
       if (!updatedEvent) {
         return response.status(404).json({ error: "Event not found" });
       }
 
-      return response.status(200).json({ status: "Image deleted from event" });
+      return response.status(200).json({ status: "Event updated" });
     } catch (error) {
       return response.status(400).json({ error: error.message });
     }
