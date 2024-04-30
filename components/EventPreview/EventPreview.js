@@ -30,10 +30,10 @@ export default function EventPreview({ event }) {
 
   return (
     <>
-      {image && (
+      {image && image.url !== "" && (
         <ImageContainer>
           <EventImage
-            src={image.url}
+            src={image?.url}
             alt={eventName}
             fill
             sizes="100vw 100vh"

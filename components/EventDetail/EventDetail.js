@@ -67,7 +67,7 @@ export default function EventDetail({ event, mutateEvent }) {
 
   return (
     <>
-      {image ? (
+      {image.url !== "" ? (
         <EventHeader>
           {event.createdBy === userId ? (
             <>
@@ -92,7 +92,7 @@ export default function EventDetail({ event, mutateEvent }) {
             <DeleteEventButton id={_id} />
           </>
         ) : null}
-        {!image && <EventName>{eventName}</EventName>}
+        {!image.url && <EventName>{eventName}</EventName>}
         <ExpandableText text={longDescription} />
         <InfoWrapper>
           <InfoColumns>

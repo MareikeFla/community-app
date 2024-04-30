@@ -40,6 +40,7 @@ const eventSchema = new Schema({
   image: {
     type: new Schema({
       url: String,
+      public_id: String,
     }),
   },
   links: [
