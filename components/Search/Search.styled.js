@@ -48,3 +48,17 @@ export const SearchLinkStyled = styled(Link)`
   right: 1rem;
   cursor: pointer;
 `;
+
+export const IconWrap = styled.div`
+  background-color: ${({ $isSelected }) =>
+    $isSelected === false || $isSelected === undefined
+      ? "var(--color_light-grey)"
+      : "var(--color_light-orange)"};
+
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+`;
