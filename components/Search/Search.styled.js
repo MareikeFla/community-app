@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
-
+import { A11yIconList } from "../A11yIcons/A11yIcons.styled";
 // SearchCard
 
 export const SearchBox = styled.div`
@@ -61,4 +61,18 @@ export const IconWrap = styled.div`
   align-items: center;
   width: 30px;
   height: 30px;
+`;
+
+export const A11yIconListColumn = styled(A11yIconList)`
+  flex-direction: column;
+  align-items: flex-start;
+`;
+export const A11yIconListRow = styled(A11yIconList)`
+  margin-top: 0.375rem;
+`;
+
+export const FilterHeading = styled.p`
+  font: var(--font_body);
+  font-size: 1rem;
+  font-weight: 300;
 `;
