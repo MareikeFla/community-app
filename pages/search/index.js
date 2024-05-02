@@ -2,14 +2,21 @@ import SearchCard from "@/components/Search/SearchCard";
 import EventList from "@/components/EventList/EventList";
 import useSearch from "@/lib/useSearch";
 import { useEffect, useState } from "react";
+import { useData } from "@/lib/useData";
 
-function isAnyValueTrue(obj) {
-  for (const key in obj) {
-    if (obj[key] === true) {
-      return true;
+function isAnyValueTrue(objOne, objTwo) {
+  let result = false;
+  for (const key in objOne) {
+    if (objOne[key] === true) {
+      result = true;
     }
   }
-  return false;
+  for (const key in objTwo) {
+    if (objTwo[key] === true) {
+      result = true;
+    }
+  }
+  return result;
 }
 
 export default function SearchPage() {
@@ -21,9 +28,18 @@ export default function SearchPage() {
     debouncedInputChange,
   } = useSearch();
 
+  const {
+    events: fetchedEvents,
+    isLoadingEvents,
+    errorEvents,
+  } = useData().fetchedEvents;
+
   const [a11yFilter, setA11yFilter] = useState({});
+  const [categoryFilter, setCategoryFilter] = useState({});
   const [events, setEvents] = useState([]);
-  const [isFiltered, setIsFiltered] = useState(isAnyValueTrue(a11yFilter));
+  const [isFiltered, setIsFiltered] = useState(
+    isAnyValueTrue(a11yFilter, categoryFilter)
+  );
   const [title, setTitle] = useState(null);
 
   // Set the event list title based on the search results
@@ -36,45 +52,84 @@ export default function SearchPage() {
     ) {
       newTitle = `Deine Suchergebnisse für "${searchTerm}" (${count})`;
     } else {
-      newTitle = `Deine Suche nach" "${searchTerm}" ergab leider kein Ergebnis.`;
+      newTitle = `Deine Suche nach "${searchTerm}" ergab leider kein Ergebnis.`;
     }
     if (filteredEvents.hasResults === undefined) {
       newTitle = null;
     }
+    if (filteredEvents.hasResults === undefined && isFiltered && count > 0) {
+      newTitle = `Deine Suchergebnisse (${count})`;
+    }
+    if (filteredEvents.hasResults === undefined && isFiltered && count === 0) {
+      newTitle = `Deine Suche ergab leider kein Ergebnis.`;
+    }
+
     setTitle(newTitle);
   }, [filteredEvents.hasResults, events, isFiltered]);
 
   // Reset the filter when a new searchTerm is submitted
   useEffect(() => {
     setA11yFilter({});
+    setCategoryFilter({});
   }, [searchTerm]);
 
   // Filter events based on a11yIcon selection
   useEffect(() => {
-    const currentEvents = [...filteredEvents.events];
-    const currentEventsFiltered = currentEvents.filter((event) => {
-      let isIncluded = false;
-      const a11yIcons = event.a11yIcons || [];
-      a11yIcons.forEach((id) => {
-        if (a11yFilter[id] === true) {
-          isIncluded = true;
-        }
+    const hasCategoryFilters = isAnyValueTrue(categoryFilter);
+    const hasa11yFilters = isAnyValueTrue(a11yFilter);
+    let currentEvents = [...filteredEvents.events];
+    if (
+      filteredEvents.hasResults === undefined &&
+      (hasCategoryFilters || hasa11yFilters)
+    ) {
+      currentEvents = fetchedEvents;
+    }
+    if (hasa11yFilters === true) {
+      let currentEventsFiltered = currentEvents.filter((event) => {
+        let isIncluded = false;
+        const a11yIcons = event.a11yIcons || [];
+        a11yIcons.forEach((id) => {
+          if (a11yFilter[id] === true) {
+            isIncluded = true;
+          }
+        });
+        return isIncluded;
       });
-      return isIncluded;
-    });
-    setEvents(currentEventsFiltered);
-    setIsFiltered(isAnyValueTrue(a11yFilter));
-  }, [a11yFilter]);
+      currentEvents = currentEventsFiltered;
+    }
 
+    if (hasCategoryFilters === true) {
+      const result = currentEvents.filter(
+        (event) => categoryFilter[event.category._id] === true
+      );
+      currentEvents = result;
+    }
+    if (
+      filteredEvents.hasResults === undefined &&
+      (hasCategoryFilters || hasa11yFilters) &&
+      currentEvents.length > 0
+    ) {
+      setTitle(`Deine Suchergebnisse (${currentEvents.length})`);
+    }
+
+    setEvents(currentEvents);
+    setIsFiltered(isAnyValueTrue(a11yFilter, categoryFilter));
+  }, [a11yFilter, categoryFilter]);
+
+  if (isLoadingEvents || errorEvents) {
+    return;
+  }
   return (
     <>
       <SearchCard
         handleSubmit={handleSubmit}
         debouncedInputChange={debouncedInputChange}
         suggestions={suggestions}
-        hasResults={filteredEvents.hasResults}
+        hasSearchTerm={filteredEvents.hasResults !== undefined}
         a11yFilter={a11yFilter}
+        categoryFilter={categoryFilter}
         setA11yFilter={setA11yFilter}
+        setCategoryFilter={setCategoryFilter}
         events={events}
         isFiltered={isFiltered}
       />
