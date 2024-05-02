@@ -1,3 +1,4 @@
+import A11yIcons from "../A11yIcons/A11yIcons";
 import CategoryTags from "../CategoryTags/CategoryTags";
 import CommentSection from "../CommentSection/CommentSection";
 import DeleteEventButton from "../DeleteEventButton/DeleteEventButton";
@@ -11,6 +12,7 @@ import {
   EventImage,
   EventName,
   InfoWrapper,
+  InfoColumns,
   InfoTitle,
   Info,
   LinkList,
@@ -49,6 +51,7 @@ export default function EventDetail({ event, mutateEvent }) {
     organization,
     image,
     links,
+    a11yIcons,
     category,
     subCategories,
     isOnlineEvent,
@@ -92,34 +95,37 @@ export default function EventDetail({ event, mutateEvent }) {
         {!image.url && <EventName>{eventName}</EventName>}
         <ExpandableText text={longDescription} />
         <InfoWrapper>
-          <InfoTitle>Beginn</InfoTitle>
-          <Info>
-            {formattedStartDate}
-            {start.time && "," + start.time + " Uhr"}
-          </Info>
-          <InfoTitle>Ende</InfoTitle>
-          <Info>
-            {formattedEndDate} {end.time && "," + end.time + " Uhr"}
-          </Info>
-          <InfoTitle>Ort</InfoTitle>
-          <Info>{isOnlineEvent ? "Online" : locationToString(location)}</Info>
-          <InfoTitle>Kosten</InfoTitle>
-          <Info>{costs}</Info>
-          <InfoTitle>Veranstalter</InfoTitle>
-          <Info>{organizationName}</Info>
-          <InfoTitle>Kontakt</InfoTitle>
-          <Info>{organizationContact}</Info>
-          <InfoTitle>Weitere Infos</InfoTitle>
-          <LinkList>
-            {links.map((link, index) => (
-              <ListItem key={index}>
-                <ListItemMarker>&raquo;</ListItemMarker>
-                <ListItemLink href={link.url} target="blank">
-                  {link.linkDescription}
-                </ListItemLink>
-              </ListItem>
-            ))}
-          </LinkList>
+          <InfoColumns>
+            <InfoTitle>Beginn</InfoTitle>
+            <Info>
+              {formattedStartDate}
+              {start.time && "," + start.time + " Uhr"}
+            </Info>
+            <InfoTitle>Ende</InfoTitle>
+            <Info>
+              {formattedEndDate} {end.time && "," + end.time + " Uhr"}
+            </Info>
+            <InfoTitle>Ort</InfoTitle>
+            <Info>{isOnlineEvent ? "Online" : locationToString(location)}</Info>
+            <InfoTitle>Kosten</InfoTitle>
+            <Info>{costs}</Info>
+            <InfoTitle>Veranstalter</InfoTitle>
+            <Info>{organizationName}</Info>
+            <InfoTitle>Kontakt</InfoTitle>
+            <Info>{organizationContact}</Info>
+            <InfoTitle>Weitere Infos</InfoTitle>
+            <LinkList>
+              {links.map((link, index) => (
+                <ListItem key={index}>
+                  <ListItemMarker>&raquo;</ListItemMarker>
+                  <ListItemLink href={link.url} target="blank">
+                    {link.linkDescription}
+                  </ListItemLink>
+                </ListItem>
+              ))}
+            </LinkList>
+          </InfoColumns>
+          <A11yIcons a11yIcons={a11yIcons} />
           {longitude && latitude && <Map event={event} />}
         </InfoWrapper>
         <ButtonWrapper>

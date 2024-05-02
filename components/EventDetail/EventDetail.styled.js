@@ -39,6 +39,7 @@ export const EventImage = styled(Image)`
   border-top-left-radius: var(--border-radius_card);
   border-top-right-radius: var(--border-radius_card);
   object-fit: cover;
+  box-shadow: 0px -2px 12px 0px rgba(91, 95, 98, 0.2);
 `;
 
 export const EventName = styled.h1`
@@ -83,13 +84,16 @@ export const DescriptionContainer = styled.div`
 `;
 
 export const InfoWrapper = styled.div`
-  display: grid;
-  grid-template-columns: minmax(6.25rem, 1fr) 2fr;
-  gap: 0.5rem;
   margin: 1.25rem 0 1.875rem;
   padding: 1.125rem 1rem 1rem;
   border: 1px solid var(--color_light-grey);
   border-radius: var(--border-radius_card);
+`;
+
+export const InfoColumns = styled.div`
+  display: grid;
+  grid-template-columns: minmax(6.25rem, 1fr) 2fr;
+  gap: 0.5rem;
 `;
 
 export const InfoTitle = styled.span`
