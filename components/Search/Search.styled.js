@@ -63,16 +63,29 @@ export const IconWrap = styled.div`
   height: 30px;
 `;
 
-export const A11yIconListColumn = styled(A11yIconList)`
+export const ListColumn = styled(A11yIconList)`
   flex-direction: column;
   align-items: flex-start;
 `;
-export const A11yIconListRow = styled(A11yIconList)`
-  margin-top: 0.375rem;
+export const ListRow = styled(A11yIconList)`
+  margin-top: 0.75rem;
 `;
 
 export const FilterHeading = styled.p`
   font: var(--font_body);
   font-size: 1rem;
   font-weight: 300;
+`;
+
+export const CategoryFilterTag = styled.span`
+  font: var(--font_tag);
+  background-color: ${({ $isSelected, color }) =>
+    $isSelected === false || $isSelected === undefined
+      ? "var(--color_light-grey)"
+      : `var(--color_${color})`};
+  color: var(--color_white);
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--border-radius_button);
+  padding: 0.375rem 0.625rem 0.3125rem;
 `;
