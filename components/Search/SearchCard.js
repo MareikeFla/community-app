@@ -1,9 +1,21 @@
 import { SearchBox, SearchCardHeader, SearchBar } from "./Search.styled";
+import { A11yIconList } from "../A11yIcons/A11yIcons.styled";
+import { IconWrap } from "./Search.styled";
+import { icons } from "../A11yIcons/A11yIcons";
+import { useData } from "@/lib/useData";
 export default function SearchCard({
   handleSubmit,
   debouncedInputChange,
   suggestions,
+  hasResults,
+  a11yFilter,
+  setA11yFilter,
 }) {
+  const { a11yIcons, isLoadingA11yIcons, errorA11yIcons } =
+    useData().fetchedA11yIcons;
+  if (isLoadingA11yIcons || errorA11yIcons) {
+    return;
+  }
   return (
     <SearchBox>
       <SearchCardHeader>Wonach suchst Du?</SearchCardHeader>
@@ -23,6 +35,31 @@ export default function SearchCard({
             : null}
         </datalist>
       </form>
+      {hasResults ? (
+        <A11yIconList>
+          {a11yIcons.map((icon, i) => {
+            const A11yIcon = icons[icon.icon];
+            const isSelected = a11yFilter[icon._id];
+            return (
+              <IconWrap
+                key={i}
+                onClick={() => {
+                  const newState = { ...a11yFilter };
+                  let newStatus = true;
+                  if (newState[icon._id] === true) {
+                    newStatus = false;
+                  }
+                  newState[icon._id] = newStatus;
+                  setA11yFilter(newState);
+                }}
+                $isSelected={isSelected}
+              >
+                <A11yIcon />
+              </IconWrap>
+            );
+          })}
+        </A11yIconList>
+      ) : null}
     </SearchBox>
   );
 }
