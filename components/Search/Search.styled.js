@@ -61,6 +61,7 @@ export const IconWrap = styled.div`
   align-items: center;
   width: 30px;
   height: 30px;
+  cursor: pointer;
 `;
 
 export const ListColumn = styled(A11yIconList)`
@@ -101,4 +102,5 @@ export const CategoryFilterTag = styled.span`
   border: none;
   border-radius: var(--border-radius_button);
   padding: 0.375rem 0.625rem 0.3125rem;
+  cursor: pointer;
 `;
