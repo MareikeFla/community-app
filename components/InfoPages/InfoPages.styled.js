@@ -39,13 +39,3 @@ export const Paragraph = styled.p`
     }
   }
 `;
-
-export const Mail = styled.a`
-  color: var(--color_red);
-  text-decoration: none;
-  margin-bottom: 1rem;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
