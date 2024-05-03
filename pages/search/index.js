@@ -44,28 +44,25 @@ export default function SearchPage() {
 
   // Set the event list title based on the search results
   useEffect(() => {
-    const count = isFiltered ? events.length : filteredEvents.events.length;
-    let newTitle = "";
-    if (
-      (filteredEvents.hasResults && isFiltered === false) ||
-      (isFiltered === true && events.length > 0)
-    ) {
-      newTitle = `Deine Suchergebnisse für "${searchTerm}" (${count})`;
-    } else {
-      newTitle = `Deine Suche nach "${searchTerm}" ergab leider kein Ergebnis.`;
-    }
-    if (filteredEvents.hasResults === undefined) {
-      newTitle = null;
-    }
-    if (filteredEvents.hasResults === undefined && isFiltered && count > 0) {
-      newTitle = `Deine Suchergebnisse (${count})`;
-    }
-    if (filteredEvents.hasResults === undefined && isFiltered && count === 0) {
-      newTitle = `Deine Suche ergab leider kein Ergebnis.`;
+    if (events === null) return;
+    const eventCount = isFiltered
+      ? events.length
+      : filteredEvents.events.length;
+    const searchPerformed = filteredEvents?.hasResults !== undefined;
+    const hasResults = eventCount > 0;
+
+    if (!searchPerformed && !isFiltered) {
+      setTitle(null);
+      return;
     }
 
-    setTitle(newTitle);
-  }, [filteredEvents.hasResults, events, isFiltered]);
+    const searchString = searchPerformed ? ` für "${searchTerm}"` : "";
+    setTitle(
+      hasResults
+        ? `Deine Suchergebnisse${searchString} (${eventCount})`
+        : `Deine Suche${searchString} ergab leider kein Ergebnis.`
+    );
+  }, [filteredEvents?.hasResults, events, isFiltered]);
 
   // Reset the filter when a new searchTerm is submitted
   useEffect(() => {
