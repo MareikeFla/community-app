@@ -50,8 +50,8 @@ export default function SearchCard({
       </form>
 
       <ListColumn>
-        <FilterHeading>
-          Events filtern
+        <ListRow>
+          <FilterHeading>Events filtern</FilterHeading>
           {isFiltered ? (
             <FilterReset
               onClick={() => {
@@ -62,7 +62,7 @@ export default function SearchCard({
               (Filter zurücksetzen)
             </FilterReset>
           ) : null}
-        </FilterHeading>
+        </ListRow>
         <ListRow>
           {a11yIcons.map((icon, i) => {
             const A11yIcon = icons[icon.icon];
@@ -70,14 +70,12 @@ export default function SearchCard({
             return (
               <IconWrap
                 key={i}
+                title={icon.name}
                 onClick={() => {
-                  const newState = { ...a11yFilter };
-                  let newStatus = true;
-                  if (newState[icon._id] === true) {
-                    newStatus = false;
-                  }
-                  newState[icon._id] = newStatus;
-                  setA11yFilter(newState);
+                  setA11yFilter((prevState) => ({
+                    ...prevState,
+                    [icon._id]: !prevState[icon._id],
+                  }));
                 }}
                 $isSelected={isSelected}
               >
@@ -96,14 +94,12 @@ export default function SearchCard({
               category={category}
               color={category.color}
               selected={isSelected}
+              title={category.title}
               onClick={() => {
-                const newState = { ...categoryFilter };
-                let newStatus = true;
-                if (newState[category._id] === true) {
-                  newStatus = false;
-                }
-                newState[category._id] = newStatus;
-                setCategoryFilter(newState);
+                setCategoryFilter((prevState) => ({
+                  ...prevState,
+                  [category._id]: !prevState[category._id],
+                }));
               }}
             >
               {category.title}

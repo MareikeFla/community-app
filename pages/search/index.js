@@ -75,6 +75,7 @@ export default function SearchPage() {
 
   // Filter events based on filter selection
   useEffect(() => {
+    if (!fetchedEvents) return;
     const hasCategoryFilters = isAnyValueTrue(categoryFilter);
     const hasA11yFilters = isAnyValueTrue(a11yFilter);
     const hasFilters = hasCategoryFilters || hasA11yFilters;
