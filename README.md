@@ -1,4 +1,4 @@
-# New Next Project
+# Pin&Join
 
 ### Local Development
 
