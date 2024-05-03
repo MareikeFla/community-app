@@ -4,8 +4,8 @@ import { FilterHeading, FilterReset } from "./Search.styled";
 import { IconWrap } from "./Search.styled";
 import { icons } from "../A11yIcons/A11yIcons";
 import { useData } from "@/lib/useData";
-import { CategoryFilterTag } from "./Search.styled";
 import { Tag } from "../EventForm/EventForm.styled";
+
 export default function SearchCard({
   handleSubmit,
   debouncedInputChange,
