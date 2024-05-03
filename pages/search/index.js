@@ -43,8 +43,8 @@ export default function SearchPage() {
   const [title, setTitle] = useState(null);
 
   // Set the event list title based on the search results
+
   useEffect(() => {
-    if (events === null) return;
     const eventCount = isFiltered
       ? events.length
       : filteredEvents.events.length;
