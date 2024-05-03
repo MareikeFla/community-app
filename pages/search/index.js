@@ -30,6 +30,7 @@ export default function SearchPage() {
     debouncedInputChange,
   } = useSearch();
 
+  // Fetch our events to show results when filtering without performing a search
   const {
     events: fetchedEvents,
     isLoadingEvents,
@@ -42,10 +43,9 @@ export default function SearchPage() {
   const [isFiltered, setIsFiltered] = useState(
     isAnyValueTrue(a11yFilter, categoryFilter)
   );
-  const [title, setTitle] = useState(null);
+  const [eventListTitle, setEventListTitle] = useState(null);
 
   // Set the event list title based on the search results
-
   useEffect(() => {
     const eventCount = isFiltered
       ? events.length
@@ -55,11 +55,11 @@ export default function SearchPage() {
     const searchString = searchPerformed ? ` für "${searchTerm}"` : "";
 
     if (!searchPerformed && !isFiltered) {
-      setTitle(null);
+      setEventListTitle(null);
       return;
     }
 
-    setTitle(
+    setEventListTitle(
       hasResults
         ? `Deine Suchergebnisse${searchString} (${eventCount})`
         : `Deine Suche${searchString} ergab leider kein Ergebnis.`
@@ -67,7 +67,6 @@ export default function SearchPage() {
   }, [filteredEvents?.hasResults, events, isFiltered]);
 
   // Reset the filter when a new searchTerm is submitted
-
   useEffect(() => {
     setA11yFilter({});
     setCategoryFilter({});
@@ -75,7 +74,6 @@ export default function SearchPage() {
   }, [searchTerm]);
 
   // Filter events based on filter selection
-
   useEffect(() => {
     const hasCategoryFilters = isAnyValueTrue(categoryFilter);
     const hasA11yFilters = isAnyValueTrue(a11yFilter);
@@ -86,29 +84,22 @@ export default function SearchPage() {
       ? [...filteredEvents.events]
       : [...fetchedEvents];
 
-    if (hasA11yFilters === true) {
-      let filteredResult = newFilteredEvents.filter((event) => {
-        let isIncluded = false;
-        const a11yIcons = event.a11yIcons || [];
-        a11yIcons.forEach((id) => {
-          if (a11yFilter[id] === true) {
-            isIncluded = true;
-          }
-        });
-        return isIncluded;
+    if (hasA11yFilters) {
+      newFilteredEvents = newFilteredEvents.filter((event) => {
+        const a11yIconIds = event.a11yIcons || [];
+        return a11yIconIds.some((id) => a11yFilter[id]);
       });
-      newFilteredEvents = filteredResult;
     }
 
-    if (hasCategoryFilters === true) {
-      const result = newFilteredEvents.filter(
-        (event) => categoryFilter[event.category._id] === true
+    if (hasCategoryFilters) {
+      newFilteredEvents = newFilteredEvents.filter(
+        (event) => categoryFilter[event.category._id]
       );
-      newFilteredEvents = result;
     }
-    // To prevent the title from appearing with delay
+
+    // To prevent the eventListTitle from appearing with delay when so search was performed but filterd
     if (!searchPerformed && hasFilters && newFilteredEvents.length > 0) {
-      setTitle(`Deine Suchergebnisse (${newFilteredEvents.length})`);
+      setEventListTitle(`Deine Suchergebnisse (${newFilteredEvents.length})`);
     }
 
     setEvents(newFilteredEvents);
@@ -139,7 +130,7 @@ export default function SearchPage() {
       <EventList
         events={isFiltered ? events : filteredEvents.events}
         isSorted
-        title={title}
+        title={eventListTitle}
       />
     </>
   );
