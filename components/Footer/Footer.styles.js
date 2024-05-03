@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 export const StyledFooter = styled.footer`
   background-color: var(--color_midnight);
@@ -11,8 +12,20 @@ export const StyledFooter = styled.footer`
   width: 100%;
 `;
 
-export const TextFooter = styled.p`
+export const FooterLinkContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+export const FooterLink = styled(Link)`
   color: var(--color_white);
   font: var(--font_footer);
   text-transform: uppercase;
+  text-decoration: none;
+
+  &:not(:last-child)::after {
+    content: "Ι";
+    font-weight: lighter;
+    margin: 0 0.438rem;
+  }
 `;
