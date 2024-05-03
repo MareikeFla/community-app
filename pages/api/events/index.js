@@ -34,9 +34,13 @@ export default async function handler(request, response) {
       const ourEvents = events.map((event) => enrichEventObject(event));
       if (!metainfo.isUpToDate) {
         try {
-          const koelnCategories = await fetchData(koelnCategoriesUrl, koelnDB);
-          const ourCategories = await fetchData(ourCategoriesUrl, ourDB);
-          const ourA11yIcons = await fetchData(a11yIconsUrl, ourDB);
+          const [koelnCategories, ourCategories, ourA11yIcons] =
+            await Promise.all([
+              fetchData(koelnCategoriesUrl, koelnDB),
+              fetchData(ourCategoriesUrl, ourDB),
+              fetchData(a11yIconsUrl, ourDB),
+            ]);
+
           const koelnEventsInOurDataBase = ourEvents.filter(
             (event) => event.isFetchedEvent === true
           );
