@@ -69,12 +69,12 @@ export default function EventDetail({ event, mutateEvent }) {
     <>
       {image && image?.url !== "" ? (
         <EventHeader>
-          {event.createdBy === userId ? (
+          {event.createdBy === userId && (
             <>
               <EditEventButton id={_id} />
               <DeleteEventButton id={_id} />
             </>
-          ) : null}
+          )}
           <EventName $withImage={image}>{eventName}</EventName>
           <EventImage
             src={image?.url}

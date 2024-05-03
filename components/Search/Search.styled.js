@@ -51,9 +51,7 @@ export const SearchLinkStyled = styled(Link)`
 
 export const IconWrap = styled.div`
   background-color: ${({ $isSelected }) =>
-    $isSelected === false || $isSelected === undefined
-      ? "var(--color_light-grey)"
-      : "var(--color_light-orange)"};
+    $isSelected ? "var(--color_light-orange)" : "var(--color_light-grey)"};
 
   border-radius: 5px;
   display: flex;
@@ -90,9 +88,7 @@ export const CategoryFilterTag = styled.span`
   width: 150px;
   font: var(--font_tag);
   background-color: ${({ $isSelected, color }) =>
-    $isSelected === false || $isSelected === undefined
-      ? "var(--color_light-grey)"
-      : `var(--color_${color})`};
+    $isSelected ? `var(--color_${color})` : "var(--color_light-grey)"};
   color: var(--color_white);
   text-transform: uppercase;
   border: none;

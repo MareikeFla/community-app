@@ -52,7 +52,7 @@ export default function SearchCard({
       <ListColumn>
         <ListRow>
           <FilterHeading>Events filtern</FilterHeading>
-          {isFiltered ? (
+          {isFiltered && (
             <FilterReset
               onClick={() => {
                 setA11yFilter({});
@@ -61,15 +61,15 @@ export default function SearchCard({
             >
               (Filter zurücksetzen)
             </FilterReset>
-          ) : null}
+          )}
         </ListRow>
         <ListRow>
-          {a11yIcons.map((icon, i) => {
+          {a11yIcons.map((icon) => {
             const A11yIcon = icons[icon.icon];
             const isSelected = a11yFilter[icon._id];
             return (
               <IconWrap
-                key={i}
+                key={icon._id}
                 title={icon.name}
                 onClick={() => {
                   setA11yFilter((prevState) => ({
