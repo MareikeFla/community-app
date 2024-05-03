@@ -1,5 +1,7 @@
 # Pin&Join
 
+![hero](public/assets/images/banner.png)
+
 ### Local Development
 
 To work locally, please install the dependencies using `npm i` first.
