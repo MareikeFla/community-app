@@ -72,12 +72,25 @@ export const ListRow = styled(A11yIconList)`
 `;
 
 export const FilterHeading = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
   font: var(--font_body);
   font-size: 1rem;
   font-weight: 300;
 `;
 
+export const FilterReset = styled.p`
+  color: var(--color_orange);
+  cursor: pointer;
+  font: var(--font_body);
+  font-size: 0.75rem;
+  font-weight: 300;
+`;
+
 export const CategoryFilterTag = styled.span`
+  width: 150px;
   font: var(--font_tag);
   background-color: ${({ $isSelected, color }) =>
     $isSelected === false || $isSelected === undefined

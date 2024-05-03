@@ -1,10 +1,11 @@
 import { SearchBox, SearchCardHeader, SearchBar } from "./Search.styled";
 import { ListColumn, ListRow } from "./Search.styled";
-import { FilterHeading } from "./Search.styled";
+import { FilterHeading, FilterReset } from "./Search.styled";
 import { IconWrap } from "./Search.styled";
 import { icons } from "../A11yIcons/A11yIcons";
 import { useData } from "@/lib/useData";
 import { CategoryFilterTag } from "./Search.styled";
+import { Tag } from "../EventForm/EventForm.styled";
 export default function SearchCard({
   handleSubmit,
   debouncedInputChange,
@@ -13,6 +14,7 @@ export default function SearchCard({
   setA11yFilter,
   categoryFilter,
   setCategoryFilter,
+  isFiltered,
 }) {
   const { a11yIcons, isLoadingA11yIcons, errorA11yIcons } =
     useData().fetchedA11yIcons;
@@ -48,7 +50,19 @@ export default function SearchCard({
       </form>
 
       <ListColumn>
-        <FilterHeading>Events filtern</FilterHeading>
+        <FilterHeading>
+          Events filtern
+          {isFiltered ? (
+            <FilterReset
+              onClick={() => {
+                setA11yFilter({});
+                setCategoryFilter({});
+              }}
+            >
+              (Filter zurücksetzen)
+            </FilterReset>
+          ) : null}
+        </FilterHeading>
         <ListRow>
           {a11yIcons.map((icon, i) => {
             const A11yIcon = icons[icon.icon];
@@ -77,11 +91,11 @@ export default function SearchCard({
         {categories.map((category) => {
           const isSelected = categoryFilter[category._id];
           return (
-            <CategoryFilterTag
+            <Tag
               key={category._id}
               category={category}
               color={category.color}
-              $isSelected={isSelected}
+              selected={isSelected}
               onClick={() => {
                 const newState = { ...categoryFilter };
                 let newStatus = true;
@@ -93,7 +107,7 @@ export default function SearchCard({
               }}
             >
               {category.title}
-            </CategoryFilterTag>
+            </Tag>
           );
         })}
       </ListRow>

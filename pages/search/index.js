@@ -130,7 +130,6 @@ export default function SearchPage() {
         categoryFilter={categoryFilter}
         setA11yFilter={setA11yFilter}
         setCategoryFilter={setCategoryFilter}
-        events={events}
         isFiltered={isFiltered}
       />
 
