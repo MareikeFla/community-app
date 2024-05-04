@@ -1,5 +1,3 @@
-# Pin&Join
-
 ![hero](public/assets/images/banner.png)
 
 ### Local Development
