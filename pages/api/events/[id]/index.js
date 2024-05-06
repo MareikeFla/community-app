@@ -70,6 +70,11 @@ export default async function handler(request, response) {
         await Comment.deleteMany({ _id: { $in: event.comments } });
       }
 
+      await User.updateMany(
+        { attendedEvents: id },
+        { $pull: { attendedEvents: id } }
+      );
+
       await Event.findByIdAndDelete(id);
 
       if (hasImage && imageDeleted) {
