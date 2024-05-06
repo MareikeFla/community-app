@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 export const Card = styled.div`
   background-color: var(--color_white);
@@ -28,14 +29,23 @@ export const SectionTitle = styled.h3`
 
 export const Paragraph = styled.p`
   padding-bottom: 1rem;
+`;
 
-  a {
-    color: var(--color_red);
-    text-decoration: none;
-    margin-bottom: 1rem;
+export const List = styled.ul`
+  padding: 0 0 1rem 1rem;
+`;
 
-    &:hover {
-      text-decoration: underline;
-    }
+export const LinkList = styled.ul`
+  list-style-type: none;
+  padding: 0 0 0.75rem;
+`;
+
+export const StyledLink = styled(Link)`
+  color: var(--color_red);
+  text-decoration: none;
+  margin-bottom: 1rem;
+
+  &:hover {
+    text-decoration: underline;
   }
 `;
