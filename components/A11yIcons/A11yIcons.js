@@ -6,6 +6,7 @@ import IconDog from "public/assets/icons/icon_dog.svg";
 import IconLGBTQ from "public/assets/icons/icon_lgbtq.svg";
 import IconFamily from "public/assets/icons/icon_family.svg";
 import { A11yIconList } from "./A11yIcons.styled";
+import FetchingError from "../FetchingError/FetchingError";
 
 export const icons = {
   wheelchair: IconWheelchair,

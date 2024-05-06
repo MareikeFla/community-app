@@ -19,12 +19,11 @@ export const CommentHeader = styled.p`
   margin-bottom: 0.375rem;
   display: flex;
   gap: 0.375rem;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 export const CommentTime = styled.span`
   color: var(--color_grey);
-  flex: 1;
 `;
 
 export const CommentBody = styled.p`
@@ -38,6 +37,10 @@ export const CommentText = styled.section`
 `;
 
 export const FlexContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
+  align-items: ${(props) => props.align};
+  gap: ${(props) => props.gap};
+  justify-content: ${(props) => props.justify};
+  flex-wrap: ${(props) => props.wrap};
+  display: ${(props) => props.display};
+  grid-template-columns: ${(props) => props.gridCol};
 `;

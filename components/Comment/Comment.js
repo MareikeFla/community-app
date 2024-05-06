@@ -23,8 +23,9 @@ export default function Comment({ comment }) {
   const [isEditingComment, setIsEditingComment] = useState(false);
   const [isReplyFormOpen, setIsReplyFormOpen] = useState();
   const { data: session } = useSession();
-  const userId = session?.user.id;
-  const { text, creationDate, isLiked, _id, createdBy } = comment;
+  const userId = session?.user?.id;
+  const { text, creationDate, isLiked, _id, createdBy, parentEventId } =
+    comment;
   const { likeComment, addReply, fetchedComments, editComment } = useData();
   const timeElapsed = getTimeElapsed(creationDate);
 
@@ -54,8 +55,10 @@ export default function Comment({ comment }) {
         />
         <CommentText>
           <CommentHeader>
-            {createdBy.name}{" "}
-            <CommentTime> · {creationDate && timeElapsed}</CommentTime>
+            <FlexContainer display="flex" wrap="wrap">
+              {createdBy.name}
+              <CommentTime> · {creationDate && timeElapsed}</CommentTime>
+            </FlexContainer>
             {userId === createdBy._id && (
               <EditButton
                 onEdit={handleEditComment}
@@ -77,13 +80,12 @@ export default function Comment({ comment }) {
           )}
 
           {!isEditingComment && (
-            <FlexContainer>
+            <FlexContainer display="grid" gridCol={session ? "1fr 1fr" : "1fr"}>
               {session && (
                 <ReplyButton onClick={handleReplyForm} text="Antworten" />
               )}
-
               <LikeButton
-                userIsLoggedIn={!session}
+                userIsLoggedIn={session ? true : false}
                 onLikeComment={() => likeComment(_id, userId)}
                 checkIfIsLiked={commentIsLikedByUser}
                 numberOfLikes={
@@ -98,7 +100,7 @@ export default function Comment({ comment }) {
       {isReplyFormOpen && (
         <ReplyCommentForm
           onPostReply={(event) => {
-            addReply(_id, event, userId);
+            addReply(_id, event, userId, parentEventId);
             handleReplyForm();
           }}
         />
