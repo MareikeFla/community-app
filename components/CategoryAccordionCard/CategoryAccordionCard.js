@@ -1,1 +1,3 @@
-export default function CategoryAccordeonCard() {}
+export default function CategoryAccordeonCard({ name }) {
+  return name;
+}
