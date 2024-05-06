@@ -66,9 +66,7 @@ export default async function handler(request, response) {
         }
       }
 
-      if (event.comments && event.comments.length) {
-        await Comment.deleteMany({ _id: { $in: event.comments } });
-      }
+      await Comment.deleteMany({ parentEventId: id });
 
       await User.updateMany(
         { attendedEvents: id },
