@@ -85,7 +85,11 @@ export default function EventDetail({ event, mutateEvent }) {
           />
         </EventHeader>
       ) : null}
-      <Card $withImage={image} $userId={userId} $createdBy={event.createdBy}>
+      <Card
+        $withImage={image && image?.url !== ""}
+        $userId={userId}
+        $createdBy={event.createdBy}
+      >
         {event.createdBy === userId ? (
           <>
             <EditEventButton id={_id} />
