@@ -22,7 +22,7 @@ export const authOptions = {
       async authorize(credentials) {
         // this is only here in order to make it easier for people to test the application
         const testUser = await User.findOne({
-          _id: "65fbdcb35895e6679be113b3",
+          _id: process.env.USER_ID,
         });
 
         if (
