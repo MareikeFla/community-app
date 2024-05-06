@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
+import Link from "next/link";
 
 export const EventFormStyled = styled.form`
   padding-top: 1rem;
@@ -159,6 +160,16 @@ export const UploadPreviewContainer = styled.div`
 export const UploadPreview = styled(Image)`
   border-radius: var(--border-radius_card);
   object-fit: cover;
+`;
+
+export const StyledLink = styled(Link)`
+  color: var(--color_red);
+  text-decoration: none;
+  margin-bottom: 1rem;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export const FormCheckboxWrapper = styled.div`
