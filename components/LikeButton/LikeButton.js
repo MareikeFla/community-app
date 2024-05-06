@@ -7,15 +7,16 @@ export default function LikeButton({
   numberOfLikes,
   userIsLoggedIn,
 }) {
+  console.log(userIsLoggedIn);
   return (
     <Button
       onClick={onLikeComment}
-      disabled={userIsLoggedIn}
+      disabled={!userIsLoggedIn}
       aria-label="gefällt mir Taste"
     >
-      {userIsLoggedIn ? (
+      {!userIsLoggedIn ? (
         <Image
-          src="/assets/icons/icon_heart-filled.svg"
+          src="/assets/icons/icon_heart.svg"
           alt="Herz"
           height={12}
           width={14}

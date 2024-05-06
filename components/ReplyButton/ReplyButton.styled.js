@@ -6,6 +6,7 @@ export const ReplyButtonStyled = styled.button`
   border: none;
   background-color: var(--color_white);
   cursor: pointer;
+  justify-self: flex-start;
 
   &:hover {
     text-decoration: underline;
