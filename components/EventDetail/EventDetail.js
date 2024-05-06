@@ -141,7 +141,11 @@ export default function EventDetail({ event, mutateEvent }) {
             />
           )}
         </ButtonWrapper>
-        <AttendeeWrapper>{attendeeCount} Teilnehmende</AttendeeWrapper>
+        <AttendeeWrapper>
+          {`${attendeeCount} ${
+            attendeeCount === 1 ? "Person nimmt" : " Personen nehmen"
+          } teil`}
+        </AttendeeWrapper>
       </Card>
       <CommentSection id={_id} />
     </>
