@@ -7,7 +7,6 @@ export default function LikeButton({
   numberOfLikes,
   userIsLoggedIn,
 }) {
-  console.log(userIsLoggedIn);
   return (
     <Button
       onClick={onLikeComment}

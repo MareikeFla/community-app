@@ -14,6 +14,7 @@ import EditButton from "../EditButton/EditButton";
 import CommentForm from "../CommentForm/CommentForm";
 import { useState } from "react";
 import { FlexContainer } from "./Reply.styled";
+import { UserName } from "../Comment/Comment.styled";
 
 export default function Reply({ reply }) {
   const { data: session } = useSession();
@@ -36,8 +37,8 @@ export default function Reply({ reply }) {
         />
         <ReplyText>
           <ReplyHeader>
-            <FlexContainer wrap="wrap">
-              {createdBy.name}
+            <FlexContainer $wrap="wrap">
+              <UserName> {createdBy.name}</UserName>
               <ReplyTime> · {creationDate && timeElapsed}</ReplyTime>
             </FlexContainer>
             {userId === createdBy._id && (

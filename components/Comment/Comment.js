@@ -18,6 +18,7 @@ import { FlexContainer } from "./Comment.styled";
 import { useSession } from "next-auth/react";
 import EditButton from "../EditButton/EditButton";
 import CommentForm from "../CommentForm/CommentForm";
+import { UserName } from "./Comment.styled";
 
 export default function Comment({ comment }) {
   const [isEditingComment, setIsEditingComment] = useState(false);
@@ -55,8 +56,8 @@ export default function Comment({ comment }) {
         />
         <CommentText>
           <CommentHeader>
-            <FlexContainer display="flex" wrap="wrap">
-              {createdBy.name}{" "}
+            <FlexContainer $display="flex" $wrap="wrap">
+              <UserName>{createdBy.name} </UserName>
               <CommentTime> · {creationDate && timeElapsed}</CommentTime>
             </FlexContainer>
             {userId === createdBy._id && (
@@ -80,7 +81,10 @@ export default function Comment({ comment }) {
           )}
 
           {!isEditingComment && (
-            <FlexContainer display="grid" gridCol={session ? "1fr 1fr" : "1fr"}>
+            <FlexContainer
+              $display="grid"
+              $gridCol={session ? "1fr 1fr" : "1fr"}
+            >
               {session && (
                 <ReplyButton onClick={handleReplyForm} text="Antworten" />
               )}
