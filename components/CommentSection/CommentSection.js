@@ -36,17 +36,17 @@ export default function CommentSection({ id }) {
           sortedComments?.length === 1 ? "" : "e"
         }`}
       </SectionTitle>
-      <CommentCard>
-        {session ? (
+      {session && (
+        <CommentCard>
           <CommentForm
             onPostComment={(comment) => addComment(id, comment, userId)}
           />
-        ) : null}
-        <CommentList
-          comments={sortedComments}
-          mutateComments={mutateComments}
-        />
-      </CommentCard>
+          <CommentList
+            comments={sortedComments}
+            mutateComments={mutateComments}
+          />
+        </CommentCard>
+      )}
     </section>
   );
 }
