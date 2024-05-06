@@ -4,6 +4,7 @@ import Image from "next/image";
 import { EditButton } from "../EditEventButton/EditEventButton.styled";
 import { EventFormStyled, FormInfoText } from "../EventForm/EventForm.styled";
 import { EventName } from "../EventDetail/EventDetail.styled";
+import { InfoWrapper } from "../EventDetail/EventDetail.styled";
 
 export const StyledProfile = styled(Card)`
   position: relative;
@@ -38,4 +39,12 @@ export const ProfileFormStyled = styled(EventFormStyled)`
 
 export const ProfileFormInfoText = styled(FormInfoText)`
   margin-bottom: 1.875rem;
+`;
+
+export const Wrapper = styled(InfoWrapper)`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 10px;
+  justify-content: center;
 `;
