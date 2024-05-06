@@ -56,7 +56,7 @@ export default function Comment({ comment }) {
         <CommentText>
           <CommentHeader>
             <FlexContainer display="flex" wrap="wrap">
-              {createdBy.name}
+              {createdBy.name}{" "}
               <CommentTime> · {creationDate && timeElapsed}</CommentTime>
             </FlexContainer>
             {userId === createdBy._id && (
