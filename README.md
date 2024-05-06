@@ -2,7 +2,7 @@
 
 Pin&Join is a dynamic platform designed to foster local engagement through social interaction. Our intuitive web interface connects community members, allowing them to participate in and create local events. Access the app [here on Vercel](https://community-app-topaz.vercel.app).
 
-> **Digitales Gesellenstück**: This project is the capstone for the neuefische web development bootcamp, crafted with dedication by [Annette](), [Bruno](), [Lea](), and [Mareike]().
+> **Digitales Gesellenstück**: This project is the capstone for the neuefische web development bootcamp, crafted with dedication by [n377i](https://github.com/n377i), [Bruno0221](https://github.com/Bruno0221), [Lea-Mentz](https://github.com/Lea-Mentz), and [MareikeFla](https://github.com/MareikeFla).
 
 ## Description
 
