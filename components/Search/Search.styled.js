@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
-
+import { A11yIconList } from "../A11yIcons/A11yIcons.styled";
 // SearchCard
 
 export const SearchBox = styled.div`
@@ -46,5 +46,53 @@ export const SearchLinkStyled = styled(Link)`
   position: absolute;
   top: 1.125rem;
   right: 1rem;
+  cursor: pointer;
+`;
+
+export const IconWrap = styled.div`
+  background-color: ${({ $isSelected }) =>
+    $isSelected ? "var(--color_light-orange)" : "var(--color_light-grey)"};
+
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+`;
+
+export const ListColumn = styled(A11yIconList)`
+  flex-direction: column;
+  align-items: flex-start;
+`;
+export const ListRow = styled(A11yIconList)`
+  margin-top: 0.75rem;
+`;
+
+export const FilterHeading = styled.p`
+  font: var(--font_body);
+  font-size: 1rem;
+  font-weight: 300;
+`;
+
+export const FilterReset = styled.p`
+  color: var(--color_orange);
+  cursor: pointer;
+  font: var(--font_body);
+  font-size: 0.75rem;
+  font-weight: 300;
+`;
+
+export const CategoryFilterTag = styled.span`
+  width: 150px;
+  font: var(--font_tag);
+  background-color: ${({ $isSelected, color }) =>
+    $isSelected ? `var(--color_${color})` : "var(--color_light-grey)"};
+  color: var(--color_white);
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--border-radius_button);
+  padding: 0.375rem 0.625rem 0.3125rem;
   cursor: pointer;
 `;

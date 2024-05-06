@@ -7,7 +7,7 @@ import IconLGBTQ from "public/assets/icons/icon_lgbtq.svg";
 import IconFamily from "public/assets/icons/icon_family.svg";
 import { A11yIconList } from "./A11yIcons.styled";
 
-const icons = {
+export const icons = {
   wheelchair: IconWheelchair,
   blind: IconBlind,
   deaf: IconDeaf,

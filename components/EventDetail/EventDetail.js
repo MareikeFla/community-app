@@ -67,17 +67,17 @@ export default function EventDetail({ event, mutateEvent }) {
 
   return (
     <>
-      {image.url !== "" ? (
+      {image && image?.url !== "" ? (
         <EventHeader>
-          {event.createdBy === userId ? (
+          {event.createdBy === userId && (
             <>
               <EditEventButton id={_id} />
               <DeleteEventButton id={_id} />
             </>
-          ) : null}
+          )}
           <EventName $withImage={image}>{eventName}</EventName>
           <EventImage
-            src={image.url}
+            src={image?.url}
             alt={eventName}
             fill
             sizes="100vw 100vh"
@@ -92,7 +92,7 @@ export default function EventDetail({ event, mutateEvent }) {
             <DeleteEventButton id={_id} />
           </>
         ) : null}
-        {!image.url && <EventName>{eventName}</EventName>}
+        {!image?.url && <EventName>{eventName}</EventName>}
         <ExpandableText text={longDescription} />
         <InfoWrapper>
           <InfoColumns>
