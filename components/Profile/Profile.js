@@ -1,11 +1,7 @@
-import { EditProfileButton } from "./Profile.styled";
+import { EditProfileButton, Wrapper } from "./Profile.styled";
 import { StyledEditIcon } from "../EditEventButton/EditEventButton.styled";
 import { StyledProfile, UserName, PictureProfile } from "./Profile.styled";
-import {
-  InfoWrapper,
-  InfoTitle,
-  Info,
-} from "../EventDetail/EventDetail.styled";
+import { InfoTitle, Info } from "../EventDetail/EventDetail.styled";
 import { Fragment } from "react";
 
 export default function Profile({ toggleEditMode, userInfo }) {
@@ -28,7 +24,7 @@ export default function Profile({ toggleEditMode, userInfo }) {
         height={profilePicture.pictureSize}
         width={profilePicture.pictureSize}
       />
-      <InfoWrapper>
+      <Wrapper>
         {additionalInfo.map((info) => {
           return (
             <Fragment key={info.key}>
@@ -37,7 +33,7 @@ export default function Profile({ toggleEditMode, userInfo }) {
             </Fragment>
           );
         })}
-      </InfoWrapper>
+      </Wrapper>
     </StyledProfile>
   );
 }
