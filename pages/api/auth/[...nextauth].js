@@ -26,8 +26,8 @@ export const authOptions = {
         });
 
         if (
-          credentials.username === "test" &&
-          credentials.password === "test"
+          credentials.username === process.env.USER_NAME &&
+          credentials.password === process.env.USER_PASSWORD
         ) {
           return testUser;
         } else {
