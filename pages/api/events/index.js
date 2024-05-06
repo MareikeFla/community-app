@@ -32,6 +32,7 @@ export default async function handler(request, response) {
         "end.date": { $gte: today },
       }).populate("category");
       const ourEvents = events.map((event) => enrichEventObject(event));
+
       if (!metainfo.isUpToDate) {
         try {
           const [koelnCategories, ourCategories, ourA11yIcons] =
@@ -40,7 +41,6 @@ export default async function handler(request, response) {
               fetchData(ourCategoriesUrl, ourDB),
               fetchData(a11yIconsUrl, ourDB),
             ]);
-
           const koelnEventsInOurDataBase = ourEvents.filter(
             (event) => event.isFetchedEvent === true
           );
