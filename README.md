@@ -10,8 +10,6 @@ Pin&Join is a dynamic platform designed to foster local engagement through socia
 
 Pin&Join is an event management application that enables users to actively engage with their local communities by finding and creating events. It emphasizes accessibility, allowing for quick user onboarding with GitHub account integration.
 
-## Contact Us
-
 ## Key Features
 
 - **Event Management**: Users can create and manage local events to boost community participation.
@@ -34,6 +32,8 @@ Pin&Join is an event management application that enables users to actively engag
 - Mongoose for data modeling
 - [City of Cologne Event API for real-time event data](https://offenedaten-koeln.de/dataset/veranstaltungen-der-stadt-k%C3%Bln/resource/94d5e889-ed56-403d-9cd6-4e98d3d5c8bd)
 - [Leaflet for interactive maps](https://leafletjs.com/)
+
+## Contact Us
 
 ## Getting Started
 
