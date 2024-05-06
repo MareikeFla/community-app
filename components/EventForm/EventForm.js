@@ -28,7 +28,6 @@ import {
   UploadPreview,
   FlexContainer,
   FormInputTime,
-  FixedSize,
   FullWidth,
   SubtitleLeft,
   SubtitleRight,
@@ -41,6 +40,7 @@ import {
   SearchContainer,
   SearchLoading,
   SearchNotification,
+  StyledLink,
 } from "./EventForm.styled";
 import { DeleteButton } from "../DeleteEventButton/DeleteEventButton.styled";
 import Image from "next/image";
@@ -508,8 +508,12 @@ export default function EventForm({ onSubmit, event: editEvent }) {
               />
             </FlexWrapper>
             <p>
-              Ich besitze alle erforderlichen Rechte an dem ausgewählten Bild
-              und bin mit der Verwendung einverstanden.
+              Ich besitze alle erforderlichen Rechte an dem von mir
+              hochgeladenem Bild und bin mit der Verwendung gemäß der{" "}
+              <StyledLink href="/privacy-policy" target="_blank">
+                Datenschutzrichtlinie
+              </StyledLink>{" "}
+              einverstanden.
             </p>
             {submitAttempted && !isConsentChecked && (
               <ErrorMessage>Bitte bestätigen, um fortzufahren.</ErrorMessage>
