@@ -46,10 +46,11 @@ export default async function handler(request, response) {
       if (!event) {
         return response.status(404).json({ status: "Event not found" });
       }
-
+      let hasImage = false;
       let imageDeleted = false;
 
-      if (event.image.public_id) {
+      if (event.image && event.image.public_id) {
+        hasImage = true;
         try {
           cloudinary.v2.config({
             cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -65,18 +66,23 @@ export default async function handler(request, response) {
         }
       }
 
-      if (event.comments?.length) {
+      if (event.comments && event.comments.length) {
         await Comment.deleteMany({ _id: { $in: event.comments } });
       }
 
       await Event.findByIdAndDelete(id);
 
-      if (imageDeleted) {
+      if (hasImage && imageDeleted) {
         return response.status(200).json({
           success: true,
           status: `Event ${id} and related image successfully deleted.`,
         });
-      } else {
+      } else if (!hasImage) {
+        return response.status(200).json({
+          success: true,
+          status: `Event ${id} successfully deleted.`,
+        });
+      } else if (hasImage && !imageDeleted) {
         return response.status(500).json({
           success: false,
           error: "Error deleting event or image",
