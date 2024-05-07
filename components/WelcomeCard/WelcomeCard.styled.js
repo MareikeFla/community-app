@@ -41,7 +41,8 @@ export const Paragraph = styled.p`
 
 export const LinksContainer = styled.div`
   display: flex;
-  gap: 0.875rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 `;
 
 export const Button = styled(Link)`
