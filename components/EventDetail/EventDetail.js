@@ -117,17 +117,23 @@ export default function EventDetail({ event, mutateEvent }) {
             <Info>{organizationName}</Info>
             <InfoTitle>Kontakt</InfoTitle>
             <Info>{organizationContact}</Info>
-            <InfoTitle>Weitere Infos</InfoTitle>
-            <LinkList>
-              {links.map((link, index) => (
-                <ListItem key={index}>
-                  <ListItemMarker>&raquo;</ListItemMarker>
-                  <ListItemLink href={link.url} target="blank">
-                    {link.linkDescription}
-                  </ListItemLink>
-                </ListItem>
-              ))}
-            </LinkList>
+            {links && links.some((link) => link.url) && (
+              <>
+                <InfoTitle>Link</InfoTitle>
+                <LinkList>
+                  {links.map((link, index) => (
+                    <ListItem key={index}>
+                      <ListItemMarker>&raquo;</ListItemMarker>
+                      <ListItemLink href={link.url} target="blank">
+                        {link.linkDescription
+                          ? link.linkDescription
+                          : "Mehr Informationen"}
+                      </ListItemLink>
+                    </ListItem>
+                  ))}
+                </LinkList>
+              </>
+            )}
           </InfoColumns>
           <A11yIcons a11yIcons={a11yIcons} />
           {longitude && latitude && <Map event={event} />}
