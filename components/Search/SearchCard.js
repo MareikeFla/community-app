@@ -4,7 +4,8 @@ import { FilterHeading, FilterReset } from "./Search.styled";
 import { IconWrap } from "./Search.styled";
 import { icons } from "../A11yIcons/A11yIcons";
 import { useData } from "@/lib/useData";
-import { Tag } from "../EventForm/EventForm.styled";
+import { Tag, TagList } from "../EventForm/EventForm.styled";
+import { TagListStyled } from "./Search.styled";
 
 export default function SearchCard({
   handleSubmit,
@@ -85,7 +86,7 @@ export default function SearchCard({
           })}
         </ListRow>
       </ListColumn>
-      <ListRow>
+      <TagListStyled>
         {categories.map((category) => {
           const isSelected = categoryFilter[category._id];
           return (
@@ -106,7 +107,7 @@ export default function SearchCard({
             </Tag>
           );
         })}
-      </ListRow>
+      </TagListStyled>
     </SearchBox>
   );
 }

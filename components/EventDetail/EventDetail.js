@@ -113,10 +113,19 @@ export default function EventDetail({ event, mutateEvent }) {
             <Info>{isOnlineEvent ? "Online" : locationToString(location)}</Info>
             <InfoTitle>Kosten</InfoTitle>
             <Info>{costs}</Info>
-            <InfoTitle>Veranstalter</InfoTitle>
-            <Info>{organizationName}</Info>
-            <InfoTitle>Kontakt</InfoTitle>
-            <Info>{organizationContact}</Info>
+            {organizationName ? (
+              <>
+                <InfoTitle>Veranstalter</InfoTitle>
+                <Info>{organizationName}</Info>
+              </>
+            ) : undefined}
+            {organizationContact ? (
+              <>
+                <InfoTitle>Kontakt</InfoTitle>
+                <Info>{organizationContact}</Info>
+              </>
+            ) : undefined}
+
             <InfoTitle>Weitere Infos</InfoTitle>
             <LinkList>
               {links.map((link, index) => (
