@@ -9,6 +9,7 @@ const nextConfig = {
       "avatars.githubusercontent.com",
       "res.cloudinary.com",
       "www.stadt-koeln.de",
+      "lh3.googleusercontent.com",
     ],
   },
   webpack(config) {
