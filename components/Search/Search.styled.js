@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { A11yIconList } from "../A11yIcons/A11yIcons.styled";
+import { TagList } from "../EventForm/EventForm.styled";
 // SearchCard
 
 export const SearchBox = styled.div`
@@ -95,4 +96,9 @@ export const CategoryFilterTag = styled.span`
   border-radius: var(--border-radius_button);
   padding: 0.375rem 0.625rem 0.3125rem;
   cursor: pointer;
+`;
+
+export const TagListStyled = styled(TagList)`
+  margin-top: 0.75rem;
+  width: 100%;
 `;

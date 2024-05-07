@@ -113,10 +113,19 @@ export default function EventDetail({ event, mutateEvent }) {
             <Info>{isOnlineEvent ? "Online" : locationToString(location)}</Info>
             <InfoTitle>Kosten</InfoTitle>
             <Info>{costs}</Info>
-            <InfoTitle>Veranstalter</InfoTitle>
-            <Info>{organizationName}</Info>
-            <InfoTitle>Kontakt</InfoTitle>
-            <Info>{organizationContact}</Info>
+            {organizationName ? (
+              <>
+                <InfoTitle>Veranstalter</InfoTitle>
+                <Info>{organizationName}</Info>
+              </>
+            ) : undefined}
+            {organizationContact ? (
+              <>
+                <InfoTitle>Kontakt</InfoTitle>
+                <Info>{organizationContact}</Info>
+              </>
+            ) : undefined}
+
             {links && links.some((link) => link.url) && (
               <>
                 <InfoTitle>Link</InfoTitle>
@@ -147,7 +156,11 @@ export default function EventDetail({ event, mutateEvent }) {
             />
           )}
         </ButtonWrapper>
-        <AttendeeWrapper>{attendeeCount} Teilnehmende</AttendeeWrapper>
+        <AttendeeWrapper>
+          {`${attendeeCount} ${
+            attendeeCount === 1 ? "Person nimmt" : " Personen nehmen"
+          } teil`}
+        </AttendeeWrapper>
       </Card>
       <CommentSection id={_id} />
     </>

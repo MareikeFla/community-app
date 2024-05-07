@@ -29,6 +29,8 @@ export default function Comment({ comment }) {
     comment;
   const { likeComment, addReply, fetchedComments, editComment } = useData();
   const timeElapsed = getTimeElapsed(creationDate);
+  const commentIsLikedByUser = isLiked.includes(userId);
+  const [commentIsLiked, setCommentIsLiked] = useState(commentIsLikedByUser);
 
   const replies = fetchedComments.comments.filter(
     (comment) => comment.parentCommentId === _id
@@ -38,7 +40,6 @@ export default function Comment({ comment }) {
     setIsReplyFormOpen((prevState) => !prevState);
   };
 
-  const commentIsLikedByUser = isLiked.includes(userId);
   function handleEditComment() {
     setIsEditingComment(!isEditingComment);
   }
@@ -90,8 +91,11 @@ export default function Comment({ comment }) {
               )}
               <LikeButton
                 userIsLoggedIn={session ? true : false}
-                onLikeComment={() => likeComment(_id, userId)}
-                checkIfIsLiked={commentIsLikedByUser}
+                onLikeComment={() => {
+                  setCommentIsLiked(!commentIsLiked);
+                  likeComment(_id, userId);
+                }}
+                checkIfIsLiked={commentIsLiked}
                 numberOfLikes={
                   isLiked && isLiked.length > 0 ? isLiked.length : 0
                 }
