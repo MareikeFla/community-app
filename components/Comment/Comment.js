@@ -50,7 +50,9 @@ export default function Comment({ comment }) {
     <li>
       <CommentContainer>
         <ProfilePicture
-          src={createdBy.image}
+          src={
+            createdBy.image ? createdBy.image : "/assets/icons/icon_profile.svg"
+          }
           alt="Profilbild"
           height={36}
           width={36}
