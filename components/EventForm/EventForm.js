@@ -163,7 +163,7 @@ export default function EventForm({ onSubmit, event: editEvent }) {
   }
 
   useEffect(() => {
-    if (searchText === "") {
+    if (searchText === "" && !editEvent) {
       setPlaceList([]);
       setSelectedAddress(null);
       setEventLocation({});
