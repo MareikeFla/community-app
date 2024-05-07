@@ -1,9 +1,10 @@
-import AccordionMenu from "@/components/Accordion/AccordionMenu";
+import { AccordionMenu } from "@/components/Accordion/AccordionMenu";
 import CategoryAccordion from "@/components/CategoryAccordion/CategoryAccordion";
 import { CategoryAccordeonCardContainer } from "@/components/CategoryAccordion/CategoryAccordion.styled";
 import { useData } from "@/lib/useData";
 import Loading from "@/components/Loading/Loading";
 import FetchingError from "@/components/FetchingError/FetchingError";
+import { AccordionTitle } from "@/components/Accordion/AccordionMenu.styled";
 
 export default function CategoryOverview() {
   const { categories, isLoadingCategories, errorCategories } =

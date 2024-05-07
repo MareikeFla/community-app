@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const CategoryAccordeonCardContainer = styled.div`
   background-color: var(--color_white);
   border-radius: var(--border-radius_card);
@@ -8,5 +9,9 @@ export const CategoryAccordeonCardContainer = styled.div`
   h1 {
     text-align: center;
     font: var(--font_heading-1);
+  }
+
+  & > AccordionMenu {
+    text-transform: uppercase;
   }
 `;
