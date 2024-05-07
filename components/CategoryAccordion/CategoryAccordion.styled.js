@@ -11,7 +11,18 @@ export const CategoryAccordeonCardContainer = styled.div`
     font: var(--font_heading-1);
   }
 
-  & > AccordionMenu {
-    text-transform: uppercase;
+  ul {
+    background-color: var(--color_white);
+    border-radius: var(--border-radius_card);
+    box-shadow: var(--shadow_card);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    list-style: none;
   }
+`;
+
+export const Subcategory = styled.li`
+  display: flex;
+  justify-content: space-between;
 `;

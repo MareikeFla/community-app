@@ -1,12 +1,11 @@
-import CategoryAccordionCard from "@/components/CategoryAccordionCard/CategoryAccordionCard";
-
+import { Subcategory } from "./CategoryAccordion.styled";
 export default function CategoryAccordion({ subCategories }) {
   return (
     <ul>
       {subCategories.map((subCategory) => (
-        <li>
-          {subCategory.title} {subCategory.count}
-        </li>
+        <Subcategory>
+          {subCategory.title} <span>{subCategory.count} Events</span>
+        </Subcategory>
       ))}
     </ul>
   );
