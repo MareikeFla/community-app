@@ -13,6 +13,8 @@ import { useSession } from "next-auth/react";
 import EditButton from "../EditButton/EditButton";
 import CommentForm from "../CommentForm/CommentForm";
 import { useState } from "react";
+import { FlexContainer } from "./Reply.styled";
+import { UserName } from "../Comment/Comment.styled";
 
 export default function Reply({ reply }) {
   const { data: session } = useSession();
@@ -35,8 +37,10 @@ export default function Reply({ reply }) {
         />
         <ReplyText>
           <ReplyHeader>
-            {createdBy.name}{" "}
-            <ReplyTime> · {creationDate && timeElapsed}</ReplyTime>
+            <FlexContainer $wrap="wrap">
+              <UserName> {createdBy.name}</UserName>
+              <ReplyTime> · {creationDate && timeElapsed}</ReplyTime>
+            </FlexContainer>
             {userId === createdBy._id && (
               <EditButton
                 onEdit={() => setIsEditingReply(!isEditingReply)}
@@ -49,7 +53,7 @@ export default function Reply({ reply }) {
               <>
                 <p>{text}</p>
                 <LikeButton
-                  userIsLoggedIn={!session}
+                  userIsLoggedIn={session ? true : false}
                   onLikeComment={() => likeComment(_id, userId)}
                   checkIfIsLiked={replyIsLikedByUser}
                   numberOfLikes={

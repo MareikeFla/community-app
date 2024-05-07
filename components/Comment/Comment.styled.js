@@ -13,18 +13,18 @@ export const CommentContainer = styled.article`
   padding: 1.5rem 0 1.375rem;
 `;
 
-export const CommentHeader = styled.p`
+export const CommentHeader = styled.div`
   font: var(--font_label);
   color: var(--color_midnight);
   margin-bottom: 0.375rem;
   display: flex;
   gap: 0.375rem;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: space-between;
 `;
 
 export const CommentTime = styled.span`
   color: var(--color_grey);
-  flex: 1;
 `;
 
 export const CommentBody = styled.p`
@@ -38,6 +38,14 @@ export const CommentText = styled.section`
 `;
 
 export const FlexContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
+  align-items: ${(props) => props.$align};
+  gap: ${(props) => props.$gap};
+  justify-content: ${(props) => props.$justify};
+  flex-wrap: ${(props) => props.$wrap};
+  display: ${(props) => props.$display};
+  grid-template-columns: ${(props) => props.$gridCol};
+`;
+
+export const UserName = styled.p`
+  margin-right: 0.25rem;
 `;

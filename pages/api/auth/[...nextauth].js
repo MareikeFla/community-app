@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/db/mongodb";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -13,6 +14,10 @@ export const authOptions = {
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
     CredentialsProvider({
       name: "credentials",
       credentials: {
@@ -22,12 +27,12 @@ export const authOptions = {
       async authorize(credentials) {
         // this is only here in order to make it easier for people to test the application
         const testUser = await User.findOne({
-          _id: "65fbdcb35895e6679be113b3",
+          _id: process.env.USER_ID,
         });
 
         if (
-          credentials.username === "test" &&
-          credentials.password === "test"
+          credentials.username === process.env.USER_NAME &&
+          credentials.password === process.env.USER_PASSWORD
         ) {
           return testUser;
         } else {

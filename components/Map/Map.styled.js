@@ -5,7 +5,7 @@ export const StyledMapContainer = styled(MapContainer)`
   grid-column: 1 / span 2;
   width: 100%;
   height: 18rem;
-  margin-top: 0.5rem;
+  margin-top: 0.813rem;
   border-radius: var(--border-radius_card);
   z-index: 0;
 `;

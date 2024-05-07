@@ -1,3 +1,4 @@
+import A11yIcons from "../A11yIcons/A11yIcons";
 import CategoryTags from "../CategoryTags/CategoryTags";
 import {
   Card,
@@ -18,18 +19,25 @@ export default function EventPreview({ event }) {
     eventName,
     shortDescription,
     start,
+    end,
     location,
     category,
     subCategories,
+    a11yIcons,
   } = event;
-  const { date, time } = start;
-  const formattedDate = formatDate(date);
+
+  const hasA11yIcons = !!a11yIcons && a11yIcons.length > 0;
+  const { date: startDate, time: startTime } = start;
+  const formattedStartDate = formatDate(startDate);
+  const formattedEndDate =
+    end && end.date !== start.date ? formatDate(end.date) : null;
+
   return (
     <>
-      {image && (
+      {image && image.url !== "" && (
         <ImageContainer>
           <EventImage
-            src={image.url}
+            src={image?.url}
             alt={eventName}
             fill
             sizes="100vw 100vh"
@@ -40,16 +48,17 @@ export default function EventPreview({ event }) {
         <PreviewTitle>{eventName}</PreviewTitle>
         <PreviewDescription>{shortDescription}</PreviewDescription>
         <CategoryTags category={category} subCategories={subCategories} />
-        <Divider />
+        <A11yIcons a11yIcons={a11yIcons} />
+        <Divider $hasA11yIcons={hasA11yIcons} />
         <InfoContainer>
           <Info>
             <Icon src="/assets/icons/icon_date.svg" alt="event date icon" />
-            {formattedDate}
+            {formattedStartDate} {formattedEndDate && <>- {formattedEndDate}</>}
           </Info>
-          {time && (
+          {startTime && (
             <Info>
               <Icon src="/assets/icons/icon_time.svg" alt="event time icon" />
-              {time}
+              {startTime}
             </Info>
           )}
           <Info>

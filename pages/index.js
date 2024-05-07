@@ -6,13 +6,10 @@ import Loading from "@/components/Loading/Loading";
 import { useData } from "@/lib/useData";
 
 export default function HomePage() {
-  const { events, isLoadingEvents, errorEvents } = useData().fetchedEvents;
+  const { events, isLoadingEvents } = useData().fetchedEvents;
 
   if (isLoadingEvents) {
     return <Loading />;
-  }
-  if (errorEvents) {
-    return <FetchingError />;
   }
 
   return (

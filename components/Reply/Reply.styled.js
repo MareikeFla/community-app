@@ -13,17 +13,17 @@ export const ReplyContainer = styled.article`
   padding: 1.5rem 0 1rem;
 `;
 
-export const ReplyHeader = styled.p`
+export const ReplyHeader = styled.div`
   font: var(--font_label);
   color: var(--color_midnight);
   margin-bottom: 0.375rem;
   display: flex;
   gap: 0.375rem;
+  align-items: flex-start;
 `;
 
 export const ReplyTime = styled.span`
   color: var(--color_grey);
-  flex: 1;
 `;
 
 export const ReplyBody = styled.div`
@@ -43,6 +43,9 @@ export const ReplyText = styled.section`
 `;
 
 export const FlexContainer = styled.div`
+  align-items: ${(props) => props.$align};
+  gap: ${(props) => props.$gap};
+  justify-content: ${(props) => props.$justify};
+  flex-wrap: ${(props) => props.$wrap};
   display: flex;
-  justify-content: space-between;
 `;

@@ -17,13 +17,14 @@ import {
   koelnDB,
   koelnCategoriesUrl,
   ourCategoriesUrl,
+  a11yIconsUrl,
   categoryRelation,
 } from "@/lib/dailyFetchHelper/variables";
-const foo = true;
+
 export default async function handler(request, response) {
   await dbConnect();
-  const metainfo = await fetchData(metainfoUrl, ourDB);
 
+  const metainfo = await fetchData(metainfoUrl, ourDB);
   if (request.method === "GET") {
     try {
       const today = new Date().toISOString().split("T")[0];
@@ -34,8 +35,12 @@ export default async function handler(request, response) {
 
       if (!metainfo.isUpToDate) {
         try {
-          const koelnCategories = await fetchData(koelnCategoriesUrl, koelnDB);
-          const ourCategories = await fetchData(ourCategoriesUrl, ourDB);
+          const [koelnCategories, ourCategories, ourA11yIcons] =
+            await Promise.all([
+              fetchData(koelnCategoriesUrl, koelnDB),
+              fetchData(ourCategoriesUrl, ourDB),
+              fetchData(a11yIconsUrl, ourDB),
+            ]);
           const koelnEventsInOurDataBase = ourEvents.filter(
             (event) => event.isFetchedEvent === true
           );
@@ -45,7 +50,10 @@ export default async function handler(request, response) {
             categoryRelation
           );
           const uniqueEvents = await fetchUniqueEvents(mergedCategories);
-          const formatedEvents = formateEvents(uniqueEvents);
+          const formatedEvents = await formateEvents(
+            uniqueEvents,
+            ourA11yIcons
+          );
           let deletedEvents = [];
           if (formatedEvents.length > 0) {
             deletedEvents = findUniqueEventsInFirstArray(
@@ -69,11 +77,9 @@ export default async function handler(request, response) {
       console.error(error);
       return response.status(400).json({ error: error.message });
     }
-
   }
 
   if (request.method === "PUT") {
-
     try {
       const event = request.body;
       const newEvent = await Event.create(event);

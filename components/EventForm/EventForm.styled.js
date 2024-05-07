@@ -162,6 +162,16 @@ export const UploadPreview = styled(Image)`
   object-fit: cover;
 `;
 
+export const StyledLink = styled(Link)`
+  color: var(--color_red);
+  text-decoration: none;
+  margin-bottom: 1rem;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 export const FormCheckboxWrapper = styled.div`
   padding: 0.625rem 0.875rem;
   margin: ${({ $consentMargin }) =>

@@ -21,11 +21,12 @@ export const Dialog = styled(Card)`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
+  max-width: 95%;
 `;
 
 export const DialogMessage = styled(Message)`
   margin-bottom: 1.125rem;
-  min-width: max-content;
+  min-width: 100%;
   font-weight: 400;
 `;
 
