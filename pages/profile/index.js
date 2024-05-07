@@ -77,7 +77,11 @@ export default function ProfilePage() {
       isOpen: false,
     },
   ];
-  if (openSection !== undefined && openSection < accordionSections.length) {
+  if (
+    openSection !== undefined &&
+    openSection < accordionSections.length &&
+    accordionSections[openSection].canOpen === true
+  ) {
     accordionSections[openSection].isOpen = true;
   }
 
