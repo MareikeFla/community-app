@@ -38,7 +38,7 @@ export default function CommentSection({ id }) {
     <section>
       <SectionTitle>
         {`${sortedComments?.length + numberOfReplies} Kommentar${
-          sortedComments?.length === 1 ? "" : "e"
+          sortedComments?.length + numberOfReplies === 1 ? "" : "e"
         }`}
       </SectionTitle>
       {session && (
