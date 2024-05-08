@@ -18,7 +18,7 @@ export default function CategoryOverview() {
   }
 
   // const array = [
-  //   { mainCategory: "", subCategories: [{ title: "", id: "", count: "" }, {}] },
+  //   { mainCategory: "", mainSlug: "", subCategories: [{ title: "", id: "", count: "" }, {}] },
   //   {},
   // ];
 
@@ -27,9 +27,18 @@ export default function CategoryOverview() {
       const count = events.filter((event) =>
         event.subCategories.includes(subCategory._id)
       ).length;
-      return { title: subCategory.title, id: subCategory._id, count };
+      return {
+        title: subCategory.title,
+        subSlug: subCategory.slug,
+        id: subCategory._id,
+        count,
+      };
     });
-    return { mainCategory: category.title, subCategories };
+    return {
+      mainCategory: category.title,
+      mainSlug: category.slug,
+      subCategories,
+    };
   });
 
   const sections = categoriesAndSubcategories.map((category, i) => {
@@ -37,7 +46,11 @@ export default function CategoryOverview() {
       id: i,
       title: category.mainCategory,
       component: CategoryAccordion,
-      componentsProps: { subCategories: category.subCategories || [] },
+      componentsProps: {
+        subCategories: category.subCategories || [],
+        mainCategory: category.mainCategory,
+        mainSlug: category.mainSlug,
+      },
       counter: category.subCategories.length,
       counterText: { singular: "Unterkategorie", plural: "Unterkategorien" },
       canOpen: true,

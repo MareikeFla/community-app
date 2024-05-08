@@ -1,10 +1,13 @@
 import { Subcategory } from "./CategoryAccordion.styled";
-export default function CategoryAccordion({ subCategories }) {
+import { LinkCat } from "./CategoryAccordion.styled";
+export default function CategoryAccordion({ subCategories, mainSlug }) {
   return (
     <ul>
       {subCategories.map((subCategory) => (
-        <Subcategory>
-          {subCategory.title} <span>{subCategory.count} Events</span>
+        <Subcategory key={subCategories}>
+          <LinkCat href={`categories/${mainSlug}/${subCategory.subSlug}`}>
+            {subCategory.title} <span>{subCategory.count} Events</span>
+          </LinkCat>
         </Subcategory>
       ))}
     </ul>

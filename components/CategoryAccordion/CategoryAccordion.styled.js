@@ -33,3 +33,11 @@ export const Subcategory = styled.li`
     border-bottom: none;
   }
 `;
+
+export const LinkCat = styled.a`
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
