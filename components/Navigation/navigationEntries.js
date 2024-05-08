@@ -24,4 +24,9 @@ export const navigationEntries = [
     href: "/profile?openSection=1",
     requireSession: true,
   },
+  {
+    text: "Themenübersicht",
+    href: "/categories",
+    requireSession: false,
+  },
 ];
