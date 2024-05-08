@@ -19,10 +19,17 @@ export const CategoryAccordeonCardContainer = styled.div`
     flex-direction: column;
     justify-content: start;
     list-style: none;
+    font: var(--font_info);
   }
 `;
 
 export const Subcategory = styled.li`
   display: flex;
   justify-content: space-between;
+  padding: 1.5em 1em;
+  border-bottom: 1px solid var(--color_light-grey);
+
+  &:last-child {
+    border-bottom: none;
+  }
 `;
