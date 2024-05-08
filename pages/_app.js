@@ -19,7 +19,7 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <Head>
-        <title>Pin & Join</title>
+        <title>Pin&Join</title>
       </Head>
       <DataProvider>
         <GlobalStyle />
